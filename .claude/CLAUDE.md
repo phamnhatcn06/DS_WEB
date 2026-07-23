@@ -50,7 +50,7 @@ Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 
 | `--dsh-muted` | `#c7ccd6` | Chữ body/phụ trên nền navy |
 | `--dsh-line` | `rgba(201,168,76,.25)` | Đường kẻ mảnh màu vàng |
 
-**Typography — đề xuất (Google Fonts):** một serif display cho tiêu đề (vd **Playfair Display** hoặc **Cormorant** cho cảm giác doanh nghiệp/cao cấp) kết hợp một sans sạch cho body (**Be Vietnam Pro** — hỗ trợ đầy đủ dấu Tiếng Việt — hoặc **Inter**). Thang chữ fluid bằng `clamp()`:
+**Typography — đã xác nhận (Figma node `1134:25`): dùng `Inter` cho TOÀN BỘ** (heading + body), tải về local `assets/fonts/` (weight 400/500/600/700/800), không CDN. Thang chữ fluid bằng `clamp()`:
 | Vai trò | `clamp()` (min → max) |
 |---------|-----------------------|
 | Hero H1 | `clamp(2.5rem, 5vw, 4.5rem)` |
