@@ -5,20 +5,45 @@
 
 .about {
   position: relative;
-  background-color: #fdf6f7;
+  /* Nền hồng nhạt, sáng hơn ở trên */
+  background: linear-gradient(180deg, #fdf3f5 0%, #f9e8ec 55%, #f6e2e7 100%);
   overflow: hidden;
 }
 
-/* Nền skyline mờ phía sau (phủ toàn section, lộ ra quanh & giữa các card) */
+/* Hoạ tiết chevron (mái) mờ ở hai bên sau card */
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(-45deg, rgba(154, 18, 32, .05) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(45deg, rgba(154, 18, 32, .05) 0 2px, transparent 2px 26px);
+  background-repeat: no-repeat, no-repeat;
+  background-position: left -60px center, right -60px center;
+  background-size: 420px 70%, 420px 70%;
+}
+
+/* Lưới chấm mờ ở góc dưới trái/phải */
 .about::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("../images/city-skyline.svg") repeat-x center bottom 24px;
-  background-size: 460px auto;
-  opacity: .55;
   pointer-events: none;
   z-index: 0;
+  background-image:
+    radial-gradient(rgba(154, 18, 32, .14) 1.6px, transparent 1.8px),
+    radial-gradient(rgba(154, 18, 32, .14) 1.6px, transparent 1.8px);
+  background-repeat: repeat, repeat;
+  background-position: left 12px bottom 12px, right 12px bottom 12px;
+  background-size: 15px 15px, 15px 15px;
+  -webkit-mask:
+    radial-gradient(220px 200px at left bottom, #000 0%, transparent 72%),
+    radial-gradient(220px 200px at right bottom, #000 0%, transparent 72%);
+  mask:
+    radial-gradient(220px 200px at left bottom, #000 0%, transparent 72%),
+    radial-gradient(220px 200px at right bottom, #000 0%, transparent 72%);
 }
 
 .about > .container { position: relative; z-index: 1; }
