@@ -9,6 +9,23 @@
   overflow: hidden;
 }
 
+/* Nền skyline mờ phía sau */
+.about::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 340px;
+  background: url("../images/city-skyline.svg") repeat-x bottom center;
+  background-size: auto 300px;
+  opacity: .28;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about > .container { position: relative; z-index: 1; }
+
 /* -------- Quote -------- */
 .about-quote {
   max-width: 980px;
