@@ -97,7 +97,7 @@
 
 ## 🧱 Cấu trúc file — markup hoàn chỉnh
 
-Mỗi trang là HTML đầy đủ: `<head>` chứa link CDN Bootstrap + Google Fonts + Icon,
+Mỗi trang là HTML đầy đủ: `<head>` chứa link **local** Bootstrap + Fonts + Icon (`assets/vendor/`, `assets/fonts/`),
 `<body>` chứa nội dung, script Popper/Bootstrap đặt cuối `<body>`.
 
 ```html
