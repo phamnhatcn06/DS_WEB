@@ -103,6 +103,7 @@ The intended build order (see design doc for full detail per phase):
 
 ## Key constraints to preserve when implementing
 
-- Colors, typography, and spacing must come from the design tokens, not ad-hoc values — brand red `#9a1220`, gold accent `#c9a84c`, dark navy `#080f1d` backgrounds are the core palette.
-- Responsive scaling uses `clamp()` for fluid typography/spacing rather than fixed breakpoint overrides where possible.
+- **Implementation approach is Bootstrap 5.3 (CDN)** — see `.claude/rules/frontend-bootstrap.md` for the mandatory coding rules (grid/utilities/components first, minimal custom CSS, CDN `<head>` + end-of-body scripts, semantic HTML, FontAwesome/Bootstrap Icons).
+- Colors, typography, and spacing must come from the design tokens, not ad-hoc values — brand red `#9a1220`, gold accent `#c9a84c`, dark navy `#080f1d` backgrounds are the confirmed core palette. Supporting palette/type/spacing values in the Design Analysis above are recommended defaults; reconcile against Figma once an inner frame is selectable (see extraction-status note).
+- Responsive scaling uses `clamp()` for fluid typography/spacing rather than fixed breakpoint overrides where possible, layered on top of Bootstrap's responsive column classes.
 - Section fade-in-on-scroll uses `IntersectionObserver`, not scroll-event polling.
