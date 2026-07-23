@@ -1,0 +1,185 @@
+/* ==========================================================================
+   section-1-hero.css — Hero slider (Figma node 1134:26)
+   Full-bleed ảnh tối, nội dung căn giữa, điều khiển slider tùy biến.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: clamp(640px, 100vh, 940px);
+  background-color: var(--dsh-navy);
+  overflow: hidden;
+}
+
+.hero .carousel-inner,
+.hero .carousel-item { height: 100%; }
+
+.hero .carousel-item {
+  min-height: clamp(640px, 100vh, 940px);
+}
+
+/* Ảnh nền + lớp phủ tối cho chữ dễ đọc */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 15, 29, .55) 0%, rgba(8, 15, 29, .35) 45%, rgba(8, 15, 29, .75) 100%);
+}
+
+/* Nội dung căn giữa */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  min-height: clamp(640px, 100vh, 940px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-block: 120px 140px;
+}
+
+.hero-logo {
+  height: clamp(96px, 12vw, 168px);
+  width: auto;
+  margin-bottom: var(--space-5);
+}
+
+.hero-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: clamp(2.5rem, 7vw, 6rem);
+  line-height: 1.06;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, .35);
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, .92);
+  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+  line-height: 1.4;
+  max-width: 800px;
+  margin-inline: auto;
+  margin-bottom: var(--space-6);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.hero-actions .btn { border-radius: 8px; }
+
+.hero-actions .btn-discover {
+  --bs-btn-padding-x: 41px;
+  --bs-btn-padding-y: 17px;
+  font-size: .875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-actions .btn-discover .btn-arrow { width: 14px; height: 14px; }
+
+/* Nút phụ nền tối */
+.hero-actions .btn-dark-solid {
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: #000000;
+  --bs-btn-border-color: #000000;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #1a1a1a;
+  --bs-btn-hover-border-color: #1a1a1a;
+  --bs-btn-padding-x: 40px;
+  --bs-btn-padding-y: 16px;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+/* -------- Điều khiển slider (dưới) -------- */
+.hero-controls {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: clamp(24px, 5vh, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.hero-progress {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-counter {
+  color: rgba(255, 255, 255, .65);
+  font-size: .6875rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+.hero-dashes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.hero-dashes .dash {
+  height: 2px;
+  width: 12px;
+  padding: 0;
+  border: 0;
+  background-color: rgba(255, 255, 255, .45);
+  transition: width var(--transition-base), background-color var(--transition-base);
+}
+
+.hero-dashes .dash.active {
+  width: 40px;
+  background-color: var(--dsh-red);
+}
+
+.hero-nav {
+  display: flex;
+  gap: 8px;
+}
+
+.hero-nav .nav-btn {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, .35);
+  color: #fff;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.hero-nav .nav-btn:hover {
+  background-color: var(--dsh-red);
+  border-color: var(--dsh-red);
+}
+
+.hero-nav .nav-btn img { width: 16px; height: 16px; }
+
+@media (max-width: 575.98px) {
+  .hero-controls { flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+}
