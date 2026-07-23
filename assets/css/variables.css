@@ -19,8 +19,9 @@
   --dsh-line:      rgba(201, 168, 76, .25);
 
   /* -------- Typography -------- */
-  --font-heading: "Playfair Display", Georgia, serif;
-  --font-body:    "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+  /* Figma dùng Inter cho toàn bộ (heading + body) */
+  --font-heading: "Inter", system-ui, -apple-system, sans-serif;
+  --font-body:    "Inter", system-ui, -apple-system, sans-serif;
 
   /* Thang chữ fluid (clamp: min → max) */
   --fs-hero:    clamp(2.5rem, 5vw, 4.5rem);
