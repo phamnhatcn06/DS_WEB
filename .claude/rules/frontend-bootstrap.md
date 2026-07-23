@@ -2,7 +2,7 @@
 
 > Quy tắc **bắt buộc** khi code website tĩnh cho Đông Sơn Holdings (DSH).
 > Trang chủ là một trang cuộn dài (single long-scrolling) dựng từ Figma OPTION 01 (`12:11`).
-> Không dùng framework JS, không bundler, không package manager — chỉ HTML/CSS/JS tĩnh + Bootstrap qua CDN.
+> Không dùng framework JS, không bundler, không package manager — chỉ HTML/CSS/JS tĩnh + Bootstrap **tải về local** (không CDN).
 
 ---
 
