@@ -1,0 +1,59 @@
+/* ==========================================================================
+   variables.css — Design tokens cho Đông Sơn Holdings (DSH)
+   Tất cả màu / typography / spacing khai báo dưới dạng CSS custom properties.
+   KHÔNG hardcode giá trị brand rải rác — luôn dùng token ở đây.
+   ========================================================================== */
+
+:root {
+  /* -------- Màu brand (đã xác nhận) -------- */
+  --dsh-red:  #9a1220;
+  --dsh-gold: #c9a84c;
+  --dsh-navy: #080f1d;
+
+  /* -------- Màu phụ (đề xuất — đối chiếu Figma khi có frame con) -------- */
+  --dsh-red-dark:  #7a0e19;
+  --dsh-gold-soft: #d8bd72;
+  --dsh-navy-2:    #0f1a2e;
+  --dsh-white:     #ffffff;
+  --dsh-muted:     #c7ccd6;
+  --dsh-line:      rgba(201, 168, 76, .25);
+
+  /* -------- Typography -------- */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body:    "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+
+  /* Thang chữ fluid (clamp: min → max) */
+  --fs-hero:    clamp(2.5rem, 5vw, 4.5rem);
+  --fs-h2:      clamp(1.75rem, 3.5vw, 3rem);
+  --fs-h3:      clamp(1.125rem, 2vw, 1.5rem);
+  --fs-body:    clamp(0.95rem, 1.1vw, 1.125rem);
+  --fs-eyebrow: 0.8125rem;
+  --fs-stat:    clamp(2.5rem, 5vw, 4rem);
+
+  /* -------- Spacing (gốc 8px) -------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+
+  /* Padding dọc mỗi section */
+  --section-py: clamp(64px, 8vw, 128px);
+
+  /* -------- Layout -------- */
+  --container-max: 1320px;
+
+  /* -------- Hiệu ứng -------- */
+  --transition-base: .3s ease;
+  --radius: .5rem;
+  --radius-lg: 1rem;
+
+  /* -------- Override token Bootstrap để component dùng luôn màu brand -------- */
+  --bs-primary: var(--dsh-red);
+  --bs-body-font-family: var(--font-body);
+  --bs-body-font-size: var(--fs-body);
+}
