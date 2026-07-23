@@ -10,19 +10,19 @@
   overflow: hidden;
 }
 
-/* Hoạ tiết chevron (mái) mờ ở hai bên sau card */
+/* Hoạ tiết Cityscape (chevron) thật từ Figma làm nền chính */
 .about::before {
   content: "";
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  aspect-ratio: 2699 / 956;
   pointer-events: none;
   z-index: 0;
-  background-image:
-    repeating-linear-gradient(-45deg, rgba(154, 18, 32, .05) 0 2px, transparent 2px 26px),
-    repeating-linear-gradient(45deg, rgba(154, 18, 32, .05) 0 2px, transparent 2px 26px);
-  background-repeat: no-repeat, no-repeat;
-  background-position: left -60px center, right -60px center;
-  background-size: 420px 70%, 420px 70%;
+  background: url("../images/about-chevrons.svg") no-repeat center / contain;
+  opacity: .7;
 }
 
 /* Lưới chấm mờ ở góc dưới trái/phải */
