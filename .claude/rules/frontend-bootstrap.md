@@ -141,8 +141,8 @@ Mỗi trang là HTML đầy đủ: `<head>` chứa link CDN Bootstrap + Google F
   <!-- ===== Footer ===== -->
   <footer> ... </footer>
 
-  <!-- Bootstrap JS bundle (đã kèm Popper) — CUỐI body -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS bundle (đã kèm Popper) — local, CUỐI body -->
+  <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
   <!-- Custom JS (carousel config, news filter, fade-in) -->
   <script src="assets/js/main.js"></script>
 </body>
