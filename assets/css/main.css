@@ -1,0 +1,151 @@
+/* ==========================================================================
+   main.css — Base / reset / utilities dùng chung
+   Chỉ chứa CSS mà Bootstrap không cung cấp (brand overrides, helpers).
+   Style theo từng section sẽ nằm ở các file partial riêng.
+   ========================================================================== */
+
+/* -------- Base -------- */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--dsh-navy);
+  background-color: var(--dsh-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* -------- Typography helpers -------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dsh-gold);
+}
+
+.section-title {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--space-4);
+}
+
+.lead-body {
+  font-size: var(--fs-body);
+  line-height: 1.75;
+}
+
+/* -------- Section layout -------- */
+.section {
+  padding-block: var(--section-py);
+}
+
+.section-dark {
+  background-color: var(--dsh-navy);
+  color: var(--dsh-white);
+}
+
+.section-dark .lead-body,
+.section-dark p {
+  color: var(--dsh-muted);
+}
+
+.bg-navy   { background-color: var(--dsh-navy) !important; }
+.bg-navy-2 { background-color: var(--dsh-navy-2) !important; }
+.text-gold { color: var(--dsh-gold) !important; }
+.text-red  { color: var(--dsh-red) !important; }
+.text-muted-soft { color: var(--dsh-muted) !important; }
+
+.container {
+  max-width: var(--container-max);
+}
+
+/* -------- Divider vàng mảnh -------- */
+.divider-gold {
+  width: 64px;
+  height: 3px;
+  background-color: var(--dsh-gold);
+  border: 0;
+  opacity: 1;
+  margin-block: var(--space-3);
+}
+
+.divider-gold.mx-auto { margin-inline: auto; }
+
+/* -------- Buttons (brand) -------- */
+.btn-dsh {
+  --bs-btn-color: var(--dsh-white);
+  --bs-btn-bg: var(--dsh-red);
+  --bs-btn-border-color: var(--dsh-red);
+  --bs-btn-hover-color: var(--dsh-white);
+  --bs-btn-hover-bg: var(--dsh-red-dark);
+  --bs-btn-hover-border-color: var(--dsh-red-dark);
+  --bs-btn-active-bg: var(--dsh-red-dark);
+  --bs-btn-active-border-color: var(--dsh-red-dark);
+  --bs-btn-padding-x: 1.75rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: var(--radius);
+}
+
+.btn-dsh-outline {
+  --bs-btn-color: var(--dsh-white);
+  --bs-btn-border-color: rgba(255, 255, 255, .5);
+  --bs-btn-bg: transparent;
+  --bs-btn-hover-color: var(--dsh-navy);
+  --bs-btn-hover-bg: var(--dsh-white);
+  --bs-btn-hover-border-color: var(--dsh-white);
+  --bs-btn-padding-x: 1.75rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: var(--radius);
+}
+
+.btn-gold {
+  --bs-btn-color: var(--dsh-navy);
+  --bs-btn-bg: var(--dsh-gold);
+  --bs-btn-border-color: var(--dsh-gold);
+  --bs-btn-hover-color: var(--dsh-navy);
+  --bs-btn-hover-bg: var(--dsh-gold-soft);
+  --bs-btn-hover-border-color: var(--dsh-gold-soft);
+  --bs-btn-padding-x: 1.75rem;
+  --bs-btn-padding-y: .75rem;
+  --bs-btn-font-weight: 600;
+  --bs-btn-border-radius: var(--radius);
+}
+
+/* -------- Fade-in on scroll (IntersectionObserver thêm .is-visible) -------- */
+.fade-section {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .7s ease, transform .7s ease;
+  will-change: opacity, transform;
+}
+
+.fade-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* -------- Utilities -------- */
+.text-balance { text-wrap: balance; }
