@@ -59,7 +59,105 @@
   </header>
 
   <main>
-    <!-- Các section trang chủ sẽ được dựng lần lượt ở các bước tiếp theo -->
+
+    <!-- ===== Section 1: Hero slider ===== -->
+    <section id="hero" class="hero">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+        <div class="carousel-inner">
+
+          <div class="carousel-item hero-item active">
+            <img src="assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Đông Sơn Holding</h1>
+              <p class="hero-subtitle">Trở thành doanh nghiệp uy tín trong lĩnh vực<br class="d-none d-md-inline" />
+                năng lượng, bất động sản và xây lắp</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Hạ tầng &amp; BOT</h1>
+              <p class="hero-subtitle">Kết nối hành lang kinh tế, kiến tạo những<br class="d-none d-md-inline" />
+                tuyến giao thông trọng điểm quốc gia</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Bất động sản</h1>
+              <p class="hero-subtitle">Phát triển các khu đô thị và nhà ở bền vững,<br class="d-none d-md-inline" />
+                nâng tầm chất lượng sống cho cộng đồng</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Năng lượng</h1>
+              <p class="hero-subtitle">Đầu tư năng lượng tái tạo và khu công nghiệp,<br class="d-none d-md-inline" />
+                hướng tới một tương lai xanh và bền vững</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Điều khiển slider tùy biến -->
+        <div class="container hero-controls">
+          <div class="hero-progress">
+            <span class="hero-counter"><span id="heroCurrent">01</span> / 04</span>
+            <div class="hero-dashes" role="tablist" aria-label="Chọn slide">
+              <button type="button" class="dash active" data-bs-target="#heroCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+          </div>
+          <div class="hero-nav">
+            <button type="button" class="nav-btn" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Slide trước">
+              <img src="assets/images/chevron-left.svg" alt="" aria-hidden="true" />
+            </button>
+            <button type="button" class="nav-btn" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Slide sau">
+              <img src="assets/images/chevron-right.svg" alt="" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== Footer ===== -->
