@@ -92,6 +92,8 @@ Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 
 
 ## Kế hoạch triển khai
 
+> **Bóc tách section chi tiết để dựng lần lượt:** xem `.claude/SECTIONS.md` — nguồn thiết kế thật hiện tại là Figma node **`1134:25`** (10 section thân + header/footer, kèm node ID từng section, trạng thái ☐/☑). Bảng "Bóc tách từng section" phía trên (dựa trên design cũ `12:11`) đã lỗi thời ở vài điểm — ưu tiên `SECTIONS.md`.
+
 Thứ tự dựng dự kiến (xem tài liệu thiết kế để biết chi tiết từng phase):
 
 1. Design token & CSS reset (`variables.css`, layout/grid utilities cơ bản)
