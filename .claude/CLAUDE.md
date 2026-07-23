@@ -103,7 +103,8 @@ Thứ tự dựng dự kiến (xem tài liệu thiết kế để biết chi ti�
 
 ## Ràng buộc chính cần giữ khi triển khai
 
-- **Cách tiếp cận triển khai là Bootstrap 5.3 (CDN)** — xem `.claude/rules/frontend-bootstrap.md` để biết quy tắc code bắt buộc (ưu tiên grid/utilities/component, tối thiểu custom CSS, `<head>` CDN + script cuối body, HTML ngữ nghĩa, FontAwesome/Bootstrap Icons).
+- **Cách tiếp cận triển khai là Bootstrap 5.3** — xem `.claude/rules/frontend-bootstrap.md` để biết quy tắc code bắt buộc (ưu tiên grid/utilities/component, tối thiểu custom CSS, script cuối body, HTML ngữ nghĩa, Bootstrap Icons).
+- **Không dùng CDN — mọi thư viện bên thứ ba phải tải về local** trong `assets/vendor/` (Bootstrap CSS/JS, Bootstrap Icons + font) và `assets/fonts/` (Google Fonts + file `.woff2`), tham chiếu qua đường dẫn tương đối. Trang phải chạy hoàn toàn offline, không request ra `cdn.jsdelivr.net`, `fonts.googleapis.com`, `fonts.gstatic.com` hay host ngoài nào. Cùng nguyên tắc với ảnh (export về local).
 - Màu, typography và spacing phải lấy từ design token, không dùng giá trị tùy tiện — đỏ brand `#9a1220`, vàng nhấn `#c9a84c`, nền navy tối `#080f1d` là palette cốt lõi đã xác nhận. Các giá trị palette phụ/type/spacing trong phần Phân tích thiết kế ở trên là mặc định đề xuất; đối chiếu lại với Figma khi có thể chọn được frame con (xem ghi chú trạng thái trích xuất).
 - Scaling responsive dùng `clamp()` cho typography/spacing fluid thay vì đè breakpoint cố định khi có thể, đặt trên nền các class cột responsive của Bootstrap.
 - Fade-in section khi cuộn dùng `IntersectionObserver`, không poll sự kiện scroll.
