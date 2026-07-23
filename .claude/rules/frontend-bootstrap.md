@@ -10,7 +10,7 @@
 
 | # | Rule |
 |---|------|
-| 1 | **Bootstrap 5.3 qua CDN** — ưu tiên Grid, utilities và component có sẵn; hạn chế tối đa custom CSS |
+| 1 | **Bootstrap 5.3 tải về local** (`assets/vendor/`, KHÔNG CDN) — ưu tiên Grid, utilities và component có sẵn; hạn chế tối đa custom CSS |
 | 2 | **Responsive bằng Bootstrap Grid** — `col-`, `col-md-`, `col-lg-` cho mobile / tablet / desktop |
 | 3 | **Semantic HTML** — dùng đúng thẻ ngữ nghĩa, không "div soup" |
 | 4 | **Clean code** — thụt lề chuẩn, dễ đọc, comment rõ ràng cho từng section |
