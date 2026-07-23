@@ -76,13 +76,12 @@
   overflow: hidden;
 }
 
-.about-text .watermark {
+.about-text .card-logo {
   position: absolute;
-  top: 28px;
-  left: 24px;
-  width: 120px;
+  top: 32px;
+  left: 28px;
+  width: 128px;
   height: auto;
-  opacity: .08;
   pointer-events: none;
 }
 
