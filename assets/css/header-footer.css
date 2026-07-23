@@ -1,0 +1,183 @@
+/* ==========================================================================
+   header-footer.css — Header sticky/glassmorphism + Footer (CTA + 4 cột)
+   ========================================================================== */
+
+/* -------- Sentinel cho IntersectionObserver (đặt ở đỉnh trang) -------- */
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+/* ===================== Header ===================== */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1030;
+  padding-block: var(--space-3);
+  background-color: transparent;
+  transition: background-color var(--transition-base), backdrop-filter var(--transition-base),
+              box-shadow var(--transition-base), padding var(--transition-base);
+}
+
+/* Trạng thái đã cuộn — glassmorphism navy trong mờ */
+.site-header.is-scrolled {
+  padding-block: var(--space-2);
+  background-color: rgba(8, 15, 29, .78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .25);
+  border-bottom: 1px solid var(--dsh-line);
+}
+
+.site-header .navbar-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--dsh-white);
+  letter-spacing: .02em;
+}
+
+.site-header .navbar-brand .brand-mark { color: var(--dsh-gold); }
+
+.site-header .nav-link {
+  color: rgba(255, 255, 255, .85);
+  font-weight: 500;
+  padding-inline: var(--space-3);
+  transition: color var(--transition-base);
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+  color: var(--dsh-gold);
+}
+
+/* Công tắc đổi ngôn ngữ */
+.lang-switch {
+  color: rgba(255, 255, 255, .7);
+  font-weight: 600;
+  font-size: .875rem;
+}
+
+.lang-switch .lang-active { color: var(--dsh-gold); }
+
+.lang-switch .btn {
+  color: inherit;
+  padding: .25rem .4rem;
+  border: 0;
+}
+
+/* Toggler trên nền tối */
+.site-header .navbar-toggler {
+  border-color: rgba(255, 255, 255, .35);
+}
+
+.site-header .navbar-toggler:focus { box-shadow: none; }
+
+.site-header .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Menu thu gọn dưới lg — nền navy để đọc được */
+@media (max-width: 991.98px) {
+  .site-header .navbar-collapse {
+    background-color: rgba(8, 15, 29, .96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    margin-top: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--dsh-line);
+  }
+}
+
+/* ===================== Footer ===================== */
+/* Banner CTA nổi bật */
+.cta-banner {
+  background-color: var(--dsh-red);
+  color: var(--dsh-white);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 5vw, 4rem);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: calc(-1 * clamp(2rem, 5vw, 4rem));
+  z-index: 2;
+}
+
+.cta-banner h2 { color: var(--dsh-white); }
+
+.site-footer {
+  background-color: var(--dsh-navy);
+  color: var(--dsh-muted);
+  padding-top: clamp(6rem, 12vw, 9rem);
+}
+
+.site-footer .footer-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--dsh-white);
+}
+
+.site-footer .footer-brand .brand-mark { color: var(--dsh-gold); }
+
+.site-footer h6 {
+  color: var(--dsh-white);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  font-size: .875rem;
+  margin-bottom: var(--space-4);
+}
+
+.site-footer .footer-link {
+  color: var(--dsh-muted);
+  text-decoration: none;
+  display: inline-block;
+  padding-block: .35rem;
+  transition: color var(--transition-base), padding-left var(--transition-base);
+}
+
+.site-footer .footer-link:hover {
+  color: var(--dsh-gold);
+  padding-left: 4px;
+}
+
+.site-footer .footer-contact li {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  margin-bottom: var(--space-3);
+}
+
+.site-footer .footer-contact i { color: var(--dsh-gold); margin-top: .2rem; }
+
+/* Thanh dưới cùng */
+.footer-bottom {
+  border-top: 1px solid var(--dsh-line);
+  margin-top: clamp(2rem, 5vw, 4rem);
+  padding-block: var(--space-4);
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--dsh-line);
+  color: var(--dsh-muted);
+  font-size: 1.1rem;
+  transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+}
+
+.social-links a:hover {
+  color: var(--dsh-navy);
+  background-color: var(--dsh-gold);
+  border-color: var(--dsh-gold);
+}
