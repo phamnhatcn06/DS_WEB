@@ -1,109 +1,109 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+File này cung cấp hướng dẫn cho Claude Code (claude.ai/code) khi làm việc với mã nguồn trong repo này.
 
-## Project Overview
+## Tổng quan dự án
 
-Static HTML/CSS/JS marketing website for **Đông Sơn Holdings (DSH)**, built from a Figma design (canvas `1920px` wide). No frontend framework, bundler, or package manager is used — this is plain HTML/CSS/JS served as static files.
+Website marketing tĩnh bằng HTML/CSS/JS cho **Đông Sơn Holdings (DSH)**, dựng từ thiết kế Figma (canvas rộng `1920px`). Không dùng framework frontend, không bundler, không package manager — đây là HTML/CSS/JS thuần, phục vụ dưới dạng file tĩnh.
 
-Current state: the repo is a fresh scaffold. `index.html` and `assets/css/`, `assets/js/`, `assets/images/` exist but are empty — none of the pages/sections below have been implemented yet.
+Hiện trạng: repo mới ở dạng khung (scaffold). `index.html` và các thư mục `assets/css/`, `assets/js/`, `assets/images/` đã tồn tại nhưng còn trống — chưa section/trang nào bên dưới được triển khai.
 
-## Commands
+## Lệnh (Commands)
 
-There is no `package.json`, build tool, linter, or test runner in this repo. Development is:
+Repo không có `package.json`, không build tool, không linter, không test runner. Quy trình phát triển:
 
-- **Preview**: open `index.html` directly in a browser, or serve the directory with any static file server (e.g. `python -m http.server` from the project root) so relative asset paths resolve correctly.
-- **Asset pipeline**: `download_and_convert_assets.py` pulls image assets referenced by an external Figma/Antigravity export (`http://localhost:3845/assets/...` URLs found in a local Antigravity IDE "steps" directory), converts raster images to `.webp`, and copies `.svg` files as-is into `assets/images/`. This only works when that local export tool is running and generating step files; it is not a general-purpose downloader. Run with `python download_and_convert_assets.py`.
+- **Xem trước (Preview)**: mở trực tiếp `index.html` trên trình duyệt, hoặc chạy một static file server bất kỳ trong thư mục gốc (vd `python -m http.server`) để các đường dẫn asset tương đối phân giải đúng.
+- **Pipeline asset**: `download_and_convert_assets.py` tải các ảnh được tham chiếu bởi một bản export Figma/Antigravity bên ngoài (các URL `http://localhost:3845/assets/...` tìm thấy trong thư mục "steps" của Antigravity IDE cục bộ), chuyển ảnh raster sang `.webp`, và sao chép nguyên các file `.svg` vào `assets/images/`. Chỉ hoạt động khi công cụ export cục bộ đó đang chạy và sinh ra file step; đây không phải trình tải file đa dụng. Chạy bằng `python download_and_convert_assets.py`.
 
-## Architecture
+## Kiến trúc
 
-The site is a single long-scrolling homepage (`OP1 3` in Figma) composed of 10 stacked sections, plus a shared Header and Footer. When implementing, build one section/component at a time as separate CSS partials (or clearly delimited blocks) rather than one monolithic stylesheet, since the page is very tall (~11,300px design height) and content-heavy.
+Website là một trang chủ cuộn dài duy nhất (`OPTION 01` trong Figma), gồm 10 section xếp chồng, cộng thêm Header và Footer dùng chung. Khi triển khai, dựng từng section/component một, tách thành các file CSS partial (hoặc các khối được phân định rõ) thay vì một stylesheet khổng lồ, vì trang rất cao (~11.300px theo thiết kế) và nhiều nội dung.
 
-**Planned file structure** (per the implementation plan below):
-- `assets/css/variables.css` — design tokens (colors, fonts, spacing) as CSS custom properties
-- `assets/css/` — component and section stylesheets
-- `assets/js/` — carousel/slider controller, news filter tabs, scroll-triggered fade-in (IntersectionObserver)
-- `assets/images/` — exported/converted image assets
+**Cấu trúc file dự kiến** (theo kế hoạch triển khai bên dưới):
+- `assets/css/variables.css` — design token (màu, font, spacing) dưới dạng CSS custom properties
+- `assets/css/` — stylesheet cho component và section
+- `assets/js/` — điều khiển carousel/slider, tab lọc tin tức, hiệu ứng fade-in khi cuộn (IntersectionObserver)
+- `assets/images/` — ảnh đã export/convert
 
-**Section order on the homepage** (each is its own visual block, roughly in this sequence): Hero slider → BOT/infrastructure highlight → About/vision-mission → Business area pillars (3) → Featured projects → Company stats → Featured projects detail → Partners/shareholders → News with category filter tabs → Footer with CTA banner.
+**Thứ tự các section trên trang chủ** (mỗi cái là một khối hình riêng, đại khái theo trình tự): Hero slider → Điểm nhấn hạ tầng BOT → Giới thiệu/tầm nhìn–sứ mệnh → 3 trụ cột lĩnh vực kinh doanh → Dự án tiêu biểu → Số liệu công ty → Chi tiết dự án tiêu biểu → Đối tác/cổ đông → Tin tức có tab lọc theo danh mục → Footer kèm banner CTA.
 
-The Figma source is the **MOODBOARD** page. The chosen homepage is **OPTION 01** (Figma section node `12:11`, inside section "ĐỀ XUẤT GIAO DIỆN" `24:22`). Three other options exist (`17:759`, `23:3`, `24:17`) — ignore them. A separate "PHÂN TÍCH VÀ ĐỀ XUẤT" section (`13:46`) holds the rationale.
+Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 01** (node section Figma `12:11`, nằm trong section "ĐỀ XUẤT GIAO DIỆN" `24:22`). Có 3 option khác (`17:759`, `23:3`, `24:17`) — bỏ qua. Một section riêng "PHÂN TÍCH VÀ ĐỀ XUẤT" (`13:46`) chứa phần lý giải.
 
-## Design Analysis (OPTION 01 — homepage `12:11`)
+## Phân tích thiết kế (OPTION 01 — trang chủ `12:11`)
 
-> **Figma extraction status (2026-07-23):** Live per-node token extraction from the Figma desktop MCP is currently **blocked**: every OPTION is a Figma *section* node and the MCP returns a "sparse" response for sections (it will not enumerate the child frame IDs, so `get_design_context` cannot be called on the inner frames); node screenshots render **pure black** because the design's image fills reference an offline `localhost:3845` asset server; and `get_variable_defs` returns `{}` (the file has **no bound Figma variables** — colors/sizes are hardcoded fills). To extract exact hex/px values, **open the Figma desktop app and select an inner frame** (not the OPTION 01 section), then re-run `get_design_context` / `get_variable_defs` on that frame. Until then, the tokens below are: brand colors = **confirmed**; the supporting palette, type scale, and spacing = **recommended defaults** to be reconciled against Figma once a frame is selectable.
+> **Trạng thái trích xuất Figma (2026-07-23):** Việc trích token trực tiếp theo từng node qua Figma desktop MCP hiện đang **bị chặn**: mỗi OPTION là một node *section* của Figma và MCP trả về phản hồi "sparse" cho section (không liệt kê ID các frame con, nên không gọi được `get_design_context` trên các frame bên trong); ảnh chụp node render ra **màu đen tuyền** vì phần image fill của thiết kế tham chiếu tới asset server `localhost:3845` đang offline; và `get_variable_defs` trả về `{}` (file **không có biến Figma nào được bind** — màu/kích thước là fill hardcode). Để lấy giá trị hex/px chính xác, **mở Figma desktop và chọn một frame con** (không phải section OPTION 01), rồi chạy lại `get_design_context` / `get_variable_defs` trên frame đó. Trước khi làm được điều đó: màu brand = **đã xác nhận**; palette phụ, thang typography và spacing = **giá trị mặc định đề xuất**, cần đối chiếu lại với Figma khi có thể chọn được frame.
 
-### Design tokens
+### Design token
 
-**Colors — confirmed brand palette:**
-| Token | Hex | Use |
-|-------|-----|-----|
-| `--dsh-red` | `#9a1220` | Primary brand red — buttons, accents, active tab underline, CTA banner |
-| `--dsh-gold` | `#c9a84c` | Gold accent — hairlines, stat numbers, decorative dividers, hover states |
-| `--dsh-navy` | `#080f1d` | Dark navy — primary section backgrounds, footer |
+**Màu sắc — palette brand đã xác nhận:**
+| Token | Hex | Dùng cho |
+|-------|-----|----------|
+| `--dsh-red` | `#9a1220` | Đỏ brand chính — nút, điểm nhấn, gạch chân tab active, banner CTA |
+| `--dsh-gold` | `#c9a84c` | Vàng nhấn — đường kẻ mảnh, số liệu thống kê, divider trang trí, trạng thái hover |
+| `--dsh-navy` | `#080f1d` | Navy tối — nền section chính, footer |
 
-**Colors — recommended supporting palette (reconcile with Figma):**
-| Token | Hex (suggested) | Use |
-|-------|-----|-----|
-| `--dsh-navy-2` | `#0f1a2e` | Elevated cards/panels on navy |
-| `--dsh-white` | `#ffffff` | Text/headings on navy |
-| `--dsh-muted` | `#c7ccd6` | Body/secondary text on navy |
-| `--dsh-line` | `rgba(201,168,76,.25)` | Gold hairline borders |
+**Màu sắc — palette phụ đề xuất (đối chiếu với Figma):**
+| Token | Hex (gợi ý) | Dùng cho |
+|-------|-----|----------|
+| `--dsh-navy-2` | `#0f1a2e` | Card/panel nổi trên nền navy |
+| `--dsh-white` | `#ffffff` | Chữ/tiêu đề trên nền navy |
+| `--dsh-muted` | `#c7ccd6` | Chữ body/phụ trên nền navy |
+| `--dsh-line` | `rgba(201,168,76,.25)` | Đường kẻ mảnh màu vàng |
 
-**Typography — recommended (Google Fonts):** a serif display for headings (e.g. **Playfair Display** or **Cormorant** for the corporate/premium feel) paired with a clean sans for body (**Be Vietnam Pro** — full Vietnamese diacritics support — or **Inter**). Fluid scale via `clamp()`:
-| Role | `clamp()` (min → max) |
-|------|-----------------------|
+**Typography — đề xuất (Google Fonts):** một serif display cho tiêu đề (vd **Playfair Display** hoặc **Cormorant** cho cảm giác doanh nghiệp/cao cấp) kết hợp một sans sạch cho body (**Be Vietnam Pro** — hỗ trợ đầy đủ dấu Tiếng Việt — hoặc **Inter**). Thang chữ fluid bằng `clamp()`:
+| Vai trò | `clamp()` (min → max) |
+|---------|-----------------------|
 | Hero H1 | `clamp(2.5rem, 5vw, 4.5rem)` |
 | Section H2 | `clamp(1.75rem, 3.5vw, 3rem)` |
 | Card/H3 | `clamp(1.125rem, 2vw, 1.5rem)` |
 | Body | `clamp(0.95rem, 1.1vw, 1.125rem)` |
-| Eyebrow/label | `0.8125rem`, letter-spacing `.12em`, uppercase |
-| Stat number | `clamp(2.5rem, 5vw, 4rem)` |
+| Eyebrow/nhãn | `0.8125rem`, letter-spacing `.12em`, viết hoa |
+| Số thống kê | `clamp(2.5rem, 5vw, 4rem)` |
 
-**Spacing scale (recommended, 8px base):** `4 / 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128 px`. Section vertical padding: `clamp(64px, 8vw, 128px)`. Content max-width container ≈ `1320px` (Bootstrap `.container`), design canvas 1920px.
+**Thang spacing (đề xuất, gốc 8px):** `4 / 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128 px`. Padding dọc mỗi section: `clamp(64px, 8vw, 128px)`. Container nội dung max-width ≈ `1320px` (Bootstrap `.container`), canvas thiết kế 1920px.
 
-### Section-by-section breakdown (→ Bootstrap mapping)
+### Bóc tách từng section (→ ánh xạ Bootstrap)
 
-| # | Section | Purpose | Layout | Bootstrap mapping |
-|---|---------|---------|--------|-------------------|
-| — | **Header** | Sticky nav, glassmorphism-on-scroll | Logo left, nav center/right, CTA + lang switch | `.navbar .navbar-expand-lg .fixed-top`, `.container`, collapse toggler on `< lg` |
-| 1 | **Hero slider** | Brand statement + rotating feature slides | Full-bleed navy, headline + CTA over image, slide dots/arrows | `#carousel` (Bootstrap Carousel), `.container` overlay, `.btn` |
-| 2 | **BOT / infrastructure highlight** | Flagship infrastructure story | Two-column: image + text | `.row`, `.col-lg-6` (stack on `< lg`) |
-| 3 | **About / vision–mission** | Company intro, vision & mission | Heading + 2–3 value blocks | `.row .g-4`, `.col-md-6 / col-lg-4` |
-| 4 | **Business area pillars** | 3 core business domains | 3 equal cards with icon/title/desc | `.row .row-cols-1 .row-cols-md-3`, `.card` |
-| 5 | **Featured projects** | Showcase key projects | Grid or carousel of project cards | `.row .g-4`, `.col-md-6 .col-lg-4`, `.card` |
-| 6 | **Company stats** | Key numbers (years, projects, capital…) | Horizontal band of 3–4 counters | `.row .text-center`, `.col-6 .col-md-3`, gold stat numbers |
-| 7 | **Featured projects detail** | Deep-dive on a marquee project | Alternating image/text rows | repeated `.row` with `.flex-lg-row-reverse` |
-| 8 | **Partners / shareholders** | Logos of partners & shareholders | Responsive logo grid | `.row .row-cols-2 .row-cols-md-4 / md-6`, grayscale logos |
-| 9 | **News + category filter tabs** | Latest news with category filtering | Tab bar + card grid | `.nav .nav-pills` (filter), `.row .g-4`, `.card`; JS filter |
-| — | **Footer** | CTA banner + 4-column links + copyright | Full-width red/navy CTA band above dark footer | `.container`, `.row`, `.col-lg-3` × 4 |
+| # | Section | Mục đích | Bố cục | Ánh xạ Bootstrap |
+|---|---------|----------|--------|------------------|
+| — | **Header** | Nav sticky, glassmorphism khi cuộn | Logo trái, nav giữa/phải, CTA + đổi ngôn ngữ | `.navbar .navbar-expand-lg .fixed-top`, `.container`, toggler collapse ở `< lg` |
+| 1 | **Hero slider** | Tuyên ngôn brand + các slide xoay vòng | Full-bleed navy, tiêu đề + CTA trên ảnh, dot/mũi tên | `#carousel` (Bootstrap Carousel), overlay `.container`, `.btn` |
+| 2 | **Điểm nhấn hạ tầng BOT** | Câu chuyện hạ tầng chủ lực | 2 cột: ảnh + chữ | `.row`, `.col-lg-6` (xếp chồng ở `< lg`) |
+| 3 | **Giới thiệu / tầm nhìn–sứ mệnh** | Giới thiệu công ty, tầm nhìn & sứ mệnh | Tiêu đề + 2–3 khối giá trị | `.row .g-4`, `.col-md-6 / col-lg-4` |
+| 4 | **Trụ cột lĩnh vực kinh doanh** | 3 mảng kinh doanh cốt lõi | 3 card đều nhau: icon/tiêu đề/mô tả | `.row .row-cols-1 .row-cols-md-3`, `.card` |
+| 5 | **Dự án tiêu biểu** | Trưng bày các dự án chính | Grid hoặc carousel card dự án | `.row .g-4`, `.col-md-6 .col-lg-4`, `.card` |
+| 6 | **Số liệu công ty** | Con số chính (số năm, dự án, vốn…) | Dải ngang 3–4 bộ đếm | `.row .text-center`, `.col-6 .col-md-3`, số màu vàng |
+| 7 | **Chi tiết dự án tiêu biểu** | Đi sâu một dự án chủ lực | Các hàng ảnh/chữ xen kẽ | lặp `.row` với `.flex-lg-row-reverse` |
+| 8 | **Đối tác / cổ đông** | Logo đối tác & cổ đông | Grid logo responsive | `.row .row-cols-2 .row-cols-md-4 / md-6`, logo grayscale |
+| 9 | **Tin tức + tab lọc danh mục** | Tin mới nhất kèm lọc danh mục | Thanh tab + grid card | `.nav .nav-pills` (lọc), `.row .g-4`, `.card`; JS lọc |
+| — | **Footer** | Banner CTA + 4 cột link + copyright | Dải CTA full-width đỏ/navy trên footer tối | `.container`, `.row`, `.col-lg-3` × 4 |
 
-### Header & Footer specs
+### Đặc tả Header & Footer
 
-- **Header:** transparent over the hero at scroll top; on scroll adds a translucent navy + blur "glassmorphism" background (toggle a class via a small scroll listener or IntersectionObserver sentinel). Contains logo, primary nav links, a `--dsh-red` CTA button, and a VI/EN language switch. Collapses to a hamburger (`.navbar-toggler`) below `lg`.
-- **Footer:** a prominent CTA banner (brand-red background, headline + button) sits directly above a 4-column dark-navy footer (company info/logo, quick links, business areas, contact). Bottom bar: copyright + social icons. Gold hairline (`--dsh-line`) separates banner from columns.
+- **Header:** trong suốt khi ở đỉnh hero; khi cuộn xuống thêm nền navy trong mờ + blur kiểu "glassmorphism" (bật/tắt một class qua scroll listener nhỏ hoặc sentinel IntersectionObserver). Gồm logo, các link nav chính, một nút CTA màu `--dsh-red`, và công tắc đổi ngôn ngữ VI/EN. Thu về hamburger (`.navbar-toggler`) dưới `lg`.
+- **Footer:** một banner CTA nổi bật (nền đỏ brand, tiêu đề + nút) nằm ngay trên footer 4 cột nền navy tối (thông tin/logo công ty, link nhanh, lĩnh vực kinh doanh, liên hệ). Thanh dưới cùng: copyright + icon mạng xã hội. Đường kẻ mảnh vàng (`--dsh-line`) ngăn banner với các cột.
 
-### Responsive behavior
+### Hành vi responsive
 
-- Desktop (`≥ lg` / 992px+): full multi-column grids as designed (3–4 cols).
-- Tablet (`md` / 768–991px): 2-column grids; two-column image+text sections keep side-by-side or begin stacking; nav collapses to hamburger.
-- Mobile (`< md` / < 768px): everything stacks to a single column (`col-12`); hero text scales down via `clamp()`; stats wrap to 2-per-row (`col-6`); partner logos 2-per-row; news tabs scroll horizontally if needed.
-- Prefer fluid `clamp()` typography/spacing over hard breakpoint overrides; use Bootstrap's responsive column classes (`col-`, `col-md-`, `col-lg-`) for structural changes.
+- Desktop (`≥ lg` / 992px+): grid nhiều cột đầy đủ như thiết kế (3–4 cột).
+- Tablet (`md` / 768–991px): grid 2 cột; các section ảnh+chữ giữ cạnh nhau hoặc bắt đầu xếp chồng; nav thu về hamburger.
+- Mobile (`< md` / < 768px): mọi thứ xếp về 1 cột (`col-12`); chữ hero co lại nhờ `clamp()`; số liệu wrap 2/hàng (`col-6`); logo đối tác 2/hàng; tab tin tức cuộn ngang nếu cần.
+- Ưu tiên typography/spacing fluid bằng `clamp()` thay vì đè breakpoint cứng; dùng các class cột responsive của Bootstrap (`col-`, `col-md-`, `col-lg-`) cho thay đổi bố cục.
 
-## Implementation Plan
+## Kế hoạch triển khai
 
-The intended build order (see design doc for full detail per phase):
+Thứ tự dựng dự kiến (xem tài liệu thiết kế để biết chi tiết từng phase):
 
-1. Design tokens & CSS reset (`variables.css`, base layout/grid utilities)
-2. Reusable components (buttons, typography, cards, filter tabs, carousel controls)
-3. Header (sticky, glassmorphism-on-scroll) and Footer (CTA banner + 4-column links)
-4. All 10 homepage sections, section by section
-5. JavaScript interactivity: carousel autoplay/controls, news filter tabs, scroll fade-in
-6. Responsive pass (1920/1440/1024/768/375px) + SEO (meta tags, semantic heading hierarchy, alt text) + performance pass
+1. Design token & CSS reset (`variables.css`, layout/grid utilities cơ bản)
+2. Component tái sử dụng (button, typography, card, tab lọc, điều khiển carousel)
+3. Header (sticky, glassmorphism khi cuộn) và Footer (banner CTA + 4 cột link)
+4. Toàn bộ 10 section trang chủ, làm lần lượt từng section
+5. Tương tác JavaScript: carousel autoplay/điều khiển, tab lọc tin tức, fade-in khi cuộn
+6. Rà responsive (1920/1440/1024/768/375px) + SEO (meta tag, phân cấp heading ngữ nghĩa, alt text) + tối ưu hiệu năng
 
-## Key constraints to preserve when implementing
+## Ràng buộc chính cần giữ khi triển khai
 
-- **Implementation approach is Bootstrap 5.3 (CDN)** — see `.claude/rules/frontend-bootstrap.md` for the mandatory coding rules (grid/utilities/components first, minimal custom CSS, CDN `<head>` + end-of-body scripts, semantic HTML, FontAwesome/Bootstrap Icons).
-- Colors, typography, and spacing must come from the design tokens, not ad-hoc values — brand red `#9a1220`, gold accent `#c9a84c`, dark navy `#080f1d` backgrounds are the confirmed core palette. Supporting palette/type/spacing values in the Design Analysis above are recommended defaults; reconcile against Figma once an inner frame is selectable (see extraction-status note).
-- Responsive scaling uses `clamp()` for fluid typography/spacing rather than fixed breakpoint overrides where possible, layered on top of Bootstrap's responsive column classes.
-- Section fade-in-on-scroll uses `IntersectionObserver`, not scroll-event polling.
+- **Cách tiếp cận triển khai là Bootstrap 5.3 (CDN)** — xem `.claude/rules/frontend-bootstrap.md` để biết quy tắc code bắt buộc (ưu tiên grid/utilities/component, tối thiểu custom CSS, `<head>` CDN + script cuối body, HTML ngữ nghĩa, FontAwesome/Bootstrap Icons).
+- Màu, typography và spacing phải lấy từ design token, không dùng giá trị tùy tiện — đỏ brand `#9a1220`, vàng nhấn `#c9a84c`, nền navy tối `#080f1d` là palette cốt lõi đã xác nhận. Các giá trị palette phụ/type/spacing trong phần Phân tích thiết kế ở trên là mặc định đề xuất; đối chiếu lại với Figma khi có thể chọn được frame con (xem ghi chú trạng thái trích xuất).
+- Scaling responsive dùng `clamp()` cho typography/spacing fluid thay vì đè breakpoint cố định khi có thể, đặt trên nền các class cột responsive của Bootstrap.
+- Fade-in section khi cuộn dùng `IntersectionObserver`, không poll sự kiện scroll.
