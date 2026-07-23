@@ -170,9 +170,9 @@ không hardcode rải rác:
   --dsh-muted:  #c7ccd6;
   --dsh-line:   rgba(201, 168, 76, .25);
 
-  /* Fonts */
-  --font-heading: "Playfair Display", serif;
-  --font-body: "Be Vietnam Pro", system-ui, sans-serif;
+  /* Fonts — Inter cho toàn bộ (xác nhận từ Figma node 1134:25), tải local */
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
 }
 ```
 
