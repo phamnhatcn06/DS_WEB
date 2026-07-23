@@ -18,7 +18,10 @@
 
 ---
 
-## 📦 Framework — Bootstrap 5.3 (CDN)
+## 📦 Framework — Bootstrap 5.3 (tải về local, KHÔNG CDN)
+
+> **Bắt buộc:** mọi thư viện bên thứ ba (Bootstrap CSS/JS, Bootstrap Icons + file font, Google Fonts + `.woff2`) phải tải về `assets/vendor/` và `assets/fonts/`, tham chiếu bằng đường dẫn tương đối. Trang chạy offline hoàn toàn — không request tới `cdn.jsdelivr.net`, `fonts.googleapis.com`, `fonts.gstatic.com` hay host ngoài. Cấu trúc: `assets/vendor/bootstrap/`, `assets/vendor/bootstrap-icons/` (+ `fonts/`), `assets/fonts/` (+ `files/`).
+
 
 - **Luôn** ưu tiên component dựng sẵn của Bootstrap trước khi tự viết:
   - `Navbar` (header), `Carousel` (hero slider), `Card` (project/news/pillar), `Button`,
