@@ -9,17 +9,16 @@
   overflow: hidden;
 }
 
-/* Nền skyline mờ phía sau */
+/* Nền skyline mờ phía sau (phủ toàn section, lộ ra quanh & giữa các card) */
 .about::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 340px;
-  background: url("../images/city-skyline.svg") repeat-x bottom center;
-  background-size: auto 300px;
-  opacity: .28;
+  inset: 0;
+  background:
+    url("../images/city-skyline.svg") repeat-x left 20% bottom 40px,
+    url("../images/city-skyline.svg") repeat-x right 15% bottom 40px;
+  background-size: 520px auto, 380px auto;
+  opacity: .5;
   pointer-events: none;
   z-index: 0;
 }
