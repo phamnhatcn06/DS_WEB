@@ -228,3 +228,4 @@ document.querySelectorAll('.fade-section').forEach((el) => observer.observe(el))
 - ❌ Load Popper riêng khi đã dùng `bootstrap.bundle.min.js`.
 - ❌ Poll sự kiện `scroll` cho fade-in/header (dùng `IntersectionObserver`).
 - ❌ Chế màu brand tuỳ tiện — chỉ dùng token đã xác nhận.
+- ❌ Link thư viện/font qua CDN hay host ngoài — mọi asset phải tải về local (`assets/vendor/`, `assets/fonts/`, `assets/images/`).
