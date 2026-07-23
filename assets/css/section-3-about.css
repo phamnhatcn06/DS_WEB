@@ -14,11 +14,9 @@
   content: "";
   position: absolute;
   inset: 0;
-  background:
-    url("../images/city-skyline.svg") repeat-x left 20% bottom 40px,
-    url("../images/city-skyline.svg") repeat-x right 15% bottom 40px;
-  background-size: 520px auto, 380px auto;
-  opacity: .5;
+  background: url("../images/city-skyline.svg") repeat-x center bottom 24px;
+  background-size: 460px auto;
+  opacity: .55;
   pointer-events: none;
   z-index: 0;
 }
