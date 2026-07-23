@@ -129,8 +129,9 @@
 
 .cta-title {
   color: #ffffff;
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-weight: 800;
+  letter-spacing: -.01em;
   text-transform: uppercase;
   font-size: clamp(2rem, 5vw, 3.75rem);
   line-height: 1.15;
