@@ -50,23 +50,25 @@
   }
 
   /**
-   * Đồng bộ điều khiển tùy biến của Hero (counter "0X / 04" + dash active)
-   * với Bootstrap Carousel qua sự kiện slide.
+   * Slider tùy biến dùng chung: đồng bộ counter "0X / 0N" và dash active với
+   * Bootstrap Carousel. Áp cho mọi carousel có thuộc tính [data-custom-slider].
+   * Bên trong tìm phần tử .js-counter (hiện số) và các nút .dash.
    */
-  function initHeroSlider() {
-    var carousel = document.getElementById('heroCarousel');
-    var counter = document.getElementById('heroCurrent');
-    if (!carousel || !counter) {
-      return;
-    }
+  function initCustomSliders() {
+    var sliders = document.querySelectorAll('[data-custom-slider]');
 
-    var dashes = carousel.querySelectorAll('.hero-dashes .dash');
+    sliders.forEach(function (carousel) {
+      var counter = carousel.querySelector('.js-counter');
+      var dashes = carousel.querySelectorAll('.dash');
 
-    carousel.addEventListener('slide.bs.carousel', function (event) {
-      var index = event.to;
-      counter.textContent = String(index + 1).padStart(2, '0');
-      dashes.forEach(function (dash, i) {
-        dash.classList.toggle('active', i === index);
+      carousel.addEventListener('slide.bs.carousel', function (event) {
+        var index = event.to;
+        if (counter) {
+          counter.textContent = String(index + 1).padStart(2, '0');
+        }
+        dashes.forEach(function (dash, i) {
+          dash.classList.toggle('active', i === index);
+        });
       });
     });
   }
@@ -74,6 +76,6 @@
   document.addEventListener('DOMContentLoaded', function () {
     initFadeOnScroll();
     initHeaderGlass();
-    initHeroSlider();
+    initCustomSliders();
   });
 })();
