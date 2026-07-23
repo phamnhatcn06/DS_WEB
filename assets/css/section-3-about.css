@@ -1,0 +1,107 @@
+/* ==========================================================================
+   section-3-about.css — Giới thiệu · Sứ mệnh & Tầm nhìn (Figma node 1134:471)
+   Nền sáng: khối quote lớn + 2 card ảnh↔chữ xen kẽ.
+   ========================================================================== */
+
+.about {
+  position: relative;
+  background-color: #fdf6f7;
+  overflow: hidden;
+}
+
+/* -------- Quote -------- */
+.about-quote {
+  max-width: 980px;
+  margin-inline: auto;
+  text-align: center;
+  margin-bottom: clamp(2.5rem, 6vw, 5rem);
+}
+
+.about-quote .quote-mark {
+  color: var(--dsh-red);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-3);
+}
+
+.about-quote p {
+  color: var(--dsh-navy);
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  line-height: 1.45;
+  font-weight: 500;
+  margin: 0;
+}
+
+.about-quote .hl { color: var(--dsh-red); }
+
+/* -------- Card ảnh + chữ -------- */
+.about-card {
+  background-color: #ffffff;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05), 0 1.5rem 3rem rgba(8, 15, 29, .06);
+}
+
+.about-card + .about-card { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
+
+.about-card .row { min-height: 420px; }
+
+/* Panel chữ */
+.about-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  overflow: hidden;
+}
+
+.about-text .watermark {
+  position: absolute;
+  top: 28px;
+  left: 24px;
+  width: 120px;
+  height: auto;
+  opacity: .08;
+  pointer-events: none;
+}
+
+.about-text h3 {
+  position: relative;
+  color: #000000;
+  font-weight: 500;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  margin-bottom: var(--space-2);
+}
+
+.about-text p {
+  position: relative;
+  color: #707070;
+  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Panel ảnh */
+.about-media {
+  min-height: 320px;
+  background-size: cover;
+  background-position: center;
+}
+
+.about-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 991.98px) {
+  .about-card .row { min-height: 0; }
+  .about-media { min-height: 260px; }
+  /* Ảnh luôn lên trên khi xếp chồng, kể cả card đảo chiều */
+  .about-card .order-lg-first { order: -1; }
+}
