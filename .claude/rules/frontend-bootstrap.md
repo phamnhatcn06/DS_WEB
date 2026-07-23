@@ -81,7 +81,7 @@
 - Ảnh: dùng `<img>` với `alt` mô tả, `loading="lazy"`, `class="img-fluid"` để co giãn.
   Khung tỉ lệ dùng `.ratio` (vd `ratio ratio-16x9`) để tránh layout shift (CLS).
 - Đồ hoạ vector/logo: `<img src="*.svg">` hoặc `<svg>` inline.
-- Icon: **FontAwesome** hoặc **Bootstrap Icons** (chọn một, dùng nhất quán) — link qua CDN.
+- Icon: **Bootstrap Icons** (tải về `assets/vendor/bootstrap-icons/`, dùng nhất quán) — KHÔNG link CDN.
 
 ```html
 <img src="assets/images/project-01.webp" alt="Dự án BOT cao tốc DSH"
