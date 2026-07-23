@@ -111,15 +111,13 @@ Mỗi trang là HTML đầy đủ: `<head>` chứa link CDN Bootstrap + Google F
   <title>Đông Sơn Holdings</title>
   <meta name="description" content="..." />
 
-  <!-- Google Fonts (preconnect + font cần dùng) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <!-- Fonts (local — tải về, KHÔNG dùng Google Fonts CDN) -->
+  <link href="assets/fonts/fonts.css" rel="stylesheet" />
 
-  <!-- Bootstrap 5.3 CSS (CDN) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Bootstrap Icons (CDN) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Bootstrap 5.3 CSS (local) -->
+  <link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons (local) -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
 
   <!-- Custom CSS (design tokens + section styles) -->
   <link href="assets/css/variables.css" rel="stylesheet" />
