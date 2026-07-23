@@ -102,6 +102,4 @@
 @media (max-width: 991.98px) {
   .about-card .row { min-height: 0; }
   .about-media { min-height: 260px; }
-  /* Ảnh luôn lên trên khi xếp chồng, kể cả card đảo chiều */
-  .about-card .order-lg-first { order: -1; }
 }
