@@ -49,8 +49,31 @@
     observer.observe(sentinel);
   }
 
+  /**
+   * Đồng bộ điều khiển tùy biến của Hero (counter "0X / 04" + dash active)
+   * với Bootstrap Carousel qua sự kiện slide.
+   */
+  function initHeroSlider() {
+    var carousel = document.getElementById('heroCarousel');
+    var counter = document.getElementById('heroCurrent');
+    if (!carousel || !counter) {
+      return;
+    }
+
+    var dashes = carousel.querySelectorAll('.hero-dashes .dash');
+
+    carousel.addEventListener('slide.bs.carousel', function (event) {
+      var index = event.to;
+      counter.textContent = String(index + 1).padStart(2, '0');
+      dashes.forEach(function (dash, i) {
+        dash.classList.toggle('active', i === index);
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initFadeOnScroll();
     initHeaderGlass();
+    initHeroSlider();
   });
 })();
