@@ -176,12 +176,16 @@
   font-weight: 500;
 }
 
-.bot-slider .dashes { display: flex; gap: 8px; align-items: center; }
+.bot-slider .dashes { display: flex; gap: 8px; align-items: center; padding: 0; margin: 0; border: 0; }
 
 .bot-slider .dashes .dash {
   height: 2px;
   width: 12px;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
   background-color: rgba(255, 255, 255, .4);
+  transition: width var(--transition-base), background-color var(--transition-base);
 }
 
 .bot-slider .dashes .dash.active { width: 40px; background-color: var(--dsh-gold); }
