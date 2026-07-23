@@ -1,0 +1,172 @@
+/* ==========================================================================
+   components.css — Component tái sử dụng (card, tab lọc, carousel, stat...)
+   Dựa trên component Bootstrap, chỉ thêm lớp brand tối thiểu.
+   ========================================================================== */
+
+/* -------- Card thương hiệu -------- */
+.card-dsh {
+  --bs-card-bg: var(--dsh-white);
+  --bs-card-border-color: rgba(8, 15, 29, .08);
+  --bs-card-border-radius: var(--radius-lg);
+  --bs-card-spacer-y: var(--space-4);
+  --bs-card-spacer-x: var(--space-4);
+  height: 100%;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-dsh:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2.5rem rgba(8, 15, 29, .12);
+}
+
+/* Card trên nền tối */
+.card-dsh--dark {
+  --bs-card-bg: var(--dsh-navy-2);
+  --bs-card-border-color: var(--dsh-line);
+  color: var(--dsh-white);
+}
+
+.card-dsh--dark .card-text { color: var(--dsh-muted); }
+
+/* Ảnh trong card (dùng kèm .ratio để tránh CLS) */
+.card-dsh .card-img-top {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* -------- Icon tròn cho pillar/value -------- */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  background-color: rgba(154, 18, 32, .08);
+  color: var(--dsh-red);
+  margin-bottom: var(--space-3);
+}
+
+.section-dark .icon-badge {
+  background-color: rgba(201, 168, 76, .12);
+  color: var(--dsh-gold);
+}
+
+/* -------- Tab lọc tin tức (nav-pills) -------- */
+.filter-pills {
+  gap: var(--space-2);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.filter-pills::-webkit-scrollbar { display: none; }
+
+.filter-pills .nav-link {
+  --bs-nav-link-color: var(--dsh-navy);
+  white-space: nowrap;
+  border: 1px solid rgba(8, 15, 29, .15);
+  border-radius: 999px;
+  padding: .5rem 1.25rem;
+  font-weight: 500;
+  color: var(--dsh-navy);
+  transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.filter-pills .nav-link:hover {
+  border-color: var(--dsh-red);
+  color: var(--dsh-red);
+}
+
+.filter-pills .nav-link.active {
+  background-color: var(--dsh-red);
+  border-color: var(--dsh-red);
+  color: var(--dsh-white);
+}
+
+/* Ẩn card không khớp bộ lọc */
+.news-item.is-hidden { display: none; }
+
+/* -------- Điều khiển carousel (mũi tên + dot) -------- */
+.carousel-dsh .carousel-control-prev,
+.carousel-dsh .carousel-control-next {
+  width: 56px;
+  height: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(8, 15, 29, .35);
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  opacity: 1;
+  transition: background-color var(--transition-base);
+}
+
+.carousel-dsh .carousel-control-prev { left: clamp(1rem, 4vw, 3rem); }
+.carousel-dsh .carousel-control-next { right: clamp(1rem, 4vw, 3rem); }
+
+.carousel-dsh .carousel-control-prev:hover,
+.carousel-dsh .carousel-control-next:hover {
+  background-color: var(--dsh-red);
+  border-color: var(--dsh-red);
+}
+
+.carousel-dsh .carousel-indicators [data-bs-target] {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0;
+  background-color: rgba(255, 255, 255, .45);
+  transition: background-color var(--transition-base), width var(--transition-base);
+}
+
+.carousel-dsh .carousel-indicators .active {
+  width: 32px;
+  border-radius: 999px;
+  background-color: var(--dsh-gold);
+}
+
+/* -------- Stat (số liệu công ty) -------- */
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: var(--fs-stat);
+  font-weight: 700;
+  color: var(--dsh-gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: var(--fs-body);
+  color: var(--dsh-muted);
+  margin-top: var(--space-2);
+}
+
+/* -------- Logo đối tác (grayscale → màu khi hover) -------- */
+.partner-logo {
+  filter: grayscale(1);
+  opacity: .7;
+  max-height: 64px;
+  width: auto;
+  transition: filter var(--transition-base), opacity var(--transition-base);
+}
+
+.partner-logo:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+/* -------- Badge danh mục / eyebrow trên ảnh -------- */
+.tag-chip {
+  display: inline-block;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--dsh-red);
+  background-color: rgba(154, 18, 32, .08);
+  padding: .25rem .75rem;
+  border-radius: 999px;
+}
