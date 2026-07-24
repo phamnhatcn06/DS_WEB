@@ -138,6 +138,37 @@
     });
   }
 
+  /**
+   * Tab lọc tin tức theo danh mục (Section 9). Ẩn/hiện card qua class
+   * .is-hidden dựa trên [data-category], không tải lại trang.
+   */
+  function initNewsFilter() {
+    var filterBars = document.querySelectorAll('[data-news-filter]');
+
+    filterBars.forEach(function (bar) {
+      var buttons = bar.querySelectorAll('[data-filter]');
+      var items = document.querySelectorAll('.news-item');
+
+      function applyFilter(category) {
+        items.forEach(function (item) {
+          var matched = category === 'all' || item.dataset.category === category;
+          item.classList.toggle('is-hidden', !matched);
+        });
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          buttons.forEach(function (other) {
+            var isCurrent = other === button;
+            other.classList.toggle('active', isCurrent);
+            other.setAttribute('aria-selected', String(isCurrent));
+          });
+          applyFilter(button.dataset.filter);
+        });
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initFadeOnScroll();
     initRevealItems();
