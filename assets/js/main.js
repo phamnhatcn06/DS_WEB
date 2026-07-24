@@ -175,5 +175,6 @@
     initHeaderGlass();
     initCustomSliders();
     initScrollSliders();
+    initNewsFilter();
   });
 })();
