@@ -66,6 +66,10 @@
 
 .filter-pills::-webkit-scrollbar { display: none; }
 
+/* Không cho tab co lại cho vừa container — chữ tab phải giữ nguyên cỡ,
+   tràn thì cuộn ngang (đã bật overflow-x ở trên). */
+.filter-pills .nav-item { flex: 0 0 auto; }
+
 .filter-pills .nav-link {
   --bs-nav-link-color: var(--dsh-navy);
   white-space: nowrap;
