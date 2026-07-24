@@ -48,27 +48,30 @@
 .duan-link:hover { color: var(--dsh-red); }
 .duan-link:hover .duan-link-icon { transform: translateX(4px); }
 
-/* -------- Dải gallery ngang (full-bleed, cuộn ngang) -------- */
-.duan-gallery {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+/* -------- Slider ảnh dự án (full-bleed) --------
+   Bề rộng thẻ = (viewport − 4 gap) / 4 ⇒ thẻ được snap nằm giữa, hai thẻ kề
+   hiện đủ, hai thẻ ngoài cùng bị cắt đúng một nửa. */
+.duan-slider {
+  --duan-gap: 10px;
+  --duan-card: calc((100vw - 4 * var(--duan-gap)) / 4);
+  position: relative;
   /* Tràn hết bề rộng viewport, bỏ giới hạn .container */
   margin-inline: calc(50% - 50vw);
-  padding-inline: clamp(16px, 4vw, 64px);
-  scrollbar-width: thin;
+}
+
+.duan-gallery {
+  display: flex;
+  gap: var(--duan-gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
 
-.duan-gallery::-webkit-scrollbar { height: 6px; }
-.duan-gallery::-webkit-scrollbar-thumb {
-  background-color: rgba(13, 37, 69, .2);
-  border-radius: 999px;
-}
+.duan-gallery::-webkit-scrollbar { display: none; }
 
 .duan-item {
-  flex: 0 0 clamp(260px, 26vw, 432px);
+  flex: 0 0 var(--duan-card);
   scroll-snap-align: center;
   border-radius: 6px;
   overflow: hidden;
