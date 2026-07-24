@@ -743,6 +743,128 @@
       </div>
     </section>
 
+    <!-- ===== Section 9: Tin tức nổi bật (tab lọc danh mục) ===== -->
+    <section id="tin-tuc" class="tintuc fade-section">
+      <div class="container">
+
+        <!-- Đầu section: tiêu đề + tab lọc danh mục -->
+        <div class="tintuc-head">
+          <h2 class="tintuc-title">Tin tức nổi bật</h2>
+          <ul class="nav filter-pills" role="tablist" data-news-filter>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link active" role="tab" aria-selected="true" data-filter="all">Tất cả</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="du-an">Dự án</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="thi-cong">Thi công</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="dau-tu">Đầu tư</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="co-dong">Cổ đông</button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Lưới tin: card lớn trái · card cao giữa · 2 card nhỏ phải -->
+        <div class="row g-3 g-lg-4">
+
+          <div class="col-12 col-lg-4 tintuc-col-left">
+            <article class="news-item" data-category="du-an">
+              <a href="#tin-tuc" class="news-card news-card--lg">
+                <img src="assets/images/news-01.webp" alt="Khu nhà ở xã hội Bãi Viên – Nam Định" class="news-card-img" loading="lazy" />
+                <span class="news-chip">Dự án</span>
+                <div class="news-body">
+                  <p class="news-date">
+                    <img src="assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                    09/03/2026
+                  </p>
+                  <h3 class="news-heading">Đông Sơn Holdings đầu tư dự án nhà ở xã hội Bãi Viên – Nam Định</h3>
+                  <p class="news-excerpt">CTCP Đông Sơn Holdings chính thức công bố đầu tư Khu nhà ở xã hội
+                    Bãi Viên tại TP. Nam Định, tổng mức đầu tư hơn 909 tỷ đồng với 1.100 căn hộ,
+                    khởi công tháng 5/2025.</p>
+                  <span class="news-more">
+                    Đọc tiếp
+                    <img src="assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                  </span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <article class="news-item" data-category="dau-tu">
+              <a href="#tin-tuc" class="news-card news-card--tall">
+                <img src="assets/images/news-02.webp" alt="Khu đô thị do Đông Sơn Holdings đầu tư" class="news-card-img" loading="lazy" />
+                <span class="news-chip">Đầu tư</span>
+                <div class="news-body">
+                  <p class="news-date">
+                    <img src="assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                    11/2025
+                  </p>
+                  <h3 class="news-heading">Tăng vốn điều lệ lên 350 tỷ đồng, mở rộng danh mục đầu tư</h3>
+                  <span class="news-more">
+                    Đọc tiếp
+                    <img src="assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                  </span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="row g-3 g-lg-4">
+
+              <div class="col-12">
+                <article class="news-item" data-category="thi-cong">
+                  <a href="#tin-tuc" class="news-card news-card--sm">
+                    <img src="assets/images/duan-04-thicong.webp" alt="Công trường thi công của Đông Sơn Holdings" class="news-card-img" loading="lazy" />
+                    <span class="news-chip">Thi công</span>
+                    <div class="news-body">
+                      <p class="news-date">
+                        <img src="assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                        05/2025
+                      </p>
+                      <h3 class="news-heading">Khởi công gói thầu xây lắp trọng điểm, bảo đảm tiến độ toàn tuyến</h3>
+                      <span class="news-more">
+                        Đọc tiếp
+                        <img src="assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              </div>
+
+              <div class="col-12">
+                <article class="news-item" data-category="co-dong">
+                  <a href="#tin-tuc" class="news-card news-card--sm">
+                    <img src="assets/images/duan-01-bot.webp" alt="Dự án BOT hạ tầng giao thông của Đông Sơn Holdings" class="news-card-img" loading="lazy" />
+                    <span class="news-chip">Cổ đông</span>
+                    <div class="news-body">
+                      <p class="news-date">
+                        <img src="assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                        22/04/2025
+                      </p>
+                      <h3 class="news-heading">Cổ phiếu DSH chính thức giao dịch trên UPCOM</h3>
+                      <span class="news-more">
+                        Đọc tiếp
+                        <img src="assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ===== Footer ===== -->
