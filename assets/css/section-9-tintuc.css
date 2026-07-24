@@ -180,10 +180,11 @@
     /* fr chia phần còn lại sau gutter ⇒ đúng tỉ lệ 626/574/447 của Figma */
     grid-template-columns: 626fr 574fr 447fr;
     column-gap: 24px;
-    margin-inline: 0;
+    /* Bỏ gutter âm + padding của .row: khoảng cách do grid/flex đảm nhiệm */
+    margin: 0;
   }
 
-  .tintuc-layout > * { padding-inline: 0; }
+  .tintuc-layout > * { padding: 0; }
 
   /* Hai card nhỏ cột 3: dùng flex + gap thay gutter âm của Bootstrap row */
   .tintuc-col--narrow > .row {
