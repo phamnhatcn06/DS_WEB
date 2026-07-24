@@ -12,13 +12,26 @@ class AuditBehavior extends CActiveRecordBehavior
         'password_hash', 'two_factor_secret', 'token_hash', 'refresh_token_hash',
     );
 
-    /** @var array giá trị trước khi lưu, chụp ở beforeSave */
+    /**
+     * @var array giá trị lúc bản ghi được nạp từ DB.
+     *
+     * Yii1 (khác Yii2) KHÔNG theo dõi thuộc tính cũ — không có getOldAttributes().
+     * Nên phải tự chụp lại ngay khi bản ghi được nạp.
+     */
+    private $_loadedAttributes = array();
+
+    /** @var array giá trị trước khi lưu */
     private $_oldValues = array();
+
+    public function afterFind($event)
+    {
+        $this->_loadedAttributes = $this->getOwner()->getAttributes();
+    }
 
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
-        $this->_oldValues = $owner->getIsNewRecord() ? array() : $owner->getOldAttributes();
+        $this->_oldValues = $owner->getIsNewRecord() ? array() : $this->_loadedAttributes;
     }
 
     public function afterSave($event)
