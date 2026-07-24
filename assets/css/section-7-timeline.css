@@ -1,0 +1,177 @@
+/* ==========================================================================
+   section-7-timeline.css — Hành trình phát triển (Figma node 1134:1628)
+   Nền sáng, tiêu đề trái + quote đỏ phải. Timeline dọc có trục giữa (gold),
+   mốc năm xen kẽ trái/phải, mỗi mốc là card: eyebrow + năm đỏ + tiêu đề + mô tả.
+   Node đỏ tròn nằm trên trục. Mobile: dồn hết về một phía.
+   ========================================================================== */
+
+.timeline {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 128px);
+  background-color: #fdf6f6;
+  overflow: hidden;
+}
+
+/* -------- Đầu section: tiêu đề trái · quote phải -------- */
+.timeline-head {
+  margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.timeline-title {
+  color: var(--dsh-ink);
+  font-size: clamp(2rem, 3.6vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.timeline-quote {
+  color: var(--dsh-red);
+  font-size: clamp(0.9rem, 1vw, 1.0625rem);
+  font-style: italic;
+  line-height: 1.6;
+  text-align: right;
+  margin: 0;
+}
+
+/* -------- Trục timeline -------- */
+.timeline-track {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Trục dọc chính giữa, gradient vàng brand */
+.timeline-track::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background-image: linear-gradient(180deg,
+    rgba(201, 168, 76, 0) 0%,
+    var(--dsh-gold) 8%,
+    var(--dsh-gold) 92%,
+    rgba(201, 168, 76, 0) 100%);
+}
+
+/* -------- Mỗi mốc -------- */
+.tl-item {
+  position: relative;
+  min-height: clamp(200px, 20vw, 280px);
+}
+
+/* Xen kẽ chồng lấn để tạo nhịp so le trái/phải như thiết kế */
+.tl-item + .tl-item {
+  margin-top: clamp(-96px, -4vw, -32px);
+}
+
+/* Node tròn đỏ nằm trên trục, canh theo phần đầu card */
+.tl-node {
+  position: absolute;
+  top: clamp(28px, 3vw, 44px);
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: var(--dsh-red);
+  box-shadow: 0 0 0 6px #fdf6f6, 0 0 0 8px var(--dsh-line);
+  z-index: 2;
+}
+
+/* -------- Card -------- */
+.tl-card {
+  position: relative;
+  width: calc(50% - clamp(32px, 4vw, 64px));
+  padding: clamp(1.5rem, 2.2vw, 2.25rem);
+  background-color: var(--dsh-white);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px -28px rgba(13, 37, 69, .28);
+}
+
+/* Vạch nhấn đỏ phía trên card, phía sát trục */
+.tl-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: clamp(48px, 30%, 120px);
+  height: 3px;
+  background-color: var(--dsh-red);
+  border-radius: 2px;
+}
+
+/* Card trái: nằm bên trái trục, nội dung căn phải */
+.tl-left .tl-card {
+  margin-left: 0;
+  margin-right: auto;
+  text-align: right;
+}
+.tl-left .tl-card::before { right: 0; }
+
+/* Card phải: nằm bên phải trục, nội dung căn trái */
+.tl-right .tl-card {
+  margin-left: auto;
+  margin-right: 0;
+  text-align: left;
+}
+.tl-right .tl-card::before { left: 0; }
+
+.tl-eyebrow {
+  display: block;
+  color: var(--dsh-gold);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.tl-year {
+  display: block;
+  color: var(--dsh-red);
+  font-size: clamp(2.25rem, 3.2vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.tl-heading {
+  color: var(--dsh-ink);
+  font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 var(--space-3);
+}
+
+.tl-desc {
+  color: var(--dsh-slate);
+  font-size: clamp(0.875rem, 1vw, 0.9375rem);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* -------- Tablet & Mobile: dồn timeline về một phía (trục trái) -------- */
+@media (max-width: 991.98px) {
+  .timeline-quote { text-align: left; margin-top: var(--space-4); }
+
+  .timeline-track::before { left: 8px; }
+
+  .tl-item + .tl-item { margin-top: var(--space-5); }
+  .tl-item { min-height: 0; }
+
+  .tl-node { left: 8px; top: clamp(24px, 6vw, 34px); }
+
+  .tl-left .tl-card,
+  .tl-right .tl-card {
+    width: 100%;
+    margin-left: clamp(28px, 8vw, 44px);
+    margin-right: 0;
+    text-align: left;
+  }
+  .tl-left .tl-card::before,
+  .tl-right .tl-card::before { left: 0; right: auto; }
+}
