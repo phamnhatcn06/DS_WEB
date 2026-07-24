@@ -85,9 +85,11 @@ return array(
                 'admin'                                  => 'admin/default/index',
                 'admin/dang-nhap'                        => 'admin/auth/login',
                 'admin/dang-xuat'                        => 'admin/auth/logout',
-                'admin/<controller:\w+>'                 => 'admin/<controller>/index',
-                'admin/<controller:\w+>/<action:\w+>'    => 'admin/<controller>/<action>',
+                // Luật cụ thể hơn phải đứng trước: Yii1 khớp theo thứ tự, nếu
+                // để luật 2 đoạn lên trên thì luật có <id> sẽ không bao giờ khớp.
                 'admin/<controller:\w+>/<action:\w+>/<id:\d+>' => 'admin/<controller>/<action>',
+                'admin/<controller:\w+>/<action:\w+>'    => 'admin/<controller>/<action>',
+                'admin/<controller:\w+>'                 => 'admin/<controller>/index',
                 ''                                       => 'site/index',
                 '<action:(error|contact)>'               => 'site/<action>',
             ),
