@@ -23,6 +23,9 @@ class AuditBehavior extends CActiveRecordBehavior
     /** @var array giá trị trước khi lưu */
     private $_oldValues = array();
 
+    /** @var bool bản ghi có phải mới tạo không, chụp ở beforeSave */
+    private $_wasNewRecord = false;
+
     public function afterFind($event)
     {
         $this->_loadedAttributes = $this->getOwner()->getAttributes();
