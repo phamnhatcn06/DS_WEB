@@ -131,27 +131,7 @@ a:not(.btn):focus-visible {
   --bs-btn-border-radius: var(--radius);
 }
 
-/* -------- Fade-in on scroll (IntersectionObserver thêm .is-visible) -------- */
-.fade-section {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity .7s ease, transform .7s ease;
-  will-change: opacity, transform;
-}
-
-.fade-section.is-visible {
-  opacity: 1;
-  transform: none;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .fade-section {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-}
+/* Fade-in on scroll + toàn bộ chuyển động: xem assets/css/animations.css */
 
 /* -------- Utilities -------- */
 .text-balance { text-wrap: balance; }
