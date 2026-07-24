@@ -156,6 +156,11 @@
 
   /* Cột trái lệch xuống, cột phải bám mép trên như thiết kế */
   .tintuc-col-left { padding-top: 148px; }
+
+  /* Khi đang lọc theo một danh mục, bỏ lệch và cào bằng chiều cao card */
+  .tintuc.is-filtered .tintuc-col-left { padding-top: 0; }
+  .tintuc.is-filtered .news-card--lg,
+  .tintuc.is-filtered .news-card--tall { min-height: 480px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
