@@ -20,12 +20,19 @@
   margin: 0 0 var(--space-4);
 }
 
-/* Pill lọc — Figma: bo 8px, viền rgba(13,37,69,.15), chữ slate; active nền đỏ */
+/* Pill lọc — Figma: chữ 20px/medium, padding 6px 16px, bo 8px,
+   viền rgba(13,37,69,.15), chữ slate; tab active nền đỏ brand. */
+.tintuc .filter-pills { gap: 10px; }
+
 .tintuc .filter-pills .nav-link {
   border-radius: var(--radius);
   border-color: rgba(13, 37, 69, .15);
   color: var(--dsh-slate);
-  padding: .375rem 1rem;
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.65;
+  padding: 6px 16px;
+  white-space: nowrap;
 }
 
 .tintuc .filter-pills .nav-link.active { color: var(--dsh-white); }
