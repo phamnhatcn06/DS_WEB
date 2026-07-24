@@ -15,10 +15,11 @@
 /* Dải cần cẩu chạy ngang phía sau (Figma: opacity 18%, mix-blend color-burn) */
 .linhvuc-bg {
   position: absolute;
-  left: 0;
-  top: 8%;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   opacity: .18;
   mix-blend-mode: color-burn;
   pointer-events: none;
