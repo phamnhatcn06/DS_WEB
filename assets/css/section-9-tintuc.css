@@ -39,10 +39,11 @@
   border-radius: var(--radius);
   border-color: rgba(13, 37, 69, .15);
   color: var(--dsh-slate);
-  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  /* 20px ở canvas 1920, co lại theo viewport để 5 tab vừa một hàng */
+  font-size: clamp(0.9375rem, 1.05vw, 1.25rem);
   font-weight: 500;
   line-height: 1.65;
-  padding: 6px 16px;
+  padding: 6px clamp(10px, .84vw, 16px);
   white-space: nowrap;
 }
 
