@@ -292,15 +292,48 @@
       var items = document.querySelectorAll('.news-item');
       var section = bar.closest('.tintuc');
 
-      function applyFilter(category) {
+      var FILTER_FADE_MS = PREFERS_REDUCED_MOTION ? 0 : 300;
+
+      function isMatched(item, category) {
+        return category === 'all' || item.dataset.category === category;
+      }
+
+      /** Bước 1: làm mờ các thẻ sắp bị ẩn trước khi gỡ khỏi luồng layout. */
+      function fadeOutUnmatched(category) {
+        items.forEach(function (item) {
+          item.classList.toggle('is-leaving', !isMatched(item, category));
+        });
+      }
+
+      /** Bước 2: ẩn hẳn thẻ không khớp và cho thẻ khớp hiện lên có stagger. */
+      function swapVisibility(category) {
+        var enterIndex = 0;
+
         // Bỏ độ lệch trang trí của cột trái khi lưới chỉ còn một danh mục.
         if (section) {
           section.classList.toggle('is-filtered', category !== 'all');
         }
+
         items.forEach(function (item) {
-          var matched = category === 'all' || item.dataset.category === category;
+          var matched = isMatched(item, category);
           item.classList.toggle('is-hidden', !matched);
+          item.classList.remove('is-entering');
+
+          if (!matched) {
+            return;
+          }
+          item.classList.remove('is-leaving');
+          item.style.setProperty('--reveal-delay', enterIndex * STAGGER_STEP_MS + 'ms');
+          // Ép trình duyệt tính lại để animation chạy lại khi lọc liên tiếp.
+          void item.offsetWidth;
+          item.classList.add('is-entering');
+          enterIndex += 1;
         });
+      }
+
+      function applyFilter(category) {
+        fadeOutUnmatched(category);
+        window.setTimeout(function () { swapVisibility(category); }, FILTER_FADE_MS);
       }
 
       buttons.forEach(function (button) {
