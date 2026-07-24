@@ -1,0 +1,84 @@
+/* ==========================================================================
+   section-5-duan.css — Dự án tiêu biểu (Figma node 1134:1265)
+   Nền gradient hồng nhạt → trắng, tiêu đề trái / intro + link phải,
+   dải gallery ngang 5 ảnh dự án (full-bleed, cuộn ngang có scroll-snap).
+   ========================================================================== */
+
+.duan {
+  position: relative;
+  background-image: linear-gradient(180deg, #ffe5e8 14%, var(--dsh-white) 37%);
+  padding-block: clamp(64px, 7vw, 120px);
+  overflow: hidden;
+}
+
+/* -------- Đầu section: tiêu đề trái · intro + link phải -------- */
+.duan-head { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
+
+.duan-title {
+  color: var(--dsh-ink);
+  font-size: clamp(2.25rem, 4vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.06;
+  margin: 0;
+}
+
+.duan-intro {
+  color: var(--dsh-slate);
+  font-size: clamp(1rem, 1.15vw, 1.25rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-3);
+}
+
+/* Link "Xem tất cả dự án →" */
+.duan-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--dsh-red);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.duan-link .duan-link-icon {
+  width: 24px;
+  height: 24px;
+  transition: transform var(--transition-base);
+}
+
+.duan-link:hover { color: var(--dsh-red); }
+.duan-link:hover .duan-link-icon { transform: translateX(4px); }
+
+/* -------- Dải gallery ngang (full-bleed, cuộn ngang) -------- */
+.duan-gallery {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  /* Tràn hết bề rộng viewport, bỏ giới hạn .container */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: clamp(16px, 4vw, 64px);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.duan-gallery::-webkit-scrollbar { height: 6px; }
+.duan-gallery::-webkit-scrollbar-thumb {
+  background-color: rgba(13, 37, 69, .2);
+  border-radius: 999px;
+}
+
+.duan-item {
+  flex: 0 0 clamp(260px, 26vw, 432px);
+  scroll-snap-align: center;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.duan-item img {
+  width: 100%;
+  height: clamp(260px, 24vw, 408px);
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.duan-item:hover img { transform: scale(1.04); }
