@@ -5,6 +5,9 @@
    ========================================================================== */
 
 .tintuc {
+  /* Dùng lại để neo bố cục theo chiều cao dòng tiêu đề */
+  --tintuc-title-fs: clamp(2.25rem, 4vw, 3.125rem);
+  --tintuc-title-lh: 1.1;
   background-color: var(--dsh-white);
   padding-block: clamp(64px, 7vw, 120px);
 }
