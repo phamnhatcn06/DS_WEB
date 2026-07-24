@@ -81,7 +81,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .6s ease;
 }
+
+/* Hover: phóng to ảnh trong khung card (card đã overflow:hidden nên ảnh bị cắt gọn) */
+.news-card:hover .news-card-img,
+.news-card:focus-visible .news-card-img { transform: scale(1.07); }
 
 /* Phủ tối nhẹ toàn ảnh để chip/chữ luôn đọc được */
 .news-card::after {
