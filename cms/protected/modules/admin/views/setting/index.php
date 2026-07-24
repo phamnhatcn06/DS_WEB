@@ -51,12 +51,16 @@ $firstGroup = $groupKeys === array() ? null : $groupKeys[0];
                   </select>
 
                 <?php elseif ($setting->value_type === 'media'): ?>
-                  <select class="form-select" id="<?php echo $inputId; ?>"
-                          name="Setting[<?php echo $setting->setting_key; ?>]"
-                          <?php echo $canUpdate ? '' : 'disabled'; ?>>
-                    <?php echo CHtml::listOptions($setting->setting_value,
-                        MediaFile::optionsForSelect(), $htmlOptions = array()); ?>
-                  </select>
+                  <?php echo CHtml::dropDownList(
+                      'Setting[' . $setting->setting_key . ']',
+                      $setting->setting_value,
+                      MediaFile::optionsForSelect(),
+                      array(
+                          'class'    => 'form-select',
+                          'id'       => $inputId,
+                          'disabled' => !$canUpdate,
+                      )
+                  ); ?>
 
                 <?php elseif ($isLong): ?>
                   <textarea class="form-control" id="<?php echo $inputId; ?>" rows="3"
