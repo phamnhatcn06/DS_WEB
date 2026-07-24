@@ -1,0 +1,19 @@
+# Credentials — TUYỆT ĐỐI không commit (xem .claude/rules/gitignore-check.md)
+/protected/config/db.php
+/protected/config/params.local.php
+
+# Runtime: log, cache, session
+/protected/runtime/*
+!/protected/runtime/.gitkeep
+
+# Asset do Yii publish tự động (CAssetManager)
+/assets/*
+!/assets/.gitkeep
+
+# File người dùng upload qua media manager
+/uploads/*
+!/uploads/.gitkeep
+
+# Rác hệ điều hành
+Thumbs.db
+.DS_Store
