@@ -157,15 +157,18 @@
 /* -------- Chiều cao theo bố cục Figma (mosaic 3 cột) --------
    Cột giữa cao nhất (746px), cột trái 597px, cột phải 2 card 368px. */
 @media (min-width: 992px) {
-  .news-card--lg   { min-height: 597px; }
+  /* Bề rộng 3 cột theo Figma (626 / 574 / 447 px) — cột 3 hẹp nhất */
+  .tintuc-col--wide   { flex: 0 0 auto; width: 38%; }
+  .tintuc-col--mid    { flex: 0 0 auto; width: 34.85%; }
+  .tintuc-col--narrow { flex: 0 0 auto; width: 27.15%; }
+
+  /* Cả 3 cột bám cùng mép trên và cùng mép dưới:
+     card cột 1 & 2 cao bằng nhau, cột 3 là 2 card nhỏ xếp chồng. */
+  .news-card--lg,
   .news-card--tall { min-height: 746px; }
-  .news-card--sm   { min-height: 368px; }
+  .news-card--sm   { min-height: 365px; }
 
-  /* Cột trái lệch xuống, cột phải bám mép trên như thiết kế */
-  .tintuc-col-left { padding-top: 148px; }
-
-  /* Khi đang lọc theo một danh mục, bỏ lệch và cào bằng chiều cao card */
-  .tintuc.is-filtered .tintuc-col-left { padding-top: 0; }
+  /* Khi đang lọc theo một danh mục, cào bằng chiều cao card cho gọn */
   .tintuc.is-filtered .news-card--lg,
   .tintuc.is-filtered .news-card--tall { min-height: 480px; }
 }
