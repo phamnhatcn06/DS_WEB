@@ -31,7 +31,7 @@
    ⇒ tab nằm trọn trong lane cột 1, tràn thì xuống dòng chứ không co chữ. */
 @media (min-width: 992px) {
   .tintuc .filter-pills {
-    max-width: 38%;
+    max-width: 100%;
     flex-wrap: wrap;
     overflow: visible;
     row-gap: 10px;
