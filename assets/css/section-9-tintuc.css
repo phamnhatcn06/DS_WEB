@@ -177,12 +177,23 @@
      card lớn neo mép dưới ⇒ ba cột kết thúc cùng một mép dưới. */
   .tintuc-layout {
     display: grid;
-    grid-template-columns: 38% 34.85% 27.15%;
+    /* fr chia phần còn lại sau gutter ⇒ đúng tỉ lệ 626/574/447 của Figma */
+    grid-template-columns: 626fr 574fr 447fr;
     column-gap: 24px;
     margin-inline: 0;
   }
 
   .tintuc-layout > * { padding-inline: 0; }
+
+  /* Hai card nhỏ cột 3: dùng flex + gap thay gutter âm của Bootstrap row */
+  .tintuc-col--narrow > .row {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 0;
+  }
+
+  .tintuc-col--narrow > .row > * { width: 100%; padding: 0; }
 
   .tintuc-head,
   .tintuc-col--wide {
