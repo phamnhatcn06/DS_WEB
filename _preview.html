@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var o=[];
   for(var k in sel){var e=document.querySelector(sel[k]);var r=e.getBoundingClientRect();
     o.push(k+' top='+Math.round(r.top)+' bottom='+Math.round(r.bottom)+' w='+Math.round(r.width)+' h='+Math.round(r.height));}
-  var sms=document.querySelectorAll('.news-card--sm');
+  var cs=getComputedStyle(document.querySelector('.tintuc-col--mid'));var L=document.querySelector('.tintuc-layout');var ls=getComputedStyle(L);o.push('LAYOUT padTop='+ls.paddingTop+' marginTop='+ls.marginTop+' gridTemplateRows='+ls.gridTemplateRows+' children='+L.children.length);o.push('c2 padTop='+cs.paddingTop+' display='+getComputedStyle(document.querySelector('.tintuc-layout')).display+' rowGap='+getComputedStyle(document.querySelector('.tintuc-layout')).rowGap+' alignItems='+getComputedStyle(document.querySelector('.tintuc-layout')).alignItems);var sms=document.querySelectorAll('.news-card--sm');
   sms.forEach(function(e,i){var r=e.getBoundingClientRect();o.push('sm'+i+' top='+Math.round(r.top)+' bottom='+Math.round(r.bottom));});
   document.getElementById('out').textContent=o.join(' | ');
 });

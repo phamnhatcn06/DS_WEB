@@ -150,7 +150,7 @@
 
         </div>
       </div>
-    </section><pre id="out" style="font:12px monospace">head top=48 bottom=163 w=474 h=114 | c1 top=264 bottom=707 w=474 h=443 | c2 top=100 bottom=707 w=435 h=607 | c3 top=100 bottom=707 w=339 h=607 | card1 top=264 bottom=707 w=474 h=443 | card2 top=100 bottom=654 w=435 h=554 | sm1 top=124 bottom=391 w=339 h=268 | row top=76 bottom=707 w=1296 h=631 | title top=48 bottom=103 w=474 h=55 | sm0 top=124 bottom=391 | sm1 top=439 bottom=707</pre><script>
+    </section><pre id="out" style="font:12px monospace">head top=72 bottom=187 w=474 h=114 | c1 top=288 bottom=731 w=474 h=443 | c2 top=124 bottom=731 w=435 h=607 | c3 top=124 bottom=731 w=339 h=607 | card1 top=288 bottom=731 w=474 h=443 | card2 top=124 bottom=678 w=435 h=554 | sm1 top=148 bottom=415 w=339 h=268 | row top=100 bottom=731 w=1296 h=631 | title top=72 bottom=127 w=474 h=55 | LAYOUT padTop=0px marginTop=0px gridTemplateRows=631.406px children=4 | c2 padTop=0px display=grid rowGap=normal alignItems=normal | sm0 top=148 bottom=415 | sm1 top=463 bottom=731</pre><script>
 document.addEventListener('DOMContentLoaded',function(){
   var sel={head:'.tintuc-head',c1:'.tintuc-col--wide',c2:'.tintuc-col--mid',c3:'.tintuc-col--narrow',
            card1:'.news-card--lg',card2:'.news-card--tall',sm1:'.news-card--sm',
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var o=[];
   for(var k in sel){var e=document.querySelector(sel[k]);var r=e.getBoundingClientRect();
     o.push(k+' top='+Math.round(r.top)+' bottom='+Math.round(r.bottom)+' w='+Math.round(r.width)+' h='+Math.round(r.height));}
-  var sms=document.querySelectorAll('.news-card--sm');
+  var cs=getComputedStyle(document.querySelector('.tintuc-col--mid'));var L=document.querySelector('.tintuc-layout');var ls=getComputedStyle(L);o.push('LAYOUT padTop='+ls.paddingTop+' marginTop='+ls.marginTop+' gridTemplateRows='+ls.gridTemplateRows+' children='+L.children.length);o.push('c2 padTop='+cs.paddingTop+' display='+getComputedStyle(document.querySelector('.tintuc-layout')).display+' rowGap='+getComputedStyle(document.querySelector('.tintuc-layout')).rowGap+' alignItems='+getComputedStyle(document.querySelector('.tintuc-layout')).alignItems);var sms=document.querySelectorAll('.news-card--sm');
   sms.forEach(function(e,i){var r=e.getBoundingClientRect();o.push('sm'+i+' top='+Math.round(r.top)+' bottom='+Math.round(r.bottom));});
   document.getElementById('out').textContent=o.join(' | ');
 });
