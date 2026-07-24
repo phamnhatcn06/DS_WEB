@@ -144,20 +144,6 @@
   margin-top: var(--space-2);
 }
 
-/* -------- Logo đối tác (grayscale → màu khi hover) -------- */
-.partner-logo {
-  filter: grayscale(1);
-  opacity: .7;
-  max-height: 64px;
-  width: auto;
-  transition: filter var(--transition-base), opacity var(--transition-base);
-}
-
-.partner-logo:hover {
-  filter: grayscale(0);
-  opacity: 1;
-}
-
 /* -------- Badge danh mục / eyebrow trên ảnh -------- */
 .tag-chip {
   display: inline-block;
