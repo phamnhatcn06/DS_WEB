@@ -85,3 +85,33 @@
 }
 
 .duan-item:hover img { transform: scale(1.04); }
+
+/* -------- Nút điều hướng slider -------- */
+.duan-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, .9);
+  box-shadow: 0 .5rem 1.5rem rgba(13, 37, 69, .18);
+  transition: background-color var(--transition-base);
+}
+
+.duan-nav:hover { background-color: var(--dsh-white); }
+.duan-nav img { width: 24px; height: 24px; }
+.duan-nav--prev { left: clamp(8px, 2vw, 32px); }
+.duan-nav--prev img { transform: rotate(180deg); }
+.duan-nav--next { right: clamp(8px, 2vw, 32px); }
+
+/* Mobile: thẻ rộng hơn để ảnh không quá nhỏ, vẫn hé thẻ kế bên */
+@media (max-width: 767.98px) {
+  .duan-slider { --duan-card: calc((100vw - 3 * var(--duan-gap)) / 1.6); }
+  .duan-nav { display: none; }
+}
