@@ -18,6 +18,8 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  /* Asset gốc từ Figma bị lật ngang so với thiết kế (kỹ sư phải nằm bên trái) */
+  transform: scaleX(-1);
 }
 
 /* Làm tối phần nền phía sau khối chữ để đảm bảo tương phản chữ trắng */
