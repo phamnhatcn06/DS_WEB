@@ -62,10 +62,7 @@
   max-height: 100%;
   width: auto;
   height: auto;
-  /* Logo về grayscale, sáng lên khi hover cho cảm giác "nhấn" */
-  filter: grayscale(1);
-  opacity: .85;
-  transition: filter var(--transition-base), opacity var(--transition-base);
+  object-fit: contain;
 }
 
 .partner-logo:hover {
@@ -73,12 +70,6 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
 }
 
-.partner-logo:hover img {
-  filter: grayscale(0);
-  opacity: 1;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .partner-logo,
-  .partner-logo img { transition: none; }
+  .partner-logo { transition: none; }
 }
