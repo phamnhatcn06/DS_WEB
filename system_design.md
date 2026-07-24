@@ -759,6 +759,12 @@ Nếu vẫn muốn 4 bảng tự viết (vì cần UI phân quyền theo ma tr�
 
 Yii1 AR **không có sẵn** soft delete / auto slug / audit. Viết 3 behavior gắn vào `BaseActiveRecord`:
 
+> ⚠️ **Hai cạm bẫy đã gặp thật khi dựng `AuditBehavior`:**
+> 1. Yii1 **không có `getOldAttributes()`** (đó là API của Yii2) — Yii1 không theo dõi giá trị cũ.
+>    Phải tự chụp `getAttributes()` ở `afterFind`.
+> 2. Yii1 đặt `isNewRecord = false` **trước** khi gọi `afterSave`. Đọc cờ này trong `afterSave`
+>    sẽ luôn ra "đang cập nhật" → mọi bản ghi mới bị ghi log sai loại. Phải chụp ở `beforeSave`.
+
 | Behavior | Thay thế cho | Ghi chú |
 |---|---|---|
 | `CTimestampBehavior` (built-in) | `created_at`/`updated_at` | Cấu hình `createAttribute`/`updateAttribute` |
