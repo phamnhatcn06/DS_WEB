@@ -9,12 +9,17 @@
   padding-block: clamp(64px, 7vw, 120px);
 }
 
+.tintuc {
+  /* Dùng lại ở nhiều nơi để neo bố cục theo chiều cao dòng tiêu đề */
+  --tintuc-title-fs: clamp(2.25rem, 4vw, 3.125rem);
+}
+
 /* -------- Đầu section: tiêu đề + tab lọc -------- */
 .tintuc-head { margin-bottom: clamp(1.5rem, 3vw, 2.5rem); }
 
 .tintuc-title {
   color: var(--dsh-ink);
-  font-size: clamp(2.25rem, 4vw, 3.125rem);
+  font-size: var(--tintuc-title-fs);
   font-weight: 700;
   line-height: 1.1;
   margin: 0 0 var(--space-4);
