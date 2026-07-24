@@ -1,0 +1,128 @@
+/* ==========================================================================
+   section-4-linhvuc.css — Lĩnh vực kinh doanh (Figma node 1134:1206)
+   Nền đỏ brand + ảnh công trường mờ; tiêu đề trái / intro phải;
+   card trắng lớn chứa 4 cột đánh số 01–04.
+   ========================================================================== */
+
+.linhvuc {
+  position: relative;
+  background-color: var(--dsh-red);
+  color: var(--dsh-white);
+  overflow: hidden;
+}
+
+/* Ảnh công trường mờ phía sau nền đỏ */
+.linhvuc-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .12;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+}
+
+.linhvuc > .container { position: relative; z-index: 1; }
+
+/* -------- Đầu section: tiêu đề trái · intro phải -------- */
+.linhvuc-head {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.linhvuc-eyebrow {
+  display: inline-block;
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dsh-gold-soft);
+  margin-bottom: var(--space-3);
+}
+
+.linhvuc-title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.linhvuc-intro {
+  color: rgba(255, 255, 255, .82);
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* -------- Card trắng chứa 4 trụ cột -------- */
+.linhvuc-card {
+  background-color: var(--dsh-white);
+  border-radius: 28px;
+  padding: clamp(1.5rem, 3vw, 3rem);
+  box-shadow: 0 1.5rem 3rem rgba(8, 15, 29, .18);
+}
+
+/* Đường kẻ dọc ngăn các cột (desktop) */
+.linhvuc-item {
+  position: relative;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  height: 100%;
+}
+
+@media (min-width: 992px) {
+  .linhvuc-item::after {
+    content: "";
+    position: absolute;
+    top: 8%;
+    right: 0;
+    width: 1px;
+    height: 84%;
+    background-color: rgba(8, 15, 29, .1);
+  }
+
+  .linhvuc-col:last-child .linhvuc-item::after { display: none; }
+}
+
+.linhvuc-num {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--dsh-red);
+  opacity: .28;
+  margin-bottom: var(--space-4);
+}
+
+.linhvuc-item h3 {
+  color: var(--dsh-navy);
+  font-size: clamp(1.125rem, 1.7vw, 1.375rem);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.linhvuc-item p {
+  color: #707070;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.linhvuc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Hover: nhấn số và nâng nhẹ */
+.linhvuc-item {
+  transition: transform var(--transition-base);
+}
+
+.linhvuc-item:hover { transform: translateY(-4px); }
+.linhvuc-item:hover .linhvuc-num { opacity: 1; }
+.linhvuc-num { transition: opacity var(--transition-base); }
+
+@media (max-width: 991.98px) {
+  .linhvuc-item + .linhvuc-item { border-top: 1px solid rgba(8, 15, 29, .1); }
+}
