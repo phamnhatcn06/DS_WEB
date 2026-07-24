@@ -11,7 +11,12 @@
   --dsh-navy: #080f1d;
 
   /* -------- Màu phụ (đề xuất — đối chiếu Figma khi có frame con) -------- */
-  --dsh-red-dark:  #7a0e19;
+  --dsh-red-dark:   #7a0e19;
+  /* Đỏ tươi cho số thứ tự (xác nhận Figma node 1134:1206) */
+  --dsh-red-bright: #c61a2c;
+  /* Xanh mực + xám xanh cho chữ trên nền trắng (xác nhận Figma) */
+  --dsh-ink:        #0d2545;
+  --dsh-slate:      #5a6880;
   --dsh-gold-soft: #d8bd72;
   --dsh-navy-2:    #0f1a2e;
   --dsh-white:     #ffffff;
