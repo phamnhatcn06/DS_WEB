@@ -100,7 +100,7 @@ class AuditBehavior extends CActiveRecordBehavior
     private function flushContentCache()
     {
         if (Yii::app()->hasComponent('cache')) {
-            Yii::app()->cache->delete(Content::CACHE_KEY_HOMEPAGE);
+            Yii::app()->cache->delete(BaseActiveRecord::CACHE_KEY_HOMEPAGE);
         }
     }
 }
