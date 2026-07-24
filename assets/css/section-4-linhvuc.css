@@ -124,5 +124,7 @@
 .linhvuc-num { transition: opacity var(--transition-base); }
 
 @media (max-width: 991.98px) {
-  .linhvuc-item + .linhvuc-item { border-top: 1px solid rgba(8, 15, 29, .1); }
+  .linhvuc-col + .linhvuc-col .linhvuc-item {
+    border-top: 1px solid rgba(8, 15, 29, .1);
+  }
 }
