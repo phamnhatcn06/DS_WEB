@@ -6,53 +6,195 @@
 (function () {
   'use strict';
 
+  var STAGGER_STEP_MS = 90;
+  var SUPPORTS_OBSERVER = 'IntersectionObserver' in window;
+  var PREFERS_REDUCED_MOTION =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /**
-   * Fade-in section khi cuộn vào viewport — dùng IntersectionObserver,
-   * không poll sự kiện scroll.
+   * Gán reveal cho các nhóm phần tử lặp lại mà không phải sửa từng thẻ trong
+   * HTML. Mỗi mục trong nhóm nhận độ trễ tăng dần để tạo hiệu ứng stagger.
+   * @param {string} selector - selector của các mục trong một nhóm
+   * @param {string} direction - biến thể hướng: up | left | right | zoom | blur
    */
-  function initFadeOnScroll() {
-    var sections = document.querySelectorAll('.fade-section');
-    if (!sections.length || !('IntersectionObserver' in window)) {
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+  function assignReveal(selector, direction) {
+    document.querySelectorAll(selector).forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, index) {
+        if (child.hasAttribute('data-reveal')) {
+          return;
         }
+        child.setAttribute('data-reveal', direction);
+        child.style.setProperty('--reveal-delay', index * STAGGER_STEP_MS + 'ms');
       });
-    }, { threshold: 0.15 });
-
-    sections.forEach(function (section) {
-      observer.observe(section);
     });
   }
 
+  /** Khai báo các nhóm cần reveal theo thứ tự — chỉ chạy một lần lúc khởi tạo. */
+  function markRevealTargets() {
+    assignReveal('.linhvuc-grid .row', 'up');
+    assignReveal('.giatri-inner .row-cols-1', 'up');
+    assignReveal('.doitac-inner .row', 'zoom');
+    assignReveal('.duan-gallery', 'up');
+    assignReveal('.footer-main .row', 'up');
+  }
+
   /**
-   * Reveal từng phần tử khi cuộn tới (stagger) — thêm .is-visible cho mỗi
-   * phần tử [data-reveal] riêng lẻ. Dùng cho timeline (Section 7) để mỗi mốc
-   * hiện dần theo lúc cuộn, không hiện cả khối một lần.
+   * Reveal khi cuộn vào viewport — một observer duy nhất cho cả khối lớn
+   * (.fade-section) lẫn phần tử lẻ ([data-reveal]). Dùng IntersectionObserver,
+   * không poll sự kiện scroll.
    */
-  function initRevealItems() {
-    var items = document.querySelectorAll('[data-reveal]');
-    if (!items.length || !('IntersectionObserver' in window)) {
+  function initScrollReveal() {
+    var targets = document.querySelectorAll('.fade-section, [data-reveal]');
+    if (!targets.length) {
+      return;
+    }
+
+    if (!SUPPORTS_OBSERVER || PREFERS_REDUCED_MOTION) {
+      targets.forEach(function (target) { target.classList.add('is-visible'); });
       return;
     }
 
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) {
+          return;
         }
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
 
-    items.forEach(function (item) {
-      observer.observe(item);
+    targets.forEach(function (target) { observer.observe(target); });
+  }
+
+  /**
+   * Parallax nhẹ cho ảnh nền [data-parallax] — cập nhật biến --parallax-y
+   * trong một vòng requestAnimationFrame duy nhất, không đọc layout mỗi scroll.
+   */
+  function initParallax() {
+    var layers = document.querySelectorAll('[data-parallax]');
+    if (!layers.length || PREFERS_REDUCED_MOTION) {
+      return;
+    }
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var viewportHeight = window.innerHeight;
+
+      layers.forEach(function (layer) {
+        var rect = layer.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > viewportHeight) {
+          return;
+        }
+        var strength = parseFloat(layer.dataset.parallax) || 0.15;
+        var progress = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
+        layer.style.setProperty('--parallax-y', (progress * strength * 100).toFixed(2) + 'px');
+      });
+    }
+
+    function requestUpdate() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    update();
+  }
+
+  /** Thanh tiến độ cuộn trang ở đỉnh màn hình. */
+  function initScrollProgress() {
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    bar.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(bar);
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      var ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      bar.style.setProperty('--progress', Math.min(ratio, 1).toFixed(4));
+    }
+
+    function requestUpdate() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    update();
+  }
+
+  /** Nút quay lại đầu trang — hiện khi đã rời khỏi vùng hero. */
+  function initBackToTop() {
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'back-to-top';
+    button.setAttribute('aria-label', 'Lên đầu trang');
+    button.innerHTML = '<i class="bi bi-arrow-up" aria-hidden="true"></i>';
+    document.body.appendChild(button);
+
+    button.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: PREFERS_REDUCED_MOTION ? 'auto' : 'smooth',
+      });
     });
+
+    var sentinel = document.querySelector('.header-sentinel');
+    if (!sentinel || !SUPPORTS_OBSERVER) {
+      button.classList.add('is-shown');
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      button.classList.toggle('is-shown', !entries[0].isIntersecting);
+    }, { threshold: 0, rootMargin: '-50% 0px 0px 0px' });
+
+    observer.observe(sentinel);
+  }
+
+  /**
+   * Scroll spy: đánh dấu link nav của section đang xem bằng class .is-active.
+   * Dùng IntersectionObserver với dải quan sát nằm giữa viewport.
+   */
+  function initScrollSpy() {
+    var links = document.querySelectorAll('.site-header .nav-link[href^="#"]');
+    if (!links.length || !SUPPORTS_OBSERVER) {
+      return;
+    }
+
+    var linkBySectionId = {};
+    var sections = [];
+
+    links.forEach(function (link) {
+      var section = document.querySelector(link.getAttribute('href'));
+      if (section) {
+        linkBySectionId[section.id] = link;
+        sections.push(section);
+      }
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        links.forEach(function (link) { link.classList.remove('is-active'); });
+        linkBySectionId[entry.target.id].classList.add('is-active');
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+
+    sections.forEach(function (section) { observer.observe(section); });
   }
 
   /**
