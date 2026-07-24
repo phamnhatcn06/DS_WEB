@@ -26,10 +26,13 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
     public function down()
     {
+        // Dùng DELETE chứ không TRUNCATE: MySQL chặn TRUNCATE trên bảng đang
+        // được bảng khác tham chiếu bằng khoá ngoại. Thứ tự dưới đây là thứ tự
+        // an toàn với FK (bảng con trước, bảng cha sau).
         foreach (array('news_posts', 'news_categories', 'projects', 'partners',
                      'timeline_milestones', 'core_values', 'business_sectors',
                      'hero_slides', 'site_settings') as $table) {
-            $this->truncateTable($table);
+            $this->delete($table);
         }
     }
 
