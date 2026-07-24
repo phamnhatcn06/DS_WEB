@@ -104,17 +104,19 @@
 /* Thẻ tag viền mảnh (Figma: hộp chữ nhật, không bo tròn) */
 .linhvuc-tags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-wrap: nowrap;
+  gap: 4px;
   margin-top: auto;
 }
 
+/* Cỡ chữ co theo bề rộng cột để 4 tag luôn nằm gọn trên một hàng */
 .lv-tag {
   border: 1px solid rgba(13, 37, 69, .1);
   color: var(--dsh-slate);
-  font-size: .875rem;
+  font-size: clamp(.625rem, .72vw, .875rem);
   line-height: 1;
-  padding: .5rem .625rem;
+  padding: .45em .6em;
+  white-space: nowrap;
 }
 
 /* Khi các thẻ xếp chồng 1 cột, thêm đường kẻ ngăn cách */
