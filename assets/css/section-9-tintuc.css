@@ -162,14 +162,17 @@
   .tintuc-col--mid    { flex: 0 0 auto; width: 34.85%; }
   .tintuc-col--narrow { flex: 0 0 auto; width: 27.15%; }
 
-  /* Cả 3 cột bám cùng mép trên và cùng mép dưới:
-     card cột 1 & 2 cao bằng nhau, cột 3 là 2 card nhỏ xếp chồng. */
-  .news-card--lg,
-  .news-card--tall { min-height: 746px; }
-  /* 2 card nhỏ + gutter 24px = đúng chiều cao cột 1 & 2 */
-  .news-card--sm   { min-height: 361px; }
+  /* Chiều cao theo Figma, co giãn theo viewport (canvas gốc 1920px):
+     card 1 = 597px, card 2 = 746px, card nhỏ = 368px. Cột 1 lệch xuống 152px
+     để nhường lane cho hàng tab ⇒ cả 3 cột kết thúc cùng một mép dưới. */
+  .tintuc-col--wide { padding-top: min(7.9vw, 152px); }
 
-  /* Khi đang lọc theo một danh mục, cào bằng chiều cao card cho gọn */
+  .news-card--lg   { min-height: min(31.1vw, 597px); }
+  .news-card--tall { min-height: min(38.9vw, 746px); }
+  .news-card--sm   { min-height: min(18.8vw, 361px); }
+
+  /* Khi đang lọc theo một danh mục, bỏ lệch và cào bằng chiều cao card */
+  .tintuc.is-filtered .tintuc-col--wide { padding-top: 0; }
   .tintuc.is-filtered .news-card--lg,
   .tintuc.is-filtered .news-card--tall { min-height: 480px; }
 }
