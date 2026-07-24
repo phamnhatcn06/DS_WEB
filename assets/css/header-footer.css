@@ -177,7 +177,7 @@
   transition: color var(--transition-base), padding-left var(--transition-base);
 }
 
-.site-footer .footer-link:hover { color: var(--dsh-gold); padding-left: 4px; }
+.site-footer .footer-link:hover { color: var(--dsh-red); padding-left: 4px; }
 
 /* Liên hệ (icon đỏ vuông + nhãn) */
 .footer-contact li {
