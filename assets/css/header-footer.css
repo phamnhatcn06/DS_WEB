@@ -54,7 +54,7 @@
 .site-header .navbar-nav { gap: 28px; }
 
 .site-header .nav-link:hover,
-.site-header .nav-link.active { color: var(--dsh-gold); }
+.site-header .nav-link.active { color: var(--dsh-red); }
 
 /* Caret dropdown */
 .nav-caret::after {
