@@ -31,13 +31,17 @@ class AuditBehavior extends CActiveRecordBehavior
     public function beforeSave($event)
     {
         $owner = $this->getOwner();
-        $this->_oldValues = $owner->getIsNewRecord() ? array() : $this->_loadedAttributes;
+
+        // Yii1 đặt isNewRecord = false TRƯỚC khi gọi afterSave, nên phải chụp
+        // cờ này ở đây; đọc trong afterSave sẽ luôn ra "đang cập nhật".
+        $this->_wasNewRecord = $owner->getIsNewRecord();
+        $this->_oldValues = $this->_wasNewRecord ? array() : $this->_loadedAttributes;
     }
 
     public function afterSave($event)
     {
         $owner = $this->getOwner();
-        $isNew = $owner->getIsNewRecord();
+        $isNew = $this->_wasNewRecord;
 
         $new = $this->filter($owner->getAttributes());
         $old = $this->filter($this->_oldValues);
