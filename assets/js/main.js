@@ -148,8 +148,13 @@
     filterBars.forEach(function (bar) {
       var buttons = bar.querySelectorAll('[data-filter]');
       var items = document.querySelectorAll('.news-item');
+      var section = bar.closest('.tintuc');
 
       function applyFilter(category) {
+        // Bỏ độ lệch trang trí của cột trái khi lưới chỉ còn một danh mục.
+        if (section) {
+          section.classList.toggle('is-filtered', category !== 'all');
+        }
         items.forEach(function (item) {
           var matched = category === 'all' || item.dataset.category === category;
           item.classList.toggle('is-hidden', !matched);
