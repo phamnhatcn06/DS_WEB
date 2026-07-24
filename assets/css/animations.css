@@ -1,0 +1,326 @@
+/* ==========================================================================
+   animations.css — Lớp chuyển động dùng chung (scroll reveal, parallax,
+   hover polish, progress bar, back-to-top).
+   Mọi hiệu ứng đều tôn trọng prefers-reduced-motion ở cuối file.
+   ========================================================================== */
+
+:root {
+  /* Đường cong chuyển động dùng chung — mượt, giảm tốc tự nhiên */
+  --ease-out-soft:  cubic-bezier(.22, .61, .36, 1);
+  --ease-out-back:  cubic-bezier(.16, 1, .3, 1);
+  --reveal-duration: .9s;
+  --header-height: 80px;
+}
+
+/* -------- Neo cuộn: chừa chỗ cho header cố định -------- */
+html {
+  scroll-padding-top: calc(var(--header-height) + 16px);
+}
+
+section[id] {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+/* ==========================================================================
+   1. Scroll reveal — [data-reveal] với các biến thể hướng
+   ========================================================================== */
+
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity    var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms),
+    transform  var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms),
+    filter     var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="up"],
+[data-reveal=""]        { transform: translate3d(0, 40px, 0); }
+[data-reveal="down"]    { transform: translate3d(0, -40px, 0); }
+[data-reveal="left"]    { transform: translate3d(-56px, 0, 0); }
+[data-reveal="right"]   { transform: translate3d(56px, 0, 0); }
+[data-reveal="zoom"]    { transform: scale(.92); }
+[data-reveal="blur"]    { transform: translate3d(0, 24px, 0); filter: blur(10px); }
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Khối lớn (.fade-section) giữ API cũ nhưng dịu và dài hơi hơn */
+.fade-section {
+  opacity: 0;
+  transform: translate3d(0, 48px, 0);
+  transition:
+    opacity   1s var(--ease-out-back),
+    transform 1s var(--ease-out-back);
+  will-change: opacity, transform;
+}
+
+.fade-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Bỏ will-change sau khi đã hiện — tránh giữ layer GPU vô ích */
+.fade-section.is-visible,
+[data-reveal].is-visible {
+  will-change: auto;
+}
+
+/* ==========================================================================
+   2. Parallax nhẹ cho ảnh nền section
+   ========================================================================== */
+
+[data-parallax] {
+  will-change: transform;
+  transform: translate3d(0, var(--parallax-y, 0), 0) scale(1.08);
+}
+
+/* ==========================================================================
+   3. Thanh tiến độ cuộn trang
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 3px;
+  z-index: 1040;
+  background: linear-gradient(90deg, var(--dsh-red), var(--dsh-gold));
+  transform: scaleX(var(--progress, 0));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   4. Nút quay lại đầu trang
+   ========================================================================== */
+
+.back-to-top {
+  position: fixed;
+  right: clamp(16px, 2.5vw, 32px);
+  bottom: clamp(16px, 2.5vw, 32px);
+  z-index: 1035;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--dsh-line);
+  border-radius: 50%;
+  background: var(--dsh-navy);
+  color: var(--dsh-white);
+  font-size: 1.15rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 16px, 0);
+  transition: opacity .4s var(--ease-out-soft), transform .4s var(--ease-out-soft),
+              visibility .4s, background-color .3s ease;
+}
+
+.back-to-top.is-shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+}
+
+/* ==========================================================================
+   5. Hover polish — nâng nhẹ card, zoom ảnh trong khung
+   ========================================================================== */
+
+.about-card,
+.giatri-card,
+.partner-card,
+.tl-card,
+.duan-item,
+.news-card {
+  transition: transform .5s var(--ease-out-soft), box-shadow .5s var(--ease-out-soft);
+}
+
+.about-card:hover,
+.giatri-card:hover,
+.tl-card:hover,
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(8, 15, 29, .18);
+}
+
+.partner-card:hover { transform: translateY(-4px); }
+
+/* Ảnh trong khung có overflow: phóng nhẹ khi hover thẻ cha */
+.duan-thumb,
+.about-media,
+.bot-visual {
+  overflow: hidden;
+}
+
+.duan-thumb img,
+.about-media img,
+.bot-visual .bot-image,
+.news-card-img {
+  transition: transform .8s var(--ease-out-soft);
+}
+
+.duan-item:hover .duan-thumb img,
+.about-card:hover .about-media img,
+.bot-visual:hover .bot-image,
+.news-card:hover .news-card-img {
+  transform: scale(1.06);
+}
+
+/* Nút: nhấc nhẹ + đổ bóng khi hover */
+.btn-dsh,
+.btn-discover,
+.btn-dark-solid,
+.btn-outline-light-2 {
+  transition: transform .3s var(--ease-out-soft), background-color .3s ease,
+              border-color .3s ease, box-shadow .3s ease, color .3s ease;
+}
+
+.btn-dsh:hover,
+.btn-discover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(154, 18, 32, .3);
+}
+
+/* Mũi tên trong nút trượt sang phải */
+.btn-arrow,
+.news-more img,
+.duan-link-icon {
+  transition: transform .35s var(--ease-out-soft);
+}
+
+.btn:hover .btn-arrow,
+.news-card:hover .news-more img,
+.duan-link:hover .duan-link-icon {
+  transform: translateX(6px);
+}
+
+/* Link footer: gạch chân trượt */
+.footer-link {
+  position: relative;
+  transition: color .3s ease;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .35s var(--ease-out-soft);
+}
+
+.footer-link:hover::after,
+.footer-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Nav link header: gạch chân đỏ trượt từ trái */
+.site-header .nav-link {
+  position: relative;
+}
+
+.site-header .nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 2px;
+  background: var(--dsh-red);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .35s var(--ease-out-soft);
+}
+
+.site-header .nav-link:hover::after,
+.site-header .nav-link.is-active::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Nav link đang xem (scroll spy) */
+.site-header .nav-link.is-active { color: var(--dsh-red); }
+
+/* ==========================================================================
+   6. Hero — chữ vào từng lớp khi slide đổi
+   ========================================================================== */
+
+.hero-item.active .hero-logo,
+.hero-item.active .hero-title,
+.hero-item.active .hero-subtitle,
+.hero-item.active .hero-actions {
+  animation: heroIn 1s var(--ease-out-back) both;
+}
+
+.hero-item.active .hero-logo     { animation-delay: .15s; }
+.hero-item.active .hero-title    { animation-delay: .3s; }
+.hero-item.active .hero-subtitle { animation-delay: .45s; }
+.hero-item.active .hero-actions  { animation-delay: .6s; }
+
+/* Ảnh nền hero phóng chậm (Ken Burns) suốt thời gian slide hiển thị */
+.hero-item.active .hero-bg {
+  animation: kenBurns 8s linear both;
+}
+
+@keyframes heroIn {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+/* ==========================================================================
+   7. Tin tức — chuyển mượt khi lọc danh mục
+   ========================================================================== */
+
+.news-item {
+  transition: opacity .45s var(--ease-out-soft), transform .45s var(--ease-out-soft);
+}
+
+.news-item.is-hidden {
+  opacity: 0;
+  transform: scale(.96);
+}
+
+/* ==========================================================================
+   8. Tôn trọng prefers-reduced-motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal],
+  .fade-section {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  [data-parallax] { transform: none !important; }
+}
