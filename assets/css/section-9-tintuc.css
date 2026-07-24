@@ -166,7 +166,8 @@
      card cột 1 & 2 cao bằng nhau, cột 3 là 2 card nhỏ xếp chồng. */
   .news-card--lg,
   .news-card--tall { min-height: 746px; }
-  .news-card--sm   { min-height: 365px; }
+  /* 2 card nhỏ + gutter 24px = đúng chiều cao cột 1 & 2 */
+  .news-card--sm   { min-height: 361px; }
 
   /* Khi đang lọc theo một danh mục, cào bằng chiều cao card cho gọn */
   .tintuc.is-filtered .news-card--lg,
