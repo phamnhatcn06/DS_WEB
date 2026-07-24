@@ -24,7 +24,7 @@
 | ☑ | 5 | **Dự án tiêu biểu** | `1134:1265` | 787 | `section-5-duan.css` |
 | ☑ | 6 | **Giá trị cốt lõi ("Xây dựng niềm tin")** | `1134:1588` | 961 | `section-6-giatri.css` |
 | ☑ | 7 | **Hành trình phát triển (timeline)** | `1134:1628` | 2611 | `section-7-timeline.css` |
-| ☐ | 8 | **Đối tác & Cổ đông chiến lược** | `1134:2742` | 956 | `section-8-doitac.css` |
+| ☑ | 8 | **Đối tác & Cổ đông chiến lược** | `1134:2742` | 956 | `section-8-doitac.css` |
 | ☐ | 9 | **Tin tức nổi bật (tab lọc)** | `1134:2767` | 956 | `section-9-tintuc.css` |
 | ☑ | — | **Footer (CTA + 4 cột)** | `1134:2908` | 833 | `header-footer.css` |
 
