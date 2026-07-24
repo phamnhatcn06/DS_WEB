@@ -19,7 +19,7 @@
   color: var(--dsh-ink);
   font-size: var(--tintuc-title-fs);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: var(--tintuc-title-lh);
   margin: 0 0 var(--space-4);
 }
 
