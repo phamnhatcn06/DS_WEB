@@ -232,5 +232,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .news-card,
+  .news-card-img,
   .news-more img { transition: none; }
+
+  .news-card:hover .news-card-img { transform: none; }
 }
