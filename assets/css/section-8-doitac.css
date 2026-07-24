@@ -52,7 +52,8 @@
   justify-content: center;
   /* Ô Figma 402×200 → tỉ lệ ~2:1, bo góc 15px */
   aspect-ratio: 402 / 200;
-  padding: clamp(16px, 2.2vw, 40px);
+  /* Ít padding dọc hơn để logo (nhất là hàng dưới) cao/lớn hơn, sát tỉ lệ Figma */
+  padding: clamp(10px, 1.4vw, 22px) clamp(16px, 2.2vw, 36px);
   background-color: var(--dsh-white);
   border-radius: 15px;
   transition: transform var(--transition-base), box-shadow var(--transition-base);
