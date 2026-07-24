@@ -1,0 +1,120 @@
+/* ==========================================================================
+   section-6-giatri.css — Giá trị cốt lõi (Figma node 1134:1588)
+   Ảnh nền full-bleed (kỹ sư công trường) + overlay tối, heading căn phải,
+   4 card kính (glassmorphism) xếp 2×2 ở nửa phải.
+   ========================================================================== */
+
+.giatri {
+  position: relative;
+  padding-block: clamp(64px, 7vw, 120px);
+  overflow: hidden;
+  color: var(--dsh-white);
+}
+
+.giatri-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Làm tối phần nền phía sau khối chữ để đảm bảo tương phản chữ trắng */
+.giatri-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(90deg,
+    rgba(0, 0, 0, .18) 0%,
+    rgba(0, 0, 0, 0) 25%,
+    rgba(0, 0, 0, .5) 100%);
+}
+
+.giatri-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------- Heading -------- */
+.giatri-title {
+  color: var(--dsh-white);
+  font-size: clamp(2rem, 3.6vw, 3.75rem);
+  line-height: 1.07;
+  margin: 0 0 clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.giatri-title em {
+  display: block;
+  font-weight: 400;
+}
+
+/* -------- Card kính -------- */
+.giatri-card {
+  height: 100%;
+  min-height: clamp(200px, 17vw, 253px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 55px);
+  padding: var(--space-4) var(--space-4) var(--space-4) 20px;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, .32);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.giatri-card:hover {
+  background-color: rgba(0, 0, 0, .48);
+  transform: translateY(-4px);
+}
+
+/* Huy hiệu icon tròn trắng — svg của shield/person đã tự chứa nền tròn trắng */
+.giatri-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--dsh-white);
+  overflow: hidden;
+}
+
+.giatri-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.giatri-icon--award img { width: auto; height: 25px; }
+.giatri-icon--inner img { width: 24px; height: 24px; }
+
+.giatri-card h3 {
+  color: var(--dsh-white);
+  font-size: clamp(1.375rem, 1.9vw, 2rem);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0 0 6px;
+}
+
+.giatri-card p {
+  color: var(--dsh-white);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .giatri-card { transition: none; }
+}
+
+/* Mobile: nền ảnh dễ gây rối chữ → tăng độ tối overlay, bỏ căn phải */
+@media (max-width: 767.98px) {
+  .giatri-overlay {
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .3) 0%, rgba(0, 0, 0, .62) 100%);
+  }
+
+  .giatri-title { text-align: left; }
+}
