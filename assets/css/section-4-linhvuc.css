@@ -116,3 +116,10 @@
   line-height: 1;
   padding: .5rem .625rem;
 }
+
+/* Khi các thẻ xếp chồng, thêm đường kẻ ngăn cách */
+@media (max-width: 991.98px) {
+  .linhvuc-col + .linhvuc-col .linhvuc-item {
+    border-top: 1px solid rgba(13, 37, 69, .1);
+  }
+}
