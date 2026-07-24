@@ -51,7 +51,8 @@
   --section-py: clamp(64px, 8vw, 128px);
 
   /* -------- Layout -------- */
-  --container-max: 1320px;
+  /* Figma: frame nội dung rộng 1680px, lề 120px mỗi bên trên canvas 1920px */
+  --container-max: 1680px;
 
   /* -------- Hiệu ứng -------- */
   --transition-base: .3s ease;
