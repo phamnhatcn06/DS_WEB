@@ -12,6 +12,25 @@
   overflow: hidden;
 }
 
+/* Skyline mờ ở đáy, nhạt dần lên trên (điểm nhấn nền) */
+.timeline-city {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 55%);
+}
+
+.timeline > .container {
+  position: relative;
+  z-index: 1;
+}
+
 /* -------- Đầu section: tiêu đề trái · quote phải -------- */
 .timeline-head {
   margin-bottom: clamp(2.5rem, 5vw, 5rem);
