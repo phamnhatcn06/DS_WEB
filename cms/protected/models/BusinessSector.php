@@ -73,6 +73,7 @@ class BusinessSector extends BaseActiveRecord
             'card_title'       => 'Tiêu đề card nổi',
             'card_description' => 'Nội dung card nổi',
             'tags'             => 'Tag / chip',
+            'tagsText'         => 'Tag / chip',
             'image_media_id'   => 'Ảnh minh hoạ',
             'icon_media_id'    => 'Icon',
             'cta_label'        => 'Nhãn nút',
