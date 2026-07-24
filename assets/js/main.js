@@ -31,6 +31,31 @@
   }
 
   /**
+   * Reveal từng phần tử khi cuộn tới (stagger) — thêm .is-visible cho mỗi
+   * phần tử [data-reveal] riêng lẻ. Dùng cho timeline (Section 7) để mỗi mốc
+   * hiện dần theo lúc cuộn, không hiện cả khối một lần.
+   */
+  function initRevealItems() {
+    var items = document.querySelectorAll('[data-reveal]');
+    if (!items.length || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25, rootMargin: '0px 0px -10% 0px' });
+
+    items.forEach(function (item) {
+      observer.observe(item);
+    });
+  }
+
+  /**
    * Bật/tắt glassmorphism cho header dựa trên vị trí sentinel ở đỉnh trang.
    * Dùng IntersectionObserver — không poll sự kiện scroll.
    */
