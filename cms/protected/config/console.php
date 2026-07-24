@@ -25,7 +25,6 @@ return array(
             'migrationPath'         => 'application.migrations',
             'migrationTable'        => 'migrations',
             'connectionID'          => 'db',
-            'templateFile'          => 'application.migrations.template',
             'interactive'           => false,
         ),
     ),
