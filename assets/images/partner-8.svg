@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="220" height="90" viewBox="0 0 220 90" role="img" aria-label="Đèo Cả">
-  <rect width="220" height="90" fill="none"/>
-  <circle cx="34" cy="45" r="20" fill="none" stroke="#5a6880" stroke-width="3"/>
-  <path d="M24 45 l7 7 l15 -15" fill="none" stroke="#5a6880" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="68" y="50" fill="#5a6880" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" dominant-baseline="middle">Đèo Cả</text>
-</svg>
