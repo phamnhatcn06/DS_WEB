@@ -661,6 +661,18 @@ erDiagram
 
 # 6. Triển khai bằng Yii 1.1 + PHP 8
 
+> **Trạng thái: đã dựng xong core CMS trong thư mục `cms/`** (2026-07-24).
+> Chi tiết cài đặt và kết quả kiểm thử: xem `cms/README.md`.
+>
+> Khác biệt so với dự kiến ban đầu của tài liệu này, do môi trường thật:
+> - **Yii 1.1.32** (bản mới nhất, vá PHP 8.2/8.3 tốt hơn 1.1.30) — vẫn thoả "1.1.30+".
+> - **MySQL 5.7.24** chứ không phải MySQL 8 (MAMP). Kiểu `JSON` vẫn dùng được vì có từ 5.7.8.
+>   Các phần khác của thiết kế không phải đổi.
+> - **Đã chọn RBAC built-in** (§6.4) → bỏ 4 bảng `roles`/`permissions`/`role_permissions`/`user_roles`,
+>   thay bằng `auth_items`/`auth_item_children`/`auth_assignments`. Phase 1 vì vậy còn **12 bảng**
+>   thay vì 14.
+> - PHP CLI của MAMP không nạp `php.ini` nào → `cms/yiic.bat` truyền extension bằng cờ `-d`.
+
 ## 6.1 Điều kiện tiên quyết
 
 | Hạng mục | Yêu cầu |
