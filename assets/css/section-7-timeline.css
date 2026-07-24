@@ -88,6 +88,43 @@
   margin-top: clamp(-96px, -4vw, -32px);
 }
 
+/* -------- Reveal khi cuộn tới: card trượt vào theo phía, node phóng to -------- */
+.tl-item[data-reveal] .tl-card {
+  opacity: 0;
+  transition: opacity .7s ease, transform .7s ease;
+  will-change: opacity, transform;
+}
+.tl-left[data-reveal] .tl-card  { transform: translateX(-48px); }
+.tl-right[data-reveal] .tl-card { transform: translateX(48px); }
+
+.tl-item[data-reveal] .tl-node {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition: opacity .4s ease .15s, transform .4s ease .15s;
+}
+
+.tl-item.is-visible .tl-card {
+  opacity: 1;
+  transform: none;
+}
+.tl-item.is-visible .tl-node {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-item[data-reveal] .tl-card,
+  .tl-item[data-reveal] .tl-node {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .tl-item.is-visible .tl-node,
+  .tl-item[data-reveal] .tl-node {
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* Node tròn đỏ nằm trên trục, canh theo phần đầu card */
 .tl-node {
   position: absolute;
