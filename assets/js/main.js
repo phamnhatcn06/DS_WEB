@@ -140,6 +140,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     initFadeOnScroll();
+    initRevealItems();
     initHeaderGlass();
     initCustomSliders();
     initScrollSliders();
