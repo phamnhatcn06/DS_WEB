@@ -73,9 +73,50 @@
     });
   }
 
+  /**
+   * Slider ảnh cuộn ngang có scroll-snap (Section 5 — Dự án tiêu biểu).
+   * Mở đầu căn giữa thẻ ở giữa dải để hai thẻ ngoài cùng bị cắt một nửa;
+   * nút prev/next cuộn đi đúng một thẻ.
+   */
+  function initScrollSliders() {
+    var sliders = document.querySelectorAll('[data-duan-slider]');
+
+    sliders.forEach(function (slider) {
+      var track = slider.querySelector('.duan-gallery');
+      var items = slider.querySelectorAll('.duan-item');
+      if (!track || !items.length) {
+        return;
+      }
+
+      function scrollByOneCard(direction) {
+        var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+        track.scrollBy({ left: direction * (items[0].offsetWidth + gap), behavior: 'smooth' });
+      }
+
+      function centerMiddleCard() {
+        var middle = items[Math.floor(items.length / 2)];
+        track.scrollLeft = middle.offsetLeft - (track.clientWidth - middle.offsetWidth) / 2;
+      }
+
+      var prevButton = slider.querySelector('[data-duan-prev]');
+      var nextButton = slider.querySelector('[data-duan-next]');
+
+      if (prevButton) {
+        prevButton.addEventListener('click', function () { scrollByOneCard(-1); });
+      }
+      if (nextButton) {
+        nextButton.addEventListener('click', function () { scrollByOneCard(1); });
+      }
+
+      centerMiddleCard();
+      window.addEventListener('resize', centerMiddleCard);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initFadeOnScroll();
     initHeaderGlass();
     initCustomSliders();
+    initScrollSliders();
   });
 })();
