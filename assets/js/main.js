@@ -1,6 +1,7 @@
 /* ==========================================================================
    main.js — Tương tác cho trang chủ Đông Sơn Holdings (DSH)
-   Sẽ bổ sung dần: carousel config, news filter, header glassmorphism, fade-in.
+   Gồm: scroll reveal, parallax, thanh tiến độ, back-to-top, scroll spy,
+   header glassmorphism, carousel và tab lọc tin tức.
    ========================================================================== */
 
 (function () {
