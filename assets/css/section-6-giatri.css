@@ -90,7 +90,8 @@
   height: 100%;
 }
 
-.giatri-icon--award img { width: auto; height: 25px; }
+/* Các icon này có preserveAspectRatio="none" → phải khai báo đúng kích thước gốc */
+.giatri-icon--award img { width: 19px; height: 25px; }
 .giatri-icon--inner img { width: 24px; height: 24px; }
 
 .giatri-card h3 {
