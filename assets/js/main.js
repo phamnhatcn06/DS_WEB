@@ -350,9 +350,13 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initFadeOnScroll();
-    initRevealItems();
+    markRevealTargets();
+    initScrollReveal();
     initHeaderGlass();
+    initScrollSpy();
+    initScrollProgress();
+    initBackToTop();
+    initParallax();
     initCustomSliders();
     initScrollSliders();
     initNewsFilter();
