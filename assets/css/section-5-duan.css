@@ -66,6 +66,9 @@
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  /* Chừa chỗ cho box-shadow của thẻ khi hover, tránh bị overflow cắt mất */
+  padding-block: var(--space-4);
+  margin-block: calc(-1 * var(--space-4));
 }
 
 .duan-gallery::-webkit-scrollbar { display: none; }
