@@ -77,6 +77,13 @@
 
 .linhvuc-item:hover::after { width: 100%; }
 
+/* Thân thẻ: kéo dài hết chiều cao để dãy tag của 4 thẻ luôn thẳng hàng dưới đáy */
+.linhvuc-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .linhvuc-num {
   display: block;
   font-family: var(--font-heading);
