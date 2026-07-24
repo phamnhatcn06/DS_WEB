@@ -34,7 +34,6 @@
     assignReveal('.linhvuc-grid .row', 'up');
     assignReveal('.giatri-inner .row-cols-1', 'up');
     assignReveal('.doitac-inner .row', 'zoom');
-    assignReveal('.duan-gallery', 'up');
     assignReveal('.footer-main .row', 'up');
   }
 
