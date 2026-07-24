@@ -172,22 +172,42 @@
 /* -------- Chiều cao theo bố cục Figma (mosaic 3 cột) --------
    Cột giữa cao nhất (746px), cột trái 597px, cột phải 2 card 368px. */
 @media (min-width: 992px) {
-  /* Bề rộng 3 cột theo Figma (626 / 574 / 447 px) — cột 3 hẹp nhất */
-  .tintuc-col--wide   { flex: 0 0 auto; width: 38%; }
-  .tintuc-col--mid    { flex: 0 0 auto; width: 34.85%; }
-  .tintuc-col--narrow { flex: 0 0 auto; width: 27.15%; }
+  /* Lưới 3 cột theo Figma (626 / 574 / 447 px) — cột 3 hẹp nhất.
+     Tiêu đề + tab và card lớn dùng chung ô cột 1: tiêu đề neo mép trên,
+     card lớn neo mép dưới ⇒ ba cột kết thúc cùng một mép dưới. */
+  .tintuc-layout {
+    display: grid;
+    grid-template-columns: 38% 34.85% 27.15%;
+    column-gap: 24px;
+    margin-inline: 0;
+  }
 
-  /* Chiều cao theo Figma, co giãn theo viewport (canvas gốc 1920px):
-     card 1 = 597px, card 2 = 746px, card nhỏ = 368px. Cột 1 lệch xuống 152px
-     để nhường lane cho hàng tab ⇒ cả 3 cột kết thúc cùng một mép dưới. */
-  .tintuc-col--wide { padding-top: min(7.9vw, 152px); }
+  .tintuc-layout > * { padding-inline: 0; }
 
+  .tintuc-head,
+  .tintuc-col--wide {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* Tâm dòng tiêu đề nằm ngang mép trên của cột cao nhất (Figma: 124 ≈ 126) */
+  .tintuc-head {
+    align-self: start;
+    margin-top: calc(var(--tintuc-title-fs) * var(--tintuc-title-lh) / -2);
+    margin-bottom: 0;
+  }
+
+  .tintuc-col--wide   { align-self: end; }
+  .tintuc-col--mid    { grid-column: 2; grid-row: 1; }
+  .tintuc-col--narrow { grid-column: 3; grid-row: 1; }
+
+  /* Chiều cao theo Figma, co giãn theo viewport (canvas gốc 1920px) */
   .news-card--lg   { min-height: min(31.1vw, 597px); }
   .news-card--tall { min-height: min(38.9vw, 746px); }
   .news-card--sm   { min-height: min(18.8vw, 361px); }
 
-  /* Khi đang lọc theo một danh mục, bỏ lệch và cào bằng chiều cao card */
-  .tintuc.is-filtered .tintuc-col--wide { padding-top: 0; }
+  /* Khi đang lọc theo một danh mục, card lớn bám mép trên và cào bằng chiều cao */
+  .tintuc.is-filtered .tintuc-col--wide { align-self: stretch; }
   .tintuc.is-filtered .news-card--lg,
   .tintuc.is-filtered .news-card--tall { min-height: 480px; }
 }
