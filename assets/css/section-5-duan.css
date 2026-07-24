@@ -70,21 +70,91 @@
 
 .duan-gallery::-webkit-scrollbar { display: none; }
 
+/* Thẻ có chiều cao cố định: khi hover, ảnh co lại nhường chỗ cho caption
+   nên dải slider không bị nhảy layout. (Hiệu ứng bổ sung, Figma chưa có.) */
 .duan-item {
   flex: 0 0 var(--duan-card);
   scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  height: clamp(260px, 24vw, 408px);
+  padding: 0;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base),
+    padding var(--transition-base);
+}
+
+.duan-thumb {
+  flex: 1 1 auto;
+  min-height: 0;
   border-radius: 6px;
   overflow: hidden;
 }
 
-.duan-item img {
+.duan-thumb img {
   width: 100%;
-  height: clamp(260px, 24vw, 408px);
+  height: 100%;
   object-fit: cover;
   transition: transform var(--transition-base);
 }
 
-.duan-item:hover img { transform: scale(1.04); }
+/* -------- Caption hiện khi hover -------- */
+.duan-caption {
+  flex: 0 0 auto;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base), opacity var(--transition-base),
+    padding-top var(--transition-base);
+}
+
+.duan-caption h3 {
+  color: var(--dsh-ink);
+  font-size: clamp(1.125rem, 1.4vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 var(--space-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.duan-caption p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(0, 0, 0, .5);
+  font-size: clamp(.875rem, 1vw, 1rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.duan-caption p img { width: 24px; height: 24px; flex: 0 0 24px; }
+
+.duan-item:hover,
+.duan-item:focus-within {
+  background-color: var(--dsh-white);
+  box-shadow: 0 1rem 2.5rem rgba(13, 37, 69, .14);
+  padding: var(--space-3);
+}
+
+.duan-item:hover .duan-thumb img,
+.duan-item:focus-within .duan-thumb img { transform: scale(1.04); }
+
+.duan-item:hover .duan-caption,
+.duan-item:focus-within .duan-caption {
+  max-height: 96px;
+  opacity: 1;
+  padding-top: var(--space-3);
+}
+
+/* Tôn trọng người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .duan-item,
+  .duan-caption,
+  .duan-thumb img { transition: none; }
+}
 
 /* -------- Nút điều hướng slider -------- */
 .duan-nav {
