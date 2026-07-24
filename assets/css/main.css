@@ -25,6 +25,12 @@ h1, h2, h3, h4, h5, h6,
   line-height: 1.15;
 }
 
+/* Hover link toàn site — đỏ brand (cùng nền nút "Liên hệ ngay") */
+a:not(.btn):hover,
+a:not(.btn):focus-visible {
+  color: var(--dsh-red);
+}
+
 /* -------- Typography helpers -------- */
 .eyebrow {
   display: inline-block;
