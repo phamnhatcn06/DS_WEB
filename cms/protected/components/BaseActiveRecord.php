@@ -62,6 +62,28 @@ abstract class BaseActiveRecord extends CActiveRecord
     }
 
     /**
+     * Chuẩn hoá dữ liệu trước khi lưu.
+     *
+     * Form HTML gửi chuỗi rỗng cho ô không chọn gì (vd dropdown chọn ảnh).
+     * MySQL ở chế độ strict từ chối '' cho cột INT/DATE/DECIMAL, nên phải đổi
+     * về NULL. Xử lý một lần ở đây thay vì lặp lại trong từng model.
+     */
+    protected function beforeSave()
+    {
+        if (!parent::beforeSave()) {
+            return false;
+        }
+
+        foreach ($this->getMetaData()->tableSchema->columns as $name => $column) {
+            if ($column->allowNull && $this->$name === '') {
+                $this->$name = null;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Đảo thứ tự sắp xếp — dùng cho nút lên/xuống trong admin.
      */
     public function swapSortOrder($otherId)
