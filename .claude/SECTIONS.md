@@ -20,7 +20,7 @@
 | ☑ | 1 | **Hero slider** | `1134:26` | 853 | `section-1-hero.css` |
 | ☑ | 2 | **Đầu tư BOT & Hạ tầng** | `1134:90` | 773 | `section-2-bot.css` |
 | ☑ | 3 | **Giới thiệu — Sứ mệnh & Tầm nhìn** | `1134:471` | 1734 | `section-3-about.css` |
-| ☐ | 4 | **Lĩnh vực kinh doanh** | `1134:1206` | 868 | `section-4-linhvuc.css` |
+| ☑ | 4 | **Lĩnh vực kinh doanh** | `1134:1206` | 868 | `section-4-linhvuc.css` |
 | ☐ | 5 | **Dự án tiêu biểu** | `1134:1265` | 787 | `section-5-duan.css` |
 | ☐ | 6 | **Giá trị cốt lõi ("Xây dựng niềm tin")** | `1134:1588` | 961 | `section-6-giatri.css` |
 | ☐ | 7 | **Hành trình phát triển (timeline)** | `1134:1628` | 2611 | `section-7-timeline.css` |
