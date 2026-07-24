@@ -63,11 +63,6 @@
   gap: clamp(1.5rem, 3vw, 3rem);
 }
 
-/* Đường kẻ mảnh ngăn các thẻ (thay cho gap trong Figma) */
-.linhvuc-col + .linhvuc-col .linhvuc-item {
-  box-shadow: inset 1px 0 0 rgba(13, 37, 69, .1);
-}
-
 /* Gạch đỏ chạy ngang đáy thẻ khi hover */
 .linhvuc-item::after {
   content: "";
