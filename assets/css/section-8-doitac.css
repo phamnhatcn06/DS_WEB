@@ -37,29 +37,11 @@
 }
 
 /* -------- Đầu section -------- */
-.doitac-eyebrow {
-  display: inline-block;
-  color: var(--dsh-gold);
-  font-size: var(--fs-eyebrow);
-  font-weight: 600;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  margin: 0 0 var(--space-3);
-}
-
 .doitac-title {
   color: var(--dsh-white);
-  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  font-size: clamp(2rem, 3.6vw, 3.75rem);
   line-height: 1.1;
   font-weight: 700;
-  margin: 0 0 var(--space-3);
-}
-
-.doitac-intro {
-  max-width: 620px;
-  color: var(--dsh-muted);
-  font-size: var(--fs-body);
-  line-height: 1.6;
   margin: 0 0 clamp(2rem, 4vw, 3.5rem);
 }
 
