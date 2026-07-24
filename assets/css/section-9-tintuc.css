@@ -195,7 +195,7 @@
     margin: 0;
   }
 
-  .tintuc-col--narrow > .row > * { width: 100%; padding: 0; }
+  .tintuc-col--narrow > .row > * { width: 100%; padding: 0; margin-top: 0; }
 
   .tintuc-head,
   .tintuc-col--wide {
