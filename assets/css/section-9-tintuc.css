@@ -30,6 +30,10 @@
 
 .tintuc .filter-pills .nav-link.active { color: var(--dsh-white); }
 
+/* Cột chứa card đã bị lọc bỏ thì thu lại, tránh để lỗ trống trong lưới */
+.tintuc .col:has(> .news-item.is-hidden),
+.tintuc [class*="col-"]:has(> .news-item.is-hidden) { display: none; }
+
 /* -------- Card tin -------- */
 .news-card {
   position: relative;
