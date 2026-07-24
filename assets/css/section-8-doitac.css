@@ -1,0 +1,102 @@
+/* ==========================================================================
+   section-8-doitac.css — Đối tác & Cổ đông chiến lược (Figma node 1134:2742)
+   Nền ảnh cầu về đêm tối, tiêu đề trắng căn trái, grid logo 4×2 (8 ô trắng
+   bo góc chứa logo đối tác).
+   ========================================================================== */
+
+.doitac {
+  position: relative;
+  padding-block: clamp(64px, 8vw, 128px);
+  overflow: hidden;
+  color: var(--dsh-white);
+}
+
+.doitac-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Overlay tối để tương phản chữ trắng + hoà tông navy brand */
+.doitac-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(180deg,
+    rgba(8, 15, 29, .78) 0%,
+    rgba(8, 15, 29, .62) 45%,
+    rgba(8, 15, 29, .82) 100%);
+}
+
+.doitac-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------- Đầu section -------- */
+.doitac-eyebrow {
+  display: inline-block;
+  color: var(--dsh-gold);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 0 0 var(--space-3);
+}
+
+.doitac-title {
+  color: var(--dsh-white);
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0 0 var(--space-3);
+}
+
+.doitac-intro {
+  max-width: 620px;
+  color: var(--dsh-muted);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  margin: 0 0 clamp(2rem, 4vw, 3.5rem);
+}
+
+/* -------- Ô logo -------- */
+.partner-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(96px, 10vw, 132px);
+  padding: var(--space-4);
+  background-color: var(--dsh-white);
+  border-radius: 12px;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.partner-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  /* Logo về grayscale, sáng lên khi hover cho cảm giác "nhấn" */
+  filter: grayscale(1);
+  opacity: .85;
+  transition: filter var(--transition-base), opacity var(--transition-base);
+}
+
+.partner-logo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+}
+
+.partner-logo:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-logo,
+  .partner-logo img { transition: none; }
+}
