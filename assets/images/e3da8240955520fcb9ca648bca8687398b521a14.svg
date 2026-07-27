@@ -1,0 +1,41 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 219.365 165.861" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 5">
+<path id="Rectangle 31" d="M8.02539 54.841H211.34C215.033 54.8412 218.027 57.835 218.027 61.5285V164.524H1.33789V61.5285C1.33798 57.835 4.33187 54.8411 8.02539 54.841Z" fill="var(--fill-0, #FFD5D6)" stroke="url(#paint0_linear_1146_455)" stroke-width="2.67519"/>
+<path id="Rectangle 34" d="M8.02539 54.841H155.161V164.524H1.33789V61.5285C1.33798 57.835 4.33187 54.8411 8.02539 54.841Z" fill="var(--fill-0, #E1E9FF)" stroke="url(#paint1_linear_1146_455)" stroke-width="2.67519"/>
+<path id="Rectangle 32" d="M49.4908 1.33789H96.3208C97.0511 1.33789 97.7767 1.45697 98.4683 1.69141L175.224 27.71V52.166H42.8033V8.02539C42.8034 4.33186 45.7972 1.33798 49.4908 1.33789Z" fill="var(--fill-0, #FFD5D6)" stroke="url(#paint2_linear_1146_455)" stroke-width="2.67519"/>
+<path id="Rectangle 35" d="M49.4908 1.33789H96.3062V52.166H42.8033V8.02539C42.8034 4.33186 45.7972 1.33798 49.4908 1.33789Z" fill="var(--fill-0, #E1E9FF)" stroke="url(#paint3_linear_1146_455)" stroke-width="2.67519"/>
+<rect id="Rectangle 53" x="10.7008" y="69.5548" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 54" x="40.1278" y="69.5548" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 55" x="69.5548" y="69.5548" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 56" x="98.9819" y="69.5548" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 57" x="128.409" y="69.5548" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 53_2" x="10.7008" y="100.319" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 54_2" x="40.1278" y="100.319" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 55_2" x="69.5548" y="100.319" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 56_2" x="98.9819" y="100.319" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 57_2" x="128.409" y="100.319" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 53_3" x="10.7008" y="131.084" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 54_3" x="40.1278" y="131.084" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 55_3" x="69.5548" y="131.084" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+<rect id="Rectangle 56_3" x="98.9819" y="131.084" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #F6B2BB)"/>
+<rect id="Rectangle 57_3" x="128.409" y="131.084" width="18.7263" height="18.7263" rx="4.01278" fill="var(--fill-0, #B18686)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1146_455" x1="109.683" y1="53.5032" x2="109.683" y2="165.861" gradientUnits="userSpaceOnUse">
+<stop stop-color="#77ABD4" stop-opacity="0.46"/>
+<stop offset="1" stop-color="#44ADFF" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1146_455" x1="78.2492" y1="53.5032" x2="78.2492" y2="165.861" gradientUnits="userSpaceOnUse">
+<stop stop-color="#77ABD4" stop-opacity="0.46"/>
+<stop offset="1" stop-color="#44ADFF" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint2_linear_1146_455" x1="109.014" y1="0" x2="109.014" y2="53.5037" gradientUnits="userSpaceOnUse">
+<stop stop-color="#77ABD4" stop-opacity="0.46"/>
+<stop offset="1" stop-color="#44ADFF" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="paint3_linear_1146_455" x1="69.5548" y1="0" x2="69.5548" y2="53.5037" gradientUnits="userSpaceOnUse">
+<stop stop-color="#77ABD4" stop-opacity="0.46"/>
+<stop offset="1" stop-color="#44ADFF" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>
