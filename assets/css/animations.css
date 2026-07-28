@@ -29,9 +29,9 @@ section[id] {
 [data-reveal] {
   opacity: 0;
   transition:
-    opacity    var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms),
-    transform  var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms),
-    filter     var(--reveal-duration) var(--ease-out-back) var(--reveal-delay, 0ms);
+    opacity    var(--reveal-duration) var(--ease-out-soft) var(--reveal-delay, 0ms),
+    transform  var(--reveal-duration) var(--ease-out-soft) var(--reveal-delay, 0ms),
+    filter     var(--reveal-duration) var(--ease-out-soft) var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
 
