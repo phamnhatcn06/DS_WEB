@@ -1,49 +1,73 @@
 /* ==========================================================================
    about-milestone.css — Trang Giới thiệu · Section 3: Cột mốc phát triển
-   Figma node 1259:16420. Nền trắng ngà, 2 cột: nội dung trái + card thống kê đỏ.
+   Figma node 1259:16420. Nền trắng; tiêu đề canh giữa; card 2 nửa:
+   nửa trắng (nội dung) + nửa đỏ (thống kê + emblem).
    ========================================================================== */
 
 .about-milestone {
-  background-color: #f6f7f9;
+  background-color: #ffffff;
   color: var(--dsh-ink);
   overflow: hidden;
 }
 
-/* -------- Eyebrow canh giữa, gạch ngang hai bên -------- */
+/* -------- Tiêu đề canh giữa -------- */
+.milestone-head {
+  margin-bottom: var(--space-6);
+}
+
 .milestone-eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
+  display: block;
   color: var(--dsh-red);
   font-size: var(--fs-eyebrow);
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: .3em;
   text-transform: uppercase;
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
-.milestone-eyebrow::before,
-.milestone-eyebrow::after {
-  content: "";
-  width: 48px;
-  height: 2px;
-  background-color: var(--dsh-gold);
-}
-
-/* -------- Cột nội dung (trái) -------- */
 .milestone-title {
   color: var(--dsh-ink);
   font-weight: 700;
   font-size: var(--fs-h2);
-  line-height: 1.15;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* -------- Card lớn 2 nửa -------- */
+.milestone-card {
+  display: flex;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1.5rem 3rem rgba(13, 37, 69, .12);
+}
+
+/* Nửa trắng: nội dung */
+.milestone-body {
+  flex: 1 1 46%;
+  background-color: #ffffff;
+  padding: clamp(32px, 4vw, 64px);
+}
+
+.milestone-bar {
+  display: block;
+  width: 80px;
+  height: 6px;
+  background-color: var(--dsh-red);
+  margin-bottom: var(--space-4);
+}
+
+.milestone-subtitle {
+  color: var(--dsh-ink);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
   margin-bottom: var(--space-4);
 }
 
 .milestone-text {
   color: var(--dsh-slate);
   font-size: var(--fs-body);
-  line-height: 1.8;
+  line-height: 1.65;
   margin-bottom: var(--space-4);
 }
 
@@ -51,91 +75,72 @@
   margin-bottom: 0;
 }
 
-/* -------- Card thống kê nền đỏ (phải) -------- */
-.milestone-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  padding: clamp(28px, 4vw, 48px);
-  background: linear-gradient(135deg, var(--dsh-red) 0%, var(--dsh-red-dark) 100%);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 1.5rem 3rem rgba(154, 18, 32, .3);
-  overflow: hidden;
-  height: 100%;
+.milestone-text strong {
+  color: var(--dsh-red);
+  font-weight: 600;
 }
 
-/* Dấu ngoặc kép / họa tiết mờ trang trí */
-.milestone-card::after {
-  content: "";
-  position: absolute;
-  right: -40px;
-  bottom: -60px;
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .05);
-  pointer-events: none;
-}
-
+/* Nửa đỏ: thống kê + emblem */
 .milestone-stats {
+  position: relative;
+  flex: 1 1 54%;
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  position: relative;
-  z-index: 1;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: clamp(32px, 4vw, 64px);
+  background-color: var(--dsh-red);
+  overflow: hidden;
 }
 
 .milestone-stat .stat-num {
   display: block;
   color: #ffffff;
-  font-size: var(--fs-stat);
+  font-size: clamp(3rem, 6vw, 4.5rem);
   font-weight: 800;
   line-height: 1;
 }
 
 .milestone-stat .stat-num .plus {
-  color: var(--dsh-gold);
+  color: rgba(255, 255, 255, .5);
+  font-weight: 600;
 }
 
 .milestone-stat .stat-label {
   display: block;
-  margin-top: var(--space-2);
-  color: rgba(255, 255, 255, .88);
-  font-size: var(--fs-body);
-  font-weight: 500;
+  margin-top: var(--space-3);
+  color: rgba(255, 255, 255, .7);
+  font-size: .875rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
 }
 
-/* Đường kẻ vàng mảnh ngăn 2 số liệu */
-.milestone-stat + .milestone-stat {
-  padding-top: var(--space-5);
-  border-top: 1px solid var(--dsh-line);
+/* Đường kẻ mảnh ngăn 2 số liệu */
+.milestone-stat:first-child {
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(255, 255, 255, .2);
 }
 
-/* Logo lớn (vector trắng) bên phải card */
-.milestone-card-logo {
-  margin-left: auto;
-  position: relative;
-  z-index: 1;
-}
-
-.milestone-card-logo img {
-  width: clamp(120px, 14vw, 200px);
+/* Emblem lớn (vector) neo góc phải */
+.milestone-emblem {
+  position: absolute;
+  right: clamp(-40px, -2vw, 0px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(240px, 26vw, 419px);
   height: auto;
-  opacity: .9;
+  pointer-events: none;
+  user-select: none;
 }
 
+/* -------- Responsive: xếp chồng dưới lg -------- */
 @media (max-width: 991.98px) {
-  .milestone-card { margin-top: var(--space-6); }
-}
-
-@media (max-width: 575.98px) {
   .milestone-card {
     flex-direction: column;
-    align-items: flex-start;
   }
-  .milestone-card-logo {
-    margin-left: 0;
-    margin-top: var(--space-4);
+  .milestone-emblem {
+    right: -30px;
+    width: clamp(180px, 40vw, 280px);
   }
 }
