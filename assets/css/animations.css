@@ -60,10 +60,10 @@ section[id] {
 /* Khối lớn (.fade-section) giữ API cũ nhưng dịu và dài hơi hơn */
 .fade-section {
   opacity: 0;
-  transform: translate3d(0, 48px, 0);
+  transform: translate3d(0, 36px, 0);
   transition:
-    opacity   1s var(--ease-out-back),
-    transform 1s var(--ease-out-back);
+    opacity   1.15s var(--ease-out-soft),
+    transform 1.15s var(--ease-out-soft);
   will-change: opacity, transform;
 }
 
