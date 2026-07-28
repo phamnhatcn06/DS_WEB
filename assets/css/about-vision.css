@@ -1,0 +1,130 @@
+/* ==========================================================================
+   about-vision.css — Trang Giới thiệu · Section 4: Tầm nhìn & Chiến lược
+   Figma node 1259:16512. Nền tối (ảnh đô thị + overlay navy), bố cục 2 cột:
+   trái = eyebrow + tiêu đề + body + CTA; phải = grid 4 card giá trị.
+   ========================================================================== */
+
+.about-vision {
+  position: relative;
+  padding-block: var(--section-py);
+  overflow: hidden;
+  color: var(--dsh-white);
+}
+
+.about-vision-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Overlay navy để đảm bảo tương phản chữ trắng */
+.about-vision-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(90deg,
+    rgba(8, 15, 29, .94) 0%,
+    rgba(8, 15, 29, .82) 45%,
+    rgba(8, 15, 29, .62) 100%);
+}
+
+.about-vision-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* -------- Cột trái: nội dung + CTA -------- */
+.vision-eyebrow {
+  display: block;
+  color: var(--dsh-gold);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.vision-title {
+  color: var(--dsh-white);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.12;
+  margin-bottom: var(--space-4);
+}
+
+.vision-text {
+  color: var(--dsh-muted);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  margin-bottom: var(--space-6);
+  max-width: 44ch;
+}
+
+.vision-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.vision-cta .btn-arrow {
+  width: 14px;
+  height: 14px;
+}
+
+/* -------- Cột phải: grid 4 card giá trị -------- */
+.vision-card {
+  height: 100%;
+  padding: clamp(24px, 2.4vw, 36px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, .04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform var(--transition-base), border-color var(--transition-base),
+    background-color var(--transition-base);
+}
+
+.vision-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(201, 168, 76, .4);
+  background-color: rgba(255, 255, 255, .07);
+}
+
+.vision-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-4);
+  border-radius: 50%;
+  background-color: var(--dsh-white);
+  overflow: hidden;
+}
+
+.vision-card-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.vision-card h3 {
+  color: var(--dsh-white);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  margin-bottom: var(--space-2);
+}
+
+.vision-card p {
+  color: var(--dsh-muted);
+  font-size: .95rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vision-card { transition: none; }
+}
