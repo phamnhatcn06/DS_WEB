@@ -292,7 +292,7 @@ section[id] {
 }
 
 /* Slide carousel thường (BOT…): kéo dài & làm dịu chuyển động trượt */
-.carousel-slide-soft .carousel-item {
+.carousel.slide:not(.carousel-fade) .carousel-item {
   transition: transform .8s var(--ease-in-out-soft) !important;
 }
 
