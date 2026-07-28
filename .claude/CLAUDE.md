@@ -85,10 +85,18 @@ Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 
 
 ### Hành vi responsive
 
+> **Thiết kế mobile đã xác nhận:** Figma node **`1241:23`** ("op1-3-mobile", khung 375px) là bản responsive chính thức — đối chiếu khi chỉnh mobile.
+
 - Desktop (`≥ lg` / 992px+): grid nhiều cột đầy đủ như thiết kế (3–4 cột).
 - Tablet (`md` / 768–991px): grid 2 cột; các section ảnh+chữ giữ cạnh nhau hoặc bắt đầu xếp chồng; nav thu về hamburger.
-- Mobile (`< md` / < 768px): mọi thứ xếp về 1 cột (`col-12`); chữ hero co lại nhờ `clamp()`; số liệu wrap 2/hàng (`col-6`); logo đối tác 2/hàng; tab tin tức cuộn ngang nếu cần.
+- Mobile (`< md` / < 768px): mọi thứ xếp về 1 cột (`col-12`); chữ hero co lại nhờ `clamp()`; số liệu wrap 2/hàng (`col-6`); logo đối tác 2/hàng.
 - Ưu tiên typography/spacing fluid bằng `clamp()` thay vì đè breakpoint cứng; dùng các class cột responsive của Bootstrap (`col-`, `col-md-`, `col-lg-`) cho thay đổi bố cục.
+
+**Hành vi mobile riêng theo section (khớp `op1-3-mobile`):**
+- **Section 2 (BOT):** cột nội dung canh giữa (eyebrow/tiêu đề/lead/tags/nút); card nổi rơi xuống dưới ảnh, chữ card vẫn canh trái.
+- **Section 5 (Dự án tiêu biểu):** bỏ slider ngang → xếp **dọc** từng thẻ, caption (tên + địa điểm) **luôn hiện** dưới ảnh (không dựa vào hover vì thiết bị cảm ứng).
+- **Section 7 (Timeline):** dồn về **một phía**, trục dọc nằm bên trái (`left: 8px`), card full-width.
+- **Section 9 (Tin tức):** tab lọc nằm **một hàng, cuộn ngang** khi tràn.
 
 ## Các trang khác (ngoài trang chủ)
 
