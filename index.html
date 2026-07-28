@@ -47,22 +47,26 @@
           <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="brand-logo" />
         </a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
+        <a href="#lien-he" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3">
+          <span class="d-lg-none">Liên hệ</span>
+          <span class="d-none d-lg-inline">Liên hệ ngay</span>
+        </a>
+
+        <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
                 data-bs-target="#mainNav" aria-controls="mainNav"
                 aria-expanded="false" aria-label="Mở menu">
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav mx-lg-auto mb-3 mb-lg-0">
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
             <li class="nav-item"><a class="nav-link nav-caret" href="#gioi-thieu">Về chúng tôi</a></li>
             <li class="nav-item"><a class="nav-link nav-caret" href="#linh-vuc">Lĩnh vực</a></li>
             <li class="nav-item"><a class="nav-link" href="#du-an">Dự án</a></li>
             <li class="nav-item"><a class="nav-link" href="#co-dong">Quan hệ cổ đông</a></li>
             <li class="nav-item"><a class="nav-link" href="#tin-tuc">Tin tức</a></li>
           </ul>
-
-          <a href="#lien-he" class="btn btn-dsh btn-contact">Liên hệ ngay</a>
         </div>
       </div>
     </nav>
