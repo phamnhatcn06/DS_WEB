@@ -210,3 +210,18 @@
   .bot-card { position: static; max-width: none; margin-top: var(--space-4); }
   .bot-image { box-shadow: none; }
 }
+
+/* Mobile (Figma op1-3-mobile): cột nội dung canh giữa, 2 nút cạnh nhau.
+   Card nổi vẫn giữ chữ canh trái để dễ đọc. */
+@media (max-width: 767.98px) {
+  .bot-eyebrow { justify-content: center; }
+  .bot-title,
+  .bot-tags { text-align: center; }
+  .bot-lead {
+    text-align: center;
+    max-width: none;
+    margin-inline: auto;
+  }
+  .bot-actions { justify-content: center; }
+  .bot-card { text-align: left; }
+}
