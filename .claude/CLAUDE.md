@@ -90,6 +90,10 @@ Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 
 - Mobile (`< md` / < 768px): mọi thứ xếp về 1 cột (`col-12`); chữ hero co lại nhờ `clamp()`; số liệu wrap 2/hàng (`col-6`); logo đối tác 2/hàng; tab tin tức cuộn ngang nếu cần.
 - Ưu tiên typography/spacing fluid bằng `clamp()` thay vì đè breakpoint cứng; dùng các class cột responsive của Bootstrap (`col-`, `col-md-`, `col-lg-`) cho thay đổi bố cục.
 
+## Các trang khác (ngoài trang chủ)
+
+- **Trang Giới thiệu (About):** xem `About.md` (thư mục gốc) — bóc tách 4 section thân (HeroBanner, Lịch sử hình thành, Cột mốc phát triển, Tầm nhìn & Chiến lược) + Header/Footer dùng chung, kèm node ID Figma (`GIỚI THIỆU` `1251:11840`, trong section `ANOTHER PAGES` `1251:11839`).
+
 ## Kế hoạch triển khai
 
 > **Bóc tách section chi tiết để dựng lần lượt:** xem `.claude/SECTIONS.md` — nguồn thiết kế thật hiện tại là Figma node **`1134:25`** (10 section thân + header/footer, kèm node ID từng section, trạng thái ☐/☑). Bảng "Bóc tách từng section" phía trên (dựa trên design cũ `12:11`) đã lỗi thời ở vài điểm — ưu tiên `SECTIONS.md`.
