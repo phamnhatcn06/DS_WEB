@@ -27,6 +27,18 @@
    viền rgba(13,37,69,.15), chữ slate; tab active nền đỏ brand. */
 .tintuc .filter-pills { gap: 10px; }
 
+/* Mobile (Figma op1-3-mobile): tab lọc nằm gọn một hàng, cuộn ngang khi tràn */
+@media (max-width: 991.98px) {
+  .tintuc .filter-pills {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tintuc .filter-pills::-webkit-scrollbar { display: none; }
+  .tintuc .filter-pills .nav-item { flex: 0 0 auto; }
+}
+
 /* Figma: hàng pill rộng ~631px = đúng bề rộng card tin đầu tiên (626px)
    ⇒ tab nằm trọn trong lane cột 1, tràn thì xuống dòng chứ không co chữ. */
 @media (min-width: 992px) {
