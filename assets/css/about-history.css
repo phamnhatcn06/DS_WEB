@@ -1,0 +1,175 @@
+/* ==========================================================================
+   about-history.css — Trang Giới thiệu · Section 2: Lịch sử hình thành
+   Figma node 1258:15868. Nền trắng, 2 cột: nội dung trái + ảnh & badge phải.
+   ========================================================================== */
+
+.about-history {
+  background-color: #ffffff;
+  color: var(--dsh-ink);
+  overflow: hidden;
+}
+
+/* -------- Cột nội dung (trái) -------- */
+.history-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--dsh-red);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.history-eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 2px;
+  background-color: var(--dsh-gold);
+}
+
+.history-title {
+  color: var(--dsh-ink);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+
+.history-lead {
+  color: var(--dsh-slate);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.history-lead .highlight {
+  color: var(--dsh-red);
+  font-weight: 700;
+}
+
+.history-subhead {
+  color: var(--dsh-ink);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  margin-bottom: var(--space-3);
+}
+
+/* -------- Danh sách 3 cổ đông sáng lập -------- */
+.history-founders {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.history-founders li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: #f6f7f9;
+  border: 1px solid rgba(13, 37, 69, .06);
+  border-left: 3px solid var(--dsh-red);
+  border-radius: var(--radius);
+  transition: transform var(--transition-base), border-color var(--transition-base),
+              box-shadow var(--transition-base);
+}
+
+.history-founders li:hover {
+  transform: translateY(-3px);
+  border-left-color: var(--dsh-gold);
+  box-shadow: 0 .75rem 1.5rem rgba(13, 37, 69, .08);
+}
+
+.history-founders .check-ic {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(154, 18, 32, .1);
+  color: var(--dsh-red);
+  font-size: 15px;
+}
+
+.history-founders span {
+  color: var(--dsh-ink);
+  font-weight: 500;
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+
+/* -------- Cột ảnh + badge năm (phải) -------- */
+.history-visual { position: relative; }
+
+.history-image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1.5rem 3rem rgba(13, 37, 69, .18);
+  display: block;
+}
+
+/* Overlay chữ "HISTORY OF FORMATION" trên ảnh */
+.history-image-caption {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-4);
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, .4);
+}
+
+.history-image-caption strong {
+  display: block;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.history-image-caption small {
+  font-size: .75rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+/* Badge đỏ góc dưới */
+.history-badge {
+  position: absolute;
+  left: calc(-1 * var(--space-4));
+  bottom: calc(-1 * var(--space-4));
+  background-color: var(--dsh-red);
+  color: #ffffff;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1rem 2.5rem rgba(154, 18, 32, .35);
+  text-align: center;
+}
+
+.history-badge .badge-num {
+  display: block;
+  font-size: clamp(2.25rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.history-badge .badge-label {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: .8125rem;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .85);
+}
+
+@media (max-width: 991.98px) {
+  .history-visual { margin-top: var(--space-6); }
+  .history-badge {
+    left: auto;
+    right: var(--space-4);
+    bottom: calc(-1 * var(--space-3));
+  }
+}
