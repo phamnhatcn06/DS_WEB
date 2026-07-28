@@ -183,8 +183,43 @@
 .duan-nav--prev img { transform: rotate(180deg); }
 .duan-nav--next { right: clamp(8px, 2vw, 32px); }
 
-/* Mobile: thẻ rộng hơn để ảnh không quá nhỏ, vẫn hé thẻ kế bên */
+/* Mobile (Figma op1-3-mobile): bỏ slider ngang, xếp các dự án theo cột dọc,
+   caption (tên + địa điểm) luôn hiện dưới ảnh vì thiết bị cảm ứng không hover. */
 @media (max-width: 767.98px) {
-  .duan-slider { --duan-card: calc((100vw - 3 * var(--duan-gap)) / 1.6); }
+  /* Huỷ full-bleed: dải nằm gọn trong .container */
+  .duan-slider { margin-inline: 0; }
+
+  .duan-gallery {
+    flex-direction: column;
+    gap: clamp(1.5rem, 5vw, 2rem);
+    overflow: visible;
+    scroll-snap-type: none;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  .duan-item {
+    flex: 1 1 auto;
+    height: auto;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .duan-thumb {
+    flex: 0 0 auto;
+    height: clamp(200px, 54vw, 260px);
+  }
+
+  /* Caption luôn hiển thị, xuống dòng đầy đủ */
+  .duan-caption {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    padding-top: var(--space-3);
+  }
+
+  .duan-caption h3 { white-space: normal; }
+
   .duan-nav { display: none; }
 }
