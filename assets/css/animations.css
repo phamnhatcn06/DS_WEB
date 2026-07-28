@@ -282,7 +282,13 @@ section[id] {
 
 /* Ảnh nền hero phóng chậm (Ken Burns) suốt thời gian slide hiển thị */
 .hero-item.active .hero-bg {
-  animation: kenBurns 8s linear both;
+  animation: kenBurns 9s var(--ease-out-soft) both;
+}
+
+/* Crossfade mượt giữa các slide hero thay vì trượt cứng */
+.hero .carousel-item {
+  transition: transform .9s var(--ease-in-out-soft),
+              opacity .9s var(--ease-in-out-soft) !important;
 }
 
 @keyframes heroIn {
