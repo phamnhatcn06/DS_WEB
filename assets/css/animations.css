@@ -150,7 +150,7 @@ section[id] {
 .tl-card,
 .duan-item,
 .news-card {
-  transition: transform .5s var(--ease-out-soft), box-shadow .5s var(--ease-out-soft);
+  transition: transform .6s var(--ease-out-soft), box-shadow .6s var(--ease-out-soft);
 }
 
 .about-card:hover,
