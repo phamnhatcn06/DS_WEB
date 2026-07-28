@@ -1,0 +1,141 @@
+/* ==========================================================================
+   about-milestone.css — Trang Giới thiệu · Section 3: Cột mốc phát triển
+   Figma node 1259:16420. Nền trắng ngà, 2 cột: nội dung trái + card thống kê đỏ.
+   ========================================================================== */
+
+.about-milestone {
+  background-color: #f6f7f9;
+  color: var(--dsh-ink);
+  overflow: hidden;
+}
+
+/* -------- Eyebrow canh giữa, gạch ngang hai bên -------- */
+.milestone-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--dsh-red);
+  font-size: var(--fs-eyebrow);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.milestone-eyebrow::before,
+.milestone-eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 2px;
+  background-color: var(--dsh-gold);
+}
+
+/* -------- Cột nội dung (trái) -------- */
+.milestone-title {
+  color: var(--dsh-ink);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: 1.15;
+  margin-bottom: var(--space-4);
+}
+
+.milestone-text {
+  color: var(--dsh-slate);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  margin-bottom: var(--space-4);
+}
+
+.milestone-text:last-child {
+  margin-bottom: 0;
+}
+
+/* -------- Card thống kê nền đỏ (phải) -------- */
+.milestone-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: clamp(28px, 4vw, 48px);
+  background: linear-gradient(135deg, var(--dsh-red) 0%, var(--dsh-red-dark) 100%);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 1.5rem 3rem rgba(154, 18, 32, .3);
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Dấu ngoặc kép / họa tiết mờ trang trí */
+.milestone-card::after {
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .05);
+  pointer-events: none;
+}
+
+.milestone-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  position: relative;
+  z-index: 1;
+}
+
+.milestone-stat .stat-num {
+  display: block;
+  color: #ffffff;
+  font-size: var(--fs-stat);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.milestone-stat .stat-num .plus {
+  color: var(--dsh-gold);
+}
+
+.milestone-stat .stat-label {
+  display: block;
+  margin-top: var(--space-2);
+  color: rgba(255, 255, 255, .88);
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+
+/* Đường kẻ vàng mảnh ngăn 2 số liệu */
+.milestone-stat + .milestone-stat {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--dsh-line);
+}
+
+/* Logo lớn (vector trắng) bên phải card */
+.milestone-card-logo {
+  margin-left: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.milestone-card-logo img {
+  width: clamp(120px, 14vw, 200px);
+  height: auto;
+  opacity: .9;
+}
+
+@media (max-width: 991.98px) {
+  .milestone-card { margin-top: var(--space-6); }
+}
+
+@media (max-width: 575.98px) {
+  .milestone-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .milestone-card-logo {
+    margin-left: 0;
+    margin-top: var(--space-4);
+  }
+}
