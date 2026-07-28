@@ -291,6 +291,11 @@ section[id] {
               opacity .9s var(--ease-in-out-soft) !important;
 }
 
+/* Slide carousel thường (BOT…): kéo dài & làm dịu chuyển động trượt */
+.carousel-slide-soft .carousel-item {
+  transition: transform .8s var(--ease-in-out-soft) !important;
+}
+
 @keyframes heroIn {
   from { opacity: 0; transform: translate3d(0, 28px, 0); }
   to   { opacity: 1; transform: none; }
