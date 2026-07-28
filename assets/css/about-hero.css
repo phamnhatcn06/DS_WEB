@@ -1,0 +1,120 @@
+/* ===== Trang Giới thiệu — Section 1: HeroBanner ===== */
+
+.about-hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Ảnh nền (mờ 50%, lật dọc như thiết kế) */
+.about-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  transform: scaleY(-1);
+  z-index: -2;
+}
+
+/* Lớp phủ gradient đỏ brand: tối trên → đỏ dưới */
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 6, 8, 0.7) 0%,
+    rgba(154, 18, 32, 0.6) 50%,
+    var(--dsh-red, #9a1220) 100%
+  );
+}
+
+/* Breadcrumb góc trên trái */
+.about-hero-breadcrumb {
+  position: absolute;
+  top: 102px;
+  left: clamp(16px, 8vw, 131px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 19.5px;
+  z-index: 1;
+}
+
+.about-hero-breadcrumb a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.about-hero-breadcrumb a:hover {
+  color: #ffffff;
+}
+
+.about-hero-breadcrumb .bc-current {
+  color: var(--dsh-gold, #c9a84c);
+}
+
+.about-hero-breadcrumb .bc-sep {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+}
+
+/* Khối nội dung giữa */
+.about-hero-content {
+  text-align: center;
+  color: #ffffff;
+  padding-block: 40px;
+}
+
+/* Eyebrow kèm 2 gạch vàng hai bên */
+.about-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.about-hero-eyebrow span {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.about-hero-eyebrow::before,
+.about-hero-eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--dsh-gold, #c9a84c);
+}
+
+.about-hero-title {
+  font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 72px);
+  line-height: 1;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.about-hero-subtitle {
+  margin: 20px auto 0;
+  max-width: 720px;
+  font-size: clamp(1rem, 1.6vw, 20px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+@media (max-width: 575.98px) {
+  .about-hero-breadcrumb { top: 90px; }
+}
