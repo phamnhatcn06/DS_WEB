@@ -94,7 +94,30 @@
     border: 1px solid var(--dsh-line);
   }
   .site-header .navbar-nav { gap: 8px; }
-  .btn-contact { margin-top: var(--space-3); }
+
+  /* Logo gọn hơn trên mobile (khớp op1-3-mobile) */
+  .brand-logo { height: 40px; }
+
+  /* CTA mobile: nền trắng, chữ đỏ (nhãn ngắn "Liên hệ") */
+  .btn-contact {
+    --bs-btn-color: var(--dsh-red);
+    --bs-btn-bg: #ffffff;
+    --bs-btn-border-color: #ffffff;
+    --bs-btn-hover-color: var(--dsh-red);
+    --bs-btn-hover-bg: rgba(255, 255, 255, .9);
+    --bs-btn-hover-border-color: rgba(255, 255, 255, .9);
+    --bs-btn-border-radius: 8px;
+    font-weight: 600;
+  }
+
+  /* Hamburger: nút vuông bo góc, viền mảnh sáng */
+  .site-header .navbar-toggler {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .18);
+  }
 }
 
 /* ===================== Footer ===================== */
