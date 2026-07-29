@@ -260,8 +260,10 @@
 .org-branch-bar {
   position: absolute;
   bottom: 0;
-  left: 12.5%;   /* tâm cột đầu của lưới 4 cột đều nhau */
-  right: 12.5%;  /* tâm cột cuối */
+  /* Khớp đúng tâm box đầu/cuối: 4 box flex đều nhau, cách nhau gap = space-4.
+     boxW = (100% - 3*gap)/4  →  tâm box đầu = (100% - 3*gap)/8 tính từ mép. */
+  left: calc((100% - 3 * var(--space-4)) / 8);
+  right: calc((100% - 3 * var(--space-4)) / 8);
   height: 2px;
   background: var(--org-branch);
 }
