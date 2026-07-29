@@ -1,0 +1,320 @@
+/* ==========================================================================
+   sodo.css — Trang Sơ đồ - Tổ chức
+   2 khối riêng: Hội đồng quản trị (.bod) + Hệ thống phân cấp (.orgchart)
+   Header / Hero / Footer tái dùng CSS chung; file này chỉ style phần thân.
+   ========================================================================== */
+
+/* Token cục bộ cho trang (màu khối sơ đồ — xác nhận Figma node 1263:17878) */
+.sodo-page {
+  --org-red-dark:   #730011;   /* nền box cấp 1, viền/chữ box cấp 2, đường nối */
+  --org-surface:    #f8f9fa;   /* nền section sơ đồ + box phòng ban */
+  --org-line-pink:  #e1bebc;   /* viền box phòng ban cấp 3 */
+  --org-branch:     #8d706e;   /* nhánh cây phân cấp */
+  --org-ink:        #191c1d;   /* tiêu đề + chữ box phòng ban */
+}
+
+/* ==========================================================================
+   Section 1: Hội đồng quản trị (.bod)
+   ========================================================================== */
+.bod {
+  padding-block: var(--section-py);
+  background: var(--dsh-white);
+}
+
+/* -- Tiêu đề khối, có viền dọc trái -- */
+.bod-head {
+  border-left: 3px solid var(--dsh-red);
+  padding-left: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+.bod-title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--dsh-ink);
+  text-transform: uppercase;
+  margin: 0 0 var(--space-2);
+}
+
+.bod-sub {
+  font-size: var(--fs-body);
+  color: var(--dsh-slate);
+  margin: 0;
+}
+
+/* -- Card Chủ tịch (bento) -- */
+.bod-chair {
+  border: 1px solid rgba(13, 37, 69, .1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+  background: var(--dsh-white);
+  box-shadow: 0 6px 24px rgba(13, 37, 69, .06);
+}
+
+.bod-chair-photo {
+  width: 272px;
+  max-width: 100%;
+  aspect-ratio: 272 / 362;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--org-surface);
+  margin-right: var(--space-6);
+}
+
+.bod-chair-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bod-chair-body {
+  padding-top: var(--space-1);
+}
+
+.bod-chair-name {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 700;
+  color: var(--dsh-red);
+  margin: 0 0 var(--space-2);
+}
+
+.bod-chair-role {
+  font-size: var(--fs-body);
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--dsh-ink);
+  margin: 0 0 var(--space-4);
+}
+
+.bod-chair-desc {
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  color: var(--dsh-slate);
+  margin: 0 0 var(--space-3);
+}
+
+.bod-chair-stats {
+  display: flex;
+  gap: var(--space-6);
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(13, 37, 69, .1);
+}
+
+.bod-stat-num {
+  display: block;
+  font-size: clamp(1.75rem, 3vw, 2rem);
+  font-weight: 800;
+  color: var(--dsh-red);
+  line-height: 1;
+}
+
+.bod-stat-label {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: .8125rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--dsh-slate);
+}
+
+/* -- Lưới 4 thành viên -- */
+.bod-member {
+  height: 100%;
+  border: 1px solid rgba(13, 37, 69, .08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--dsh-white);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.bod-member:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(13, 37, 69, .1);
+  border-color: rgba(201, 168, 76, .4);
+}
+
+.bod-member-photo {
+  aspect-ratio: 400 / 335;
+  background: var(--org-surface);
+}
+
+.bod-member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bod-member-body {
+  padding: var(--space-4);
+}
+
+.bod-member-name {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--dsh-red);
+  margin: 0 0 var(--space-1);
+}
+
+.bod-member-role {
+  font-size: .8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--dsh-ink);
+  margin: 0 0 var(--space-3);
+}
+
+.bod-member-desc {
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--dsh-slate);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Section 2: Hệ thống phân cấp — Org chart (.orgchart)
+   ========================================================================== */
+.orgchart {
+  padding-block: var(--section-py);
+  background: var(--org-surface);
+}
+
+.orgchart-title {
+  font-family: "Montserrat", var(--font-heading);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--org-ink);
+  margin: 0 0 var(--space-8);
+}
+
+/* Cây phân cấp — căn giữa */
+.org-tree {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.org-level {
+  display: flex;
+  justify-content: center;
+}
+
+/* Box cấp 1 + cấp 2 dùng chung khung */
+.org-node {
+  width: min(100%, 382px);
+  text-align: center;
+  padding: var(--space-4) var(--space-3);
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  text-transform: uppercase;
+}
+
+/* Cấp 1 — Hội đồng quản trị (nền đỏ đậm) */
+.org-node--board {
+  background: var(--org-red-dark);
+  border: 3px solid var(--dsh-red);
+  color: var(--dsh-white);
+  box-shadow: 0 6px 9px -1px rgba(0, 0, 0, .1), 0 3px 6px -3px rgba(0, 0, 0, .1);
+}
+
+/* Cấp 2 — Ban Tổng giám đốc (nền trắng, viền đỏ) */
+.org-node--exec {
+  background: var(--dsh-white);
+  border: 3px solid var(--org-red-dark);
+  color: var(--org-red-dark);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, .05);
+}
+
+/* Đường nối dọc giữa cấp 1 và cấp 2 */
+.org-connector-v {
+  display: block;
+  width: 2px;
+  height: 48px;
+  margin-inline: auto;
+  background: var(--org-red-dark);
+}
+
+/* Nhánh tỏa xuống cấp 3 */
+.org-branches {
+  position: relative;
+  height: 48px;
+}
+
+.org-branch-stem {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 100%;
+  background: var(--org-branch);
+}
+
+.org-branch-bar {
+  position: absolute;
+  bottom: 0;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: var(--org-branch);
+}
+
+/* Cấp 3 — 4 khối chức năng */
+.org-depts {
+  max-width: 1530px;
+  margin-inline: auto;
+}
+
+/* Nhánh dọc nhỏ nối từ thanh ngang xuống mỗi box */
+.org-dept {
+  position: relative;
+  text-align: center;
+  padding: var(--space-4) var(--space-3);
+  background: var(--org-surface);
+  border: 1.5px solid var(--org-line-pink);
+  border-radius: var(--radius);
+  font-weight: 500;
+  font-size: clamp(.9rem, 1.4vw, 1.125rem);
+  text-transform: uppercase;
+  color: var(--org-ink);
+  margin-top: 36px;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.org-dept::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 36px;
+  background: var(--org-branch);
+}
+
+.org-dept:hover {
+  border-color: var(--dsh-red);
+  box-shadow: 0 8px 20px rgba(115, 0, 17, .1);
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 991.98px) {
+  /* Chỉ 2 khối/hàng → chỉ nối nhánh dưới 2 box đầu bằng thanh hẹp hơn */
+  .org-branch-bar { left: 25%; right: 25%; }
+}
+
+@media (max-width: 767.98px) {
+  /* Card chủ tịch: ảnh trên, chữ dưới */
+  .bod-chair-photo {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    margin-right: 0;
+    margin-bottom: var(--space-4);
+  }
+  .bod-chair-stats { gap: var(--space-5); }
+}
