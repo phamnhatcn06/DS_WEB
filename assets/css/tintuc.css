@@ -44,8 +44,13 @@
   transition: gap var(--transition-base), color var(--transition-base);
 }
 
-.tt-more:hover { color: var(--dsh-red-dark); gap: 12px; }
-.tt-more img { width: 12px; height: 12px; }
+.tt-more:hover { color: var(--dsh-red-dark); }
+.tt-more img {
+  width: 12px;
+  height: 12px;
+  transition: transform .35s var(--ease-out-soft);
+}
+.tt-more:hover img { transform: translateX(5px); }
 
 /* ==========================================================================
    Section: Nổi bật (Light Mode)
