@@ -193,6 +193,10 @@
   border-bottom: 4px solid transparent;
   border-radius: 12px;
   padding: 32px;
+}
+
+/* Độ đặc hiệu cao hơn [data-reveal] (animations.css) để giữ đúng nhịp hover */
+.sumenh-page .sm-value-card.is-visible {
   transition:
     transform .5s var(--ease-out-soft, cubic-bezier(.25, .8, .28, 1)),
     box-shadow .5s var(--ease-out-soft, cubic-bezier(.25, .8, .28, 1)),
