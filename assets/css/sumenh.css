@@ -140,7 +140,17 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 1s var(--ease-out-soft, cubic-bezier(.25, .8, .28, 1));
 }
+
+.sm-mission-visual:hover img { transform: scale(1.05); }
+
+/* Badge nảy nhẹ khi card hiện ra */
+.sm-mission-badge {
+  transition: transform .5s var(--ease-out-back, cubic-bezier(.16, 1, .3, 1));
+}
+
+.sm-mission-card:hover .sm-mission-badge { transform: scale(1.08) rotate(-4deg); }
 
 /* ===== Section 3: Giá trị cốt lõi ===== */
 .sm-values {
