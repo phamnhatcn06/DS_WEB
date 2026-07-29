@@ -1,0 +1,231 @@
+/* ==========================================================================
+   sumenh.css — Trang "Sứ mệnh - Tầm nhìn"
+   Section 1: Tầm nhìn · Section 2: Sứ mệnh · Section 3: Giá trị cốt lõi
+   Nền sáng, heading đậm, card trắng. Bám sát Figma node 1260:16821 / mobile 1266:18366.
+   ========================================================================== */
+
+/* -------- Token cục bộ cho các section nền sáng -------- */
+.sumenh-page {
+  --sm-bg:       #f3f4f5;   /* nền section Tầm nhìn / Sứ mệnh */
+  --sm-bg-2:     #f8f9fa;   /* nền section Giá trị cốt lõi + card chip */
+  --sm-heading:  #191c1d;   /* chữ heading đen than */
+  --sm-body:     #59413f;   /* chữ mô tả nâu đỏ trầm */
+  --sm-border:   rgba(225, 190, 188, .3);
+  --sm-border-2: rgba(225, 190, 188, .4);
+}
+
+/* Gạch trang trí ngang dùng chung (Tầm nhìn / Giá trị cốt lõi) */
+.sm-divider {
+  display: block;
+  width: 48px;
+  height: 2px;
+  margin: 0 auto 18px;
+  background: var(--dsh-red);
+}
+
+/* ===== Section 1: Tầm nhìn ===== */
+.sm-vision {
+  background: var(--sm-bg);
+  padding-block: clamp(40px, 5vw, 48px);
+}
+
+.sm-vision-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--sm-heading);
+  text-align: center;
+  margin: 0 0 24px;
+}
+
+.sm-vision-quote {
+  max-width: 1644px;
+  margin: 0 auto;
+  padding: 0 16px;
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2vw, 1.75rem);
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--sm-heading);
+  text-align: center;
+}
+
+/* ===== Section 2: Sứ mệnh ===== */
+.sm-mission {
+  background: var(--sm-bg);
+  padding-block: clamp(40px, 5vw, 48px);
+}
+
+.sm-mission-card {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--sm-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+  padding: clamp(32px, 4vw, 49px);
+}
+
+/* Badge vuông đỏ nổi góc trên trái */
+.sm-mission-badge {
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dsh-red);
+  color: #fff;
+  font-size: 20px;
+}
+
+.sm-mission-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--sm-heading);
+  margin: 0 0 24px;
+}
+
+.sm-mission-text {
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.625;
+  color: var(--sm-body);
+  margin: 0 0 24px;
+}
+
+/* Hàng chip đặc trưng */
+.sm-mission-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 17px;
+  background: var(--sm-bg-2);
+  border: 1px solid var(--sm-border-2);
+  border-radius: 2px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--sm-heading);
+}
+
+.sm-tag i { color: var(--dsh-red); font-size: 12px; }
+
+/* Ảnh cột phải */
+.sm-mission-visual {
+  height: 100%;
+  min-height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sm-mission-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Section 3: Giá trị cốt lõi ===== */
+.sm-values {
+  background: var(--sm-bg-2);
+  padding-block: clamp(48px, 6vw, 64px);
+}
+
+.sm-values-head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+
+.sm-values-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--dsh-red);
+  margin: 0 0 16px;
+}
+
+.sm-values-sub {
+  max-width: 672px;
+  margin: 0 auto 16px;
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--sm-body);
+}
+
+.sm-values-bar {
+  display: block;
+  width: 96px;
+  height: 4px;
+  margin: 0 auto;
+  background: var(--dsh-red);
+}
+
+.sm-value-card {
+  height: 100%;
+  background: var(--sm-bg);
+  border-bottom: 4px solid transparent;
+  border-radius: 12px;
+  padding: 32px;
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.sm-value-card:hover {
+  border-bottom-color: var(--dsh-red);
+  transform: translateY(-6px);
+}
+
+.sm-value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 15px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.sm-value-icon img { width: 32px; height: 32px; }
+
+.sm-value-card h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--sm-heading);
+  margin: 0 0 15px;
+}
+
+.sm-value-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--sm-body);
+  margin: 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 991.98px) {
+  /* Mission: ảnh xuống dưới card (thứ tự DOM đã đặt card trước) */
+  .sm-mission-visual { min-height: 200px; }
+}
+
+@media (max-width: 575.98px) {
+  .sm-mission-badge { top: -20px; left: 20px; width: 40px; height: 40px; }
+  .sm-mission-tags { flex-direction: column; align-items: flex-start; }
+}
