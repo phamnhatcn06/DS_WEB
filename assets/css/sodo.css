@@ -56,7 +56,7 @@
   width: 272px;
   max-width: 100%;
   aspect-ratio: 272 / 362;
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--org-surface);
   margin-right: var(--space-6);
@@ -66,6 +66,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
 }
 
 .bod-chair-body {
