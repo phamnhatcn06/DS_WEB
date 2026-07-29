@@ -323,9 +323,72 @@
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* ==========================================================================
+   Micro-interactions — mượt (dùng chung easing từ animations.css)
+   ========================================================================== */
+
+/* Nhấc thẻ + đổ bóng khi hover */
+.tt-news-card,
+.tt-feature-card,
+.tt-categories {
+  transition: transform .5s var(--ease-out-soft), box-shadow .5s var(--ease-out-soft);
+}
+
+.tt-news-card:hover { transform: translateY(-6px); }
+
+.tt-feature-card:hover,
+.tt-categories:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(8, 15, 29, 0.14);
+}
+
+/* Ảnh trong khung phóng nhẹ khi hover thẻ cha */
+.tt-feature-media { overflow: hidden; }
+
+.tt-thumb img,
+.tt-feature-media img,
+.tt-project-media img,
+.tt-thumb-sm img {
+  transition: transform .8s var(--ease-out-soft);
+}
+
+.tt-news-card:hover .tt-thumb img,
+.tt-feature-card:hover .tt-feature-media img,
+.tt-project-feature:hover .tt-project-media img,
+.tt-project-item:hover .tt-thumb-sm img {
+  transform: scale(1.06);
+}
+
+/* Tiêu đề đổi màu brand khi hover */
+.tt-news-card h3,
+.tt-feature-body h3 { transition: color .3s ease; }
+.tt-news-card:hover h3,
+.tt-feature-card:hover .tt-feature-body h3 { color: var(--dsh-red); }
+
+/* Mục danh mục trượt nhẹ khi hover */
+.tt-cat-list a { transition: color .3s ease, padding-left .35s var(--ease-out-soft); }
+.tt-cat-list li:not(.is-active) a:hover { padding-left: 6px; }
+
+/* Tin nhỏ (cột phải section dự án) trượt sang phải khi hover */
+.tt-project-item { transition: transform .4s var(--ease-out-soft), border-color .4s ease; }
+.tt-project-item:hover { transform: translateX(5px); }
+
 /* ---- Responsive ---- */
 @media (max-width: 991.98px) {
   .tt-categories { margin-top: 32px; }
+}
+
+/* Tôn trọng prefers-reduced-motion (khớp animations.css) */
+@media (prefers-reduced-motion: reduce) {
+  .tt-news-card,
+  .tt-feature-card,
+  .tt-categories,
+  .tt-project-item,
+  .tt-thumb img,
+  .tt-feature-media img,
+  .tt-project-media img,
+  .tt-thumb-sm img,
+  .tt-more img { transition: none !important; transform: none !important; }
 }
 
 @media (max-width: 575.98px) {
