@@ -260,8 +260,8 @@
 .org-branch-bar {
   position: absolute;
   bottom: 0;
-  left: 12.5%;
-  right: 12.5%;
+  left: 12.5%;   /* tâm cột đầu của lưới 4 cột đều nhau */
+  right: 12.5%;  /* tâm cột cuối */
   height: 2px;
   background: var(--org-branch);
 }
