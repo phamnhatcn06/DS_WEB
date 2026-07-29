@@ -177,7 +177,7 @@
 
 .sm-value-card {
   height: 100%;
-  background: var(--sm-bg);
+  background: var(--sm-bg-2);
   border-bottom: 4px solid transparent;
   border-radius: 12px;
   padding: 32px;
