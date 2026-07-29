@@ -349,9 +349,64 @@
     });
   }
 
+  /**
+   * Đếm số từ 1 lên giá trị đích [data-count-to] khi phần tử vào viewport.
+   * Dùng IntersectionObserver (không poll scroll) và requestAnimationFrame.
+   */
+  function initCountUp() {
+    var COUNT_DURATION_MS = 1600;
+    var numbers = document.querySelectorAll('.count-up[data-count-to]');
+    if (!numbers.length) {
+      return;
+    }
+
+    function animate(element) {
+      var target = parseInt(element.getAttribute('data-count-to'), 10) || 0;
+      if (PREFERS_REDUCED_MOTION || target <= 1) {
+        element.textContent = String(target);
+        return;
+      }
+
+      var start = null;
+
+      function step(timestamp) {
+        if (start === null) {
+          start = timestamp;
+        }
+        var progress = Math.min((timestamp - start) / COUNT_DURATION_MS, 1);
+        // Ease-out để số chậm dần khi tới đích.
+        var eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = String(Math.round(1 + (target - 1) * eased));
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      }
+
+      window.requestAnimationFrame(step);
+    }
+
+    if (!SUPPORTS_OBSERVER) {
+      numbers.forEach(animate);
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) {
+          return;
+        }
+        animate(entry.target);
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    numbers.forEach(function (number) { observer.observe(number); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     markRevealTargets();
     initScrollReveal();
+    initCountUp();
     initHeaderGlass();
     initScrollSpy();
     initScrollProgress();
