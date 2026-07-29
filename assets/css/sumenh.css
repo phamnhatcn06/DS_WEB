@@ -13,6 +13,8 @@
   --sm-rose:     #e1bebc;   /* hồng nhạt — divider ngang */
   --sm-border:   rgba(225, 190, 188, .3);
   --sm-border-2: rgba(225, 190, 188, .4);
+  /* Font heading riêng của trang này (khớp Figma) — chỉ dùng ở đây */
+  --sm-font-heading: "Montserrat", var(--font-heading);
 }
 
 /* Gạch trang trí ngang màu hồng nhạt (Tầm nhìn) */
