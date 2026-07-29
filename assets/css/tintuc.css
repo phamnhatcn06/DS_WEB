@@ -236,34 +236,27 @@
 
 .tt-projects .tt-section-title { color: #ffffff; }
 
-/* Card lớn nổi bật */
+/* Card lớn: ảnh trên, nội dung dưới (khớp Figma node 1272:19786) */
 .tt-project-feature {
-  position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  min-height: 420px;
   display: flex;
-  align-items: flex-end;
-}
-
-.tt-project-feature img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
+  flex-direction: column;
   height: 100%;
+}
+
+.tt-project-media {
+  background: #1f2937;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.tt-project-media img {
+  width: 100%;
+  aspect-ratio: 1186 / 368;
   object-fit: cover;
-  z-index: -1;
+  display: block;
 }
 
-.tt-project-feature::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(8, 15, 29, 0.92) 0%, rgba(8, 15, 29, 0.15) 65%);
-  z-index: -1;
-}
-
-.tt-project-feature .tt-project-body { padding: 40px; color: #ffffff; }
+.tt-project-feature .tt-project-body { padding-top: 24px; color: #ffffff; }
 
 .tt-project-body h3 {
   font-family: var(--tt-font-heading);
@@ -278,7 +271,6 @@
   line-height: 24px;
   color: var(--dsh-muted);
   margin: 0;
-  max-width: 640px;
 }
 
 /* Danh sách 3 tin nhỏ bên phải */
