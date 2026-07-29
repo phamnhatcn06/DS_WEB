@@ -67,6 +67,37 @@
   mask: url("../images/caret-down.svg") center / contain no-repeat;
 }
 
+/* Dropdown menu "Về chúng tôi" — nền tối, viền vàng mảnh, khớp header */
+.site-header .dropdown-menu.dsh-dropdown {
+  --bs-dropdown-min-width: 232px;
+  background: rgba(8, 15, 29, .97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--dsh-line);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin-top: 14px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, .35);
+}
+
+.site-header .dsh-dropdown .dropdown-item {
+  color: rgba(255, 255, 255, .85);
+  font-weight: 500;
+  font-size: .95rem;
+  padding: 10px 14px;
+  border-radius: 6px;
+  transition: background-color .25s ease, color .25s ease,
+              padding-left .25s var(--ease-out-soft, ease);
+}
+
+.site-header .dsh-dropdown .dropdown-item:hover,
+.site-header .dsh-dropdown .dropdown-item:focus,
+.site-header .dsh-dropdown .dropdown-item.active {
+  background: rgba(154, 18, 32, .18);
+  color: #ffffff;
+  padding-left: 18px;
+}
+
 /* CTA "Liên hệ ngay" — đỏ, chữ 13px */
 .btn-contact {
   --bs-btn-padding-x: 24px;
