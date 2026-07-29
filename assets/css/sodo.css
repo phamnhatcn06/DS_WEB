@@ -316,7 +316,6 @@
 .orgchart .org-node,
 .orgchart .org-dept {
   opacity: 0;
-  transform: transl3d(0, 14px, 0) scale(.96);
   transform: translate3d(0, 14px, 0) scale(.96);
   transition:
     opacity .7s var(--ease-out-back),
