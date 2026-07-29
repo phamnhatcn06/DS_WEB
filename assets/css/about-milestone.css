@@ -117,10 +117,6 @@
 }
 
 /* Đường kẻ mảnh ngăn 2 số liệu — ngắn, không chọc qua emblem */
-.milestone-stat:first-child {
-  padding-bottom: var(--space-6);
-}
-
 .milestone-stat:first-child::after {
   content: "";
   display: block;
