@@ -220,10 +220,10 @@
   margin: 0;
 }
 
-/* ===== Hero override cho trang này (không lật ảnh như trang About) ===== */
+/* ===== Hero override — khớp Figma: ảnh lật ngang, opacity 50% ===== */
 .sumenh-page .about-hero-bg {
-  transform: none;
-  opacity: .35;
+  transform: scaleX(-1);
+  opacity: .5;
   object-position: center;
 }
 
