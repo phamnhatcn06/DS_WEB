@@ -34,7 +34,7 @@
 }
 
 .sm-vision-title {
-  font-family: var(--font-heading);
+  font-family: var(--sm-font-heading);
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.2;
@@ -87,7 +87,7 @@
 .sm-mission-badge img { width: 15px; height: 17px; }
 
 .sm-mission-title {
-  font-family: var(--font-heading);
+  font-family: var(--sm-font-heading);
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.2;
@@ -144,14 +144,14 @@
 
 /* ===== Section 3: Giá trị cốt lõi ===== */
 .sm-values {
-  background: var(--sm-bg-2);
+  background: var(--sm-bg);
   padding-block: clamp(48px, 6vw, 64px);
 }
 
 .sm-values-head { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
 
 .sm-values-title {
-  font-family: var(--font-heading);
+  font-family: var(--sm-font-heading);
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.2;
@@ -206,7 +206,7 @@
 .sm-value-icon img { width: auto; height: 30px; }
 
 .sm-value-card h3 {
-  font-family: var(--font-heading);
+  font-family: var(--sm-font-heading);
   font-weight: 600;
   font-size: 1.25rem;
   line-height: 1.4;
