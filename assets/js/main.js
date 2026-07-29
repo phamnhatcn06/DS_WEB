@@ -354,7 +354,7 @@
    * Dùng IntersectionObserver (không poll scroll) và requestAnimationFrame.
    */
   function initCountUp() {
-    var COUNT_DURATION_MS = 1600;
+    var COUNT_DURATION_MS = 2800;
     var numbers = document.querySelectorAll('.count-up[data-count-to]');
     if (!numbers.length) {
       return;
