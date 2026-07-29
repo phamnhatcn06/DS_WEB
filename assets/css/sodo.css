@@ -307,6 +307,94 @@
   box-shadow: 0 8px 20px rgba(115, 0, 17, .1);
 }
 
+/* ==========================================================================
+   Hiệu ứng riêng trang: sơ đồ "vẽ dần" khi khối lọt viewport
+   Trạng thái ẩn ban đầu → khi .orgchart.is-visible thì bung theo trình tự.
+   ========================================================================== */
+
+/* Box (cấp 1/2/3): bung nhẹ + mờ → rõ */
+.orgchart .org-node,
+.orgchart .org-dept {
+  opacity: 0;
+  transform: transl3d(0, 14px, 0) scale(.96);
+  transform: translate3d(0, 14px, 0) scale(.96);
+  transition:
+    opacity .7s var(--ease-out-back),
+    transform .7s var(--ease-out-back);
+}
+
+/* Đường nối dọc/nhánh: kéo dài từ trên xuống */
+.orgchart .org-connector-v,
+.orgchart .org-branch-stem,
+.orgchart .org-dept::before {
+  transform: scaleY(0);
+  transform-origin: top center;
+  transition: transform .45s var(--ease-out-soft);
+}
+
+/* Thanh ngang: kéo từ giữa ra hai bên */
+.orgchart .org-branch-bar {
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .6s var(--ease-out-soft);
+}
+
+/* --- Kích hoạt theo trình tự khi khối hiện --- */
+.orgchart.is-visible .org-node,
+.orgchart.is-visible .org-dept {
+  opacity: 1;
+  transform: none;
+}
+
+.orgchart.is-visible .org-connector-v,
+.orgchart.is-visible .org-branch-stem,
+.orgchart.is-visible .org-branch-bar,
+.orgchart.is-visible .org-dept::before {
+  transform: none;
+}
+
+/* Trình tự trễ: board → nối → exec → nhánh → 4 khối */
+.orgchart.is-visible .org-node--board   { transition-delay: .10s; }
+.orgchart.is-visible .org-connector-v   { transition-delay: .30s; }
+.orgchart.is-visible .org-node--exec    { transition-delay: .42s; }
+.orgchart.is-visible .org-branch-stem   { transition-delay: .62s; }
+.orgchart.is-visible .org-branch-bar    { transition-delay: .74s; }
+
+.orgchart.is-visible .org-dept:nth-child(1)          { transition-delay: .92s; }
+.orgchart.is-visible .org-dept:nth-child(1)::before  { transition-delay: .88s; }
+.orgchart.is-visible .org-dept:nth-child(2)          { transition-delay: 1.00s; }
+.orgchart.is-visible .org-dept:nth-child(2)::before  { transition-delay: .96s; }
+.orgchart.is-visible .org-dept:nth-child(3)          { transition-delay: 1.08s; }
+.orgchart.is-visible .org-dept:nth-child(3)::before  { transition-delay: 1.04s; }
+.orgchart.is-visible .org-dept:nth-child(4)          { transition-delay: 1.16s; }
+.orgchart.is-visible .org-dept:nth-child(4)::before  { transition-delay: 1.12s; }
+
+/* Ảnh Chủ tịch: zoom rất nhẹ khi hover card */
+.bod-chair-photo img { transition: transform .8s var(--ease-out-soft); }
+.bod-chair:hover .bod-chair-photo img { transform: scale(1.05); }
+
+/* Ảnh thành viên: zoom nhẹ khi hover thẻ */
+.bod-member-photo img { transition: transform .8s var(--ease-out-soft); }
+.bod-member:hover .bod-member-photo img { transform: scale(1.06); }
+
+/* Số thống kê nhấc nhẹ khi hover card chủ tịch */
+.bod-stat { transition: transform .4s var(--ease-out-soft); }
+.bod-chair:hover .bod-stat:nth-child(2) { transform: translateY(-2px); }
+
+/* Tôn trọng giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .orgchart .org-node,
+  .orgchart .org-dept,
+  .orgchart .org-connector-v,
+  .orgchart .org-branch-stem,
+  .orgchart .org-branch-bar,
+  .orgchart .org-dept::before {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* -------- Responsive -------- */
 @media (max-width: 767.98px) {
   /* Xuống 2 khối/hàng; nhánh nối phức tạp không còn khớp → ẩn, chỉ giữ box */
