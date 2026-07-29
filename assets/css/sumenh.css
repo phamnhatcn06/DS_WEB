@@ -220,10 +220,17 @@
   margin: 0;
 }
 
+/* ===== Hero override cho trang này (không lật ảnh như trang About) ===== */
+.sumenh-page .about-hero-bg {
+  transform: none;
+  opacity: .35;
+  object-position: center;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 991.98px) {
   /* Mission: ảnh xuống dưới card (thứ tự DOM đã đặt card trước) */
-  .sm-mission-visual { min-height: 200px; }
+  .sm-mission-visual { min-height: 220px; }
 }
 
 @media (max-width: 575.98px) {
