@@ -194,9 +194,9 @@
   margin: 0 0 var(--space-8);
 }
 
-/* Cây phân cấp — căn giữa */
+/* Cây phân cấp — full width, chỉ 2 box trên căn giữa hẹp */
 .org-tree {
-  max-width: 640px;
+  max-width: 1530px;
   margin-inline: auto;
 }
 
