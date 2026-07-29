@@ -80,9 +80,9 @@
   align-items: center;
   justify-content: center;
   background: var(--dsh-red);
-  color: #fff;
-  font-size: 20px;
 }
+
+.sm-mission-badge img { width: 15px; height: 17px; }
 
 .sm-mission-title {
   font-family: var(--font-heading);
