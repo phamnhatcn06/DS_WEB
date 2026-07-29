@@ -374,8 +374,8 @@
           start = timestamp;
         }
         var progress = Math.min((timestamp - start) / COUNT_DURATION_MS, 1);
-        // Ease-out để số chậm dần khi tới đích.
-        var eased = 1 - Math.pow(1 - progress, 3);
+        // Ease-out bậc 5 để số trôi mượt và chậm dần rõ hơn khi tới đích.
+        var eased = 1 - Math.pow(1 - progress, 5);
         element.textContent = String(Math.round(1 + (target - 1) * eased));
         if (progress < 1) {
           window.requestAnimationFrame(step);
