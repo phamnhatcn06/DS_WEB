@@ -396,12 +396,22 @@
 
 /* -------- Responsive -------- */
 @media (max-width: 767.98px) {
-  /* Xuống 2 khối/hàng; nhánh nối phức tạp không còn khớp → ẩn, chỉ giữ box */
+  /* 2 khối/hàng (2×2), gap flex tạo luôn khoảng cách hàng */
   .org-depts { flex-wrap: wrap; }
-  .org-dept { flex: 1 1 calc(50% - var(--space-4)); margin-top: var(--space-4); }
-  .org-dept::before { display: none; }
-  .org-branches { display: none; }
-  .org-connector-v { height: var(--space-6); }
+  .org-dept { flex: 1 1 calc(50% - var(--space-4) / 2); }
+
+  /* Thanh ngang thu về đúng tâm 2 cột (mỗi cột rộng 50% - gap/2) */
+  .org-branch-bar {
+    left: calc(25% - var(--space-4) / 4);
+    right: calc(25% - var(--space-4) / 4);
+  }
+
+  /* Hàng trên (Đầu tư / Tài chính): stub nối lên thanh ngang (36px) — giữ mặc định.
+     Hàng dưới (Kỹ thuật / Hành chính): stub nối lên box phía trên, dài bằng gap hàng. */
+  .org-dept:nth-child(3)::before,
+  .org-dept:nth-child(4)::before {
+    height: var(--space-4);
+  }
 
   /* Card chủ tịch: ảnh trên, chữ dưới */
   .bod-chair-photo {
