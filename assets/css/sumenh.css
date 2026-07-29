@@ -123,7 +123,7 @@
   color: var(--sm-heading);
 }
 
-.sm-tag i { color: var(--dsh-red); font-size: 12px; }
+.sm-tag img { width: 13px; height: 12px; flex-shrink: 0; }
 
 /* Ảnh cột phải — cao bằng card (row align-items-stretch) */
 .sm-mission-visual {
