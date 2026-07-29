@@ -6,26 +6,28 @@
 
 /* -------- Token cục bộ cho các section nền sáng -------- */
 .sumenh-page {
-  --sm-bg:       #f3f4f5;   /* nền section Tầm nhìn / Sứ mệnh */
-  --sm-bg-2:     #f8f9fa;   /* nền section Giá trị cốt lõi + card chip */
+  --sm-bg:       #f8f9fa;   /* nền section Tầm nhìn / Giá trị cốt lõi */
+  --sm-bg-2:     #f3f4f5;   /* nền section Sứ mệnh + card giá trị */
   --sm-heading:  #191c1d;   /* chữ heading đen than */
   --sm-body:     #59413f;   /* chữ mô tả nâu đỏ trầm */
+  --sm-rose:     #e1bebc;   /* hồng nhạt — divider ngang */
   --sm-border:   rgba(225, 190, 188, .3);
   --sm-border-2: rgba(225, 190, 188, .4);
 }
 
-/* Gạch trang trí ngang dùng chung (Tầm nhìn / Giá trị cốt lõi) */
+/* Gạch trang trí ngang màu hồng nhạt (Tầm nhìn) */
 .sm-divider {
   display: block;
   width: 48px;
   height: 2px;
-  margin: 0 auto 18px;
-  background: var(--dsh-red);
+  margin: 0 auto 16px;
+  background: var(--sm-rose);
 }
 
 /* ===== Section 1: Tầm nhìn ===== */
 .sm-vision {
   background: var(--sm-bg);
+  border-bottom: 1px solid rgba(225, 190, 188, .2);
   padding-block: clamp(40px, 5vw, 48px);
 }
 
@@ -35,9 +37,9 @@
   font-size: clamp(1.5rem, 3vw, 2rem);
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--sm-heading);
+  color: var(--dsh-red);
   text-align: center;
-  margin: 0 0 24px;
+  margin: 0 0 32px;
 }
 
 .sm-vision-quote {
@@ -46,16 +48,15 @@
   padding: 0 16px;
   font-weight: 700;
   font-style: italic;
-  font-size: clamp(1.1rem, 2vw, 1.75rem);
-  line-height: 1.5;
-  text-transform: uppercase;
+  font-size: clamp(1.1rem, 2vw, 2rem);
+  line-height: 1.2;
   color: var(--sm-heading);
   text-align: center;
 }
 
 /* ===== Section 2: Sứ mệnh ===== */
 .sm-mission {
-  background: var(--sm-bg);
+  background: var(--sm-bg-2);
   padding-block: clamp(40px, 5vw, 48px);
 }
 
