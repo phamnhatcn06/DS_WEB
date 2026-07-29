@@ -266,14 +266,18 @@
   background: var(--org-branch);
 }
 
-/* Cấp 3 — 4 khối chức năng (trải đều toàn chiều rộng) */
+/* Cấp 3 — 4 khối chức năng trải đều (flex để tâm cột đúng 12.5%/…/87.5%) */
 .org-depts {
-  --dept-inset: 12.5%;   /* tâm cột ngoài cùng của lưới 4 cột đều nhau */
+  display: flex;
+  gap: var(--space-4);
+  margin-top: 36px;
 }
 
 /* Nhánh dọc nhỏ nối từ thanh ngang xuống mỗi box */
 .org-dept {
   position: relative;
+  flex: 1 1 0;
+  min-width: 0;
   text-align: center;
   padding: var(--space-4) var(--space-4);
   background: var(--org-surface);
@@ -283,7 +287,6 @@
   font-size: clamp(.9rem, 1.2vw, 1.125rem);
   text-transform: uppercase;
   color: var(--org-ink);
-  margin-top: 36px;
   transition: border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
