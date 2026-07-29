@@ -308,12 +308,15 @@
 }
 
 /* -------- Responsive -------- */
-@media (max-width: 991.98px) {
-  /* Chỉ 2 khối/hàng → chỉ nối nhánh dưới 2 box đầu bằng thanh hẹp hơn */
-  .org-branch-bar { left: 25%; right: 25%; }
-}
-
 @media (max-width: 767.98px) {
+  /* Xuống 2 khối/hàng; nhánh nối phức tạp không còn khớp → ẩn, chỉ giữ box */
+  .org-depts { flex-wrap: wrap; }
+  .org-dept { flex: 1 1 calc(50% - var(--space-4)); margin-top: var(--space-4); }
+  .org-dept::before { display: none; }
+  .org-branches { display: none; }
+  .org-connector-v { height: var(--space-6); }
+
+  /* Card chủ tịch: ảnh trên, chữ dưới */
   /* Card chủ tịch: ảnh trên, chữ dưới */
   .bod-chair-photo {
     width: 100%;
