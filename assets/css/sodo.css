@@ -317,7 +317,6 @@
   .org-connector-v { height: var(--space-6); }
 
   /* Card chủ tịch: ảnh trên, chữ dưới */
-  /* Card chủ tịch: ảnh trên, chữ dưới */
   .bod-chair-photo {
     width: 100%;
     aspect-ratio: 16 / 10;
