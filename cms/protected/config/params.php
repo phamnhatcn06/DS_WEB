@@ -22,4 +22,9 @@ return array(
 
     'bcryptCost'      => 12,
     'pageSize'        => 20,
+
+    // Đặt lại mật khẩu qua email.
+    'resetTokenTtl'   => 3600,              // Hạn dùng link reset (giây) — 1 giờ.
+    'mailFromEmail'   => 'no-reply@htds.vn', // Địa chỉ gửi email hệ thống.
+    'mailFromName'    => 'Đông Sơn Holdings CMS',
 );
