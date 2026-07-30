@@ -234,8 +234,9 @@
     padding: var(--space-3) 0 0;
   }
 
-  .duan-caption h3 { color: var(--dsh-ink); white-space: normal; }
+  .duan-caption h3 { color: var(--dsh-ink); white-space: normal; text-shadow: none; }
   .duan-caption p { color: rgba(0, 0, 0, .5); }
+  .duan-caption p img { filter: none; }
 
   .duan-nav { display: none; }
 }
