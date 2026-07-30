@@ -23,13 +23,9 @@
 
 .bot > .container { position: relative; z-index: 1; }
 
-/* Bootstrap .carousel-inner mặc định overflow:hidden — chừa khoảng để card
-   nổi và bóng ảnh (lệch phải/dưới) không bị cắt. */
-.bot .carousel-inner { padding: 6px 60px 52px 6px; }
-
-@media (max-width: 991.98px) {
-  .bot .carousel-inner { padding: 0; }
-}
+/* Bootstrap .carousel-inner mặc định overflow:hidden. Không để card/bóng tràn
+   ra ngoài .bot-visual (sẽ bị clip) — nới .bot-visual thêm khoảng trống. */
+.bot .carousel-inner { padding-bottom: 8px; }
 
 /* -------- Cột nội dung -------- */
 .bot-eyebrow {
