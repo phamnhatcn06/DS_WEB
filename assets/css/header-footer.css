@@ -175,6 +175,20 @@
   object-position: center;
 }
 
+/* Lớp phủ tối trên ảnh cầu (khớp Figma): tối đều + đậm dần xuống đáy hoà vào navy footer */
+.cta-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg,
+      rgba(8, 15, 29, .55) 0%,
+      rgba(8, 15, 29, .40) 45%,
+      rgba(16, 28, 54, .92) 100%);
+}
+
 .cta-inner {
   position: relative;
   z-index: 1;
