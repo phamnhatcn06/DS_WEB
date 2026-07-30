@@ -132,9 +132,9 @@
 
 .bot-card {
   position: absolute;
-  /* Khớp Figma: card tràn phải ~52px, xuống dưới ~40px so với ảnh */
-  right: clamp(-52px, -3vw, -16px);
-  bottom: -40px;
+  /* Card nhô ra ngoài góc dưới-phải ảnh (ngồi trong padding của .bot-visual) */
+  right: 0;
+  bottom: 0;
   width: 100%;
   max-width: 400px;
   background-color: #000000;
