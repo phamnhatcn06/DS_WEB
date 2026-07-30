@@ -1,13 +1,37 @@
 <?php
-
 /**
- * Main Layout - Hope UI Dashboard
- * @var Controller $this
+ * Layout admin — Hope UI Dashboard (Đông Sơn Holdings CMS).
+ *
+ * @var AdminController $this
  * @var string $content
  */
-$baseUrl = Yii::app()->theme->baseUrl;
-$user = CacheHelper::getHeader();
+$baseUrl = Yii::app()->theme->baseUrl;                 // asset theme Hope UI
+$dshAssets = Yii::app()->baseUrl . '/../assets';       // asset DSH (Bootstrap Icons)
 $appName = Yii::app()->name;
+$user = Yii::app()->user;
+
+/** Menu bên trái: nhãn, route, icon (Bootstrap Icons), quyền RBAC cần có (null = ai cũng thấy). */
+$menu = array(
+    array('label' => 'Tổng quan',          'route' => '/admin/default/index',      'icon' => 'bi-speedometer2', 'perm' => null),
+    array('divider' => 'Nội dung trang chủ'),
+    array('label' => 'Hero slider',        'route' => '/admin/heroSlide/index',    'icon' => 'bi-images',        'perm' => 'hero_slides.view'),
+    array('label' => 'Lĩnh vực kinh doanh','route' => '/admin/sector/index',       'icon' => 'bi-diagram-3',     'perm' => 'business_sectors.view'),
+    array('label' => 'Dự án',              'route' => '/admin/project/index',      'icon' => 'bi-buildings',     'perm' => 'projects.view'),
+    array('label' => 'Giá trị cốt lõi',    'route' => '/admin/coreValue/index',    'icon' => 'bi-award',         'perm' => 'core_values.view'),
+    array('label' => 'Hành trình',         'route' => '/admin/timeline/index',     'icon' => 'bi-clock-history', 'perm' => 'timeline_milestones.view'),
+    array('label' => 'Đối tác & cổ đông',  'route' => '/admin/partner/index',      'icon' => 'bi-people',        'perm' => 'partners.view'),
+    array('divider' => 'Tin tức'),
+    array('label' => 'Bài viết',           'route' => '/admin/newsPost/index',     'icon' => 'bi-newspaper',     'perm' => 'news_posts.view'),
+    array('label' => 'Danh mục tin',       'route' => '/admin/newsCategory/index', 'icon' => 'bi-tags',          'perm' => 'news_categories.view'),
+    array('divider' => 'Hệ thống'),
+    array('label' => 'Thư viện media',     'route' => '/admin/media/index',        'icon' => 'bi-image',         'perm' => 'media.view'),
+    array('label' => 'Cấu hình website',   'route' => '/admin/setting/index',      'icon' => 'bi-gear',          'perm' => 'settings.view'),
+    array('label' => 'Người dùng',         'route' => '/admin/user/index',         'icon' => 'bi-person-badge',  'perm' => 'users.view'),
+    array('label' => 'Nhật ký',            'route' => '/admin/audit/index',        'icon' => 'bi-journal-text',  'perm' => 'audit.view'),
+);
+
+$currentRoute = '/' . Yii::app()->controller->module->id . '/'
+    . Yii::app()->controller->id . '/' . Yii::app()->controller->action->id;
 ?>
 <!DOCTYPE html>
 <html lang="vi" dir="ltr">
@@ -15,7 +39,7 @@ $appName = Yii::app()->name;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><?php echo CHtml::encode($this->title . ' - ' . $appName); ?></title>
+    <title><?php echo CHtml::encode(($this->pageTitle ? $this->pageTitle . ' - ' : '') . $appName); ?></title>
     <meta name="description" content="<?php echo CHtml::encode($appName); ?>">
 
     <!-- Favicon -->
@@ -29,10 +53,11 @@ $appName = Yii::app()->name;
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/dark.min.css" />
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/customizer.min.css" />
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/plugins/plyr.min.css" />
+    <!-- Bootstrap Icons (bi-* dùng trong menu & nội dung) -->
+    <link rel="stylesheet" href="<?php echo $dshAssets; ?>/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+    <!-- Brand tweaks (stat card, bảng, nút thương hiệu) -->
+    <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.css" />
     <style>
-        /* 
-
-        */
         .sidebar.sidebar-mini~.main-content .iq-navbar.navbar-sticky {
             left: 4.8rem;
         }
@@ -50,10 +75,10 @@ $appName = Yii::app()->name;
     <!-- Sidebar -->
     <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
-            <a href="<?php echo Yii::app()->homeUrl; ?>" class="navbar-brand" style="margin: 0 auto;">
+            <a href="<?php echo $this->createUrl('/admin/default/index'); ?>" class="navbar-brand" style="margin: 0 auto;">
                 <div class="logo-main">
                     <div class="logo-normal">
-                        <img src="<?php echo Yii::app()->theme->baseUrl; ?>/logo_daihoi.png" alt="Logo Đại hội" style="height: 100px;">
+                        <img src="<?php echo $baseUrl; ?>/logo_daihoi.png" alt="<?php echo CHtml::encode($appName); ?>" style="height: 100px;">
                     </div>
                 </div>
             </a>
@@ -68,13 +93,6 @@ $appName = Yii::app()->name;
         </div>
         <div class="sidebar-body pt-0 data-scrollbar">
             <div class="sidebar-list">
-                <?php
-                // Build menu tree from permissions (with cache)
-                $menuPermissions = CacheHelper::getPermissions();
-                $menuTree = CacheHelper::getMenu($menuPermissions);
-                $ssoToken = Yii::app()->session['sso_token'];
-                $tokenHash = $ssoToken ? md5($ssoToken) : '';
-                ?>
                 <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
                     <li class="nav-item static-item">
                         <a class="nav-link static-item disabled" href="#" tabindex="-1">
@@ -82,7 +100,25 @@ $appName = Yii::app()->name;
                             <span class="mini-icon">-</span>
                         </a>
                     </li>
-                    <?php echo MenuHelper::renderMenu($menuTree); ?>
+                    <?php foreach ($menu as $item): ?>
+                        <?php if (isset($item['divider'])): ?>
+                            <li class="nav-item static-item">
+                                <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                                    <span class="default-icon"><?php echo CHtml::encode($item['divider']); ?></span>
+                                    <span class="mini-icon">-</span>
+                                </a>
+                            </li>
+                        <?php elseif ($item['perm'] === null || $user->checkAccess($item['perm'])): ?>
+                            <li class="nav-item">
+                                <a class="nav-link<?php echo $currentRoute === $item['route'] ? ' active' : ''; ?>"
+                                   href="<?php echo $this->createUrl($item['route']); ?>"
+                                   aria-current="<?php echo $currentRoute === $item['route'] ? 'page' : 'false'; ?>">
+                                    <i class="icon"><i class="bi <?php echo $item['icon']; ?>"></i></i>
+                                    <span class="item-name"><?php echo CHtml::encode($item['label']); ?></span>
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
@@ -95,10 +131,6 @@ $appName = Yii::app()->name;
             <!-- Navbar -->
             <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
                 <div class="container-fluid navbar-inner">
-                    <a href="<?php echo Yii::app()->homeUrl; ?>" class="navbar-brand">
-                        <h4 class="logo-title"><?php echo CHtml::encode($appName); ?></h4>
-                    </a>
-
                     <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                         <i class="icon">
                             <svg width="20px" class="icon-20" viewBox="0 0 24 24">
@@ -106,6 +138,11 @@ $appName = Yii::app()->name;
                             </svg>
                         </i>
                     </div>
+
+                    <a href="<?php echo $this->createUrl('/admin/default/index'); ?>" class="navbar-brand d-flex align-items-center gap-2">
+                        <i class="bi <?php echo $this->pageIcon; ?>"></i>
+                        <h4 class="logo-title mb-0"><?php echo CHtml::encode($this->pageTitle ?: 'Tổng quan'); ?></h4>
+                    </a>
 
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
@@ -116,144 +153,76 @@ $appName = Yii::app()->name;
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <?php if (!empty($this->breadcrumbs)): ?>
-                            <nav aria-label="breadcrumb" class="me-auto">
-                                <?php $this->widget('zii.widgets.CBreadcrumbs', array(
-                                    'links' => $this->breadcrumbs,
-                                    'htmlOptions' => array('class' => 'breadcrumb mb-0'),
-                                    'tagName' => 'ol',
-                                    'separator' => '',
-                                    'activeLinkTemplate' => '<li class="breadcrumb-item"><a href="{url}">{label}</a></li>',
-                                    'inactiveLinkTemplate' => '<li class="breadcrumb-item active" aria-current="page">{label}</li>',
-                                    'homeLink' => '<li class="breadcrumb-item"><a href="' . Yii::app()->homeUrl . '">Trang chủ</a></li>',
-                                )); ?>
-                            </nav>
-                        <?php endif; ?>
                         <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+                            <!-- Xem website -->
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-sm btn-outline-secondary me-2" target="_blank" rel="noopener"
+                                   href="<?php echo Yii::app()->baseUrl; ?>/../index.html">
+                                    <i class="bi bi-box-arrow-up-right me-1"></i> Xem website
+                                </a>
+                            </li>
                             <!-- User Dropdown -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?php echo $baseUrl; ?>/assets/images/avatars/01.png" alt="User" class="img-fluid avatar avatar-50 avatar-rounded">
+                                    <span class="avatar avatar-50 avatar-rounded bg-primary text-white d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-person"></i>
+                                    </span>
                                     <div class="caption ms-3 d-none d-md-block">
-                                        <h6 class="mb-0 caption-title"><?php echo $user ? CHtml::encode($user['full_name']) : 'Guest'; ?></h6>
-                                        <p class="mb-0 caption-sub-title"><?php echo $user ? CHtml::encode($user['email']) : ''; ?></p>
+                                        <h6 class="mb-0 caption-title"><?php echo CHtml::encode($user->getFullName()); ?></h6>
+                                        <p class="mb-0 caption-sub-title"><?php echo CHtml::encode($user->getRoleName()); ?></p>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="<?php echo Yii::app()->createUrl('/admin/profile'); ?>">Hồ sơ</a></li>
+                                    <li><span class="dropdown-item-text small text-muted"><?php echo CHtml::encode($user->getEmail()); ?></span></li>
+                                    <li><hr class="dropdown-divider"></li>
                                     <li>
-                                        <a class="dropdown-item" href="#" onclick="clearUserCache(); return false;">
-                                            <i class="fa fa-refresh me-1"></i>Xóa cache
-                                        </a>
+                                        <?php echo CHtml::beginForm($this->createUrl('/admin/auth/logout'), 'post', array('class' => 'px-2')); ?>
+                                            <button type="submit" class="btn btn-sm btn-link text-danger p-0 text-decoration-none">
+                                                <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                                            </button>
+                                        <?php echo CHtml::endForm(); ?>
                                     </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="<?php echo Yii::app()->createUrl('/site/logout'); ?>">Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
-            <!-- Breadcrumb -->
-            <?php if (!empty($this->breadcrumbs)): ?>
-                <div class="iq-navbar-header" style="height: 80px;">
-                    <div class="iq-header-img">
-                        <img src="<?php echo $baseUrl; ?>/assets/images/dashboard/top-header.png" alt="header" class="theme-color-default-img img-fluid w-100 h-100 animated-scaleX">
-                    </div>
-                </div>
-            <?php endif; ?>
         </div>
 
         <!-- Page Content -->
-        <div class="conatiner-fluid content-inner mt-n5 py-0">
+        <div class="container-fluid content-inner py-4">
             <div class="row">
                 <div class="col-12">
+                    <?php foreach (array('success' => 'success', 'error' => 'danger', 'warning' => 'warning', 'info' => 'info') as $key => $style): ?>
+                        <?php if ($user->hasFlash($key)): ?>
+                            <div class="alert alert-<?php echo $style; ?> alert-dismissible fade show" role="alert">
+                                <?php echo CHtml::encode($user->getFlash($key)); ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+                            </div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+
                     <?php echo $content; ?>
-                    <?php
-                    // Toast notifications for flash messages
-                    $flashSuccess = Yii::app()->user->getFlash('success');
-                    $flashError = Yii::app()->user->getFlash('error');
-                    $flashWarning = Yii::app()->user->getFlash('warning');
-                    $flashInfo = Yii::app()->user->getFlash('info');
-                    if ($flashSuccess || $flashError || $flashWarning || $flashInfo):
-                    ?>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function() {
-                                <?php if ($flashSuccess): ?>
-                                    Toast.success('<?php echo addslashes($flashSuccess); ?>');
-                                <?php endif; ?>
-                                <?php if ($flashError): ?>
-                                    Toast.error('<?php echo addslashes($flashError); ?>');
-                                <?php endif; ?>
-                                <?php if ($flashWarning): ?>
-                                    Toast.warning('<?php echo addslashes($flashWarning); ?>');
-                                <?php endif; ?>
-                                <?php if ($flashInfo): ?>
-                                    Toast.info('<?php echo addslashes($flashInfo); ?>');
-                                <?php endif; ?>
-                            });
-                        </script>
-                    <?php endif; ?>
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-
     </main>
 
     <!-- Scripts -->
     <script src="<?php echo $baseUrl; ?>/assets/js/core/libs.min.js"></script>
     <script src="<?php echo $baseUrl; ?>/assets/js/core/external.min.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/charts/widgetcharts.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/charts/vectore-chart.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/charts/dashboard.js" defer></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/fslightbox.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/setting.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/slider-tabs.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/form-wizard.js"></script>
     <script src="<?php echo $baseUrl; ?>/assets/js/hope-ui.js" defer></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/toast.js"></script>
     <script src="<?php echo $baseUrl; ?>/assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/plyr.min.js"></script>
-    <script src="<?php echo $baseUrl; ?>/assets/js/plugins/video-player.js"></script>
     <script>
-        function clearUserCache() {
-            fetch('<?php echo Yii::app()->createUrl('/admin/default/clearCache'); ?>', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then(function(data) {
-                    if (data.success) {
-                        Toast.success('Đã xóa cache thành công!');
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-                    } else {
-                        Toast.error(data.message || 'Có lỗi xảy ra');
-                    }
-                })
-                .catch(function() {
-                    Toast.error('Lỗi kết nối server');
-                });
-        }
-
+        // Xác nhận xoá cho các form CRUD: nút gọi confirmDelete('id-form').
         function confirmDelete(formId) {
             Swal.fire({
                 title: 'Xác nhận xóa',
                 text: 'Bạn có chắc chắn muốn xóa? Hành động này không thể hoàn tác.',
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
+                confirmButtonColor: '#9a1220',
                 cancelButtonColor: '#6c757d',
                 confirmButtonText: 'Xóa',
                 cancelButtonText: 'Hủy'
@@ -265,15 +234,16 @@ $appName = Yii::app()->name;
         }
     </script>
     <script>
+        // Navbar dính khi cuộn (đồng bộ vị trí với sidebar mini/đầy đủ).
         (function() {
             var navbar = document.querySelector('.iq-navbar');
             var sidebar = document.querySelector('.sidebar');
-            var navbarOffset = navbar ? navbar.offsetTop + 100 : 100;
+            if (!navbar) return;
+            var navbarOffset = navbar.offsetTop + 100;
 
             function updateNavbarPosition() {
-                if (navbar && navbar.classList.contains('navbar-sticky')) {
-                    var sidebarWidth = sidebar && !sidebar.classList.contains('sidebar-mini') ? '16.2rem' : '4.8rem';
-                    navbar.style.left = sidebarWidth;
+                if (navbar.classList.contains('navbar-sticky')) {
+                    navbar.style.left = sidebar && !sidebar.classList.contains('sidebar-mini') ? '16.2rem' : '4.8rem';
                 }
             }
 
@@ -287,28 +257,11 @@ $appName = Yii::app()->name;
                 }
             });
 
-            // Watch for sidebar toggle
-            var observer = new MutationObserver(updateNavbarPosition);
             if (sidebar) {
-                observer.observe(sidebar, {
+                new MutationObserver(updateNavbarPosition).observe(sidebar, {
                     attributes: true,
                     attributeFilter: ['class']
                 });
-            }
-        })();
-
-        // Sync menu permissions to localStorage
-        (function() {
-            var serverTokenHash = '<?php echo $tokenHash; ?>';
-            var storedTokenHash = localStorage.getItem('sso_token_hash');
-            var serverPermissions = <?php echo !empty($menuPermissions) ? CJSON::encode($menuPermissions) : '[]'; ?>;
-
-            // Update localStorage if token changed or permissions empty
-            if (serverTokenHash && serverTokenHash !== storedTokenHash) {
-                localStorage.setItem('sso_token_hash', serverTokenHash);
-                if (serverPermissions && serverPermissions.length > 0) {
-                    localStorage.setItem('sso_menu_permissions', JSON.stringify(serverPermissions));
-                }
             }
         })();
     </script>
