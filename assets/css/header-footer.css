@@ -223,8 +223,10 @@
 
 .cta-btn .btn-arrow { width: 14px; height: 14px; }
 
-/* -------- Khối cột -------- */
+/* -------- Khối cột (đè lên phần ảnh đã tối mờ) -------- */
 .footer-main {
+  position: relative;
+  z-index: 1;
   padding-block: clamp(3rem, 6vw, 4.5rem);
   border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
