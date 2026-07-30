@@ -144,7 +144,13 @@
   margin: 0;
 }
 
-.duan-caption p img { width: 24px; height: 24px; flex: 0 0 24px; }
+/* Icon pin: ép sang trắng cho hợp chữ trắng trên overlay tối */
+.duan-caption p img {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  filter: brightness(0) invert(1);
+}
 
 .duan-item:hover,
 .duan-item:focus-within {
