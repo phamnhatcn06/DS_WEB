@@ -7,11 +7,8 @@ class UserIdentity extends CUserIdentity
     const ERROR_ACCOUNT_LOCKED   = 100;
     const ERROR_ACCOUNT_DISABLED = 101;
 
-    /** Số lần sai liên tiếp thì khoá tài khoản. */
+    /** Số lần sai liên tiếp thì khoá tài khoản (khoá vĩnh viễn). */
     const MAX_FAILED_ATTEMPTS = 5;
-
-    /** Thời gian khoá (phút) sau khi vượt ngưỡng. */
-    const LOCKOUT_MINUTES = 15;
 
     private $_id;
     private $_user;
