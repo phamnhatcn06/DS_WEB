@@ -9,7 +9,9 @@ class AuthController extends AdminController
     public function accessRules()
     {
         return array(
-            array('allow', 'actions' => array('login'), 'users' => array('*')),
+            array('allow',
+                'actions' => array('login', 'requestPasswordReset', 'resetPassword'),
+                'users' => array('*')),
             array('allow', 'actions' => array('logout'), 'users' => array('@')),
             array('deny', 'users' => array('*')),
         );
