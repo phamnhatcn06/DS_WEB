@@ -1,0 +1,17 @@
+# Chuyển mọi request không phải file/thư mục thật về index.php để Yii xử lý.
+Options +FollowSymLinks
+IndexIgnore */*
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Nếu CMS chạy trong thư mục con, sửa lại RewriteBase cho đúng (vd: /cms).
+  # RewriteBase /
+
+  # Không rewrite nếu là file hoặc thư mục có thật (asset, theme, uploads...).
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Còn lại đẩy hết vào index.php.
+  RewriteRule ^(.*)$ index.php [L,QSA]
+</IfModule>
