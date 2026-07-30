@@ -208,9 +208,57 @@
       return;
     }
 
+    var AUTO_HIDE_DELAY = 2500; // ms — thời gian chờ trước khi tự ẩn
+    var hideTimer = null;
+    var isScrolled = false;
+
+    // Vùng cảm ứng mỏng ở đỉnh trang để hover gọi header hiện lại khi đã ẩn.
+    var hoverZone = document.createElement('div');
+    hoverZone.className = 'header-hover-zone';
+    document.body.appendChild(hoverZone);
+
+    function clearHideTimer() {
+      if (hideTimer) {
+        clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+    }
+
+    function scheduleHide() {
+      clearHideTimer();
+      if (!isScrolled) {
+        return;
+      }
+      hideTimer = setTimeout(function () {
+        header.classList.add('is-hidden');
+      }, AUTO_HIDE_DELAY);
+    }
+
+    function revealHeader() {
+      header.classList.remove('is-hidden');
+      scheduleHide();
+    }
+
+    // Hover vào header (hoặc vùng cảm ứng đỉnh) => hiện & giữ nguyên.
+    header.addEventListener('mouseenter', function () {
+      header.classList.remove('is-hidden');
+      clearHideTimer();
+    });
+    header.addEventListener('mouseleave', scheduleHide);
+    hoverZone.addEventListener('mouseenter', revealHeader);
+
     var observer = new IntersectionObserver(function (entries) {
-      // Sentinel rời khỏi viewport => đã cuộn xuống => bật nền kính.
-      header.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+      // Sentinel rời khỏi viewport => đã cuộn xuống => bật nền kính + thu gọn.
+      isScrolled = !entries[0].isIntersecting;
+      header.classList.toggle('is-scrolled', isScrolled);
+
+      if (isScrolled) {
+        scheduleHide();
+      } else {
+        // Về đỉnh trang => luôn hiện đầy đủ, không ẩn.
+        clearHideTimer();
+        header.classList.remove('is-hidden');
+      }
     }, { threshold: 0 });
 
     observer.observe(sentinel);
