@@ -111,7 +111,13 @@
 }
 
 /* -------- Cột ảnh + card nổi -------- */
-.bot-visual { position: relative; }
+/* Padding phải/dưới tạo vùng cho card nhô ra ngoài ảnh + cho bóng đổ,
+   mà không tràn khỏi .bot-visual (tránh bị .carousel-inner cắt). */
+.bot-visual {
+  position: relative;
+  padding-right: 52px;
+  padding-bottom: 44px;
+}
 
 .bot-image {
   width: 100%;
