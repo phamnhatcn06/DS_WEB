@@ -2,7 +2,8 @@
 /* @var $this AdminController */
 /* @var $content string */
 
-$assets = Yii::app()->baseUrl . '/../assets';
+$theme  = Yii::app()->theme->baseUrl;             // asset của theme Hope UI
+$assets = Yii::app()->baseUrl . '/../assets';     // asset DSH (Bootstrap Icons)
 $user   = Yii::app()->user;
 
 /** Các mục menu bên trái: nhãn, route, icon, quyền cần có. */
@@ -29,89 +30,127 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
     . Yii::app()->controller->id . '/' . Yii::app()->controller->action->id;
 ?>
 <!doctype html>
-<html lang="vi">
+<html lang="vi" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><?php echo CHtml::encode($this->pageTitle ?: 'Quản trị'); ?> — Đông Sơn Holdings CMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title><?php echo CHtml::encode($this->pageTitle ?: 'Quản trị'); ?> — <?php echo CHtml::encode(Yii::app()->name); ?></title>
 
-  <link href="<?php echo $assets; ?>/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
-  <link href="<?php echo $assets; ?>/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
-  <link href="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="<?php echo $theme; ?>/assets/images/favicon.ico" />
+
+  <!-- Hope UI CSS -->
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/core/libs.min.css" />
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/hope-ui.min.css?v=2.0.0" />
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/custom.min.css?v=2.0.0" />
+  <!-- Bootstrap Icons (bi-* dùng trong menu và nội dung) -->
+  <link rel="stylesheet" href="<?php echo $assets; ?>/vendor/bootstrap-icons/bootstrap-icons.min.css" />
+  <!-- Brand tweaks (stat card, bảng, nút thương hiệu) -->
+  <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.css" />
 </head>
-<body class="admin-body">
+<body>
 
-<div class="admin-shell">
-
-  <!-- ===== Sidebar ===== -->
-  <aside class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-brand">
-      <span class="brand-mark">DSH</span>
-      <span class="brand-text">Đông Sơn Holdings<small>Hệ quản trị nội dung</small></span>
+  <!-- ===== Sidebar (Hope UI) ===== -->
+  <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all">
+    <div class="sidebar-header d-flex align-items-center justify-content-start">
+      <a href="<?php echo $this->createUrl('/admin/default/index'); ?>" class="navbar-brand">
+        <span class="brand-mark me-2">DSH</span>
+        <h5 class="logo-title mb-0">Đông Sơn Holdings</h5>
+      </a>
     </div>
 
-    <nav class="sidebar-nav">
-      <?php foreach ($menu as $item): ?>
-        <?php if (isset($item['divider'])): ?>
-          <p class="nav-divider"><?php echo CHtml::encode($item['divider']); ?></p>
-        <?php else: ?>
-          <?php if ($item['perm'] === null || $user->checkAccess($item['perm'])): ?>
-            <a class="nav-item<?php echo $currentRoute === $item['route'] ? ' active' : ''; ?>"
-               href="<?php echo $this->createUrl($item['route']); ?>">
-              <i class="bi <?php echo $item['icon']; ?>"></i>
-              <span><?php echo CHtml::encode($item['label']); ?></span>
-            </a>
-          <?php endif; ?>
-        <?php endif; ?>
-      <?php endforeach; ?>
-    </nav>
+    <div class="sidebar-body pt-0 data-scrollbar">
+      <div class="sidebar-list">
+        <ul class="navbar-nav iq-main-menu" id="sidebar-menu">
+          <?php foreach ($menu as $item): ?>
+            <?php if (isset($item['divider'])): ?>
+              <li class="nav-item static-item">
+                <a class="nav-link static-item disabled" href="#" tabindex="-1">
+                  <span class="default-icon"><?php echo CHtml::encode($item['divider']); ?></span>
+                  <span class="mini-icon">-</span>
+                </a>
+              </li>
+            <?php elseif ($item['perm'] === null || $user->checkAccess($item['perm'])): ?>
+              <li class="nav-item">
+                <a class="nav-link<?php echo $currentRoute === $item['route'] ? ' active' : ''; ?>"
+                   href="<?php echo $this->createUrl($item['route']); ?>">
+                  <i class="icon"><i class="bi <?php echo $item['icon']; ?>"></i></i>
+                  <span class="item-name"><?php echo CHtml::encode($item['label']); ?></span>
+                </a>
+              </li>
+            <?php endif; ?>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    </div>
+    <div class="sidebar-footer"></div>
   </aside>
 
-  <!-- ===== Vùng nội dung ===== -->
-  <div class="admin-main">
+  <!-- ===== Nội dung chính (Hope UI) ===== -->
+  <main class="main-content">
+    <div class="position-relative iq-banner">
+      <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
+        <div class="container-fluid navbar-inner">
+          <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
+            <i class="icon">
+              <svg width="20px" class="icon-20" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+              </svg>
+            </i>
+          </div>
 
-    <header class="admin-topbar">
-      <button type="button" class="btn btn-sm btn-outline-secondary d-lg-none" id="sidebarToggle"
-              aria-label="Mở menu">
-        <i class="bi bi-list"></i>
-      </button>
+          <h4 class="navbar-brand mb-0 d-flex align-items-center gap-2">
+            <i class="bi <?php echo $this->pageIcon; ?>"></i>
+            <?php echo CHtml::encode($this->pageTitle ?: 'Tổng quan'); ?>
+          </h4>
 
-      <h1 class="topbar-title">
-        <i class="bi <?php echo $this->pageIcon; ?>"></i>
-        <?php echo CHtml::encode($this->pageTitle ?: 'Tổng quan'); ?>
-      </h1>
-
-      <div class="topbar-right">
-        <a class="btn btn-sm btn-outline-secondary" target="_blank" rel="noopener"
-           href="<?php echo Yii::app()->baseUrl; ?>/../index.html">
-          <i class="bi bi-box-arrow-up-right"></i> Xem website
-        </a>
-
-        <div class="dropdown">
-          <button class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-            <i class="bi bi-person-circle"></i>
-            <?php echo CHtml::encode($user->getFullName()); ?>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarTop" aria-controls="navbarTop"
+                  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+              <span class="mt-2 navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><span class="dropdown-item-text small text-muted">
-              <?php echo CHtml::encode($user->getRoleName()); ?>
-            </span></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-              <?php echo CHtml::beginForm($this->createUrl('/admin/auth/logout'), 'post',
-                  array('class' => 'px-2')); ?>
-                <button type="submit" class="btn btn-sm btn-link text-danger p-0">
-                  <i class="bi bi-box-arrow-right"></i> Đăng xuất
-                </button>
-              <?php echo CHtml::endForm(); ?>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
 
-    <main class="admin-content">
+          <div class="collapse navbar-collapse" id="navbarTop">
+            <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link btn btn-sm btn-outline-secondary me-2" target="_blank" rel="noopener"
+                   href="<?php echo Yii::app()->baseUrl; ?>/../index.html">
+                  <i class="bi bi-box-arrow-up-right me-1"></i> Xem website
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link py-0 d-flex align-items-center" href="#" id="userDropdown"
+                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span class="avatar avatar-40 avatar-rounded bg-primary text-white d-flex align-items-center justify-content-center">
+                    <i class="bi bi-person"></i>
+                  </span>
+                  <div class="caption ms-2 d-none d-md-block">
+                    <h6 class="mb-0 caption-title"><?php echo CHtml::encode($user->getFullName()); ?></h6>
+                    <p class="mb-0 caption-sub-title small text-muted"><?php echo CHtml::encode($user->getRoleName()); ?></p>
+                  </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li>
+                    <?php echo CHtml::beginForm($this->createUrl('/admin/auth/logout'), 'post',
+                        array('class' => 'px-2')); ?>
+                      <button type="submit" class="btn btn-sm btn-link text-danger p-0 text-decoration-none">
+                        <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                      </button>
+                    <?php echo CHtml::endForm(); ?>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Page content -->
+    <div class="container-fluid content-inner py-4">
       <?php foreach (array('success' => 'success', 'error' => 'danger', 'info' => 'info') as $key => $style): ?>
         <?php if ($user->hasFlash($key)): ?>
           <div class="alert alert-<?php echo $style; ?> alert-dismissible fade show" role="alert">
@@ -122,11 +161,11 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
       <?php endforeach; ?>
 
       <?php echo $content; ?>
-    </main>
-  </div>
-</div>
+    </div>
+  </main>
 
-<script src="<?php echo $assets; ?>/vendor/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.js"></script>
+  <!-- Hope UI JS -->
+  <script src="<?php echo $theme; ?>/assets/js/core/libs.min.js"></script>
+  <script src="<?php echo $theme; ?>/assets/js/hope-ui.js" defer></script>
 </body>
 </html>
