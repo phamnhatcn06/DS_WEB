@@ -173,7 +173,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
 }
 
 /* Lớp phủ tối trên ảnh cầu (khớp Figma): tối đều + đậm dần xuống đáy hoà vào navy footer */
