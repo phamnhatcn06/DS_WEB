@@ -37,7 +37,7 @@ class NewsPost extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'news_posts';
+        return 'pvn_news_posts';
     }
 
     public function behaviors()

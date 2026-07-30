@@ -50,9 +50,9 @@ return array(
         'authManager' => array(
             'class'               => 'CDbAuthManager',
             'connectionID'        => 'db',
-            'itemTable'           => 'auth_items',
-            'itemChildTable'      => 'auth_item_children',
-            'assignmentTable'     => 'auth_assignments',
+            'itemTable'           => 'pvn_auth_items',
+            'itemChildTable'      => 'pvn_auth_item_children',
+            'assignmentTable'     => 'pvn_auth_assignments',
             'defaultRoles'        => array('guest'),
         ),
 

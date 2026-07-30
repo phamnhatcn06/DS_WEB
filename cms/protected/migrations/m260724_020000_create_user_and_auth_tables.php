@@ -12,7 +12,7 @@ class m260724_020000_create_user_and_auth_tables extends CDbMigration
 
     public function up()
     {
-        $this->createTable('users', array(
+        $this->createTable('pvn_users', array(
             'id'                  => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'email'               => 'VARCHAR(255) NOT NULL',
             'password_hash'       => 'VARCHAR(255) NOT NULL COMMENT "bcrypt cost 12"',
@@ -31,16 +31,16 @@ class m260724_020000_create_user_and_auth_tables extends CDbMigration
             'deleted_at'          => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_users_email', 'users', 'email', true);
-        $this->createIndex('idx_users_is_active', 'users', 'is_active');
+        $this->createIndex('uniq_users_email', 'pvn_users', 'email', true);
+        $this->createIndex('idx_users_is_active', 'pvn_users', 'is_active');
 
         // Giờ cả hai bảng đã tồn tại → đóng vòng tham chiếu.
-        $this->addForeignKey('fk_users_media_files', 'users', 'avatar_media_id',
-            'media_files', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey('fk_media_files_users', 'media_files', 'uploaded_by',
-            'users', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('fk_users_media_files', 'pvn_users', 'avatar_media_id',
+            'pvn_media_files', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('fk_media_files_users', 'pvn_media_files', 'uploaded_by',
+            'pvn_users', 'id', 'SET NULL', 'CASCADE');
 
-        $this->createTable('sessions', array(
+        $this->createTable('pvn_sessions', array(
             'id'                 => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'user_id'            => 'INT UNSIGNED NOT NULL',
             'token_hash'         => 'VARCHAR(255) NOT NULL COMMENT "Lưu hash, không lưu token thô"',
@@ -52,15 +52,15 @@ class m260724_020000_create_user_and_auth_tables extends CDbMigration
             'created_at'         => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_sessions_token_hash', 'sessions', 'token_hash', true);
-        $this->createIndex('idx_sessions_user_id', 'sessions', 'user_id');
-        $this->createIndex('idx_sessions_expires_at', 'sessions', 'expires_at');
-        $this->addForeignKey('fk_sessions_users', 'sessions', 'user_id',
-            'users', 'id', 'CASCADE', 'CASCADE');
+        $this->createIndex('uniq_sessions_token_hash', 'pvn_sessions', 'token_hash', true);
+        $this->createIndex('idx_sessions_user_id', 'pvn_sessions', 'user_id');
+        $this->createIndex('idx_sessions_expires_at', 'pvn_sessions', 'expires_at');
+        $this->addForeignKey('fk_sessions_users', 'pvn_sessions', 'user_id',
+            'pvn_users', 'id', 'CASCADE', 'CASCADE');
 
         // ----- RBAC (schema chuẩn của CDbAuthManager, đổi tên snake_case) -----
 
-        $this->createTable('auth_items', array(
+        $this->createTable('pvn_auth_items', array(
             'name'        => 'VARCHAR(64) NOT NULL PRIMARY KEY',
             'type'        => 'INT NOT NULL COMMENT "0=operation, 1=task, 2=role"',
             'description' => 'TEXT NULL',
@@ -68,18 +68,18 @@ class m260724_020000_create_user_and_auth_tables extends CDbMigration
             'data'        => 'TEXT NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createTable('auth_item_children', array(
+        $this->createTable('pvn_auth_item_children', array(
             'parent' => 'VARCHAR(64) NOT NULL',
             'child'  => 'VARCHAR(64) NOT NULL',
             'PRIMARY KEY (parent, child)',
         ), self::TABLE_OPTIONS);
 
-        $this->addForeignKey('fk_auth_item_children_parent', 'auth_item_children', 'parent',
-            'auth_items', 'name', 'CASCADE', 'CASCADE');
-        $this->addForeignKey('fk_auth_item_children_child', 'auth_item_children', 'child',
-            'auth_items', 'name', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_auth_item_children_parent', 'pvn_auth_item_children', 'parent',
+            'pvn_auth_items', 'name', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_auth_item_children_child', 'pvn_auth_item_children', 'child',
+            'pvn_auth_items', 'name', 'CASCADE', 'CASCADE');
 
-        $this->createTable('auth_assignments', array(
+        $this->createTable('pvn_auth_assignments', array(
             'itemname' => 'VARCHAR(64) NOT NULL',
             'userid'   => 'VARCHAR(64) NOT NULL',
             'bizrule'  => 'TEXT NULL',
@@ -87,17 +87,17 @@ class m260724_020000_create_user_and_auth_tables extends CDbMigration
             'PRIMARY KEY (itemname, userid)',
         ), self::TABLE_OPTIONS);
 
-        $this->addForeignKey('fk_auth_assignments_auth_items', 'auth_assignments', 'itemname',
-            'auth_items', 'name', 'CASCADE', 'CASCADE');
+        $this->addForeignKey('fk_auth_assignments_auth_items', 'pvn_auth_assignments', 'itemname',
+            'pvn_auth_items', 'name', 'CASCADE', 'CASCADE');
     }
 
     public function down()
     {
-        $this->dropTable('auth_assignments');
-        $this->dropTable('auth_item_children');
-        $this->dropTable('auth_items');
-        $this->dropTable('sessions');
-        $this->dropForeignKey('fk_media_files_users', 'media_files');
-        $this->dropTable('users');
+        $this->dropTable('pvn_auth_assignments');
+        $this->dropTable('pvn_auth_item_children');
+        $this->dropTable('pvn_auth_items');
+        $this->dropTable('pvn_sessions');
+        $this->dropForeignKey('fk_media_files_users', 'pvn_media_files');
+        $this->dropTable('pvn_users');
     }
 }

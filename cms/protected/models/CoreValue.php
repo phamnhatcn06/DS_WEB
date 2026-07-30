@@ -20,7 +20,7 @@ class CoreValue extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'core_values';
+        return 'pvn_core_values';
     }
 
     public function rules()

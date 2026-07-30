@@ -20,7 +20,7 @@ class Partner extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'partners';
+        return 'pvn_partners';
     }
 
     public function rules()

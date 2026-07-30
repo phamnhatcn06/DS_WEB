@@ -15,7 +15,7 @@ class BusinessSector extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'business_sectors';
+        return 'pvn_business_sectors';
     }
 
     public function behaviors()
@@ -56,7 +56,7 @@ class BusinessSector extends BaseActiveRecord
         return array(
             'image'    => array(self::BELONGS_TO, 'MediaFile', 'image_media_id'),
             'icon'     => array(self::BELONGS_TO, 'MediaFile', 'icon_media_id'),
-            'projects' => array(self::HAS_MANY, 'Project', 'sector_id'),
+            'pvn_projects' => array(self::HAS_MANY, 'Project', 'sector_id'),
         );
     }
 

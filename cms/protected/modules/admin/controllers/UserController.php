@@ -156,7 +156,7 @@ class UserController extends AdminCrudController
     {
         return (int) Yii::app()->db->createCommand()
             ->select('COUNT(*)')
-            ->from('auth_assignments')
+            ->from('pvn_auth_assignments')
             ->where('itemname = :r', array(':r' => 'super_admin'))
             ->queryScalar();
     }

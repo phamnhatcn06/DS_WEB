@@ -9,7 +9,7 @@ class m260724_050000_create_projects_and_news extends CDbMigration
     public function up()
     {
         // -------------------------------------------- Section 5: Dự án tiêu biểu
-        $this->createTable('projects', array(
+        $this->createTable('pvn_projects', array(
             'id'                   => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'slug'                 => 'VARCHAR(200) NOT NULL',
             'name'                 => 'VARCHAR(255) NOT NULL',
@@ -36,19 +36,19 @@ class m260724_050000_create_projects_and_news extends CDbMigration
             'deleted_at'           => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_projects_slug', 'projects', 'slug', true);
-        $this->createIndex('idx_projects_featured_sort', 'projects', array('is_featured', 'sort_order'));
-        $this->createIndex('idx_projects_sector_id', 'projects', 'sector_id');
-        $this->createIndex('idx_projects_status_published_at', 'projects', array('status', 'published_at'));
-        $this->addForeignKey('fk_projects_business_sectors', 'projects', 'sector_id',
-            'business_sectors', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey('fk_projects_thumbnail_media', 'projects', 'thumbnail_media_id',
-            'media_files', 'id', 'SET NULL', 'CASCADE');
+        $this->createIndex('uniq_projects_slug', 'pvn_projects', 'slug', true);
+        $this->createIndex('idx_projects_featured_sort', 'pvn_projects', array('is_featured', 'sort_order'));
+        $this->createIndex('idx_projects_sector_id', 'pvn_projects', 'sector_id');
+        $this->createIndex('idx_projects_status_published_at', 'pvn_projects', array('status', 'published_at'));
+        $this->addForeignKey('fk_projects_business_sectors', 'pvn_projects', 'sector_id',
+            'pvn_business_sectors', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('fk_projects_thumbnail_media', 'pvn_projects', 'thumbnail_media_id',
+            'pvn_media_files', 'id', 'SET NULL', 'CASCADE');
 
         // ------------------------------------------------ Section 9: Danh mục tin
         // `slug` phải khớp giá trị data-filter trong markup (du-an, thi-cong,
         // dau-tu, co-dong) — đây là nguồn dữ liệu của thanh tab lọc.
-        $this->createTable('news_categories', array(
+        $this->createTable('pvn_news_categories', array(
             'id'             => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'slug'           => 'VARCHAR(120) NOT NULL',
             'name'           => 'VARCHAR(150) NOT NULL',
@@ -62,13 +62,13 @@ class m260724_050000_create_projects_and_news extends CDbMigration
             'deleted_at'     => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_news_categories_slug', 'news_categories', 'slug', true);
-        $this->createIndex('idx_news_categories_sort_order', 'news_categories', 'sort_order');
-        $this->addForeignKey('fk_news_categories_parent', 'news_categories', 'parent_id',
-            'news_categories', 'id', 'SET NULL', 'CASCADE');
+        $this->createIndex('uniq_news_categories_slug', 'pvn_news_categories', 'slug', true);
+        $this->createIndex('idx_news_categories_sort_order', 'pvn_news_categories', 'sort_order');
+        $this->addForeignKey('fk_news_categories_parent', 'pvn_news_categories', 'parent_id',
+            'pvn_news_categories', 'id', 'SET NULL', 'CASCADE');
 
         // -------------------------------------------------- Section 9: Bài viết
-        $this->createTable('news_posts', array(
+        $this->createTable('pvn_news_posts', array(
             'id'                   => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'slug'                 => 'VARCHAR(220) NOT NULL',
             'category_id'          => 'INT UNSIGNED NOT NULL',
@@ -93,22 +93,22 @@ class m260724_050000_create_projects_and_news extends CDbMigration
             'deleted_at'           => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_news_posts_slug', 'news_posts', 'slug', true);
-        $this->createIndex('idx_news_posts_category_published', 'news_posts', array('category_id', 'published_at'));
-        $this->createIndex('idx_news_posts_status_published', 'news_posts', array('status', 'published_at'));
-        $this->createIndex('idx_news_posts_is_featured', 'news_posts', 'is_featured');
-        $this->addForeignKey('fk_news_posts_news_categories', 'news_posts', 'category_id',
-            'news_categories', 'id', 'RESTRICT', 'CASCADE');
-        $this->addForeignKey('fk_news_posts_thumbnail_media', 'news_posts', 'thumbnail_media_id',
-            'media_files', 'id', 'SET NULL', 'CASCADE');
-        $this->addForeignKey('fk_news_posts_users', 'news_posts', 'author_id',
-            'users', 'id', 'SET NULL', 'CASCADE');
+        $this->createIndex('uniq_news_posts_slug', 'pvn_news_posts', 'slug', true);
+        $this->createIndex('idx_news_posts_category_published', 'pvn_news_posts', array('category_id', 'published_at'));
+        $this->createIndex('idx_news_posts_status_published', 'pvn_news_posts', array('status', 'published_at'));
+        $this->createIndex('idx_news_posts_is_featured', 'pvn_news_posts', 'is_featured');
+        $this->addForeignKey('fk_news_posts_news_categories', 'pvn_news_posts', 'category_id',
+            'pvn_news_categories', 'id', 'RESTRICT', 'CASCADE');
+        $this->addForeignKey('fk_news_posts_thumbnail_media', 'pvn_news_posts', 'thumbnail_media_id',
+            'pvn_media_files', 'id', 'SET NULL', 'CASCADE');
+        $this->addForeignKey('fk_news_posts_users', 'pvn_news_posts', 'author_id',
+            'pvn_users', 'id', 'SET NULL', 'CASCADE');
     }
 
     public function down()
     {
-        $this->dropTable('news_posts');
-        $this->dropTable('news_categories');
-        $this->dropTable('projects');
+        $this->dropTable('pvn_news_posts');
+        $this->dropTable('pvn_news_categories');
+        $this->dropTable('pvn_projects');
     }
 }

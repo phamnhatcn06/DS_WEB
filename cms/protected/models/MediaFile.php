@@ -21,7 +21,7 @@ class MediaFile extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'media_files';
+        return 'pvn_media_files';
     }
 
     public function behaviors()

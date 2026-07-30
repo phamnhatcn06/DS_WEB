@@ -98,6 +98,14 @@ Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 
 - **Section 7 (Timeline):** dồn về **một phía**, trục dọc nằm bên trái (`left: 8px`), card full-width.
 - **Section 9 (Tin tức):** tab lọc nằm **một hàng, cuộn ngang** khi tràn.
 
+## CMS quản trị (thư mục `cms/` — Yii 1.x)
+
+Ngoài site tĩnh, repo có một CMS chạy bằng **Yii Framework 1.x** trong `cms/` (webroot = `cms/`, entry `cms/index.php`). Nội dung động (hero slide, dự án, tin tức, đối tác, cấu hình…) quản trị qua module admin, model dưới `cms/protected/models/`, module dưới `cms/protected/modules/admin/`.
+
+- **Theme giao diện admin — `hope-ui`:** module admin dùng theme **Hope UI** đặt tại `cms/themes/hope-ui/` (Bootstrap 5 admin dashboard). Asset (CSS/JS/ảnh) nằm trong `cms/themes/hope-ui/assets/`, các trang mẫu HTML tham chiếu trong `cms/themes/hope-ui/dashboard/` (vd `auth/sign-in.html`, `index.html`). Theme được kích hoạt cho module admin qua `AdminModule::init()` (`Yii::app()->setTheme('hope-ui')`), truy cập asset bằng `Yii::app()->theme->baseUrl`. Layout admin dùng theme này; **không tự chế layout/CSS khác** — bám markup + class của Hope UI.
+- **CRUD sinh bằng giix:** các controller/view CRUD của admin được **generate bằng giix component** đã đặt sẵn trong `cms/protected/extensions/` (`giix-core/` — generator `giixModel` + `giixCrud`; `giix-components/` — base class `GxActiveRecord`, `GxController`, `GxActiveForm`, `GxHtml`). Khi thêm CRUD mới cho một bảng, ưu tiên gen bằng giix rồi tùy biến, không viết tay từ đầu; giữ nguyên các base class giix.
+- **Xác thực:** đăng nhập admin qua `admin/auth/login` (route thân thiện `admin/dang-nhap`). Thành phần: `LoginForm` (`modules/admin/models/`), `UserIdentity` (`protected/components/`) xác thực bằng `email` + `password_hash` bcrypt, có khóa tài khoản sau 5 lần sai (15 phút), ghi audit vào `pvn_audit_logs`. Model tài khoản: `User` (bảng `pvn_users`). RBAC dùng `CDbAuthManager` (bảng `pvn_auth_*`).
+
 ## Các trang khác (ngoài trang chủ)
 
 - **Trang Giới thiệu (About):** xem `About.md` (thư mục gốc) — bóc tách 4 section thân (HeroBanner, Lịch sử hình thành, Cột mốc phát triển, Tầm nhìn & Chiến lược) + Header/Footer dùng chung, kèm node ID Figma (`GIỚI THIỆU` `1251:11840`, trong section `ANOTHER PAGES` `1251:11839`).

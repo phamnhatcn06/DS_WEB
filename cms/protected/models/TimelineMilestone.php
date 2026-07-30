@@ -20,7 +20,7 @@ class TimelineMilestone extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'timeline_milestones';
+        return 'pvn_timeline_milestones';
     }
 
     public function rules()

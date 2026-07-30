@@ -13,7 +13,7 @@ class NewsCategory extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'news_categories';
+        return 'pvn_news_categories';
     }
 
     public function behaviors()

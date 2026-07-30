@@ -1,0 +1,290 @@
+.contestant-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.contestant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-wrapper {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.contestant-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contestant-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+}
+
+.compare-checkbox {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+}
+
+.compare-checkbox .form-check-input {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.compare-checkbox .form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.contestant-card.selected {
+    border: 3px solid #0d6efd;
+}
+
+/* Modal Detail Styles */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.photo-item.main-photo {
+    grid-column: span 2;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.photo-item.main-photo img {
+    height: 300px;
+}
+
+.photo-item img:hover {
+    transform: scale(1.05);
+}
+
+.photo-item .photo-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Compare Modal */
+#modalCompare .modal-body {
+    background: #f8f9fa;
+    padding: 20px;
+}
+
+.compare-column {
+    padding: 10px;
+}
+
+.compare-column .card {
+    height: 100%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.compare-carousel {
+    background: #000;
+}
+
+.compare-carousel .carousel-inner {
+    height: 280px;
+}
+
+.compare-carousel .carousel-item {
+    height: 280px;
+}
+
+.compare-carousel .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #000;
+}
+
+.compare-carousel .carousel-control-prev,
+.compare-carousel .carousel-control-next {
+    width: 15%;
+    opacity: 0.7;
+}
+
+.compare-carousel .carousel-control-prev:hover,
+.compare-carousel .carousel-control-next:hover {
+    opacity: 1;
+}
+
+.compare-carousel .carousel-indicators {
+    margin-bottom: 5px;
+}
+
+.compare-carousel .carousel-indicators button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin: 0 3px;
+}
+
+.compare-carousel .photo-label-overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.compare-table th {
+    width: 45%;
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+.compare-table td {
+    word-break: break-word;
+}
+
+/* Photo zoom icon on hover */
+.photo-wrapper {
+    overflow: hidden;
+}
+
+.photo-zoom-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.photo-zoom-icon i {
+    color: #fff;
+    font-size: 20px;
+}
+
+.photo-wrapper:hover .photo-zoom-icon {
+    opacity: 1;
+}
+
+.photo-wrapper:hover .photo-zoomable {
+    filter: brightness(0.85);
+}
+
+/* Fullscreen image viewer carousel */
+#fullscreenCarousel .carousel-control-prev,
+#fullscreenCarousel .carousel-control-next {
+    width: 10%;
+    opacity: 0.7;
+}
+
+#fullscreenCarousel .carousel-control-prev:hover,
+#fullscreenCarousel .carousel-control-next:hover {
+    opacity: 1;
+}
+
+#fullscreenCarousel .carousel-indicators {
+    bottom: 10px;
+}
+
+#fullscreenCarousel .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+/* Image zoom style */
+.zoom-target {
+    transition: transform 0.1s ease-out;
+    transform-origin: center center;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.zoom-target:active {
+    cursor: grabbing;
+}
+
+.zoom-controls button {
+    transition: all 0.2s ease;
+}
+
+.zoom-controls button:hover {
+    transform: scale(1.1);
+    background-color: #212529 !important;
+    border-color: #fff !important;
+}
+
+/* Tabs vòng thi - chữ to hơn, dàn đều kín 1 hàng */
+#roundTabs {
+    flex-wrap: nowrap;
+    display: flex;
+}
+
+#roundTabs .nav-item {
+    flex: 1 1 0;
+}
+
+#roundTabs .nav-link {
+    width: 100%;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+}
+
+#roundTabs .nav-link .badge {
+    font-size: 0.8rem;
+    vertical-align: middle;
+}

@@ -18,7 +18,7 @@ class SiteSetting extends CActiveRecord
 
     public function tableName()
     {
-        return 'site_settings';
+        return 'pvn_site_settings';
     }
 
     public function behaviors()

@@ -55,7 +55,7 @@ class AuthController extends AdminController
     private function logAuthEvent($action)
     {
         try {
-            Yii::app()->db->createCommand()->insert('audit_logs', array(
+            Yii::app()->db->createCommand()->insert('pvn_audit_logs', array(
                 'user_id'     => Yii::app()->user->getIsGuest() ? null : Yii::app()->user->id,
                 'action'      => $action,
                 'entity_type' => 'User',

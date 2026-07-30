@@ -29,9 +29,9 @@ class m260724_080000_seed_homepage_content extends CDbMigration
         // Dùng DELETE chứ không TRUNCATE: MySQL chặn TRUNCATE trên bảng đang
         // được bảng khác tham chiếu bằng khoá ngoại. Thứ tự dưới đây là thứ tự
         // an toàn với FK (bảng con trước, bảng cha sau).
-        foreach (array('news_posts', 'news_categories', 'projects', 'partners',
-                     'timeline_milestones', 'core_values', 'business_sectors',
-                     'hero_slides', 'site_settings') as $table) {
+        foreach (array('pvn_news_posts', 'pvn_news_categories', 'pvn_projects', 'pvn_partners',
+                     'pvn_timeline_milestones', 'pvn_core_values', 'pvn_business_sectors',
+                     'pvn_hero_slides', 'pvn_site_settings') as $table) {
             $this->delete($table);
         }
     }
@@ -42,7 +42,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
     private function media($fileName)
     {
         return Yii::app()->db->createCommand()
-            ->select('id')->from('media_files')
+            ->select('id')->from('pvn_media_files')
             ->where('file_name = :n', array(':n' => $fileName))
             ->queryScalar() ?: null;
     }
@@ -76,7 +76,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($settings as $row) {
-            $this->insert('site_settings', array(
+            $this->insert('pvn_site_settings', array(
                 'setting_key'   => $row[0],
                 'setting_value' => $row[1],
                 'value_type'    => $row[2],
@@ -107,7 +107,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($slides as $slide) {
-            $this->insert('hero_slides', array(
+            $this->insert('pvn_hero_slides', array(
                 'title'                => $slide[0],
                 'subtitle'             => $slide[1],
                 'background_media_id'  => $this->media('hero-bg.webp'),
@@ -197,7 +197,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($sectors as $sector) {
-            $this->insert('business_sectors', array(
+            $this->insert('pvn_business_sectors', array(
                 'slug'             => $sector['slug'],
                 'number_label'     => $sector['number'],
                 'eyebrow'          => $sector['eyebrow'],
@@ -238,7 +238,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($values as $value) {
-            $this->insert('core_values', array(
+            $this->insert('pvn_core_values', array(
                 'title'         => $value[0],
                 'description'   => $value[1],
                 'icon_media_id' => $this->media($value[2]),
@@ -281,7 +281,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($milestones as $milestone) {
-            $this->insert('timeline_milestones', array(
+            $this->insert('pvn_timeline_milestones', array(
                 'year_label'  => $milestone[0],
                 'year_value'  => $milestone[1],
                 'event_date'  => $milestone[2],
@@ -313,7 +313,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($partners as $partner) {
-            $this->insert('partners', array(
+            $this->insert('pvn_partners', array(
                 'name'              => $partner[0],
                 'logo_media_id'     => $this->media($partner[1]),
                 'partner_type'      => $partner[2],
@@ -340,7 +340,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($categories as $category) {
-            $this->insert('news_categories', array(
+            $this->insert('pvn_news_categories', array(
                 'slug'           => $category[0],
                 'name'           => $category[1],
                 'sort_order'     => ++$order,
@@ -355,7 +355,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
     private function categoryId($slug)
     {
         return Yii::app()->db->createCommand()
-            ->select('id')->from('news_categories')
+            ->select('id')->from('pvn_news_categories')
             ->where('slug = :s', array(':s' => $slug))
             ->queryScalar();
     }
@@ -363,7 +363,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
     private function sectorId($slug)
     {
         return Yii::app()->db->createCommand()
-            ->select('id')->from('business_sectors')
+            ->select('id')->from('pvn_business_sectors')
             ->where('slug = :s', array(':s' => $slug))
             ->queryScalar() ?: null;
     }
@@ -437,7 +437,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($projects as $project) {
-            $this->insert('projects', array(
+            $this->insert('pvn_projects', array(
                 'slug'                => $project['slug'],
                 'name'                => $project['name'],
                 'location'            => $project['location'],
@@ -512,7 +512,7 @@ class m260724_080000_seed_homepage_content extends CDbMigration
 
         $order = 0;
         foreach ($posts as $post) {
-            $this->insert('news_posts', array(
+            $this->insert('pvn_news_posts', array(
                 'slug'                => $post['slug'],
                 'category_id'         => $this->categoryId($post['category']),
                 'title'               => $post['title'],

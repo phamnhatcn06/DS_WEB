@@ -24,7 +24,7 @@ class User extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'users';
+        return 'pvn_users';
     }
 
     public function behaviors()

@@ -11,7 +11,7 @@ class HeroSlide extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'hero_slides';
+        return 'pvn_hero_slides';
     }
 
     public function rules()

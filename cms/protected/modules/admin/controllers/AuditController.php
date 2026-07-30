@@ -45,7 +45,7 @@ class AuditController extends AdminController
     {
         $rows = Yii::app()->db->createCommand()
             ->selectDistinct('entity_type')
-            ->from('audit_logs')
+            ->from('pvn_audit_logs')
             ->order('entity_type ASC')
             ->queryColumn();
 

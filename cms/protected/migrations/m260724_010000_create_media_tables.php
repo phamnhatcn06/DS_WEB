@@ -12,7 +12,7 @@ class m260724_010000_create_media_tables extends CDbMigration
 
     public function up()
     {
-        $this->createTable('media_folders', array(
+        $this->createTable('pvn_media_folders', array(
             'id'         => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'parent_id'  => 'INT UNSIGNED NULL',
             'name'       => 'VARCHAR(150) NOT NULL',
@@ -23,12 +23,12 @@ class m260724_010000_create_media_tables extends CDbMigration
             'deleted_at' => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('uniq_media_folders_slug', 'media_folders', 'slug', true);
-        $this->createIndex('idx_media_folders_parent_id', 'media_folders', 'parent_id');
-        $this->addForeignKey('fk_media_folders_media_folders', 'media_folders', 'parent_id',
-            'media_folders', 'id', 'SET NULL', 'CASCADE');
+        $this->createIndex('uniq_media_folders_slug', 'pvn_media_folders', 'slug', true);
+        $this->createIndex('idx_media_folders_parent_id', 'pvn_media_folders', 'parent_id');
+        $this->addForeignKey('fk_media_folders_media_folders', 'pvn_media_folders', 'parent_id',
+            'pvn_media_folders', 'id', 'SET NULL', 'CASCADE');
 
-        $this->createTable('media_files', array(
+        $this->createTable('pvn_media_files', array(
             'id'          => 'INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY',
             'folder_id'   => 'INT UNSIGNED NULL',
             'file_name'   => 'VARCHAR(255) NOT NULL',
@@ -49,11 +49,11 @@ class m260724_010000_create_media_tables extends CDbMigration
             'deleted_at'  => 'DATETIME NULL',
         ), self::TABLE_OPTIONS);
 
-        $this->createIndex('idx_media_files_folder_id', 'media_files', 'folder_id');
-        $this->createIndex('idx_media_files_mime_type', 'media_files', 'mime_type');
-        $this->createIndex('uniq_media_files_checksum', 'media_files', 'checksum', true);
-        $this->addForeignKey('fk_media_files_media_folders', 'media_files', 'folder_id',
-            'media_folders', 'id', 'SET NULL', 'CASCADE');
+        $this->createIndex('idx_media_files_folder_id', 'pvn_media_files', 'folder_id');
+        $this->createIndex('idx_media_files_mime_type', 'pvn_media_files', 'mime_type');
+        $this->createIndex('uniq_media_files_checksum', 'pvn_media_files', 'checksum', true);
+        $this->addForeignKey('fk_media_files_media_folders', 'pvn_media_files', 'folder_id',
+            'pvn_media_folders', 'id', 'SET NULL', 'CASCADE');
 
         // FK media_files.uploaded_by → users được thêm ở migration sau, vì bảng
         // users và media_files tham chiếu vòng lẫn nhau.
@@ -61,7 +61,7 @@ class m260724_010000_create_media_tables extends CDbMigration
 
     public function down()
     {
-        $this->dropTable('media_files');
-        $this->dropTable('media_folders');
+        $this->dropTable('pvn_media_files');
+        $this->dropTable('pvn_media_folders');
     }
 }

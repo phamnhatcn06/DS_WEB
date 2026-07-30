@@ -21,7 +21,7 @@ class Project extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'projects';
+        return 'pvn_projects';
     }
 
     public function behaviors()

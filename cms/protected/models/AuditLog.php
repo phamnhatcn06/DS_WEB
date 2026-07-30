@@ -25,7 +25,7 @@ class AuditLog extends CActiveRecord
 
     public function tableName()
     {
-        return 'audit_logs';
+        return 'pvn_audit_logs';
     }
 
     public function relations()

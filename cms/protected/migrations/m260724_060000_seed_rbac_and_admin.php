@@ -88,7 +88,7 @@ class m260724_060000_seed_rbac_and_admin extends CDbMigration
         $email = 'admin@htds.vn';
         $password = $this->generatePassword();
 
-        $this->insert('users', array(
+        $this->insert('pvn_users', array(
             'email'         => $email,
             'password_hash' => password_hash($password, PASSWORD_BCRYPT, array('cost' => 12)),
             'full_name'     => 'Quản trị hệ thống',
@@ -112,7 +112,7 @@ class m260724_060000_seed_rbac_and_admin extends CDbMigration
     public function down()
     {
         Yii::app()->authManager->clearAll();
-        $this->delete('users', 'email = :email', array(':email' => 'admin@htds.vn'));
+        $this->delete('pvn_users', 'email = :email', array(':email' => 'admin@htds.vn'));
     }
 
     /**

@@ -47,7 +47,7 @@ class m260724_070000_seed_media_library extends CDbMigration
             return;
         }
 
-        $this->insert('media_folders', array(
+        $this->insert('pvn_media_folders', array(
             'name'       => 'Ảnh website',
             'slug'       => 'anh-website',
             'sort_order' => 1,
@@ -73,7 +73,7 @@ class m260724_070000_seed_media_library extends CDbMigration
 
             list($width, $height) = $this->readDimensions($fullPath, $mime);
 
-            $this->insert('media_files', array(
+            $this->insert('pvn_media_files', array(
                 'folder_id'  => $folderId,
                 'file_name'  => $fileName,
                 'file_path'  => self::SHARED_IMAGE_PATH . '/' . $fileName,
@@ -96,9 +96,9 @@ class m260724_070000_seed_media_library extends CDbMigration
 
     public function down()
     {
-        $this->delete('media_files', 'file_path LIKE :p',
+        $this->delete('pvn_media_files', 'file_path LIKE :p',
             array(':p' => self::SHARED_IMAGE_PATH . '/%'));
-        $this->delete('media_folders', 'slug = :s', array(':s' => 'anh-website'));
+        $this->delete('pvn_media_folders', 'slug = :s', array(':s' => 'anh-website'));
     }
 
     private function detectMime($path)

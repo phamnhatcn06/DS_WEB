@@ -96,7 +96,7 @@ class AuditBehavior extends CActiveRecordBehavior
         }
 
         try {
-            $app->db->createCommand()->insert('audit_logs', array(
+            $app->db->createCommand()->insert('pvn_audit_logs', array(
                 'user_id'     => $app->user->getIsGuest() ? null : $app->user->id,
                 'action'      => $action,
                 'entity_type' => get_class($owner),

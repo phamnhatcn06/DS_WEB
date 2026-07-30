@@ -11,7 +11,7 @@ class MediaFolder extends BaseActiveRecord
 
     public function tableName()
     {
-        return 'media_folders';
+        return 'pvn_media_folders';
     }
 
     public function behaviors()
