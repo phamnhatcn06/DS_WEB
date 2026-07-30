@@ -18,8 +18,8 @@ class AdminModule extends CWebModule
         // của module — ta chỉ mượn theme->baseUrl để nạp asset.
         Yii::app()->setTheme('hope-ui');
 
-        // Layout mặc định cho toàn module.
-        $this->layout = 'admin.views.layouts.admin';
+        // Layout mặc định cho toàn module = layout Hope UI trong theme.
+        $this->layout = 'webroot.themes.hope-ui.views.layouts.main';
         $this->defaultController = 'default';
     }
 
