@@ -1,24 +1,32 @@
 <?php
 /* @var $this AdminController */
 /* @var $content string */
-$assets = Yii::app()->baseUrl . '/../assets';
+
+// Asset của theme Hope UI (cms/themes/hope-ui/assets).
+$theme = Yii::app()->theme->baseUrl;
 ?>
 <!doctype html>
-<html lang="vi">
+<html lang="vi" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title><?php echo CHtml::encode($this->pageTitle); ?> — Đông Sơn Holdings CMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title><?php echo CHtml::encode($this->pageTitle); ?> — <?php echo CHtml::encode(Yii::app()->name); ?></title>
   <meta name="robots" content="noindex, nofollow" />
 
-  <link href="<?php echo $assets; ?>/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
-  <link href="<?php echo $assets; ?>/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
-  <link href="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="<?php echo $theme; ?>/assets/images/favicon.ico" />
+
+  <!-- Hope UI CSS -->
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/core/libs.min.css" />
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/hope-ui.min.css?v=2.0.0" />
+  <link rel="stylesheet" href="<?php echo $theme; ?>/assets/css/custom.min.css?v=2.0.0" />
 </head>
 <body>
-  <div class="login-page">
+  <div class="wrapper">
     <?php echo $content; ?>
   </div>
-  <script src="<?php echo $assets; ?>/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+
+  <!-- Hope UI JS -->
+  <script src="<?php echo $theme; ?>/assets/js/core/libs.min.js"></script>
+  <script src="<?php echo $theme; ?>/assets/js/hope-ui.js" defer></script>
 </body>
 </html>
