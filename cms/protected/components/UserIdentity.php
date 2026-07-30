@@ -38,7 +38,7 @@ class UserIdentity extends CUserIdentity
         }
 
         if (!password_verify($this->password, $user->password_hash)) {
-            $user->registerFailedLogin(self::MAX_FAILED_ATTEMPTS, self::LOCKOUT_MINUTES);
+            $user->registerFailedLogin(self::MAX_FAILED_ATTEMPTS);
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
             return false;
         }
