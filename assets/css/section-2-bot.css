@@ -127,14 +127,28 @@
   bottom: -40px;
   width: 100%;
   max-width: 400px;
-  background-color: rgba(8, 15, 29, .9);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid var(--dsh-line);
+  background-color: #000000;
+  border: 1px solid rgba(255, 255, 255, .63);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
+  overflow: hidden;
+  isolation: isolate;
   box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, .35);
 }
+
+/* Vệt sáng đỏ trang trí trong card (khớp Figma: ellipse góc trên-phải + cạnh trái) */
+.bot-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(78px 41px at 92% 8%, rgba(154, 18, 32, .95), transparent 72%),
+    radial-gradient(102px 54px at 8% 62%, rgba(154, 18, 32, .8), transparent 72%);
+}
+
+.bot-card > * { position: relative; z-index: 1; }
 
 .bot-card h3 {
   color: #ffffff;
