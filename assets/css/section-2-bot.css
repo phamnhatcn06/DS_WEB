@@ -121,9 +121,11 @@
 
 .bot-card {
   position: absolute;
-  right: clamp(-8px, -1vw, 0px);
-  bottom: -24px;
-  max-width: 340px;
+  /* Khớp Figma: card tràn phải ~52px, xuống dưới ~40px so với ảnh */
+  right: clamp(-52px, -3vw, -16px);
+  bottom: -40px;
+  width: 100%;
+  max-width: 400px;
   background-color: rgba(8, 15, 29, .9);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
