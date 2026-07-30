@@ -59,11 +59,12 @@ $theme = Yii::app()->theme->baseUrl;
                     </div>
                   </div>
 
-                  <div class="col-lg-12 d-flex justify-content-between">
+                  <div class="col-lg-12 d-flex justify-content-between align-items-center">
                     <div class="form-check mb-3">
                       <?php echo $form->checkBox($model, 'rememberMe', array('class' => 'form-check-input')); ?>
                       <?php echo $form->label($model, 'rememberMe', array('class' => 'form-check-label')); ?>
                     </div>
+                    <a href="<?php echo $this->createUrl('/admin/auth/requestPasswordReset'); ?>">Quên mật khẩu?</a>
                   </div>
                 </div>
 
