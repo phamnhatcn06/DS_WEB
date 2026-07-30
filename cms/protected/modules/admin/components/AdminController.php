@@ -7,7 +7,8 @@
  */
 class AdminController extends CController
 {
-    public $layout = 'admin.views.layouts.admin';
+    // Layout admin = layout Hope UI trong theme (webroot/themes/hope-ui/views/layouts/main.php).
+    public $layout = 'webroot.themes.hope-ui.views.layouts.main';
 
     /** @var string tiêu đề trang hiển thị ở header admin */
     public $pageTitle = '';
