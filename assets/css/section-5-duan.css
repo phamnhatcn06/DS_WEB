@@ -73,24 +73,24 @@
 
 .duan-gallery::-webkit-scrollbar { display: none; }
 
-/* Thẻ có chiều cao cố định: khi hover, ảnh co lại nhường chỗ cho caption
-   nên dải slider không bị nhảy layout. (Hiệu ứng bổ sung, Figma chưa có.) */
+/* Thẻ có chiều cao cố định. Ảnh KHÔNG co lại khi hover — caption là lớp phủ
+   trượt lên đè trên ảnh nên layout dải slider giữ nguyên, không nhảy. */
 .duan-item {
   flex: 0 0 var(--duan-card);
   scroll-snap-align: center;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  display: block;
   height: clamp(260px, 24vw, 408px);
   padding: 0;
   border-radius: 6px;
+  overflow: hidden;
   background-color: transparent;
-  transition: background-color var(--transition-base), box-shadow var(--transition-base),
-    padding var(--transition-base);
+  transition: box-shadow var(--transition-base);
 }
 
 .duan-thumb {
-  flex: 1 1 auto;
-  min-height: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 6px;
   overflow: hidden;
 }
@@ -102,18 +102,21 @@
   transition: transform var(--transition-base);
 }
 
-/* -------- Caption hiện khi hover -------- */
+/* -------- Caption phủ trên ảnh, trượt lên khi hover -------- */
 .duan-caption {
-  flex: 0 0 auto;
-  max-height: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, .82));
   opacity: 0;
-  overflow: hidden;
-  transition: max-height var(--transition-base), opacity var(--transition-base),
-    padding-top var(--transition-base);
+  transform: translateY(100%);
+  transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
 .duan-caption h3 {
-  color: var(--dsh-ink);
+  color: var(--dsh-white);
   font-size: clamp(1.125rem, 1.4vw, 1.5rem);
   font-weight: 700;
   line-height: 1.3;
@@ -127,7 +130,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: rgba(0, 0, 0, .5);
+  color: rgba(255, 255, 255, .8);
   font-size: clamp(.875rem, 1vw, 1rem);
   line-height: 1.1;
   margin: 0;
@@ -137,9 +140,7 @@
 
 .duan-item:hover,
 .duan-item:focus-within {
-  background-color: var(--dsh-white);
   box-shadow: 0 1rem 2.5rem rgba(13, 37, 69, .14);
-  padding: var(--space-3);
 }
 
 .duan-item:hover .duan-thumb img,
@@ -147,9 +148,8 @@
 
 .duan-item:hover .duan-caption,
 .duan-item:focus-within .duan-caption {
-  max-height: 96px;
   opacity: 1;
-  padding-top: var(--space-3);
+  transform: translateY(0);
 }
 
 /* Tôn trọng người dùng tắt hiệu ứng chuyển động */
