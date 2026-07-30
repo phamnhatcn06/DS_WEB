@@ -158,7 +158,8 @@
 .cta-banner {
   position: relative;
   background-color: #101c36;
-  min-height: 420px;
+  /* Khớp Figma: dải banner ~482px ở khung 1920, co giãn theo bề rộng */
+  min-height: clamp(360px, 25vw, 482px);
   display: flex;
   align-items: center;
   justify-content: center;
