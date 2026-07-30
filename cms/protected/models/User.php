@@ -168,6 +168,59 @@ class User extends BaseActiveRecord
         ));
     }
 
+    /**
+     * Sinh token đặt lại mật khẩu: trả token THÔ (để nhúng vào link email),
+     * chỉ lưu HASH + hạn dùng vào DB.
+     *
+     * @return string token thô (gửi qua email, không lưu DB)
+     */
+    public function generatePasswordResetToken()
+    {
+        $ttl = isset(Yii::app()->params['resetTokenTtl'])
+            ? (int) Yii::app()->params['resetTokenTtl'] : 3600;
+
+        $token = bin2hex(random_bytes(32));
+
+        $this->saveAttributes(array(
+            'reset_token_hash'       => hash('sha256', $token),
+            'reset_token_expires_at' => date('Y-m-d H:i:s', time() + $ttl),
+        ));
+
+        return $token;
+    }
+
+    /**
+     * Tìm user theo token thô nếu token còn hạn. Trả null nếu không hợp lệ.
+     */
+    public static function findByPasswordResetToken($token)
+    {
+        if (!is_string($token) || $token === '') {
+            return null;
+        }
+
+        $user = self::model()->notDeleted()->findByAttributes(array(
+            'reset_token_hash' => hash('sha256', $token),
+        ));
+
+        if ($user === null || $user->reset_token_expires_at === null
+                || strtotime($user->reset_token_expires_at) < time()) {
+            return null;
+        }
+
+        return $user;
+    }
+
+    /**
+     * Xoá token đặt lại mật khẩu (sau khi dùng xong hoặc huỷ).
+     */
+    public function clearPasswordResetToken()
+    {
+        $this->saveAttributes(array(
+            'reset_token_hash'       => null,
+            'reset_token_expires_at' => null,
+        ));
+    }
+
     public function getDisplayName()
     {
         return $this->full_name;
