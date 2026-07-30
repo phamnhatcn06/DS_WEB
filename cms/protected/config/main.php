@@ -87,6 +87,8 @@ return array(
                 'admin'                                  => 'admin/default/index',
                 'admin/dang-nhap'                        => 'admin/auth/login',
                 'admin/dang-xuat'                        => 'admin/auth/logout',
+                'admin/quen-mat-khau'                    => 'admin/auth/requestPasswordReset',
+                'admin/dat-lai-mat-khau'                 => 'admin/auth/resetPassword',
                 // Luật cụ thể hơn phải đứng trước: Yii1 khớp theo thứ tự, nếu
                 // để luật 2 đoạn lên trên thì luật có <id> sẽ không bao giờ khớp.
                 'admin/<controller:\w+>/<action:\w+>/<id:\d+>' => 'admin/<controller>/<action>',
