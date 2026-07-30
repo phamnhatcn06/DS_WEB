@@ -323,6 +323,29 @@
         nextButton.addEventListener('click', function () { scrollByOneCard(1); });
       }
 
+      /**
+       * Khi hover một thẻ đang bị cắt ở mép slider, cuộn nhẹ để lộ trọn thẻ
+       * ra trong vùng nhìn, giúp caption (đè trên ảnh) không bị cắt mất.
+       */
+      function revealOnHover(item) {
+        var trackRect = track.getBoundingClientRect();
+        var itemRect = item.getBoundingClientRect();
+        var overflowLeft = trackRect.left - itemRect.left;
+        var overflowRight = itemRect.right - trackRect.right;
+        var margin = 12;
+
+        if (overflowLeft > 0) {
+          track.scrollBy({ left: -(overflowLeft + margin), behavior: 'smooth' });
+        } else if (overflowRight > 0) {
+          track.scrollBy({ left: overflowRight + margin, behavior: 'smooth' });
+        }
+      }
+
+      items.forEach(function (item) {
+        item.addEventListener('mouseenter', function () { revealOnHover(item); });
+        item.addEventListener('focusin', function () { revealOnHover(item); });
+      });
+
       centerMiddleCard();
       window.addEventListener('resize', centerMiddleCard);
     });
