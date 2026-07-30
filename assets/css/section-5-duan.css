@@ -122,8 +122,6 @@
   transition: opacity var(--transition-base), transform var(--transition-base);
 }
 
-.duan-caption h3 { text-shadow: 0 1px 3px rgba(0, 0, 0, .6); }
-
 .duan-caption h3 {
   color: var(--dsh-white);
   font-size: clamp(1.125rem, 1.4vw, 1.5rem);
@@ -133,6 +131,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6);
 }
 
 .duan-caption p {
