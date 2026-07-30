@@ -111,25 +111,44 @@ class User extends BaseActiveRecord
         $this->password_hash = password_hash($plainPassword, PASSWORD_BCRYPT, array('cost' => $cost));
     }
 
+    /** Sentinel "khoá vĩnh viễn": locked_until đặt xa vô hạn, chỉ mở lại thủ công
+     *  hoặc khi người dùng đặt lại mật khẩu qua email. */
+    const LOCK_FOREVER = '9999-12-31 23:59:59';
+
     public function isLocked()
     {
         return $this->locked_until !== null && strtotime($this->locked_until) > time();
     }
 
     /**
-     * Ghi nhận một lần đăng nhập sai; khoá tài khoản khi vượt ngưỡng.
+     * Ghi nhận một lần đăng nhập sai; KHOÁ VĨNH VIỄN khi vượt ngưỡng.
+     * Tài khoản bị khoá chỉ mở lại được khi đặt lại mật khẩu qua email
+     * (hoặc quản trị viên mở khoá thủ công).
      */
-    public function registerFailedLogin($maxAttempts, $lockoutMinutes)
+    public function registerFailedLogin($maxAttempts)
     {
         $this->failed_login_count = (int) $this->failed_login_count + 1;
 
         $attributes = array('failed_login_count' => $this->failed_login_count);
         if ($this->failed_login_count >= $maxAttempts) {
-            $this->locked_until = date('Y-m-d H:i:s', time() + $lockoutMinutes * 60);
+            $this->locked_until = self::LOCK_FOREVER;
             $attributes['locked_until'] = $this->locked_until;
         }
 
         $this->saveAttributes($attributes);
+    }
+
+    /**
+     * Mở khoá tài khoản và xoá bộ đếm đăng nhập sai.
+     */
+    public function unlock()
+    {
+        $this->failed_login_count = 0;
+        $this->locked_until = null;
+        $this->saveAttributes(array(
+            'failed_login_count' => 0,
+            'locked_until'       => null,
+        ));
     }
 
     public function registerSuccessfulLogin()
