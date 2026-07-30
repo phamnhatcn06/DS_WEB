@@ -202,24 +202,26 @@
     flex: 1 1 auto;
     height: auto;
     padding: 0;
+    overflow: visible;
     background-color: transparent;
     box-shadow: none;
   }
 
   .duan-thumb {
-    flex: 0 0 auto;
     height: clamp(200px, 54vw, 260px);
   }
 
-  /* Caption luôn hiển thị, xuống dòng đầy đủ */
+  /* Caption luôn hiển thị dưới ảnh (không overlay vì thiết bị cảm ứng không hover) */
   .duan-caption {
-    max-height: none;
+    position: static;
     opacity: 1;
-    overflow: visible;
-    padding-top: var(--space-3);
+    transform: none;
+    background-image: none;
+    padding: var(--space-3) 0 0;
   }
 
-  .duan-caption h3 { white-space: normal; }
+  .duan-caption h3 { color: var(--dsh-ink); white-space: normal; }
+  .duan-caption p { color: rgba(0, 0, 0, .5); }
 
   .duan-nav { display: none; }
 }
