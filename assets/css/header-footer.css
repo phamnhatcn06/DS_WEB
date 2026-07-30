@@ -173,7 +173,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center bottom;
+  /* Neo lên trên (~35%) để giữ trời + trụ + mặt cầu, cắt tiền cảnh dưới như thiết kế */
+  object-position: center 35%;
 }
 
 /* Lớp phủ tối trên ảnh cầu (khớp Figma): tối đều + đậm dần xuống đáy hoà vào navy footer */
