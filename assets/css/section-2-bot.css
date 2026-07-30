@@ -213,8 +213,8 @@
 .bot-slider .nav-btn img { width: 16px; height: 16px; }
 
 @media (max-width: 991.98px) {
-  .bot-card { position: static; max-width: none; margin-top: var(--space-4); }
-  .bot-image { box-shadow: none; }
+  .bot-card { position: static; width: auto; max-width: none; margin-top: var(--space-4); right: auto; bottom: auto; }
+  .bot-image { box-shadow: 12px 10px 2px rgba(0, 0, 0, .22); }
 }
 
 /* Mobile (Figma op1-3-mobile): cột nội dung canh giữa, 2 nút cạnh nhau.
