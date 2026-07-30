@@ -115,7 +115,8 @@
   aspect-ratio: 761 / 508;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .3);
+  /* Khớp Figma: bóng cứng lệch xuống phải (x22 y18, blur 2) */
+  box-shadow: 22px 18px 2px rgba(0, 0, 0, .25);
   display: block;
 }
 
