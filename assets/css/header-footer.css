@@ -184,9 +184,9 @@
   pointer-events: none;
   background:
     linear-gradient(180deg,
-      rgba(8, 15, 29, .55) 0%,
-      rgba(8, 15, 29, .40) 45%,
-      rgba(16, 28, 54, .92) 100%);
+      rgba(8, 15, 29, .32) 0%,
+      rgba(8, 15, 29, .20) 45%,
+      rgba(16, 28, 54, .85) 100%);
 }
 
 .cta-inner {
