@@ -80,7 +80,9 @@ return array(
 
         'urlManager' => array(
             'urlFormat'      => 'path',
-            'showScriptName' => true,
+            // false => URL sạch (/admin/dang-nhap) nhờ .htaccess rewrite về index.php.
+            // Nếu server CHƯA bật mod_rewrite, đổi lại true và dùng /index.php/admin/dang-nhap.
+            'showScriptName' => false,
             'rules' => array(
                 'admin'                                  => 'admin/default/index',
                 'admin/dang-nhap'                        => 'admin/auth/login',
