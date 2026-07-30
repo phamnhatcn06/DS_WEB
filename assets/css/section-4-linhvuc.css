@@ -93,7 +93,6 @@
   z-index: 1;
 }
 
-.linhvuc-item:hover::after { width: 100%; }
 
 /* -------- Hiệu ứng spotlight: làm nổi thẻ đang hover, làm mờ các thẻ còn lại -------- */
 /* Khi trỏ vào dải thẻ, mọi thẻ tối & mờ đi (nền) */
