@@ -79,8 +79,8 @@ class UserIdentity extends CUserIdentity
     {
         switch ($this->errorCode) {
             case self::ERROR_ACCOUNT_LOCKED:
-                return 'Tài khoản đang tạm khoá do đăng nhập sai nhiều lần. Vui lòng thử lại sau '
-                    . self::LOCKOUT_MINUTES . ' phút.';
+                return 'Tài khoản đã bị khoá do đăng nhập sai quá ' . self::MAX_FAILED_ATTEMPTS
+                    . ' lần. Vui lòng dùng chức năng "Quên mật khẩu?" để đặt lại mật khẩu và mở khoá.';
             case self::ERROR_ACCOUNT_DISABLED:
                 return 'Tài khoản đã bị vô hiệu hoá. Liên hệ quản trị viên.';
             default:
