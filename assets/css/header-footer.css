@@ -154,20 +154,15 @@
 /* ===================== Footer ===================== */
 .site-footer { background-color: var(--dsh-navy); }
 
-/* -------- CTA banner nền ảnh cầu -------- */
-.cta-banner {
+/* -------- Footer-top: ảnh cầu làm nền cho cả CTA + 4 cột (Figma frame ~775px) -------- */
+.footer-hero {
   position: relative;
   background-color: #101c36;
-  /* Khớp Figma: dải banner ~482px ở khung 1920, co giãn theo bề rộng */
-  min-height: clamp(360px, 25vw, 482px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
   border-top: 1px solid rgba(255, 255, 255, .12);
 }
 
-.cta-banner .cta-bg {
+.footer-hero .cta-bg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -177,8 +172,8 @@
   object-position: center 35%;
 }
 
-/* Lớp phủ tối trên ảnh cầu (khớp Figma): tối đều + đậm dần xuống đáy hoà vào navy footer */
-.cta-banner::after {
+/* Lớp phủ tối: nhẹ ở vùng CTA (thấy rõ ảnh cầu) → đậm dần thành navy ở vùng 4 cột */
+.footer-hero::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -187,13 +182,20 @@
   background:
     linear-gradient(180deg,
       rgba(8, 15, 29, .32) 0%,
-      rgba(8, 15, 29, .20) 45%,
-      rgba(16, 28, 54, .85) 100%);
+      rgba(8, 15, 29, .22) 40%,
+      rgba(16, 28, 54, .88) 62%,
+      rgba(8, 15, 29, .97) 100%);
 }
 
+/* Vùng CTA — cao ~482px để dải ảnh cầu khớp thiết kế */
 .cta-inner {
   position: relative;
   z-index: 1;
+  min-height: clamp(360px, 25vw, 482px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: clamp(3rem, 8vw, 6rem) 1rem;
 }
 
