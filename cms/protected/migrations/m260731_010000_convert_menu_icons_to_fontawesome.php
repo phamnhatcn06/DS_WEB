@@ -50,8 +50,8 @@ class m260731_010000_convert_menu_icons_to_fontawesome extends CDbMigration
             $this->getDbConnection()->createCommand()->update(
                 'pvn_menu_items',
                 array('icon' => $bi),
-                'icon = :icon',
-                array(':icon' => $fa)
+                'icon = :old',
+                array(':old' => $fa)
             );
         }
         if (Yii::app()->cache !== null) {
