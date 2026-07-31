@@ -68,20 +68,20 @@ $items = $dataProvider->getData();
             <?php endforeach; ?>
 
             <td class="text-end">
-              <div class="btn-group btn-group-sm">
+              <div class="table-actions">
                 <?php if ($this->getSortable() && $canUpdate): ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
-                      array('id' => $item->id, 'dir' => 'up')), 'post', array('class' => 'd-inline')); ?>
-                    <button class="btn btn-outline-secondary" title="Lên trên"><i class="fa fa-arrow-up"></i></button>
+                      array('id' => $item->id, 'dir' => 'up')), 'post'); ?>
+                    <button class="btn btn-action" title="Lên trên"><i class="fa fa-arrow-up"></i></button>
                   <?php echo CHtml::endForm(); ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
-                      array('id' => $item->id, 'dir' => 'down')), 'post', array('class' => 'd-inline')); ?>
-                    <button class="btn btn-outline-secondary" title="Xuống dưới"><i class="fa fa-arrow-down"></i></button>
+                      array('id' => $item->id, 'dir' => 'down')), 'post'); ?>
+                    <button class="btn btn-action" title="Xuống dưới"><i class="fa fa-arrow-down"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
 
                 <?php if ($canUpdate): ?>
-                  <a class="btn btn-outline-primary" title="Sửa"
+                  <a class="btn btn-action btn-action--edit" title="Sửa"
                      href="<?php echo $this->createUrl('update', array('id' => $item->id)); ?>">
                     <i class="fa fa-pencil"></i>
                   </a>
@@ -90,11 +90,10 @@ $items = $dataProvider->getData();
                 <?php if ($canDelete): ?>
                   <?php echo CHtml::beginForm($this->createUrl('delete', array('id' => $item->id)), 'post',
                       array(
-                          'class'        => 'd-inline',
                           'data-confirm' => 'Xoá “' . $item->getDisplayName() . '”? '
                               . 'Bản ghi sẽ được đánh dấu đã xoá và không còn hiển thị trên website.',
                       )); ?>
-                    <button class="btn btn-outline-danger" title="Xoá"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-action btn-action--delete" title="Xoá"><i class="fa fa-trash"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
               </div>
