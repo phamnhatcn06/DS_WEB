@@ -48,17 +48,17 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
               <span class="badge bg-secondary-subtle text-secondary">đã ẩn</span>
             <?php endif; ?>
 
-            <span class="ms-auto btn-group btn-group-sm">
+            <span class="ms-auto table-actions">
               <?php if ($canUpdate): ?>
-                <a class="btn btn-outline-primary" title="Sửa"
+                <a class="btn btn-action btn-action--edit" title="Sửa"
                    href="<?php echo $that->createUrl('update', array('id' => $item->id)); ?>">
                   <i class="fa fa-pencil"></i>
                 </a>
               <?php endif; ?>
 
               <?php if ($canUpdate && !$item->is_protected): ?>
-                <?php echo CHtml::beginForm($that->createUrl('toggle', array('id' => $item->id)), 'post', array('class' => 'd-inline')); ?>
-                  <button class="btn btn-outline-secondary" title="<?php echo $item->is_active ? 'Ẩn' : 'Hiện'; ?>">
+                <?php echo CHtml::beginForm($that->createUrl('toggle', array('id' => $item->id)), 'post'); ?>
+                  <button class="btn btn-action" title="<?php echo $item->is_active ? 'Ẩn' : 'Hiện'; ?>">
                     <i class="fa fa-eye<?php echo $item->is_active ? '-slash' : ''; ?>"></i>
                   </button>
                 <?php echo CHtml::endForm(); ?>
@@ -67,8 +67,8 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
               <?php if ($canDelete && !$item->is_protected): ?>
                 <?php $formId = 'del-item-' . $item->id; ?>
                 <?php echo CHtml::beginForm($that->createUrl('delete', array('id' => $item->id)), 'post',
-                    array('class' => 'd-inline', 'id' => $formId)); ?>
-                  <button type="button" class="btn btn-outline-danger" title="Xoá"
+                    array('id' => $formId)); ?>
+                  <button type="button" class="btn btn-action btn-action--delete" title="Xoá"
                           onclick="confirmDelete('<?php echo $formId; ?>')">
                     <i class="fa fa-trash"></i>
                   </button>
