@@ -36,6 +36,9 @@ return array(
         'admin' => array(
             'class' => 'application.modules.admin.AdminModule',
         ),
+        'frontend' => array(
+            'class' => 'application.modules.frontend.FrontendModule',
+        ),
     ),
 
     'components' => array(
