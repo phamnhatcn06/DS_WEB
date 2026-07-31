@@ -153,42 +153,9 @@ class MenuController extends AdminController
             $map[(int) $it->id] = $it;
         }
 
-        $updates = array(); // id => array(parent_id, sort_order, depth)
-        $seen = array();
-        $maxDepth = (int) $location->max_depth;
-
-        $walk = function ($nodes, $parentId, $depth) use (&$walk, $map, &$updates, &$seen, $maxDepth) {
-            $order = 0;
-            foreach ($nodes as $node) {
-                $nid = isset($node['id']) ? (int) $node['id'] : 0;
-                if (!isset($map[$nid])) {
-                    throw new CHttpException(400, 'Mục #' . $nid . ' không thuộc vị trí menu này.');
-                }
-                if (isset($seen[$nid])) {
-                    throw new CHttpException(400, 'Mục #' . $nid . ' xuất hiện trùng lặp.');
-                }
-                if ($depth > $maxDepth - 1) {
-                    throw new CHttpException(400, 'Vượt quá số cấp tối đa (' . $maxDepth . ').');
-                }
-                $seen[$nid] = true;
-
-                $children = isset($node['children']) && is_array($node['children']) ? $node['children'] : array();
-                if ($children && $map[$nid]->isDivider()) {
-                    throw new CHttpException(400, 'Không thể đặt mục con dưới một divider.');
-                }
-
-                $updates[$nid] = array(
-                    'parent_id'  => $parentId,
-                    'sort_order' => ++$order,
-                    'depth'      => $depth,
-                );
-                $walk($children, $nid, $depth + 1);
-            }
-        };
-
         $transaction = Yii::app()->db->beginTransaction();
         try {
-            $walk($tree, null, 0);
+            $updates = $this->buildReorderUpdates($tree, $map, (int) $location->max_depth);
             foreach ($updates as $itemId => $attrs) {
                 $map[$itemId]->saveAttributes($attrs);
             }
