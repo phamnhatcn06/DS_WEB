@@ -50,7 +50,7 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
 
             <span class="ms-auto table-actions">
               <?php if ($canUpdate): ?>
-                <a class="btn btn-action btn-action--edit" title="Sửa"
+                <a class="btn btn-sm btn-action btn-action--edit" title="Sửa"
                    href="<?php echo $that->createUrl('update', array('id' => $item->id)); ?>">
                   <i class="fa fa-pencil"></i>
                 </a>
@@ -58,7 +58,7 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
 
               <?php if ($canUpdate && !$item->is_protected): ?>
                 <?php echo CHtml::beginForm($that->createUrl('toggle', array('id' => $item->id)), 'post'); ?>
-                  <button class="btn btn-action" title="<?php echo $item->is_active ? 'Ẩn' : 'Hiện'; ?>">
+                  <button class="btn btn-sm btn-action" title="<?php echo $item->is_active ? 'Ẩn' : 'Hiện'; ?>">
                     <i class="fa fa-eye<?php echo $item->is_active ? '-slash' : ''; ?>"></i>
                   </button>
                 <?php echo CHtml::endForm(); ?>
@@ -68,7 +68,7 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
                 <?php $formId = 'del-item-' . $item->id; ?>
                 <?php echo CHtml::beginForm($that->createUrl('delete', array('id' => $item->id)), 'post',
                     array('id' => $formId)); ?>
-                  <button type="button" class="btn btn-action btn-action--delete" title="Xoá"
+                  <button type="button" class="btn btn-sm btn-action btn-action--delete" title="Xoá"
                           onclick="confirmDelete('<?php echo $formId; ?>')">
                     <i class="fa fa-trash"></i>
                   </button>

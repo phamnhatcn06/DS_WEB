@@ -72,16 +72,16 @@ $items = $dataProvider->getData();
                 <?php if ($this->getSortable() && $canUpdate): ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
                       array('id' => $item->id, 'dir' => 'up')), 'post'); ?>
-                    <button class="btn btn-action" title="Lên trên"><i class="fa fa-arrow-up"></i></button>
+                    <button class="btn btn-sm btn-action" title="Lên trên"><i class="fa fa-arrow-up"></i></button>
                   <?php echo CHtml::endForm(); ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
                       array('id' => $item->id, 'dir' => 'down')), 'post'); ?>
-                    <button class="btn btn-action" title="Xuống dưới"><i class="fa fa-arrow-down"></i></button>
+                    <button class="btn btn-sm btn-action" title="Xuống dưới"><i class="fa fa-arrow-down"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
 
                 <?php if ($canUpdate): ?>
-                  <a class="btn btn-action btn-action--edit" title="Sửa"
+                  <a class="btn btn-sm btn-action btn-action--edit" title="Sửa"
                      href="<?php echo $this->createUrl('update', array('id' => $item->id)); ?>">
                     <i class="fa fa-pencil"></i>
                   </a>
@@ -93,7 +93,7 @@ $items = $dataProvider->getData();
                           'data-confirm' => 'Xoá “' . $item->getDisplayName() . '”? '
                               . 'Bản ghi sẽ được đánh dấu đã xoá và không còn hiển thị trên website.',
                       )); ?>
-                    <button class="btn btn-action btn-action--delete" title="Xoá"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-sm btn-action btn-action--delete" title="Xoá"><i class="fa fa-trash"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
               </div>
