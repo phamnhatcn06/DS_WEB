@@ -9,27 +9,6 @@ $baseUrl = Yii::app()->theme->baseUrl;                 // asset theme Hope UI
 $appName = Yii::app()->name;
 $user = Yii::app()->user;
 
-/** Menu bên trái: nhãn, route, icon (FontAwesome), quyền RBAC cần có (null = ai cũng thấy). */
-$menu = array(
-    array('label' => 'Tổng quan',          'route' => '/admin/default/index',      'icon' => 'fa-tachometer',   'perm' => null),
-    array('divider' => 'Nội dung trang chủ'),
-    array('label' => 'Hero slider',        'route' => '/admin/heroSlide/index',    'icon' => 'fa-clone',        'perm' => 'hero_slides.view'),
-    array('label' => 'Lĩnh vực kinh doanh','route' => '/admin/sector/index',       'icon' => 'fa-sitemap',      'perm' => 'business_sectors.view'),
-    array('label' => 'Dự án',              'route' => '/admin/project/index',      'icon' => 'fa-building',     'perm' => 'projects.view'),
-    array('label' => 'Giá trị cốt lõi',    'route' => '/admin/coreValue/index',    'icon' => 'fa-trophy',       'perm' => 'core_values.view'),
-    array('label' => 'Hành trình',         'route' => '/admin/timeline/index',     'icon' => 'fa-history',      'perm' => 'timeline_milestones.view'),
-    array('label' => 'Đối tác & cổ đông',  'route' => '/admin/partner/index',      'icon' => 'fa-users',        'perm' => 'partners.view'),
-    array('divider' => 'Tin tức'),
-    array('label' => 'Bài viết',           'route' => '/admin/newsPost/index',     'icon' => 'fa-newspaper-o',  'perm' => 'news_posts.view'),
-    array('label' => 'Danh mục tin',       'route' => '/admin/newsCategory/index', 'icon' => 'fa-tags',         'perm' => 'news_categories.view'),
-    array('divider' => 'Hệ thống'),
-    array('label' => 'Menu website',       'route' => '/admin/menu/index',         'icon' => 'fa-list-ul',      'perm' => 'menus.view'),
-    array('label' => 'Thư viện media',     'route' => '/admin/media/index',        'icon' => 'fa-picture-o',    'perm' => 'media.view'),
-    array('label' => 'Cấu hình website',   'route' => '/admin/setting/index',      'icon' => 'fa-cog',          'perm' => 'settings.view'),
-    array('label' => 'Người dùng',         'route' => '/admin/user/index',         'icon' => 'fa-user',         'perm' => 'users.view'),
-    array('label' => 'Nhật ký',            'route' => '/admin/audit/index',        'icon' => 'fa-file-text-o',  'perm' => 'audit.view'),
-);
-
 $currentRoute = '/' . Yii::app()->controller->module->id . '/'
     . Yii::app()->controller->id . '/' . Yii::app()->controller->action->id;
 ?>
