@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 30/07/2026 17:06:12
+ Date: 31/07/2026 17:21:12
 */
 
 SET NAMES utf8mb4;
@@ -40,6 +40,11 @@ INSERT INTO `migrations` VALUES ('m260724_060000_seed_rbac_and_admin', 178488568
 INSERT INTO `migrations` VALUES ('m260724_070000_seed_media_library', 1784885688);
 INSERT INTO `migrations` VALUES ('m260724_080000_seed_homepage_content', 1784886310);
 INSERT INTO `migrations` VALUES ('m260730_000000_add_password_reset_to_users', 1785404042);
+INSERT INTO `migrations` VALUES ('m260731_000000_create_menu_tables', 1785463590);
+INSERT INTO `migrations` VALUES ('m260731_010000_convert_menu_icons_to_fontawesome', 1785467847);
+INSERT INTO `migrations` VALUES ('m260731_020000_seed_frontend_menus', 1785468663);
+INSERT INTO `migrations` VALUES ('m260731_030000_seed_features_admin', 1785481426);
+INSERT INTO `migrations` VALUES ('m260801_000000_seed_roles_module_and_sidebar', 1785469928);
 
 -- ----------------------------
 -- Table structure for pvn_audit_logs
@@ -61,7 +66,7 @@ CREATE TABLE `pvn_audit_logs`  (
   INDEX `idx_audit_logs_user_id_created_at`(`user_id`, `created_at`) USING BTREE,
   INDEX `idx_audit_logs_created_at`(`created_at`) USING BTREE,
   CONSTRAINT `fk_audit_logs_users` FOREIGN KEY (`user_id`) REFERENCES `pvn_users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pvn_audit_logs
@@ -92,6 +97,7 @@ INSERT INTO `pvn_audit_logs` VALUES (23, 1, 'login', 'User', 1, NULL, NULL, '127
 INSERT INTO `pvn_audit_logs` VALUES (24, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-07-30 16:40:12');
 INSERT INTO `pvn_audit_logs` VALUES (25, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'curl/8.18.0', '2026-07-30 16:44:35');
 INSERT INTO `pvn_audit_logs` VALUES (26, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'curl/8.18.0', '2026-07-30 16:52:34');
+INSERT INTO `pvn_audit_logs` VALUES (27, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-07-31 10:05:52');
 
 -- ----------------------------
 -- Table structure for pvn_auth_assignments
@@ -138,6 +144,14 @@ INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'core_values.delete');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'core_values.update');
 INSERT INTO `pvn_auth_item_children` VALUES ('viewer', 'core_values.view');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'editor');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'features.create');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'features.create');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'features.delete');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'features.delete');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'features.update');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'features.update');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'features.view');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'features.view');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'hero_slides.create');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'hero_slides.delete');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'hero_slides.update');
@@ -146,6 +160,16 @@ INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'media.create');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'media.delete');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'media.update');
 INSERT INTO `pvn_auth_item_children` VALUES ('viewer', 'media.view');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'menus.create');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'menus.create');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'menus.delete');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'menus.delete');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'menus.reorder');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'menus.reorder');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'menus.update');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'menus.update');
+INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'menus.view');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'menus.view');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'news_categories.create');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'news_categories.delete');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'news_categories.update');
@@ -162,6 +186,10 @@ INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'projects.create');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'projects.delete');
 INSERT INTO `pvn_auth_item_children` VALUES ('editor', 'projects.update');
 INSERT INTO `pvn_auth_item_children` VALUES ('viewer', 'projects.view');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'roles.create');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'roles.delete');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'roles.update');
+INSERT INTO `pvn_auth_item_children` VALUES ('super_admin', 'roles.view');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'settings.update');
 INSERT INTO `pvn_auth_item_children` VALUES ('admin', 'settings.view');
 INSERT INTO `pvn_auth_item_children` VALUES ('viewer', 'settings.view');
@@ -205,6 +233,10 @@ INSERT INTO `pvn_auth_items` VALUES ('core_values.delete', 0, 'Xoá — Giá tr�
 INSERT INTO `pvn_auth_items` VALUES ('core_values.update', 0, 'Sửa — Giá trị cốt lõi', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('core_values.view', 0, 'Xem — Giá trị cốt lõi', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('editor', 2, 'Biên tập viên', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('features.create', 0, 'Thêm — Cấu hình chức năng', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('features.delete', 0, 'Xoá — Cấu hình chức năng', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('features.update', 0, 'Sửa — Cấu hình chức năng', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('features.view', 0, 'Xem — Cấu hình chức năng', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('guest', 2, 'Khách', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('hero_slides.create', 0, 'Thêm — Hero slider', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('hero_slides.delete', 0, 'Xoá — Hero slider', NULL, 'N;');
@@ -214,6 +246,11 @@ INSERT INTO `pvn_auth_items` VALUES ('media.create', 0, 'Thêm — Thư viện m
 INSERT INTO `pvn_auth_items` VALUES ('media.delete', 0, 'Xoá — Thư viện media', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('media.update', 0, 'Sửa — Thư viện media', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('media.view', 0, 'Xem — Thư viện media', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('menus.create', 0, 'Thêm — Quản lý menu', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('menus.delete', 0, 'Xoá — Quản lý menu', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('menus.reorder', 0, 'Sắp xếp — Quản lý menu', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('menus.update', 0, 'Sửa — Quản lý menu', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('menus.view', 0, 'Xem — Quản lý menu', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('news_categories.create', 0, 'Thêm — Danh mục tin', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('news_categories.delete', 0, 'Xoá — Danh mục tin', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('news_categories.update', 0, 'Sửa — Danh mục tin', NULL, 'N;');
@@ -230,6 +267,10 @@ INSERT INTO `pvn_auth_items` VALUES ('projects.create', 0, 'Thêm — Dự án',
 INSERT INTO `pvn_auth_items` VALUES ('projects.delete', 0, 'Xoá — Dự án', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('projects.update', 0, 'Sửa — Dự án', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('projects.view', 0, 'Xem — Dự án', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('roles.create', 0, 'Thêm — Nhóm quyền', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('roles.delete', 0, 'Xoá — Nhóm quyền', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('roles.update', 0, 'Sửa — Nhóm quyền', NULL, 'N;');
+INSERT INTO `pvn_auth_items` VALUES ('roles.view', 0, 'Xem — Nhóm quyền', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('settings.create', 0, 'Thêm — Cấu hình website', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('settings.delete', 0, 'Xoá — Cấu hình website', NULL, 'N;');
 INSERT INTO `pvn_auth_items` VALUES ('settings.update', 0, 'Sửa — Cấu hình website', NULL, 'N;');
@@ -456,6 +497,114 @@ CREATE TABLE `pvn_media_folders`  (
 -- Records of pvn_media_folders
 -- ----------------------------
 INSERT INTO `pvn_media_folders` VALUES (1, NULL, 'Ảnh website', 'anh-website', 1, '2026-07-24 16:34:47', '2026-07-24 16:34:47', NULL);
+
+-- ----------------------------
+-- Table structure for pvn_menu_items
+-- ----------------------------
+DROP TABLE IF EXISTS `pvn_menu_items`;
+CREATE TABLE `pvn_menu_items`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `location_id` int(10) UNSIGNED NOT NULL,
+  `parent_id` int(10) UNSIGNED NULL DEFAULT NULL COMMENT 'NULL = mục gốc',
+  `title` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'route' COMMENT 'route|url|divider',
+  `route` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Route Yii nội bộ khi item_type=route',
+  `url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Link khi item_type=url',
+  `target` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '_self' COMMENT '_self|_blank',
+  `icon` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Class Bootstrap Icons bi-*',
+  `perm` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'Khoá RBAC; NULL = ai cũng thấy',
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `depth` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Cache độ sâu (0 = gốc)',
+  `is_protected` tinyint(1) NOT NULL DEFAULT 0 COMMENT '1 = không cho xoá/ẩn',
+  `css_class` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx_menu_items_location`(`location_id`) USING BTREE,
+  INDEX `idx_menu_items_parent`(`parent_id`) USING BTREE,
+  INDEX `idx_menu_items_sort`(`location_id`, `parent_id`, `sort_order`) USING BTREE,
+  CONSTRAINT `fk_menu_items_location` FOREIGN KEY (`location_id`) REFERENCES `pvn_menu_locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_menu_items_parent` FOREIGN KEY (`parent_id`) REFERENCES `pvn_menu_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pvn_menu_items
+-- ----------------------------
+INSERT INTO `pvn_menu_items` VALUES (18, 2, NULL, 'Về chúng tôi', 'url', NULL, 'about.html', '_self', NULL, NULL, 1, 0, 0, 'nav-caret', 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (19, 2, 18, 'Giới thiệu', 'url', NULL, 'about.html', '_self', NULL, NULL, 1, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (20, 2, 18, 'Sứ mệnh - Tầm nhìn', 'url', NULL, 'sumenh.html', '_self', NULL, NULL, 2, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (21, 2, 18, 'Sơ đồ tổ chức', 'url', NULL, 'sodo-to-chuc.html', '_self', NULL, NULL, 3, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (22, 2, NULL, 'Lĩnh vực', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 2, 0, 0, 'nav-caret', 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (23, 2, NULL, 'Dự án', 'url', NULL, '#du-an', '_self', NULL, NULL, 3, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (24, 2, NULL, 'Quan hệ cổ đông', 'url', NULL, '#co-dong', '_self', NULL, NULL, 4, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (25, 2, NULL, 'Tin tức', 'url', NULL, 'tintuc.html', '_self', NULL, NULL, 5, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (26, 3, NULL, 'Giới thiệu', 'url', NULL, '#gioi-thieu', '_self', NULL, NULL, 1, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (27, 3, NULL, 'Tầm nhìn & Sứ mệnh', 'url', NULL, '#gioi-thieu', '_self', NULL, NULL, 2, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (28, 3, NULL, 'Ban lãnh đạo', 'url', NULL, '#gioi-thieu', '_self', NULL, NULL, 3, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (29, 3, NULL, 'Giá trị cốt lõi', 'url', NULL, '#gioi-thieu', '_self', NULL, NULL, 4, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (30, 3, NULL, 'Trách nhiệm XH', 'url', NULL, '#gioi-thieu', '_self', NULL, NULL, 5, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (31, 4, NULL, 'Thi công & Xây lắp', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 1, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (32, 4, NULL, 'Đầu tư BOT', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 2, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (33, 4, NULL, 'Nhà ở & Đô thị', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 3, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (34, 4, NULL, 'Năng lượng & KCN', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 4, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (35, 5, NULL, 'BOT Hà Nội – Bắc Giang', 'url', NULL, '#du-an', '_self', NULL, NULL, 1, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (36, 5, NULL, 'Nhà ở XH Bãi Viên', 'url', NULL, '#du-an', '_self', NULL, NULL, 2, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (37, 5, NULL, 'Cao tốc TQ–HG', 'url', NULL, '#du-an', '_self', NULL, NULL, 3, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (38, 5, NULL, 'Mỹ Đình – Bái Đính', 'url', NULL, '#du-an', '_self', NULL, NULL, 4, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (39, 6, NULL, 'Báo cáo tài chính', 'url', NULL, '#co-dong', '_self', NULL, NULL, 1, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (40, 6, NULL, 'Công bố thông tin', 'url', NULL, '#co-dong', '_self', NULL, NULL, 2, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (41, 6, NULL, 'Báo cáo thường niên', 'url', NULL, '#co-dong', '_self', NULL, NULL, 3, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (42, 6, NULL, 'ĐHĐCĐ 2026', 'url', NULL, '#co-dong', '_self', NULL, NULL, 4, 0, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (43, 7, NULL, 'Tổng quan', 'route', '/admin/default/index', NULL, '_self', 'fa-tachometer', NULL, 1, 0, 1, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (44, 7, NULL, 'Nội dung trang chủ', 'divider', NULL, NULL, '_self', NULL, NULL, 2, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (45, 7, NULL, 'Hero slider', 'route', '/admin/heroSlide/index', NULL, '_self', 'fa-clone', 'hero_slides.view', 3, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (46, 7, NULL, 'Lĩnh vực kinh doanh', 'route', '/admin/sector/index', NULL, '_self', 'fa-sitemap', 'business_sectors.view', 4, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (47, 7, NULL, 'Dự án', 'route', '/admin/project/index', NULL, '_self', 'fa-building', 'projects.view', 5, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (48, 7, NULL, 'Giá trị cốt lõi', 'route', '/admin/coreValue/index', NULL, '_self', 'fa-trophy', 'core_values.view', 6, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (49, 7, NULL, 'Hành trình', 'route', '/admin/timeline/index', NULL, '_self', 'fa-history', 'timeline_milestones.view', 7, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (50, 7, NULL, 'Đối tác & cổ đông', 'route', '/admin/partner/index', NULL, '_self', 'fa-users', 'partners.view', 8, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (51, 7, NULL, 'Tin tức', 'divider', NULL, NULL, '_self', NULL, NULL, 9, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (52, 7, NULL, 'Bài viết', 'route', '/admin/newsPost/index', NULL, '_self', 'fa-newspaper-o', 'news_posts.view', 10, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (53, 7, NULL, 'Danh mục tin', 'route', '/admin/newsCategory/index', NULL, '_self', 'fa-tags', 'news_categories.view', 11, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (54, 7, NULL, 'Hệ thống', 'divider', NULL, NULL, '_self', NULL, NULL, 12, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (55, 7, NULL, 'Menu website', 'route', '/admin/menu/index', NULL, '_self', 'fa-list-ul', 'menus.view', 13, 0, 1, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (56, 7, NULL, 'Thư viện media', 'route', '/admin/media/index', NULL, '_self', 'fa-picture-o', 'media.view', 14, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (57, 7, NULL, 'Cấu hình website', 'route', '/admin/setting/index', NULL, '_self', 'fa-cog', 'settings.view', 15, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (58, 7, NULL, 'Người dùng', 'route', '/admin/user/index', NULL, '_self', 'fa-user', 'users.view', 16, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (59, 7, NULL, 'Nhóm quyền', 'route', '/admin/role/index', NULL, '_self', 'fa-shield', 'roles.view', 17, 0, 1, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (60, 7, NULL, 'Nhật ký', 'route', '/admin/audit/index', NULL, '_self', 'fa-file-text-o', 'audit.view', 18, 0, 0, NULL, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
+INSERT INTO `pvn_menu_items` VALUES (61, 7, NULL, 'Cấu hình chức năng', 'route', '/admin/feature/index', NULL, '_self', 'fa-sliders', 'features.view', 19, 0, 1, NULL, 1, '2026-07-31 14:03:46', '2026-07-31 14:03:46', NULL);
+
+-- ----------------------------
+-- Table structure for pvn_menu_locations
+-- ----------------------------
+DROP TABLE IF EXISTS `pvn_menu_locations`;
+CREATE TABLE `pvn_menu_locations`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Slug bất biến dùng trong code',
+  `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
+  `supports_nesting` tinyint(1) NOT NULL DEFAULT 1,
+  `max_depth` tinyint(4) NOT NULL DEFAULT 2 COMMENT 'Số cấp tối đa',
+  `is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` datetime NULL DEFAULT NULL,
+  `updated_at` datetime NULL DEFAULT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uniq_menu_locations_code`(`code`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pvn_menu_locations
+-- ----------------------------
+INSERT INTO `pvn_menu_locations` VALUES (2, 'public_header', 'Menu Header', 'Thanh điều hướng chính trên header website.', 1, 2, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_locations` VALUES (3, 'public_footer_about', 'Về Đông Sơn', 'Cột 2 của footer.', 0, 1, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_locations` VALUES (4, 'public_footer_sectors', 'Lĩnh vực', 'Cột 3 của footer.', 0, 1, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_locations` VALUES (5, 'public_footer_projects', 'Dự án', 'Cột 4 của footer.', 0, 1, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_locations` VALUES (6, 'public_footer_investors', 'Nhà đầu tư', 'Cột 5 của footer.', 0, 1, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_locations` VALUES (7, 'admin_sidebar', 'Sidebar quản trị', 'Menu bên trái trong khu vực quản trị (main.php).', 1, 2, 1, '2026-07-31 10:52:08', '2026-07-31 10:52:08', NULL);
 
 -- ----------------------------
 -- Table structure for pvn_news_categories
@@ -749,6 +898,6 @@ CREATE TABLE `pvn_users`  (
 -- ----------------------------
 -- Records of pvn_users
 -- ----------------------------
-INSERT INTO `pvn_users` VALUES (1, 'admin@htds.vn', '$2y$12$Ir1BnogCBiXXsY0uc3KYoOqHHws6CybhpXpmIcqlGYqkDQxYNUJEu', 'Quản trị hệ thống', NULL, NULL, 1, NULL, '2026-07-30 16:52:34', '127.0.0.1', 0, NULL, NULL, NULL, NULL, '2026-07-24 16:34:47', '2026-07-30 16:34:12', NULL);
+INSERT INTO `pvn_users` VALUES (1, 'admin@htds.vn', '$2y$12$Ir1BnogCBiXXsY0uc3KYoOqHHws6CybhpXpmIcqlGYqkDQxYNUJEu', 'Quản trị hệ thống', NULL, NULL, 1, NULL, '2026-07-31 10:05:52', '127.0.0.1', 0, NULL, NULL, NULL, NULL, '2026-07-24 16:34:47', '2026-07-30 16:34:12', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
