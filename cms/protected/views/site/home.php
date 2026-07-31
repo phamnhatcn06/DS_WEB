@@ -1,0 +1,962 @@
+<?php
+/* Trang chủ DSH render bằng PHP — header/footer menu lấy từ CMS (MenuHelper).
+   $root = base URL tới gốc dự án (nơi chứa /assets và các trang .html). */
+$root = Yii::app()->baseUrl . '/..';
+$base = $root;
+?>
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO -->
+  <title>Đông Sơn Holdings — Kiến tạo hạ tầng, vững bước tương lai</title>
+  <meta name="description"
+        content="Đông Sơn Holdings (DSH) — tập đoàn đầu tư hạ tầng BOT, bất động sản và năng lượng, kiến tạo những công trình trọng điểm cho tương lai Việt Nam." />
+
+  <!-- Fonts (local) -->
+  <link href="<?php echo $root; ?>/assets/fonts/fonts.css" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3 CSS (local) -->
+  <link href="<?php echo $root; ?>/assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons (local) -->
+  <link href="<?php echo $root; ?>/assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="<?php echo $root; ?>/assets/css/variables.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/main.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/components.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/header-footer.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-1-hero.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-2-bot.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-3-about.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-4-linhvuc.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-5-duan.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-6-giatri.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-7-timeline.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-8-doitac.css" rel="stylesheet" />
+  <link href="<?php echo $root; ?>/assets/css/section-9-tintuc.css" rel="stylesheet" />
+  <!-- Lớp chuyển động (nạp cuối để override transition mặc định của section) -->
+  <link href="<?php echo $root; ?>/assets/css/animations.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Sentinel: kích hoạt glassmorphism header khi rời khỏi đỉnh trang -->
+  <span class="header-sentinel" aria-hidden="true"></span>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-4 px-xl-5">
+        <a class="navbar-brand" href="#hero" aria-label="Đông Sơn Holdings">
+          <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="brand-logo" />
+        </a>
+
+        <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
+        <a href="#lien-he" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3">
+          <span class="d-lg-none">Liên hệ</span>
+          <span class="d-none d-lg-inline">Liên hệ ngay</span>
+        </a>
+
+        <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNav" aria-controls="mainNav"
+                aria-expanded="false" aria-label="Mở menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0"><?php echo MenuHelper::renderPublicNav('public_header', $base); ?></ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Section 1: Hero slider ===== -->
+    <section id="hero" class="hero">
+      <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000" data-custom-slider>
+        <div class="carousel-inner">
+
+          <div class="carousel-item hero-item active">
+            <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Đông Sơn Holding</h1>
+              <p class="hero-subtitle">Trở thành doanh nghiệp uy tín trong lĩnh vực<br class="d-none d-md-inline" />
+                năng lượng, bất động sản và xây lắp</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Hạ tầng &amp; BOT</h1>
+              <p class="hero-subtitle">Kết nối hành lang kinh tế, kiến tạo những<br class="d-none d-md-inline" />
+                tuyến giao thông trọng điểm quốc gia</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Bất động sản</h1>
+              <p class="hero-subtitle">Phát triển các khu đô thị và nhà ở bền vững,<br class="d-none d-md-inline" />
+                nâng tầm chất lượng sống cho cộng đồng</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item hero-item">
+            <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="" class="hero-bg" aria-hidden="true" />
+            <div class="container hero-content">
+              <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="hero-logo" />
+              <h1 class="hero-title">Năng lượng</h1>
+              <p class="hero-subtitle">Đầu tư năng lượng tái tạo và khu công nghiệp,<br class="d-none d-md-inline" />
+                hướng tới một tương lai xanh và bền vững</p>
+              <div class="hero-actions">
+                <a href="#du-an" class="btn btn-dsh btn-discover">
+                  Khám phá dự án
+                  <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+                </a>
+                <a href="#linh-vuc" class="btn btn-dark-solid">Lĩnh vực hoạt động</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Điều khiển slider tùy biến -->
+        <div class="container hero-controls">
+          <div class="hero-progress">
+            <span class="hero-counter"><span class="js-counter">01</span> / 04</span>
+            <div class="hero-dashes" role="tablist" aria-label="Chọn slide">
+              <button type="button" class="dash active" data-bs-target="#heroCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" class="dash" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+          </div>
+          <div class="hero-nav">
+            <button type="button" class="nav-btn" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Slide trước">
+              <img src="<?php echo $root; ?>/assets/images/chevron-left.svg" alt="" aria-hidden="true" />
+            </button>
+            <button type="button" class="nav-btn" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Slide sau">
+              <img src="<?php echo $root; ?>/assets/images/chevron-right.svg" alt="" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 2: Đầu tư BOT & Hạ tầng (slider lĩnh vực) ===== -->
+    <section id="bot" class="bot section fade-section">
+      <div id="botCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000" data-custom-slider>
+        <div class="container">
+          <div class="carousel-inner">
+
+            <!-- Slide 1: Thi công & Xây lắp -->
+            <div class="carousel-item active">
+              <div class="row g-5 g-lg-4 align-items-center">
+                <div class="col-12 col-lg-6">
+                  <span class="bot-eyebrow">Thi công &amp; Xây lắp</span>
+                  <h2 class="bot-title">Nền móng<br />cho mọi công trình</h2>
+                  <p class="bot-lead">Tổng thầu thi công các công trình giao thông, hạ tầng kỹ thuật, thủy lợi, dân dụng và công nghiệp trên toàn quốc.</p>
+                  <p class="bot-tags">Tổng thầu · Hạ tầng · Dân dụng · Công nghiệp</p>
+                  <div class="bot-actions">
+                    <a href="#du-an" class="btn btn-discover">Khám phá dự án <span class="arrow-ic" aria-hidden="true"></span></a>
+                    <a href="#linh-vuc" class="btn btn-outline-light-2">Lĩnh vực hoạt động</a>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="bot-visual">
+                    <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="Công trình thi công của Đông Sơn Holdings" class="bot-image" loading="lazy" />
+                    <div class="bot-card">
+                      <h3>Thi công &amp; Xây lắp</h3>
+                      <p>Năng lực tổng thầu EPC cho các công trình trọng điểm, đảm bảo tiến độ, chất lượng và an toàn lao động.</p>
+                      <div class="bot-chips"><span class="chip">EPC</span><span class="chip">Hạ tầng</span><span class="chip">Dân dụng</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2: Đầu tư BOT & Hạ tầng (theo Figma) -->
+            <div class="carousel-item">
+              <div class="row g-5 g-lg-4 align-items-center">
+                <div class="col-12 col-lg-6">
+                  <span class="bot-eyebrow">Đầu tư BOT &amp; Hạ tầng</span>
+                  <h2 class="bot-title">Kết nối<br />hành lang kinh tế</h2>
+                  <p class="bot-lead">Trở thành doanh nghiệp uy tín trong lĩnh vực năng lượng, bất động sản và xây lắp.</p>
+                  <p class="bot-tags">BOT · Cao tốc · Cầu đường · Vành đai</p>
+                  <div class="bot-actions">
+                    <a href="#du-an" class="btn btn-discover">Khám phá dự án <span class="arrow-ic" aria-hidden="true"></span></a>
+                    <a href="#linh-vuc" class="btn btn-outline-light-2">Lĩnh vực hoạt động</a>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="bot-visual">
+                    <img src="<?php echo $root; ?>/assets/images/bot-interchange.webp" alt="Nút giao thông hạ tầng BOT của Đông Sơn Holdings" class="bot-image" loading="lazy" />
+                    <div class="bot-card">
+                      <h3>Đầu tư BOT &amp; Hạ tầng</h3>
+                      <p>Đầu tư các dự án hạ tầng giao thông theo hình thức BOT. Dự án tiêu biểu: BOT Hà Nội – Bắc Giang với tổng mức đầu tư 4.213 tỷ đồng.</p>
+                      <div class="bot-chips"><span class="chip">BOT</span><span class="chip">Cao tốc</span><span class="chip">Cầu đường</span><span class="chip">Vành đai</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3: Nhà ở & Đô thị -->
+            <div class="carousel-item">
+              <div class="row g-5 g-lg-4 align-items-center">
+                <div class="col-12 col-lg-6">
+                  <span class="bot-eyebrow">Nhà ở &amp; Đô thị</span>
+                  <h2 class="bot-title">Kiến tạo<br />không gian sống</h2>
+                  <p class="bot-lead">Phát triển nhà ở xã hội và khu đô thị bền vững, nâng tầm chất lượng sống cho cộng đồng.</p>
+                  <p class="bot-tags">Nhà ở xã hội · Đô thị · Bất động sản</p>
+                  <div class="bot-actions">
+                    <a href="#du-an" class="btn btn-discover">Khám phá dự án <span class="arrow-ic" aria-hidden="true"></span></a>
+                    <a href="#linh-vuc" class="btn btn-outline-light-2">Lĩnh vực hoạt động</a>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="bot-visual">
+                    <img src="<?php echo $root; ?>/assets/images/cta-bridge.webp" alt="Khu đô thị và nhà ở của Đông Sơn Holdings" class="bot-image" loading="lazy" />
+                    <div class="bot-card">
+                      <h3>Nhà ở &amp; Đô thị</h3>
+                      <p>Dự án Nhà ở xã hội Bãi Viên – Nam Định: 1.100 căn hộ, tổng vốn hơn 909 tỷ đồng.</p>
+                      <div class="bot-chips"><span class="chip">Nhà ở XH</span><span class="chip">Đô thị</span><span class="chip">BĐS</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4: Năng lượng & KCN -->
+            <div class="carousel-item">
+              <div class="row g-5 g-lg-4 align-items-center">
+                <div class="col-12 col-lg-6">
+                  <span class="bot-eyebrow">Năng lượng &amp; KCN</span>
+                  <h2 class="bot-title">Động lực<br />tăng trưởng xanh</h2>
+                  <p class="bot-lead">Đầu tư phát triển khu công nghiệp và năng lượng tái tạo, tạo nền tảng tăng trưởng dài hạn.</p>
+                  <p class="bot-tags">Năng lượng tái tạo · Khu công nghiệp</p>
+                  <div class="bot-actions">
+                    <a href="#du-an" class="btn btn-discover">Khám phá dự án <span class="arrow-ic" aria-hidden="true"></span></a>
+                    <a href="#linh-vuc" class="btn btn-outline-light-2">Lĩnh vực hoạt động</a>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <div class="bot-visual">
+                    <img src="<?php echo $root; ?>/assets/images/hero-bg.webp" alt="Dự án năng lượng và khu công nghiệp của Đông Sơn Holdings" class="bot-image" loading="lazy" />
+                    <div class="bot-card">
+                      <h3>Năng lượng &amp; KCN</h3>
+                      <p>Định hướng chiến lược mới: phát triển hạ tầng khu công nghiệp gắn với năng lượng tái tạo.</p>
+                      <div class="bot-chips"><span class="chip">NL tái tạo</span><span class="chip">Khu công nghiệp</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Điều khiển slider -->
+          <div class="bot-slider">
+            <div class="progress-wrap">
+              <span class="counter"><span class="js-counter">01</span> / 04</span>
+              <div class="dashes" role="tablist" aria-label="Chọn slide">
+                <button type="button" class="dash active" data-bs-target="#botCarousel" data-bs-slide-to="0" aria-label="Slide 1"></button>
+                <button type="button" class="dash" data-bs-target="#botCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" class="dash" data-bs-target="#botCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" class="dash" data-bs-target="#botCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+              </div>
+            </div>
+            <div class="nav">
+              <button type="button" class="nav-btn" data-bs-target="#botCarousel" data-bs-slide="prev" aria-label="Trước">
+                <img src="<?php echo $root; ?>/assets/images/chevron-left.svg" alt="" aria-hidden="true" />
+              </button>
+              <button type="button" class="nav-btn" data-bs-target="#botCarousel" data-bs-slide="next" aria-label="Sau">
+                <img src="<?php echo $root; ?>/assets/images/chevron-right.svg" alt="" aria-hidden="true" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 3: Giới thiệu · Sứ mệnh & Tầm nhìn ===== -->
+    <section id="gioi-thieu" class="about section fade-section">
+      <div class="container">
+
+        <!-- Quote -->
+        <blockquote class="about-quote" data-reveal="blur">
+          <span class="quote-mark" aria-hidden="true">&ldquo;&rdquo;</span>
+          <p>&ldquo;Trở thành doanh nghiệp uy tín trong <span class="hl">lĩnh vực năng lượng, bất động sản và xây lắp</span>. Kiến tạo các giá trị bền vững và đồng hành cùng sự phát triển của xã hội.&rdquo;</p>
+        </blockquote>
+
+        <!-- Card 1: Sứ mệnh (desktop: chữ trái · ảnh phải; mobile: ảnh trên) -->
+        <article class="about-card" data-reveal="left">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-12 col-lg-7 about-media">
+              <img src="<?php echo $root; ?>/assets/images/about-construction.webp" alt="Công trình xây dựng của Đông Sơn Holdings" loading="lazy" />
+            </div>
+            <div class="col-12 col-lg-5 about-text order-lg-first">
+              <img src="<?php echo $root; ?>/assets/images/logo-red.webp" alt="" class="card-logo" aria-hidden="true" />
+              <h3>Sứ mệnh</h3>
+              <p>Kiến tạo giá trị bền vững cho khách hàng, đối tác và cộng đồng.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Tầm nhìn (desktop: ảnh trái · chữ phải; mobile: ảnh trên) -->
+        <article class="about-card" data-reveal="right">
+          <div class="row g-0 align-items-stretch">
+            <div class="col-12 col-lg-7 about-media">
+              <img src="<?php echo $root; ?>/assets/images/about-energy.webp" alt="Dự án năng lượng tái tạo của Đông Sơn Holdings" loading="lazy" />
+            </div>
+            <div class="col-12 col-lg-5 about-text">
+              <img src="<?php echo $root; ?>/assets/images/logo-red.webp" alt="" class="card-logo" aria-hidden="true" />
+              <h3>Tầm nhìn</h3>
+              <p>Kiến tạo giá trị bền vững cho khách hàng, đối tác và cộng đồng.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ===== Section 4: Lĩnh vực kinh doanh ===== -->
+    <section id="linh-vuc" class="linhvuc section fade-section">
+      <img src="<?php echo $root; ?>/assets/images/linhvuc-crane.webp" alt="" class="linhvuc-bg" aria-hidden="true" data-parallax="0.18" />
+
+      <div class="container">
+
+        <!-- Đầu section: tiêu đề trái · intro phải -->
+        <div class="row g-4 align-items-center linhvuc-head">
+          <div class="col-12 col-lg-7">
+            <h2 class="linhvuc-title" data-reveal="left">Lĩnh vực<br />kinh doanh</h2>
+          </div>
+          <div class="col-12 col-lg-5">
+            <p class="linhvuc-intro" data-reveal="right">Đông Sơn Holdings hoạt động trên ba trụ cột: đầu tư, bất động sản
+              và xây lắp — đồng thời mở rộng chiến lược vào khu công nghiệp và năng lượng tái tạo.</p>
+          </div>
+        </div>
+
+        <!-- Dải 4 trụ cột 01–04 -->
+        <div class="linhvuc-grid">
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-0">
+
+            <div class="col linhvuc-col">
+              <article class="linhvuc-item">
+                <span class="linhvuc-num" aria-hidden="true">01</span>
+                <div class="linhvuc-body">
+                  <h3>Thi công và xây lắp</h3>
+                  <p>Tổng thầu thi công các công trình giao thông, hạ tầng kỹ thuật, thủy lợi,
+                    dân dụng và công nghiệp trên toàn quốc.</p>
+                  <div class="linhvuc-tags">
+                    <span class="lv-tag">BOT</span>
+                    <span class="lv-tag">Cao tốc</span>
+                    <span class="lv-tag">Cầu đường</span>
+                    <span class="lv-tag">Vành đai</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col linhvuc-col">
+              <article class="linhvuc-item">
+                <span class="linhvuc-num" aria-hidden="true">02</span>
+                <div class="linhvuc-body">
+                  <h3>Đầu tư BOT &amp; Hạ tầng</h3>
+                  <p>Đầu tư các dự án hạ tầng giao thông theo hình thức BOT. Dự án tiêu biểu:
+                    BOT Hà Nội – Bắc Giang với tổng mức đầu tư 4.213 tỷ đồng.</p>
+                  <div class="linhvuc-tags">
+                    <span class="lv-tag">BOT</span>
+                    <span class="lv-tag">Cao tốc</span>
+                    <span class="lv-tag">Cầu đường</span>
+                    <span class="lv-tag">Vành đai</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col linhvuc-col">
+              <article class="linhvuc-item">
+                <span class="linhvuc-num" aria-hidden="true">03</span>
+                <div class="linhvuc-body">
+                  <h3>Nhà ở &amp; Đô thị</h3>
+                  <p>Phát triển nhà ở xã hội và khu đô thị bền vững. Dự án Nhà ở xã hội Bãi Viên –
+                    Nam Định: 1.100 căn hộ, tổng vốn hơn 909 tỷ đồng.</p>
+                  <div class="linhvuc-tags">
+                    <span class="lv-tag">Nhà ở xã hội</span>
+                    <span class="lv-tag">Đô thị</span>
+                    <span class="lv-tag">BĐS</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="col linhvuc-col">
+              <article class="linhvuc-item">
+                <span class="linhvuc-num" aria-hidden="true">04</span>
+                <div class="linhvuc-body">
+                  <h3>Năng lượng &amp; KCN</h3>
+                  <p>Định hướng chiến lược mới: đầu tư phát triển khu công nghiệp và năng lượng
+                    tái tạo, tạo nền tảng tăng trưởng dài hạn.</p>
+                  <div class="linhvuc-tags">
+                    <span class="lv-tag">Năng lượng tái tạo</span>
+                    <span class="lv-tag">Khu công nghiệp</span>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section 5: Dự án tiêu biểu ===== -->
+    <section id="du-an" class="duan fade-section">
+      <div class="container">
+
+        <!-- Đầu section: tiêu đề trái · intro + link phải -->
+        <div class="row g-4 align-items-center duan-head">
+          <div class="col-12 col-lg-7">
+            <h2 class="duan-title" data-reveal="left">Dự án tiêu biểu</h2>
+          </div>
+          <div class="col-12 col-lg-5">
+            <p class="duan-intro">Các công trình trọng điểm quốc gia và dự án đầu tư tiêu biểu
+              của Đông Sơn Holdings.</p>
+            <a class="duan-link" href="#du-an">
+              Xem tất cả dự án
+              <img src="<?php echo $root; ?>/assets/images/arrow-right-red.svg" alt="" class="duan-link-icon" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Slider ảnh dự án: 3 ảnh giữa hiện đủ, 2 ảnh ngoài cắt một nửa -->
+        <div class="duan-slider" data-duan-slider>
+          <button type="button" class="duan-nav duan-nav--prev" data-duan-prev aria-label="Dự án trước">
+            <img src="<?php echo $root; ?>/assets/images/arrow-right-red.svg" alt="" aria-hidden="true" />
+          </button>
+          <div class="duan-gallery" role="list">
+            <figure class="duan-item m-0" role="listitem">
+              <div class="duan-thumb">
+                <img src="<?php echo $root; ?>/assets/images/duan-01-bot.webp" alt="BOT Hà Nội – Bắc Giang, Quốc lộ 1"
+                  class="img-fluid" loading="lazy" />
+              </div>
+              <figcaption class="duan-caption">
+                <h3>BOT Hà Nội – Bắc Giang</h3>
+                <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" />Quốc lộ 1, Hà Nội – Bắc Giang</p>
+              </figcaption>
+            </figure>
+            <figure class="duan-item m-0" role="listitem">
+              <div class="duan-thumb">
+                <img src="<?php echo $root; ?>/assets/images/duan-02-dothi.webp" alt="Khu đô thị hiện đại do Đông Sơn Holdings phát triển"
+                  class="img-fluid" loading="lazy" />
+              </div>
+              <figcaption class="duan-caption">
+                <h3>Khu đô thị Đông Sơn</h3>
+                <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Thanh Hóa</p>
+              </figcaption>
+            </figure>
+            <figure class="duan-item m-0" role="listitem">
+              <div class="duan-thumb">
+                <img src="<?php echo $root; ?>/assets/images/duan-01-bot.webp" alt="Toàn cảnh khu nhà ở xã hội Bãi Viên – Nam Định"
+                  class="img-fluid" loading="lazy" />
+              </div>
+              <figcaption class="duan-caption">
+                <h3>Nhà ở xã hội Bãi Viên</h3>
+                <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Nam Định</p>
+              </figcaption>
+            </figure>
+            <figure class="duan-item m-0" role="listitem">
+              <div class="duan-thumb">
+                <img src="<?php echo $root; ?>/assets/images/duan-03-nhao.webp" alt="Tổ hợp căn hộ đã bàn giao"
+                  class="img-fluid" loading="lazy" />
+              </div>
+              <figcaption class="duan-caption">
+                <h3>Tổ hợp căn hộ Sông Đào</h3>
+                <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Nam Định</p>
+              </figcaption>
+            </figure>
+            <figure class="duan-item m-0" role="listitem">
+              <div class="duan-thumb">
+                <img src="<?php echo $root; ?>/assets/images/duan-04-thicong.webp" alt="Công trình đang thi công phần thân"
+                  class="img-fluid" loading="lazy" />
+              </div>
+              <figcaption class="duan-caption">
+                <h3>Dự án đang thi công</h3>
+                <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" />Hà Nội</p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <button type="button" class="duan-nav duan-nav--next" data-duan-next aria-label="Dự án tiếp theo">
+            <img src="<?php echo $root; ?>/assets/images/arrow-right-red.svg" alt="" aria-hidden="true" />
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section 6: Giá trị cốt lõi ===== -->
+    <section id="gia-tri" class="giatri fade-section">
+      <img src="<?php echo $root; ?>/assets/images/giatri-bg.webp" alt="" class="giatri-bg" aria-hidden="true" loading="lazy" data-parallax="0.2" />
+      <div class="giatri-overlay" aria-hidden="true"></div>
+
+      <div class="container giatri-inner">
+        <div class="row justify-content-end">
+          <div class="col-12 col-lg-9 col-xl-8">
+            <h2 class="giatri-title text-lg-end" data-reveal="right">
+              Xây dựng niềm tin,<em>vươn tới xuất sắc</em>
+            </h2>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+              <div class="col">
+                <article class="giatri-card">
+                  <span class="giatri-icon">
+                    <img src="<?php echo $root; ?>/assets/images/giatri-icon-shield.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3>Trách nhiệm</h3>
+                    <p>Cam kết thực hiện đúng tiến độ, chất lượng và an toàn lao động trong mọi dự án thi công.</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="giatri-card">
+                  <span class="giatri-icon giatri-icon--award">
+                    <img src="<?php echo $root; ?>/assets/images/giatri-icon-award.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3>Chuyên nghiệp</h3>
+                    <p>Đội ngũ kỹ sư, cán bộ kỹ thuật nhiều năm kinh nghiệm trên các công trình trọng điểm quốc gia.</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="giatri-card">
+                  <span class="giatri-icon giatri-icon--inner">
+                    <img src="<?php echo $root; ?>/assets/images/giatri-icon-innovation.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3>Đổi mới</h3>
+                    <p>Không ngừng ứng dụng công nghệ thi công tiên tiến, nâng cao năng lực quản trị và triển khai dự án.</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="col">
+                <article class="giatri-card">
+                  <span class="giatri-icon">
+                    <img src="<?php echo $root; ?>/assets/images/giatri-icon-person.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <h3>Tin cậy</h3>
+                    <p>Đối tác tin cậy của các tổng công ty nhà nước, chủ đầu tư lớn và ban quản lý dự án quốc gia.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 7: Hành trình phát triển (timeline) ===== -->
+    <section id="hanh-trinh" class="timeline section fade-section">
+      <img src="<?php echo $root; ?>/assets/images/timeline-cityscape.svg" alt="" class="timeline-city" aria-hidden="true" loading="lazy" />
+      <div class="container">
+
+        <!-- Đầu section: tiêu đề trái · quote phải -->
+        <div class="row g-4 align-items-center timeline-head">
+          <div class="col-12 col-lg-7">
+            <h2 class="timeline-title" data-reveal="left">Hành trình phát triển</h2>
+          </div>
+          <div class="col-12 col-lg-5">
+            <p class="timeline-quote" data-reveal="right">&ldquo;Thành lập năm 2009, từ một công ty con của Bộ Quốc phòng,
+              Đông Sơn đã vươn lên thành công ty đại chúng niêm yết, định hướng trở thành
+              doanh nghiệp đa ngành hàng đầu.&rdquo;</p>
+          </div>
+        </div>
+
+        <!-- Timeline dọc, mốc năm xen kẽ trái/phải -->
+        <ol class="timeline-track">
+
+          <li class="tl-item tl-left" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Khởi đầu</span>
+              <span class="tl-year">2009</span>
+              <h3 class="tl-heading">Thành lập công ty</h3>
+              <p class="tl-desc">09/12/2009 – Thành lập Công ty CP Đầu tư &amp; Thương mại 319 với sự
+                tham gia của Tổng công ty 319 – Bộ Quốc phòng (51%) và các cổ đông sáng lập.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-right" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Hạ tầng</span>
+              <span class="tl-year">2014</span>
+              <h3 class="tl-heading">Đầu tư BOT Hà Nội – Bắc Giang</h3>
+              <p class="tl-desc">Khởi công dự án cải tạo, nâng cấp Quốc lộ 1 đoạn Hà Nội – Bắc Giang.
+                Tổng mức đầu tư 4.213 tỷ đồng, thời gian thu phí 21 năm.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-left" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Cổ phần hóa</span>
+              <span class="tl-year">2017</span>
+              <h3 class="tl-heading">Thoái vốn Nhà nước</h3>
+              <p class="tl-desc">Tổng công ty 319 bán đấu giá 3,6 triệu cổ phần trên HNX, giảm tỷ lệ
+                từ 51% xuống 15%. Giá trúng đấu giá: 11.900 đồng/CP.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-right" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Tái cơ cấu</span>
+              <span class="tl-year">2019</span>
+              <h3 class="tl-heading">Đổi tên thành Đông Sơn</h3>
+              <p class="tl-desc">31/10/2019 – Chính thức đổi tên thành Công ty CP Đầu tư Hạ tầng
+                Đông Sơn theo Giấy ĐKKD số 10 của Sở KH&amp;ĐT Hà Nội.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-left" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Đại chúng</span>
+              <span class="tl-year">2024</span>
+              <h3 class="tl-heading">Trở thành công ty đại chúng</h3>
+              <p class="tl-desc">25/11/2024 – UBCK xác nhận hoàn thành đăng ký công ty đại chúng.
+                09/12/2024 – Đăng ký lưu ký tập trung tại VSD với mã CK DSH.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-right" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Niêm yết</span>
+              <span class="tl-year">2025</span>
+              <h3 class="tl-heading">Niêm yết UPCOM &amp; tăng vốn</h3>
+              <p class="tl-desc">22/04/2025 – DSH chính thức giao dịch trên UPCOM với giá tham chiếu
+                18.000 đồng/CP. Tháng 11/2025: tăng vốn điều lệ lên 350 tỷ đồng.</p>
+            </article>
+          </li>
+
+          <li class="tl-item tl-left" data-reveal>
+            <span class="tl-node" aria-hidden="true"></span>
+            <article class="tl-card">
+              <span class="tl-eyebrow">Hiện tại</span>
+              <span class="tl-year">2026</span>
+              <h3 class="tl-heading">Đông Sơn Holdings</h3>
+              <p class="tl-desc">Đại hội cổ đông thường niên 2026 thông qua đổi tên thành CTCP
+                Đông Sơn Holdings (DSH). Mở rộng sang lĩnh vực khu công nghiệp và năng lượng.</p>
+            </article>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Section 8: Đối tác & Cổ đông chiến lược ===== -->
+    <section id="co-dong" class="doitac section fade-section">
+      <img src="<?php echo $root; ?>/assets/images/doitac-bridge-night.webp" alt="" class="doitac-bg" aria-hidden="true" loading="lazy" data-parallax="0.2" />
+      <div class="doitac-overlay" aria-hidden="true"></div>
+
+      <div class="container doitac-inner">
+
+        <!-- Tiêu đề trắng căn trái -->
+        <h2 class="doitac-title" data-reveal="left">Đối tác &amp; Cổ đông<br />chiến lược</h2>
+
+        <!-- Grid logo 4×2 -->
+        <div class="row row-cols-2 row-cols-md-4 g-3 g-lg-4" role="list">
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-1.webp" alt="Tổng công ty 319 — Bộ Quốc phòng" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-2.webp" alt="OGC Group" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-3.webp" alt="Vinaconex" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-4.webp" alt="Văn Phú – Invest" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-5.webp" alt="Tư Lập" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-6.webp" alt="Trung tâm Lưu ký &amp; Bù trừ Chứng khoán Việt Nam (VSDC)" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-7.webp" alt="Sở Giao dịch Chứng khoán Hà Nội (HNX)" loading="lazy" />
+            </div>
+          </div>
+          <div class="col" role="listitem">
+            <div class="partner-card">
+              <img src="<?php echo $root; ?>/assets/images/partner-7.webp" alt="Sở Giao dịch Chứng khoán Hà Nội (HNX)" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section 9: Tin tức nổi bật (tab lọc danh mục) ===== -->
+    <section id="tin-tuc" class="tintuc fade-section">
+      <div class="container">
+
+        <!-- Lưới tin: tiêu đề+tab và card lớn cùng nằm ở lane cột 1,
+             card cao giữa · 2 card nhỏ phải bám mép trên = tâm dòng tiêu đề -->
+        <div class="row g-3 g-lg-4 tintuc-layout">
+
+        <!-- Đầu section: tiêu đề + tab lọc danh mục -->
+        <div class="col-12 tintuc-head">
+          <h2 class="tintuc-title" data-reveal="left">Tin tức nổi bật</h2>
+          <ul class="nav filter-pills" role="tablist" data-news-filter>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link active" role="tab" aria-selected="true" data-filter="all">Tất cả</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="du-an">Dự án</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="thi-cong">Thi công</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="dau-tu">Đầu tư</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="co-dong">Cổ đông</button>
+            </li>
+          </ul>
+        </div>
+
+          <div class="col-12 tintuc-col--wide">
+            <article class="news-item" data-category="du-an">
+              <a href="#tin-tuc" class="news-card news-card--lg">
+                <img src="<?php echo $root; ?>/assets/images/news-01.webp" alt="Khu nhà ở xã hội Bãi Viên – Nam Định" class="news-card-img" loading="lazy" />
+                <span class="news-chip">Dự án</span>
+                <div class="news-body">
+                  <p class="news-date">
+                    <img src="<?php echo $root; ?>/assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                    09/03/2026
+                  </p>
+                  <h3 class="news-heading">Đông Sơn Holdings đầu tư dự án nhà ở xã hội Bãi Viên – Nam Định</h3>
+                  <p class="news-excerpt">CTCP Đông Sơn Holdings chính thức công bố đầu tư Khu nhà ở xã hội
+                    Bãi Viên tại TP. Nam Định, tổng mức đầu tư hơn 909 tỷ đồng với 1.100 căn hộ,
+                    khởi công tháng 5/2025.</p>
+                  <span class="news-more">
+                    Đọc tiếp
+                    <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                  </span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 tintuc-col--mid">
+            <article class="news-item" data-category="dau-tu">
+              <a href="#tin-tuc" class="news-card news-card--tall">
+                <img src="<?php echo $root; ?>/assets/images/news-02.webp" alt="Khu đô thị do Đông Sơn Holdings đầu tư" class="news-card-img" loading="lazy" />
+                <span class="news-chip">Đầu tư</span>
+                <div class="news-body">
+                  <p class="news-date">
+                    <img src="<?php echo $root; ?>/assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                    11/2025
+                  </p>
+                  <h3 class="news-heading">Tăng vốn điều lệ lên 350 tỷ đồng, mở rộng danh mục đầu tư</h3>
+                  <span class="news-more">
+                    Đọc tiếp
+                    <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                  </span>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 tintuc-col--narrow">
+            <div class="row g-3 g-lg-4">
+
+              <div class="col-12">
+                <article class="news-item" data-category="thi-cong">
+                  <a href="#tin-tuc" class="news-card news-card--sm">
+                    <img src="<?php echo $root; ?>/assets/images/duan-04-thicong.webp" alt="Công trường thi công của Đông Sơn Holdings" class="news-card-img" loading="lazy" />
+                    <span class="news-chip">Thi công</span>
+                    <div class="news-body">
+                      <p class="news-date">
+                        <img src="<?php echo $root; ?>/assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                        05/2025
+                      </p>
+                      <h3 class="news-heading">Khởi công gói thầu xây lắp trọng điểm, bảo đảm tiến độ toàn tuyến</h3>
+                      <span class="news-more">
+                        Đọc tiếp
+                        <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              </div>
+
+              <div class="col-12">
+                <article class="news-item" data-category="co-dong">
+                  <a href="#tin-tuc" class="news-card news-card--sm">
+                    <img src="<?php echo $root; ?>/assets/images/duan-01-bot.webp" alt="Dự án BOT hạ tầng giao thông của Đông Sơn Holdings" class="news-card-img" loading="lazy" />
+                    <span class="news-chip">Cổ đông</span>
+                    <div class="news-body">
+                      <p class="news-date">
+                        <img src="<?php echo $root; ?>/assets/images/icon-calendar.svg" alt="" aria-hidden="true" />
+                        22/04/2025
+                      </p>
+                      <h3 class="news-heading">Cổ phiếu DSH chính thức giao dịch trên UPCOM</h3>
+                      <span class="news-more">
+                        Đọc tiếp
+                        <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </a>
+                </article>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer" id="lien-he">
+
+    <!-- CTA banner nền ảnh cầu -->
+    <div class="cta-banner fade-section">
+      <img src="<?php echo $root; ?>/assets/images/cta-bridge.webp" alt="" class="cta-bg" aria-hidden="true" data-parallax="0.16" />
+      <div class="cta-inner text-center">
+        <h2 class="cta-title" data-reveal="up">Khám phá tiềm năng<br />Bắt đầu kết nối.</h2>
+        <a href="mailto:hatangdongson@htds.vn" class="btn btn-dsh cta-btn">
+          Liên lạc ngay
+          <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Khối cột -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 g-lg-5">
+
+          <!-- Brand + liên hệ + social -->
+          <div class="col">
+            <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
+            <ul class="list-unstyled footer-contact mb-4">
+              <li>
+                <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Điện thoại</small><strong>024 3933 5708</strong></span>
+              </li>
+              <li>
+                <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-email.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Email</small><strong>hatangdongson@htds.vn</strong></span>
+              </li>
+            </ul>
+            <div class="social-links d-flex gap-2">
+              <a href="#" aria-label="Facebook"><img src="<?php echo $root; ?>/assets/images/social-facebook.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="LinkedIn"><img src="<?php echo $root; ?>/assets/images/social-linkedin.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="YouTube"><img src="<?php echo $root; ?>/assets/images/social-youtube.svg" alt="" aria-hidden="true" /></a>
+            </div>
+          </div>
+
+          <!-- Về Đông Sơn -->
+          <div class="col">
+            <h6><?php echo CHtml::encode(MenuHelper::locationName('public_footer_about')); ?></h6>
+            <ul class="list-unstyled mb-0"><?php echo MenuHelper::renderFooterColumn('public_footer_about', $base); ?></ul>
+          </div>
+
+          <!-- Lĩnh vực -->
+          <div class="col">
+            <h6><?php echo CHtml::encode(MenuHelper::locationName('public_footer_sectors')); ?></h6>
+            <ul class="list-unstyled mb-0"><?php echo MenuHelper::renderFooterColumn('public_footer_sectors', $base); ?></ul>
+          </div>
+
+          <!-- Dự án -->
+          <div class="col">
+            <h6><?php echo CHtml::encode(MenuHelper::locationName('public_footer_projects')); ?></h6>
+            <ul class="list-unstyled mb-0"><?php echo MenuHelper::renderFooterColumn('public_footer_projects', $base); ?></ul>
+          </div>
+
+          <!-- Nhà đầu tư -->
+          <div class="col">
+            <h6><?php echo CHtml::encode(MenuHelper::locationName('public_footer_investors')); ?></h6>
+            <ul class="list-unstyled mb-0"><?php echo MenuHelper::renderFooterColumn('public_footer_investors', $base); ?></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanh dưới cùng -->
+    <div class="footer-bottom">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0">© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.</p>
+        <div class="d-flex gap-4">
+          <a class="footer-link" href="#">Chính sách bảo mật</a>
+          <a class="footer-link" href="#">Điều khoản sử dụng</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle (kèm Popper) — local -->
+  <script src="<?php echo $root; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="<?php echo $root; ?>/assets/js/main.js"></script>
+</body>
+</html>

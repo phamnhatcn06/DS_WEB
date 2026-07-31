@@ -9,8 +9,15 @@ class SiteController extends Controller
 {
     public function actionIndex()
     {
-        $payload = $this->loadHomepagePayload();
+        // Trang chủ: HTML đầy đủ, header/footer menu render động từ CMS.
+        // renderPartial vì 'home' đã là tài liệu HTML hoàn chỉnh (không dùng layout).
+        $this->renderPartial('home');
+    }
 
+    /** Xem nguồn dữ liệu trang chủ (debug). */
+    public function actionDataSource()
+    {
+        $payload = $this->loadHomepagePayload();
         $this->pageTitle = 'Nguồn dữ liệu trang chủ';
         $this->render('index', array('payload' => $payload));
     }
