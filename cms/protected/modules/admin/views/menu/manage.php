@@ -7,6 +7,8 @@ $user = Yii::app()->user;
 $canCreate = $user->checkAccess('menus.create');
 $canUpdate = $user->checkAccess('menus.update');
 $canDelete = $user->checkAccess('menus.delete');
+$canReorder = $user->checkAccess('menus.reorder');
+$themeUrl = Yii::app()->theme->baseUrl;
 
 /** Render đệ quy một nhánh cây thành markup tương thích Nestable2. */
 $that = $this;
