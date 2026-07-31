@@ -13,7 +13,7 @@ $root = $this->assetsBase();
 $items = array();
 if (!empty($projects)) {
     foreach ($projects as $p) {
-        $place = $p->location !== '' ? $p->location : $p->province;
+        $place = $p->location != '' ? $p->location : $p->province;
         $items[] = array(
             'thumb' => $p->thumbnail,
             'title' => $p->name,

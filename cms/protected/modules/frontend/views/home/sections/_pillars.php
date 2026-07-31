@@ -18,7 +18,7 @@ if (!empty($sectors)) {
         }
         $index++;
         $items[] = array(
-            'num'   => $sector->number_label !== '' ? $sector->number_label : sprintf('%02d', $index),
+            'num'   => $sector->number_label != '' ? $sector->number_label : sprintf('%02d', $index),
             'title' => $sector->name,
             'desc'  => $sector->description,
             'tags'  => is_array($sector->tags) ? $sector->tags : array(),

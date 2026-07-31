@@ -16,12 +16,12 @@ if (!empty($sectors)) {
             continue;
         }
         $slides[] = array(
-            'eyebrow'  => $sector->eyebrow !== '' ? $sector->eyebrow : $sector->name,
-            'title'    => $sector->headline !== '' ? $sector->headline : $sector->name,
+            'eyebrow'  => $sector->eyebrow != '' ? $sector->eyebrow : $sector->name,
+            'title'    => $sector->headline != '' ? $sector->headline : $sector->name,
             'lead'     => $sector->lead_text,
             'tags'     => is_array($sector->tags) ? $sector->tags : array(),
             'image'    => $sector->image,
-            'cardTitle'=> $sector->card_title !== '' ? $sector->card_title : $sector->name,
+            'cardTitle'=> $sector->card_title != '' ? $sector->card_title : $sector->name,
             'cardDesc' => $sector->card_description,
         );
     }
