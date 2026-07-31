@@ -7,14 +7,23 @@ class FrontendController extends Controller
     public $layout = 'frontend.views.layouts.main';
 
     /**
-     * Base URL tới gốc dự án (nơi chứa /assets). CMS chạy trong thư mục con
-     * `cms/`, còn asset frontend nằm ở thư mục cha — nên lùi một cấp.
+     * Base URL tới gốc dự án (nơi chứa /assets). CMS chạy trong webroot con
+     * `cms/`, còn asset frontend nằm ở thư mục cha (cùng cấp static index.html).
      *
-     * Đặt một chỗ để layout + mọi view/partial tham chiếu asset nhất quán,
-     * thay vì lặp lại `Yii::app()->baseUrl . '/..'` rải rác.
+     * Lùi một cấp bằng cách BỎ đoạn cuối của baseUrl thay vì nối "/.." — cho ra
+     * URL tuyệt đối sạch (vd "/assets/..."), không phụ thuộc trình duyệt/Apache
+     * chuẩn hoá "/../". Ví dụ:
+     *   baseUrl "/cms"      → ""      → href "/assets/..."
+     *   baseUrl "/sub/cms"  → "/sub"  → href "/sub/assets/..."
+     *   baseUrl ""          → ""      → href "/assets/..."
+     *
+     * Đặt một chỗ để layout + mọi view/partial tham chiếu asset nhất quán.
      */
     public function assetsBase()
     {
-        return Yii::app()->baseUrl . '/..';
+        $base  = rtrim(Yii::app()->getBaseUrl(), '/');
+        $slash = strrpos($base, '/');
+
+        return $slash === false ? '' : substr($base, 0, $slash);
     }
 }
