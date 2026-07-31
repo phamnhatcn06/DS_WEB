@@ -6,7 +6,6 @@
  * @var string $content
  */
 $baseUrl = Yii::app()->theme->baseUrl;                 // asset theme Hope UI
-$dshAssets = Yii::app()->baseUrl . '/../assets';       // asset DSH (Bootstrap Icons)
 $appName = Yii::app()->name;
 $user = Yii::app()->user;
 
