@@ -172,6 +172,54 @@ class MenuController extends AdminController
         $this->renderJson(array('success' => true, 'message' => 'Đã lưu thứ tự menu.'));
     }
 
+    /**
+     * Duyệt cây kéo thả, sinh danh sách cập nhật (id => parent_id/sort_order/depth).
+     * Ném CHttpException(400) khi: id lạ/ngoài location, id trùng, vượt max_depth,
+     * hoặc đặt mục con dưới divider. Tách riêng để kiểm thử được.
+     *
+     * @param array $tree     mảng lồng nhau [{id, children:[...]}]
+     * @param array $map      id => MenuItem hợp lệ của location
+     * @param int   $maxDepth số cấp tối đa của location
+     * @return array
+     */
+    public function buildReorderUpdates(array $tree, array $map, $maxDepth)
+    {
+        $updates = array();
+        $seen = array();
+
+        $walk = function ($nodes, $parentId, $depth) use (&$walk, $map, &$updates, &$seen, $maxDepth) {
+            $order = 0;
+            foreach ($nodes as $node) {
+                $nid = isset($node['id']) ? (int) $node['id'] : 0;
+                if (!isset($map[$nid])) {
+                    throw new CHttpException(400, 'Mục #' . $nid . ' không thuộc vị trí menu này.');
+                }
+                if (isset($seen[$nid])) {
+                    throw new CHttpException(400, 'Mục #' . $nid . ' xuất hiện trùng lặp.');
+                }
+                if ($depth > $maxDepth - 1) {
+                    throw new CHttpException(400, 'Vượt quá số cấp tối đa (' . $maxDepth . ').');
+                }
+                $seen[$nid] = true;
+
+                $children = isset($node['children']) && is_array($node['children']) ? $node['children'] : array();
+                if ($children && $map[$nid]->isDivider()) {
+                    throw new CHttpException(400, 'Không thể đặt mục con dưới một divider.');
+                }
+
+                $updates[$nid] = array(
+                    'parent_id'  => $parentId,
+                    'sort_order' => ++$order,
+                    'depth'      => $depth,
+                );
+                $walk($children, $nid, $depth + 1);
+            }
+        };
+
+        $walk($tree, null, 0);
+        return $updates;
+    }
+
     // ------------------------------------------------------------------ helpers
 
     /**
