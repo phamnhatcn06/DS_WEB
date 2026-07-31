@@ -82,13 +82,13 @@ class MenuHelper
      *
      * @return string HTML các <li class="nav-item">
      */
-    public static function renderPublicNav($code)
+    public static function renderPublicNav($code, $base = '')
     {
         $tree = self::publicTree($code);
         $html = '';
         foreach ($tree as $node) {
             $row = $node['row'];
-            $href = CHtml::encode($row['url'] !== null ? $row['url'] : '#');
+            $href = CHtml::encode(self::resolveUrl($row['url'], $base));
             $target = $row['target'] && $row['target'] !== '_self'
                 ? ' target="' . CHtml::encode($row['target']) . '"' : '';
             $caret = strpos((string) $row['css_class'], 'nav-caret') !== false ? ' nav-caret' : '';
@@ -97,7 +97,7 @@ class MenuHelper
                 $items = '';
                 foreach ($node['children'] as $child) {
                     $c = $child['row'];
-                    $items .= '<li><a class="dropdown-item" href="' . CHtml::encode($c['url'] !== null ? $c['url'] : '#') . '">'
+                    $items .= '<li><a class="dropdown-item" href="' . CHtml::encode(self::resolveUrl($c['url'], $base)) . '">'
                         . CHtml::encode($c['title']) . '</a></li>';
                 }
                 $html .= '<li class="nav-item dropdown">'
