@@ -28,12 +28,14 @@ class m260731_010000_convert_menu_icons_to_fontawesome extends CDbMigration
 
     public function up()
     {
+        // Lưu ý: điều kiện dùng param tên khác `:old` — Yii tự đặt param SET
+        // theo tên cột (`:icon`); trùng tên sẽ khiến WHERE khớp 0 dòng.
         foreach ($this->map as $bi => $fa) {
             $this->getDbConnection()->createCommand()->update(
                 'pvn_menu_items',
                 array('icon' => $fa),
-                'icon = :icon',
-                array(':icon' => $bi)
+                'icon = :old',
+                array(':old' => $bi)
             );
         }
         // Xoá cache menu để render lại với icon mới.
