@@ -72,8 +72,86 @@ class MenuHelper
         return $html;
     }
 
+    // =================================================================
+    //  FRONTEND (website công khai) — không lọc RBAC (khách xem được hết)
+    // =================================================================
+
+    /**
+     * Render thanh menu header website (public_header) — markup navbar Bootstrap
+     * của index.html: mục có con → dropdown `.dsh-dropdown`.
+     *
+     * @return string HTML các <li class="nav-item">
+     */
+    public static function renderPublicNav($code)
+    {
+        $tree = self::publicTree($code);
+        $html = '';
+        foreach ($tree as $node) {
+            $row = $node['row'];
+            $href = CHtml::encode($row['url'] !== null ? $row['url'] : '#');
+            $target = $row['target'] && $row['target'] !== '_self'
+                ? ' target="' . CHtml::encode($row['target']) . '"' : '';
+            $caret = strpos((string) $row['css_class'], 'nav-caret') !== false ? ' nav-caret' : '';
+
+            if (!empty($node['children'])) {
+                $items = '';
+                foreach ($node['children'] as $child) {
+                    $c = $child['row'];
+                    $items .= '<li><a class="dropdown-item" href="' . CHtml::encode($c['url'] !== null ? $c['url'] : '#') . '">'
+                        . CHtml::encode($c['title']) . '</a></li>';
+                }
+                $html .= '<li class="nav-item dropdown">'
+                    . '<a class="nav-link nav-caret" href="' . $href . '" role="button"'
+                    . ' data-bs-toggle="dropdown" aria-expanded="false">' . CHtml::encode($row['title']) . '</a>'
+                    . '<ul class="dropdown-menu dsh-dropdown">' . $items . '</ul></li>';
+            } else {
+                $html .= '<li class="nav-item"><a class="nav-link' . $caret . '" href="' . $href . '"' . $target . '>'
+                    . CHtml::encode($row['title']) . '</a></li>';
+            }
+        }
+        return $html;
+    }
+
+    /**
+     * Render một cột link footer (danh sách phẳng) — markup `.footer-link`.
+     *
+     * @return string HTML các <li>
+     */
+    public static function renderFooterColumn($code)
+    {
+        $tree = self::publicTree($code);
+        $html = '';
+        foreach ($tree as $node) {
+            $row = $node['row'];
+            $href = CHtml::encode($row['url'] !== null ? $row['url'] : '#');
+            $target = $row['target'] && $row['target'] !== '_self'
+                ? ' target="' . CHtml::encode($row['target']) . '"' : '';
+            $html .= '<li><a class="footer-link" href="' . $href . '"' . $target . '>'
+                . CHtml::encode($row['title']) . '</a></li>';
+        }
+        return $html;
+    }
+
+    /** Tên hiển thị của location (dùng làm tiêu đề cột footer). */
+    public static function locationName($code)
+    {
+        $location = MenuLocation::findByCode($code);
+        return $location !== null ? $location->name : '';
+    }
+
+    /** Cây các mục active của location, KHÔNG lọc RBAC (dùng cho frontend). */
+    protected static function publicTree($code)
+    {
+        $location = MenuLocation::findByCode($code);
+        if ($location === null) {
+            return array();
+        }
+        return self::filteredTree(self::getItems($location->id), null);
+    }
+
     /**
      * Dựng cây đã lọc RBAC. Mục không đạt quyền bị loại BỎ cả nhánh con.
+     * $user = null → bỏ qua lọc RBAC (chỉ dựa vào is_active, dùng cho frontend).
      */
     protected static function filteredTree(array $rows, $user)
     {
