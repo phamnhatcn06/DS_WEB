@@ -10,7 +10,7 @@
  *     public_footer_projects — cột "Dự án"
  *     public_footer_investors— cột "Nhà đầu tư"
  */
-class m260731_010000_seed_frontend_menus extends CDbMigration
+class m260731_020000_seed_frontend_menus extends CDbMigration
 {
     public function up()
     {
