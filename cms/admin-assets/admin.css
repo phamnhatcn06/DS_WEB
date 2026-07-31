@@ -197,6 +197,60 @@ body.admin-body {
   color: #fff;
 }
 
+/* -------------------------------------------------- nút thao tác trong grid */
+
+/* Hàng nút thao tác: các nút đồng nhất, cách đều (mỗi nút bọc 1 form riêng). */
+.table-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .35rem;
+}
+
+.table-actions form {
+  display: inline-flex;
+  margin: 0;
+}
+
+/* Nút thao tác chuẩn: cùng kích thước vuông, cùng viền/nền trung tính. */
+.btn-action {
+  --size: 34px;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d7dbe0;
+  background: #fff;
+  color: #6b7280;
+  border-radius: 6px;
+  line-height: 1;
+  transition: color .15s ease, background-color .15s ease, border-color .15s ease;
+}
+
+.btn-action:hover,
+.btn-action:focus {
+  background: #f3f4f6;
+  border-color: #c2c7cd;
+  color: #374151;
+}
+
+/* Chỉ đổi màu khi hover để vẫn phân biệt Sửa / Xoá. */
+.btn-action--edit:hover,
+.btn-action--edit:focus {
+  background: rgba(154, 18, 32, .08);
+  border-color: var(--dsh-red);
+  color: var(--dsh-red);
+}
+
+.btn-action--delete:hover,
+.btn-action--delete:focus {
+  background: rgba(220, 53, 69, .1);
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
 /* ------------------------------------------------------------------- bảng */
 
 .table > :not(caption) > * > * {
