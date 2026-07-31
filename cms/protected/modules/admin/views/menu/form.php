@@ -11,7 +11,7 @@ $routes = $this->routeSuggestions($location->id);
 
 <div class="d-flex align-items-center mb-3">
   <a class="btn btn-sm btn-link text-muted ps-0" href="<?php echo $this->createUrl('manage', array('id' => $location->id)); ?>">
-    <i class="bi bi-arrow-left me-1"></i> Về cây menu
+    <i class="fa fa-arrow-left me-1"></i> Về cây menu
   </a>
 </div>
 
@@ -75,8 +75,8 @@ $routes = $this->routeSuggestions($location->id);
       <div class="col-6 col-lg-4" data-when-type="route url">
         <?php echo $form->labelEx($model, 'icon', array('class' => 'form-label')); ?>
         <?php echo $form->textField($model, 'icon', array(
-            'class' => 'form-control', 'maxlength' => 60, 'placeholder' => 'bi-buildings')); ?>
-        <p class="form-hint mt-1 mb-0">Class Bootstrap Icons, ví dụ <code>bi-buildings</code>.</p>
+            'class' => 'form-control', 'maxlength' => 60, 'placeholder' => 'fa-building')); ?>
+        <p class="form-hint mt-1 mb-0">Class Bootstrap Icons, ví dụ <code>fa-building</code>.</p>
       </div>
 
       <div class="col-12 col-lg-6" data-when-type="route url">
@@ -108,7 +108,7 @@ $routes = $this->routeSuggestions($location->id);
   <div class="card-body border-top">
     <div class="form-actions d-flex gap-2">
       <button type="submit" class="btn btn-dsh">
-        <i class="bi bi-check-lg me-1"></i> Lưu
+        <i class="fa fa-check me-1"></i> Lưu
       </button>
       <a class="btn btn-link text-muted ms-auto"
          href="<?php echo $this->createUrl('manage', array('id' => $location->id)); ?>">Huỷ</a>

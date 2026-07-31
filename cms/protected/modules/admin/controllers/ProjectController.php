@@ -10,7 +10,7 @@ class ProjectController extends AdminCrudController
     protected $titlePlural        = 'Dự án';
     protected $withRelations      = array('thumbnail', 'sector');
 
-    public $pageIcon = 'bi-buildings';
+    public $pageIcon = 'fa-building';
 
     protected function gridColumns()
     {
@@ -56,7 +56,7 @@ class ProjectController extends AdminCrudController
 
         $html = '<span class="badge ' . $style . '">' . CHtml::encode($label) . '</span>';
         if ($item->is_featured) {
-            $html .= ' <i class="bi bi-star-fill text-warning" title="Hiện ở trang chủ"></i>';
+            $html .= ' <i class="fa fa-star text-warning" title="Hiện ở trang chủ"></i>';
         }
         return $html;
     }

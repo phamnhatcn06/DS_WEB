@@ -4,7 +4,7 @@
 ?>
 <div class="card">
   <div class="card-header d-flex align-items-center">
-    <span><i class="bi bi-list-nested me-1"></i> Vị trí menu</span>
+    <span><i class="fa fa-list-ul me-1"></i> Vị trí menu</span>
   </div>
   <div class="card-body p-0">
     <div class="table-responsive">
@@ -38,7 +38,7 @@
               </td>
               <td class="text-end">
                 <a class="btn btn-sm btn-dsh" href="<?php echo $this->createUrl('manage', array('id' => $loc->id)); ?>">
-                  <i class="bi bi-diagram-3 me-1"></i> Quản lý menu
+                  <i class="fa fa-sitemap me-1"></i> Quản lý menu
                 </a>
               </td>
             </tr>

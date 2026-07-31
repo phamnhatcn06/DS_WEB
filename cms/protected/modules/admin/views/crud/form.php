@@ -137,7 +137,7 @@ $isNew = $model->getIsNewRecord();
 
     <div class="form-actions">
       <button type="submit" class="btn btn-dsh">
-        <i class="bi bi-check-lg me-1"></i> Lưu
+        <i class="fa fa-check me-1"></i> Lưu
       </button>
       <button type="submit" name="save_and_continue" value="1" class="btn btn-outline-secondary">
         Lưu và tiếp tục sửa

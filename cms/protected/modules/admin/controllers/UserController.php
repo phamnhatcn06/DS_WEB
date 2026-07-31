@@ -11,7 +11,7 @@ class UserController extends AdminCrudController
     protected $sortable           = false;
     protected $defaultOrder       = 't.full_name ASC';
 
-    public $pageIcon = 'bi-person-badge';
+    public $pageIcon = 'fa-id-badge';
 
     protected function gridColumns()
     {

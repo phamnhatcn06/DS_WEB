@@ -68,5 +68,5 @@ $sections = array(
 </ul>
 
 <a class="btn btn-dark" href="<?php echo $this->createUrl('/admin/default/index'); ?>">
-  <i class="bi bi-box-arrow-in-right me-1"></i> Vào khu quản trị
+  <i class="fa fa-sign-in me-1"></i> Vào khu quản trị
 </a>

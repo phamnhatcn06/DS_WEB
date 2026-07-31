@@ -32,7 +32,7 @@ $logs = $dataProvider->getData();
 
   <?php if ($logs === array()): ?>
     <div class="card-body text-center text-muted py-5">
-      <i class="bi bi-journal" style="font-size:2rem"></i>
+      <i class="fa fa-book" style="font-size:2rem"></i>
       <p class="mt-2 mb-0">Chưa có bản ghi nào khớp điều kiện.</p>
     </div>
   <?php else: ?>

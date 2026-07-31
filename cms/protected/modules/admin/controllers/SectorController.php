@@ -11,7 +11,7 @@ class SectorController extends AdminCrudController
     protected $titlePlural        = 'Lĩnh vực kinh doanh';
     protected $withRelations      = array('image');
 
-    public $pageIcon = 'bi-diagram-3';
+    public $pageIcon = 'fa-sitemap';
 
     protected function gridColumns()
     {

@@ -92,7 +92,7 @@ $firstGroup = $groupKeys === array() ? null : $groupKeys[0];
   <?php if ($canUpdate): ?>
     <div class="card-footer">
       <button type="submit" class="btn btn-dsh">
-        <i class="bi bi-check-lg me-1"></i> Lưu cấu hình
+        <i class="fa fa-check me-1"></i> Lưu cấu hình
       </button>
       <span class="form-hint ms-2">
         Các thay đổi được lưu trong một transaction — hoặc tất cả thành công, hoặc không đổi gì.

@@ -28,7 +28,7 @@ $user = Yii::app()->user;
         </div>
         <div class="col-12 col-md-4">
           <button type="submit" class="btn btn-dsh w-100">
-            <i class="bi bi-upload me-1"></i> Tải lên
+            <i class="fa fa-upload me-1"></i> Tải lên
           </button>
         </div>
       <?php echo CHtml::endForm(); ?>
@@ -54,7 +54,7 @@ $user = Yii::app()->user;
       <input type="search" name="q" class="form-control form-control-sm"
              placeholder="Tìm theo tên file hoặc alt…" value="<?php echo CHtml::encode($search); ?>"
              style="min-width:240px" />
-      <button class="btn btn-sm btn-outline-secondary" type="submit"><i class="bi bi-search"></i></button>
+      <button class="btn btn-sm btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
     </form>
   </div>
 
@@ -70,7 +70,7 @@ $user = Yii::app()->user;
                 <img src="<?php echo $file->getPublicUrl(); ?>"
                      alt="<?php echo CHtml::encode($file->alt_text); ?>" loading="lazy" />
               <?php else: ?>
-                <i class="bi bi-file-earmark-pdf" style="font-size:2.4rem;color:#9a1220"></i>
+                <i class="fa fa-file-pdf-o" style="font-size:2.4rem;color:#9a1220"></i>
               <?php endif; ?>
             </figure>
 
@@ -78,7 +78,7 @@ $user = Yii::app()->user;
               <span class="file-name"><?php echo CHtml::encode($file->file_name); ?></span>
 
               <?php if ($file->getIsImage() && ($file->alt_text === null || $file->alt_text === '')): ?>
-                <span class="media-warning"><i class="bi bi-exclamation-triangle"></i> Thiếu alt</span>
+                <span class="media-warning"><i class="fa fa-exclamation-triangle"></i> Thiếu alt</span>
               <?php else: ?>
                 <span class="file-meta"><?php echo CHtml::encode(
                     TextHelper::truncate($file->alt_text, 48)); ?></span>
@@ -96,13 +96,13 @@ $user = Yii::app()->user;
                   <a class="btn btn-sm btn-outline-primary py-0 px-1"
                      href="<?php echo $this->createUrl('update', array('id' => $file->id)); ?>"
                      title="Sửa">
-                    <i class="bi bi-pencil"></i>
+                    <i class="fa fa-pencil"></i>
                   </a>
                 <?php endif; ?>
 
                 <a class="btn btn-sm btn-outline-secondary py-0 px-1" target="_blank" rel="noopener"
                    href="<?php echo $file->getPublicUrl(); ?>" title="Mở file">
-                  <i class="bi bi-box-arrow-up-right"></i>
+                  <i class="fa fa-external-link"></i>
                 </a>
 
                 <?php if ($user->checkAccess('media.delete')): ?>
@@ -113,7 +113,7 @@ $user = Yii::app()->user;
                               . 'File vật lý không bị xoá và có thể khôi phục.',
                       )); ?>
                     <button class="btn btn-sm btn-outline-danger py-0 px-1" title="Xoá">
-                      <i class="bi bi-trash"></i>
+                      <i class="fa fa-trash"></i>
                     </button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>

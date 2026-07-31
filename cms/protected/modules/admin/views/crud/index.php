@@ -23,13 +23,13 @@ $items = $dataProvider->getData();
                placeholder="Tìm kiếm…" value="<?php echo CHtml::encode($search); ?>"
                style="min-width:200px" />
         <button class="btn btn-sm btn-outline-secondary" type="submit">
-          <i class="bi bi-search"></i>
+          <i class="fa fa-search"></i>
         </button>
       </form>
 
       <?php if ($user->checkAccess($resource . '.create')): ?>
         <a class="btn btn-sm btn-dsh" href="<?php echo $this->createUrl('create'); ?>">
-          <i class="bi bi-plus-lg"></i> Thêm mới
+          <i class="fa fa-plus"></i> Thêm mới
         </a>
       <?php endif; ?>
     </div>
@@ -37,7 +37,7 @@ $items = $dataProvider->getData();
 
   <?php if ($items === array()): ?>
     <div class="card-body text-center text-muted py-5">
-      <i class="bi bi-inbox" style="font-size:2rem"></i>
+      <i class="fa fa-inbox" style="font-size:2rem"></i>
       <p class="mt-2 mb-0">
         <?php echo $search !== ''
             ? 'Không tìm thấy kết quả nào cho “' . CHtml::encode($search) . '”.'
@@ -72,18 +72,18 @@ $items = $dataProvider->getData();
                 <?php if ($this->getSortable() && $canUpdate): ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
                       array('id' => $item->id, 'dir' => 'up')), 'post', array('class' => 'd-inline')); ?>
-                    <button class="btn btn-outline-secondary" title="Lên trên"><i class="bi bi-arrow-up"></i></button>
+                    <button class="btn btn-outline-secondary" title="Lên trên"><i class="fa fa-arrow-up"></i></button>
                   <?php echo CHtml::endForm(); ?>
                   <?php echo CHtml::beginForm($this->createUrl('move',
                       array('id' => $item->id, 'dir' => 'down')), 'post', array('class' => 'd-inline')); ?>
-                    <button class="btn btn-outline-secondary" title="Xuống dưới"><i class="bi bi-arrow-down"></i></button>
+                    <button class="btn btn-outline-secondary" title="Xuống dưới"><i class="fa fa-arrow-down"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
 
                 <?php if ($canUpdate): ?>
                   <a class="btn btn-outline-primary" title="Sửa"
                      href="<?php echo $this->createUrl('update', array('id' => $item->id)); ?>">
-                    <i class="bi bi-pencil"></i>
+                    <i class="fa fa-pencil"></i>
                   </a>
                 <?php endif; ?>
 
@@ -94,7 +94,7 @@ $items = $dataProvider->getData();
                           'data-confirm' => 'Xoá “' . $item->getDisplayName() . '”? '
                               . 'Bản ghi sẽ được đánh dấu đã xoá và không còn hiển thị trên website.',
                       )); ?>
-                    <button class="btn btn-outline-danger" title="Xoá"><i class="bi bi-trash"></i></button>
+                    <button class="btn btn-outline-danger" title="Xoá"><i class="fa fa-trash"></i></button>
                   <?php echo CHtml::endForm(); ?>
                 <?php endif; ?>
               </div>

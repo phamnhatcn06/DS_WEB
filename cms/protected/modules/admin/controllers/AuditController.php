@@ -4,7 +4,7 @@
  */
 class AuditController extends AdminController
 {
-    public $pageIcon = 'bi-journal-text';
+    public $pageIcon = 'fa-file-text-o';
 
     public function actionIndex()
     {

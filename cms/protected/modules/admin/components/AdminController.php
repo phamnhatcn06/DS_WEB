@@ -17,7 +17,7 @@ class AdminController extends CController
     public $breadcrumbs = array();
 
     /** @var string icon Bootstrap Icons cho tiêu đề trang */
-    public $pageIcon = 'bi-grid';
+    public $pageIcon = 'fa-th-large';
 
     public function filters()
     {

@@ -117,8 +117,8 @@ class MenuHelper
         }
 
         $icon = $row['icon']
-            ? '<i class="icon"><i class="bi ' . CHtml::encode($row['icon']) . '"></i></i>'
-            : '<i class="icon"><i class="bi bi-dot"></i></i>';
+            ? '<i class="icon"><i class="fa ' . CHtml::encode($row['icon']) . '"></i></i>'
+            : '<i class="icon"><i class="fa fa-circle"></i></i>';
         $name = '<span class="item-name">' . CHtml::encode($row['title']) . '</span>';
 
         // Có mục con hiển thị → parent dạng collapse.

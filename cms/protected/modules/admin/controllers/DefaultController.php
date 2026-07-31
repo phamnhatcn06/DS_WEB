@@ -7,7 +7,7 @@ class DefaultController extends AdminController
     public function actionIndex()
     {
         $this->pageTitle = 'Tổng quan';
-        $this->pageIcon = 'bi-speedometer2';
+        $this->pageIcon = 'fa-tachometer';
 
         $this->render('index', array(
             'stats'       => $this->collectStats(),
@@ -22,14 +22,14 @@ class DefaultController extends AdminController
     private function collectStats()
     {
         $definitions = array(
-            array('label' => 'Hero slide',   'model' => 'HeroSlide',         'icon' => 'bi-images',        'route' => '/admin/heroSlide/index'),
-            array('label' => 'Lĩnh vực',     'model' => 'BusinessSector',    'icon' => 'bi-diagram-3',     'route' => '/admin/sector/index'),
-            array('label' => 'Dự án',        'model' => 'Project',           'icon' => 'bi-buildings',     'route' => '/admin/project/index'),
-            array('label' => 'Bài viết',     'model' => 'NewsPost',          'icon' => 'bi-newspaper',     'route' => '/admin/newsPost/index'),
-            array('label' => 'Giá trị cốt lõi','model' => 'CoreValue',       'icon' => 'bi-award',         'route' => '/admin/coreValue/index'),
-            array('label' => 'Mốc hành trình','model' => 'TimelineMilestone','icon' => 'bi-clock-history', 'route' => '/admin/timeline/index'),
-            array('label' => 'Đối tác',      'model' => 'Partner',           'icon' => 'bi-people',        'route' => '/admin/partner/index'),
-            array('label' => 'File media',   'model' => 'MediaFile',         'icon' => 'bi-image',         'route' => '/admin/media/index'),
+            array('label' => 'Hero slide',   'model' => 'HeroSlide',         'icon' => 'fa-clone',        'route' => '/admin/heroSlide/index'),
+            array('label' => 'Lĩnh vực',     'model' => 'BusinessSector',    'icon' => 'fa-sitemap',     'route' => '/admin/sector/index'),
+            array('label' => 'Dự án',        'model' => 'Project',           'icon' => 'fa-building',     'route' => '/admin/project/index'),
+            array('label' => 'Bài viết',     'model' => 'NewsPost',          'icon' => 'fa-newspaper-o',     'route' => '/admin/newsPost/index'),
+            array('label' => 'Giá trị cốt lõi','model' => 'CoreValue',       'icon' => 'fa-trophy',         'route' => '/admin/coreValue/index'),
+            array('label' => 'Mốc hành trình','model' => 'TimelineMilestone','icon' => 'fa-history', 'route' => '/admin/timeline/index'),
+            array('label' => 'Đối tác',      'model' => 'Partner',           'icon' => 'fa-users',        'route' => '/admin/partner/index'),
+            array('label' => 'File media',   'model' => 'MediaFile',         'icon' => 'fa-picture-o',         'route' => '/admin/media/index'),
         );
 
         $stats = array();

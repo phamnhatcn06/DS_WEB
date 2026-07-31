@@ -4,7 +4,7 @@
  */
 class MediaController extends AdminController
 {
-    public $pageIcon = 'bi-image';
+    public $pageIcon = 'fa-picture-o';
 
     public function actionIndex()
     {

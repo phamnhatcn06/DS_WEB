@@ -12,7 +12,7 @@ class NewsPostController extends AdminCrudController
     protected $defaultOrder       = 't.published_at DESC';
     protected $sortable           = false;
 
-    public $pageIcon = 'bi-newspaper';
+    public $pageIcon = 'fa-newspaper-o';
 
     protected function gridColumns()
     {
@@ -68,7 +68,7 @@ class NewsPostController extends AdminCrudController
 
         $html = '<span class="badge ' . $style . '">' . CHtml::encode($label) . '</span>';
         if ($item->is_featured) {
-            $html .= ' <i class="bi bi-star-fill text-warning" title="Bài nổi bật"></i>';
+            $html .= ' <i class="fa fa-star text-warning" title="Bài nổi bật"></i>';
         }
         return $html;
     }

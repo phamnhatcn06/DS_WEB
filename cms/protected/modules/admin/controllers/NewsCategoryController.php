@@ -9,7 +9,7 @@ class NewsCategoryController extends AdminCrudController
     protected $titleSingular      = 'Danh mục';
     protected $titlePlural        = 'Danh mục tin';
 
-    public $pageIcon = 'bi-tags';
+    public $pageIcon = 'fa-tags';
 
     protected function gridColumns()
     {

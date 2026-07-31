@@ -7,7 +7,7 @@
 
 <?php if ($missingAlts > 0): ?>
   <div class="alert alert-warning d-flex align-items-center gap-2">
-    <i class="bi bi-exclamation-triangle"></i>
+    <i class="fa fa-exclamation-triangle"></i>
     <div>
       Có <strong><?php echo $missingAlts; ?></strong> ảnh chưa có mô tả (alt).
       Alt là yếu tố SEO và trợ năng bắt buộc —
@@ -21,7 +21,7 @@
     <div class="col-6 col-md-4 col-xl-3">
       <a class="text-decoration-none" href="<?php echo $this->createUrl($stat['route']); ?>">
         <div class="stat-card d-flex align-items-center gap-3">
-          <span class="stat-icon"><i class="bi <?php echo $stat['icon']; ?>"></i></span>
+          <span class="stat-icon"><i class="fa <?php echo $stat['icon']; ?>"></i></span>
           <div>
             <div class="stat-value"><?php echo (int) $stat['count']; ?></div>
             <div class="stat-label"><?php echo CHtml::encode($stat['label']); ?></div>
@@ -44,22 +44,22 @@
         <div class="list-group list-group-flush">
           <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
              href="<?php echo $this->createUrl('/admin/heroSlide/index'); ?>">
-            <i class="bi bi-images text-danger"></i>
+            <i class="fa fa-clone text-danger"></i>
             Đổi tiêu đề và ảnh nền của <strong>hero slider</strong>
           </a>
           <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
              href="<?php echo $this->createUrl('/admin/newsPost/create'); ?>">
-            <i class="bi bi-plus-circle text-danger"></i>
+            <i class="fa fa-plus-circle text-danger"></i>
             Đăng một <strong>bài tin tức</strong> mới
           </a>
           <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
              href="<?php echo $this->createUrl('/admin/media/index'); ?>">
-            <i class="bi bi-upload text-danger"></i>
+            <i class="fa fa-upload text-danger"></i>
             Tải ảnh mới lên <strong>thư viện media</strong>
           </a>
           <a class="list-group-item list-group-item-action d-flex align-items-center gap-2"
              href="<?php echo $this->createUrl('/admin/setting/index'); ?>">
-            <i class="bi bi-gear text-danger"></i>
+            <i class="fa fa-cog text-danger"></i>
             Cập nhật <strong>số điện thoại, email</strong> và thông tin công ty
           </a>
         </div>

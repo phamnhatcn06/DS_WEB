@@ -10,7 +10,7 @@ class TimelineController extends AdminCrudController
     protected $titlePlural        = 'Hành trình phát triển';
     protected $defaultOrder       = 't.year_value ASC, t.sort_order ASC';
 
-    public $pageIcon = 'bi-clock-history';
+    public $pageIcon = 'fa-history';
 
     protected function gridColumns()
     {

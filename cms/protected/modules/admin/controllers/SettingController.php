@@ -4,7 +4,7 @@
  */
 class SettingController extends AdminController
 {
-    public $pageIcon = 'bi-gear';
+    public $pageIcon = 'fa-cog';
 
     public function actionIndex()
     {

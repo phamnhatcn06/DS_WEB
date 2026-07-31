@@ -35,8 +35,6 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/dark.min.css" />
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/customizer.min.css" />
     <link rel="stylesheet" href="<?php echo $baseUrl; ?>/assets/css/plugins/plyr.min.css" />
-    <!-- Bootstrap Icons (bi-* dùng trong menu & nội dung) -->
-    <link rel="stylesheet" href="<?php echo $dshAssets; ?>/vendor/bootstrap-icons/bootstrap-icons.min.css" />
     <!-- Brand tweaks (stat card, bảng, nút thương hiệu) -->
     <link rel="stylesheet" href="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.css" />
     <style>
@@ -104,7 +102,7 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
                     </div>
 
                     <a href="<?php echo $this->createUrl('/admin/default/index'); ?>" class="navbar-brand d-flex align-items-center gap-2">
-                        <i class="bi <?php echo $this->pageIcon; ?>"></i>
+                        <i class="fa <?php echo $this->pageIcon; ?>"></i>
                         <h4 class="logo-title mb-0"><?php echo CHtml::encode($this->pageTitle ?: 'Tổng quan'); ?></h4>
                     </a>
 
@@ -122,14 +120,14 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
                             <li class="nav-item">
                                 <a class="nav-link btn btn-sm btn-outline-secondary me-2" target="_blank" rel="noopener"
                                    href="<?php echo Yii::app()->baseUrl; ?>/../index.html">
-                                    <i class="bi bi-box-arrow-up-right me-1"></i> Xem website
+                                    <i class="fa fa-external-link me-1"></i> Xem website
                                 </a>
                             </li>
                             <!-- User Dropdown -->
                             <li class="nav-item dropdown">
                                 <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span class="avatar avatar-50 avatar-rounded bg-primary text-white d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-person"></i>
+                                        <i class="fa fa-user"></i>
                                     </span>
                                     <div class="caption ms-3 d-none d-md-block">
                                         <h6 class="mb-0 caption-title"><?php echo CHtml::encode($user->getFullName()); ?></h6>
@@ -142,7 +140,7 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
                                     <li>
                                         <?php echo CHtml::beginForm($this->createUrl('/admin/auth/logout'), 'post', array('class' => 'px-2')); ?>
                                             <button type="submit" class="btn btn-sm btn-link text-danger p-0 text-decoration-none">
-                                                <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                                                <i class="fa fa-sign-out me-1"></i> Đăng xuất
                                             </button>
                                         <?php echo CHtml::endForm(); ?>
                                     </li>

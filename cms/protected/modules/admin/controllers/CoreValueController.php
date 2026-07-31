@@ -10,7 +10,7 @@ class CoreValueController extends AdminCrudController
     protected $titlePlural        = 'Giá trị cốt lõi';
     protected $withRelations      = array('icon');
 
-    public $pageIcon = 'bi-award';
+    public $pageIcon = 'fa-trophy';
 
     protected function gridColumns()
     {

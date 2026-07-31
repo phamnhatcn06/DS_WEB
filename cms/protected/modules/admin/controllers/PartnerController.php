@@ -11,7 +11,7 @@ class PartnerController extends AdminCrudController
     protected $withRelations      = array('logo');
     protected $defaultOrder       = 't.partner_type ASC, t.sort_order ASC';
 
-    public $pageIcon = 'bi-people';
+    public $pageIcon = 'fa-users';
 
     protected function gridColumns()
     {

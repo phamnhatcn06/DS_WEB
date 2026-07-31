@@ -10,7 +10,7 @@ class HeroSlideController extends AdminCrudController
     protected $titlePlural        = 'Hero slider';
     protected $withRelations      = array('background');
 
-    public $pageIcon = 'bi-images';
+    public $pageIcon = 'fa-clone';
 
     protected function gridColumns()
     {

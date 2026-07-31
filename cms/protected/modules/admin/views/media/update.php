@@ -17,7 +17,7 @@
           <img src="<?php echo $model->getPublicUrl(); ?>" class="img-fluid rounded border"
                alt="<?php echo CHtml::encode($model->alt_text); ?>" />
         <?php else: ?>
-          <i class="bi bi-file-earmark-pdf" style="font-size:4rem;color:#9a1220"></i>
+          <i class="fa fa-file-pdf-o" style="font-size:4rem;color:#9a1220"></i>
         <?php endif; ?>
 
         <dl class="row text-start small mt-3 mb-0">
@@ -72,7 +72,7 @@
         </div>
 
         <div class="d-flex gap-2">
-          <button type="submit" class="btn btn-dsh"><i class="bi bi-check-lg me-1"></i> Lưu</button>
+          <button type="submit" class="btn btn-dsh"><i class="fa fa-check me-1"></i> Lưu</button>
           <a class="btn btn-link text-muted" href="<?php echo $this->createUrl('index'); ?>">Huỷ</a>
         </div>
       </div>

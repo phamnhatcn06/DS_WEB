@@ -7,7 +7,7 @@
  */
 class MenuController extends AdminController
 {
-    public $pageIcon = 'bi-list-nested';
+    public $pageIcon = 'fa-list-ul';
 
     /** Prefix quyền RBAC cho mọi thao tác trong controller này. */
     const PERM = 'menus';
