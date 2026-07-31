@@ -10,7 +10,6 @@ $dshAssets = Yii::app()->baseUrl . '/../assets';       // asset DSH (Bootstrap I
 $appName = Yii::app()->name;
 $user = Yii::app()->user;
 
-<?php
 // Menu sidebar được nạp động từ DB (location `admin_sidebar`) qua MenuHelper —
 // quản trị qua /admin/menu. Cache tự xoá khi cập nhật menu.
 $currentRoute = '/' . Yii::app()->controller->module->id . '/'
