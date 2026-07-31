@@ -14,14 +14,7 @@ class m260731_020000_seed_frontend_menus extends CDbMigration
 {
     public function up()
     {
-        // -------- gỡ location admin_sidebar (items xoá theo FK CASCADE)
-        $adminId = $this->dbConnection->createCommand()
-            ->select('id')->from('pvn_menu_locations')
-            ->where('code = :c', array(':c' => 'admin_sidebar'))->queryScalar();
-        if ($adminId) {
-            $this->delete('pvn_menu_locations', 'id = :id', array(':id' => $adminId));
-        }
-
+        // Giữ nguyên location admin_sidebar (sidebar admin vẫn render động).
         $now = date('Y-m-d H:i:s');
 
         // -------- header chính (có phân cấp)
