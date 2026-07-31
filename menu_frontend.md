@@ -157,12 +157,14 @@ render đệ quy — `divider` → static-item; mục thường → `nav-link`; 
 - [x] Thêm 5 perm RBAC `menus.*` (view/create/update/delete/reorder) + gán admin/super_admin
 - **AC:** ✅ migrate chạy sạch; query trả cây đúng thứ tự; 17 mục đủ trong DB; RBAC gán đúng.
 
-### Sprint 2 — CRUD & màn hình quản lý (2–3d)
-- [ ] `MenuController` (giix) + list location + trang `manage`
-- [ ] Form thêm/sửa mục (modal, validate type→route/url, icon/route picker, theo `modal-submit.md`)
-- [ ] Toggle active + xóa (SweetAlert `confirmDelete`); **chặn khi `is_protected=1`** (UI + server)
-- [ ] Render cây menu (HTML nested) trong trang manage
-- **AC:** thêm/sửa/xóa/ẩn hoạt động; validate đúng; phân quyền chặn đúng; không xóa/ẩn được mục protected.
+### Sprint 2 — CRUD & màn hình quản lý (2–3d) ✅ HOÀN THÀNH
+- [x] `MenuController extends AdminController` + list location (`index`) + trang `manage`
+- [x] Form thêm/sửa mục (`form.php`, trang riêng): validate type→route/url, datalist route, select perm/parent, JS ẩn/hiện trường theo loại
+- [x] Toggle active + xóa mềm (cascade con, `confirmDelete`); **chặn khi `is_protected=1`** ở cả UI lẫn server
+- [x] Render cây menu HTML nested (markup `.dd`/`.dd-item` sẵn cho Nestable2 ở Sprint 3)
+- **AC:** ✅ thêm/sửa/xóa/ẩn hoạt động; validate depth/parent/cycle server-side; phân quyền `menus.*` chặn đúng; mục protected không xóa/ẩn được.
+
+> Ghi chú: form dùng **trang riêng** (không modal) để chắc chắn & khớp CRUD hiện có — modal là polish tuỳ chọn sau. Action `reorder` (đích của form kéo thả) làm ở Sprint 3.
 
 ### Sprint 3 — Kéo thả & lưu cấu trúc (2d)
 - [ ] Tải local Nestable2 vào `assets/vendor/nestable/`
