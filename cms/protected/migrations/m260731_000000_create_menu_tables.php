@@ -45,7 +45,7 @@ class m260731_000000_create_menu_tables extends CDbMigration
             'route'        => 'VARCHAR(200) NULL COMMENT "Route Yii nội bộ khi item_type=route"',
             'url'          => 'VARCHAR(500) NULL COMMENT "Link khi item_type=url"',
             'target'       => 'VARCHAR(10) NOT NULL DEFAULT "_self" COMMENT "_self|_blank"',
-            'icon'         => 'VARCHAR(60) NULL COMMENT "Class Bootstrap Icons bi-*"',
+            'icon'         => 'VARCHAR(60) NULL COMMENT "Class Font Awesome fa-*"',
             'perm'         => 'VARCHAR(80) NULL COMMENT "Khoá RBAC; NULL = ai cũng thấy"',
             'sort_order'   => 'INT NOT NULL DEFAULT 0',
             'depth'        => 'TINYINT NOT NULL DEFAULT 0 COMMENT "Cache độ sâu (0 = gốc)"',
