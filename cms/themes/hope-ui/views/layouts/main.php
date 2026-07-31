@@ -77,25 +77,7 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
                             <span class="mini-icon">-</span>
                         </a>
                     </li>
-                    <?php foreach ($menu as $item): ?>
-                        <?php if (isset($item['divider'])): ?>
-                            <li class="nav-item static-item">
-                                <a class="nav-link static-item disabled" href="#" tabindex="-1">
-                                    <span class="default-icon"><?php echo CHtml::encode($item['divider']); ?></span>
-                                    <span class="mini-icon">-</span>
-                                </a>
-                            </li>
-                        <?php elseif ($item['perm'] === null || $user->checkAccess($item['perm'])): ?>
-                            <li class="nav-item">
-                                <a class="nav-link<?php echo $currentRoute === $item['route'] ? ' active' : ''; ?>"
-                                   href="<?php echo $this->createUrl($item['route']); ?>"
-                                   aria-current="<?php echo $currentRoute === $item['route'] ? 'page' : 'false'; ?>">
-                                    <i class="icon"><i class="fa <?php echo $item['icon']; ?>"></i></i>
-                                    <span class="item-name"><?php echo CHtml::encode($item['label']); ?></span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+                    <?php echo MenuHelper::renderSidebar('admin_sidebar', $this, $currentRoute); ?>
                 </ul>
             </div>
         </div>
