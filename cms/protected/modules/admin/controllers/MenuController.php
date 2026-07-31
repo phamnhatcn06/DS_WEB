@@ -124,6 +124,87 @@ class MenuController extends AdminController
             'Đã xoá “' . $model->getDisplayName() . '” và các mục con.');
     }
 
+    /**
+     * Lưu lại thứ tự + phân cấp sau khi kéo thả (AJAX JSON).
+     *
+     * Nhận `tree` = JSON mảng lồng nhau [{id, children:[...]}, ...]. Duyệt đệ quy,
+     * cập nhật parent_id / sort_order / depth cho từng mục trong MỘT transaction.
+     * Chống: id lạ/ngoài location, id trùng, vượt max_depth, con dưới divider.
+     */
+    public function actionReorder($id)
+    {
+        $this->requirePermission(self::PERM . '.reorder');
+        $this->requirePost();
+
+        $location = $this->loadLocation($id);
+
+        $raw = Yii::app()->request->getPost('tree');
+        $tree = is_string($raw) ? CJSON::decode($raw) : $raw;
+        if (!is_array($tree)) {
+            $this->renderJson(array('success' => false, 'message' => 'Dữ liệu cây không hợp lệ.'), 400);
+        }
+
+        // Map các mục hợp lệ của location (id => MenuItem) để kiểm tra.
+        $items = MenuItem::model()->notDeleted()->findAll(array(
+            'condition' => 't.location_id = :l', 'params' => array(':l' => $location->id),
+        ));
+        $map = array();
+        foreach ($items as $it) {
+            $map[(int) $it->id] = $it;
+        }
+
+        $updates = array(); // id => array(parent_id, sort_order, depth)
+        $seen = array();
+        $maxDepth = (int) $location->max_depth;
+
+        $walk = function ($nodes, $parentId, $depth) use (&$walk, $map, &$updates, &$seen, $maxDepth) {
+            $order = 0;
+            foreach ($nodes as $node) {
+                $nid = isset($node['id']) ? (int) $node['id'] : 0;
+                if (!isset($map[$nid])) {
+                    throw new CHttpException(400, 'Mục #' . $nid . ' không thuộc vị trí menu này.');
+                }
+                if (isset($seen[$nid])) {
+                    throw new CHttpException(400, 'Mục #' . $nid . ' xuất hiện trùng lặp.');
+                }
+                if ($depth > $maxDepth - 1) {
+                    throw new CHttpException(400, 'Vượt quá số cấp tối đa (' . $maxDepth . ').');
+                }
+                $seen[$nid] = true;
+
+                $children = isset($node['children']) && is_array($node['children']) ? $node['children'] : array();
+                if ($children && $map[$nid]->isDivider()) {
+                    throw new CHttpException(400, 'Không thể đặt mục con dưới một divider.');
+                }
+
+                $updates[$nid] = array(
+                    'parent_id'  => $parentId,
+                    'sort_order' => ++$order,
+                    'depth'      => $depth,
+                );
+                $walk($children, $nid, $depth + 1);
+            }
+        };
+
+        $transaction = Yii::app()->db->beginTransaction();
+        try {
+            $walk($tree, null, 0);
+            foreach ($updates as $itemId => $attrs) {
+                $map[$itemId]->saveAttributes($attrs);
+            }
+            $transaction->commit();
+        } catch (CHttpException $e) {
+            $transaction->rollback();
+            $this->renderJson(array('success' => false, 'message' => $e->getMessage()), 400);
+        } catch (Exception $e) {
+            $transaction->rollback();
+            Yii::log('Lưu thứ tự menu thất bại: ' . $e->getMessage(), CLogger::LEVEL_ERROR, 'app');
+            $this->renderJson(array('success' => false, 'message' => 'Lưu thất bại, vui lòng thử lại.'), 500);
+        }
+
+        $this->renderJson(array('success' => true, 'message' => 'Đã lưu thứ tự menu.'));
+    }
+
     // ------------------------------------------------------------------ helpers
 
     /**
