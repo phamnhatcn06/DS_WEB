@@ -52,9 +52,11 @@ $canDelete = $user->checkAccess('roles.delete');
                 </a>
               <?php endif; ?>
               <?php if ($canDelete && !$role['reserved']): ?>
+                <?php $formId = 'del-role-' . CHtml::encode($role['name']); ?>
                 <?php echo CHtml::beginForm($this->createUrl('delete', array('id' => $role['name'])), 'post',
-                    array('data-confirm' => 'Xoá nhóm quyền “' . $role['description'] . '”?')); ?>
-                  <button class="btn btn-sm btn-action btn-action--delete" title="Xoá"><i class="fa fa-trash"></i></button>
+                    array('id' => $formId)); ?>
+                  <button type="button" class="btn btn-sm btn-action btn-action--delete" title="Xoá"
+                          onclick="confirmDelete('<?php echo $formId; ?>')"><i class="fa fa-trash"></i></button>
                 <?php echo CHtml::endForm(); ?>
               <?php endif; ?>
               <?php if ($role['reserved']): ?>
