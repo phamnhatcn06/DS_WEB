@@ -173,11 +173,11 @@ render đệ quy — `divider` → static-item; mục thường → `nav-link`; 
 - [x] Auto-save khi `change` + toast SweetAlert2; lỗi → reload để revert
 - **AC:** ✅ kéo đổi thứ tự/cấp lưu qua AJAX; test: nesting hợp lệ OK, vượt cấp/divider/id lạ đều bị chặn.
 
-### Sprint 4 — Render động & bỏ hardcode (1d)
-- [ ] `MenuHelper::getTree` render đệ quy + lọc RBAC + cache
-- [ ] Thay `$menu` trong `main.php` (giữ class Hope UI, dropdown con)
-- [ ] Xóa cache khi lưu menu
-- **AC:** sidebar admin giống trước về giao diện nhưng lấy từ DB; đổi menu phản ánh ngay sau xóa cache.
+### Sprint 4 — Render động & bỏ hardcode (1d) ✅ HOÀN THÀNH
+- [x] `MenuHelper` (`protected/components/`): `getItems` cache theo location + `filteredTree` lọc RBAC + `renderSidebar` render đệ quy (divider / leaf / submenu collapse Hope UI)
+- [x] Thay mảng `$menu` + vòng `foreach` trong `main.php` bằng `MenuHelper::renderSidebar('admin_sidebar', $this, $currentRoute)`
+- [x] Xóa cache tự động qua `MenuItem::afterSave` (create/update/soft-delete/reorder)
+- **AC:** ✅ sidebar lấy từ DB, giữ nguyên class Hope UI; submenu tự mở khi mục con active; lọc RBAC đúng; cache tự làm mới.
 
 ---
 
