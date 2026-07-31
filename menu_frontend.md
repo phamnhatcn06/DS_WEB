@@ -166,12 +166,12 @@ render đệ quy — `divider` → static-item; mục thường → `nav-link`; 
 
 > Ghi chú: form dùng **trang riêng** (không modal) để chắc chắn & khớp CRUD hiện có — modal là polish tuỳ chọn sau. Action `reorder` (đích của form kéo thả) làm ở Sprint 3.
 
-### Sprint 3 — Kéo thả & lưu cấu trúc (2d)
-- [ ] Tải local Nestable2 vào `assets/vendor/nestable/`
-- [ ] Gắn kéo thả nested + serialize JSON
-- [ ] Endpoint `reorder` + cập nhật transaction + validate depth/cycle + CSRF
-- [ ] Auto-save + toast kết quả
-- **AC:** kéo đổi thứ tự & cấp lưu đúng sau reload; vượt `max_depth` bị chặn; không tạo vòng lặp.
+### Sprint 3 — Kéo thả & lưu cấu trúc (2d) ✅ HOÀN THÀNH
+- [x] Vendor Nestable2 (JS+CSS) local: `cms/themes/hope-ui/assets/vendor/nestable/` (jQuery 3.6.1 có sẵn trong `libs.min.js`)
+- [x] Gắn Nestable2 vào `#menu-tree` + custom CSS grip/content; nạp plugin động sau `window load` (jQuery ở cuối body)
+- [x] `actionReorder` + `buildReorderUpdates()` (tách để test): cập nhật parent/sort/depth trong transaction; validate id lạ, trùng, vượt max_depth, con dưới divider; CSRF `_dsh_csrf`
+- [x] Auto-save khi `change` + toast SweetAlert2; lỗi → reload để revert
+- **AC:** ✅ kéo đổi thứ tự/cấp lưu qua AJAX; test: nesting hợp lệ OK, vượt cấp/divider/id lạ đều bị chặn.
 
 ### Sprint 4 — Render động & bỏ hardcode (1d)
 - [ ] `MenuHelper::getTree` render đệ quy + lọc RBAC + cache
