@@ -99,7 +99,9 @@ return array(
                 'admin/<controller:\w+>/<action:\w+>/<id:[\w\-]+>' => 'admin/<controller>/<action>',
                 'admin/<controller:\w+>/<action:\w+>'    => 'admin/<controller>/<action>',
                 'admin/<controller:\w+>'                 => 'admin/<controller>/index',
-                ''                                       => 'site/index',
+                // Trang chủ mặc định: '/' vào thẳng module frontend.
+                ''                                       => 'frontend/home/index',
+                'du-lieu-trang-chu'                      => 'frontend/home/dataSource',
                 '<action:(error|contact)>'               => 'site/<action>',
             ),
         ),
