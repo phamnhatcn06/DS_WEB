@@ -10,26 +10,9 @@ $dshAssets = Yii::app()->baseUrl . '/../assets';       // asset DSH (Bootstrap I
 $appName = Yii::app()->name;
 $user = Yii::app()->user;
 
-/** Menu bên trái: nhãn, route, icon (Bootstrap Icons), quyền RBAC cần có (null = ai cũng thấy). */
-$menu = array(
-    array('label' => 'Tổng quan',          'route' => '/admin/default/index',      'icon' => 'bi-speedometer2', 'perm' => null),
-    array('divider' => 'Nội dung trang chủ'),
-    array('label' => 'Hero slider',        'route' => '/admin/heroSlide/index',    'icon' => 'bi-images',        'perm' => 'hero_slides.view'),
-    array('label' => 'Lĩnh vực kinh doanh','route' => '/admin/sector/index',       'icon' => 'bi-diagram-3',     'perm' => 'business_sectors.view'),
-    array('label' => 'Dự án',              'route' => '/admin/project/index',      'icon' => 'bi-buildings',     'perm' => 'projects.view'),
-    array('label' => 'Giá trị cốt lõi',    'route' => '/admin/coreValue/index',    'icon' => 'bi-award',         'perm' => 'core_values.view'),
-    array('label' => 'Hành trình',         'route' => '/admin/timeline/index',     'icon' => 'bi-clock-history', 'perm' => 'timeline_milestones.view'),
-    array('label' => 'Đối tác & cổ đông',  'route' => '/admin/partner/index',      'icon' => 'bi-people',        'perm' => 'partners.view'),
-    array('divider' => 'Tin tức'),
-    array('label' => 'Bài viết',           'route' => '/admin/newsPost/index',     'icon' => 'bi-newspaper',     'perm' => 'news_posts.view'),
-    array('label' => 'Danh mục tin',       'route' => '/admin/newsCategory/index', 'icon' => 'bi-tags',          'perm' => 'news_categories.view'),
-    array('divider' => 'Hệ thống'),
-    array('label' => 'Thư viện media',     'route' => '/admin/media/index',        'icon' => 'bi-image',         'perm' => 'media.view'),
-    array('label' => 'Cấu hình website',   'route' => '/admin/setting/index',      'icon' => 'bi-gear',          'perm' => 'settings.view'),
-    array('label' => 'Người dùng',         'route' => '/admin/user/index',         'icon' => 'bi-person-badge',  'perm' => 'users.view'),
-    array('label' => 'Nhật ký',            'route' => '/admin/audit/index',        'icon' => 'bi-journal-text',  'perm' => 'audit.view'),
-);
-
+<?php
+// Menu sidebar được nạp động từ DB (location `admin_sidebar`) qua MenuHelper —
+// quản trị qua /admin/menu. Cache tự xoá khi cập nhật menu.
 $currentRoute = '/' . Yii::app()->controller->module->id . '/'
     . Yii::app()->controller->id . '/' . Yii::app()->controller->action->id;
 ?>
