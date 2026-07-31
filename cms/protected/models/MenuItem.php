@@ -108,6 +108,16 @@ class MenuItem extends BaseActiveRecord
         );
     }
 
+    /**
+     * Xoá cache menu của location sau mỗi lần lưu (gồm create/update, xoá mềm
+     * qua cập nhật deleted_at, và reorder qua saveAttributes).
+     */
+    protected function afterSave()
+    {
+        parent::afterSave();
+        MenuHelper::clearCache($this->location_id);
+    }
+
     public function isDivider()
     {
         return $this->item_type === self::TYPE_DIVIDER;
