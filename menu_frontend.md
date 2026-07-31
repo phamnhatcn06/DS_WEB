@@ -1,5 +1,31 @@
 # Kế Hoạch: Tính Năng QUẢN LÝ MENU ĐỘNG (Dynamic Menu Manager) — DSH CMS
 
+---
+
+## ⚡ CẬP NHẬT (2026-07-31): CHUYỂN TRỌNG TÂM SANG MENU FRONTEND
+
+Yêu cầu thực tế: **cấu hình menu cho website frontend** (header + footer), không phải sidebar admin.
+Phần khung (schema DB + màn hình cấu hình kéo-thả `/admin/menu`) *dùng lại nguyên vẹn* — nó quản lý mọi location.
+
+**Đã điều chỉnh & hoàn thành:**
+- Sidebar admin: giữ **render động** (`renderSidebar('admin_sidebar')`) — location admin_sidebar vẫn còn.
+- Migration `m260731_020000_seed_frontend_menus`: seed 5 location frontend lấy đúng từ `index.html`:
+  `public_header` (có dropdown "Về chúng tôi"), `public_footer_about/sectors/projects/investors`.
+- `MenuHelper::renderPublicNav($code,$base)` / `renderFooterColumn($code,$base)` / `locationName($code)` —
+  xuất **đúng markup** navbar/footer của `index.html`; `resolveUrl()` prefix base cho link tương đối (giữ `#anchor`).
+- Port `index.html` → `cms/protected/views/site/home.php`: thay khối nav + 4 cột footer bằng lệnh render động,
+  prefix 93 asset về `$root = Yii::app()->baseUrl.'/..'` (docroot = CMS phục vụ tất cả).
+- `SiteController::actionIndex` → `renderPartial('home')`; action cũ chuyển sang `actionDataSource`.
+
+**Kiểm chứng (render thật):** dropdown header động, link con resolve base, 4 cột footer động, 93 asset prefix,
+không sót `src="assets/` thô, không sót `<?php`. `php -l` sạch mọi file.
+
+**Còn lại:** các trang `.html` khác (about, sumenh, sodo-to-chuc, tintuc) muốn dùng menu động thì port tương tự
+(cùng công thức: renderPartial + `$root`/`$base` + gọi MenuHelper). QA thủ công trên trình duyệt.
+
+---
+
+
 > Nguồn: phân tích bởi Project Manager, đã chốt quyết định với người dùng (2026-07-31).
 > Phạm vi **Giai đoạn 1**: chỉ động hóa menu **sidebar admin** (`admin_sidebar`). Menu public giữ HTML tĩnh, tính sau.
 
