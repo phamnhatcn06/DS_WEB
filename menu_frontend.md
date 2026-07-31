@@ -150,12 +150,12 @@ render đệ quy — `divider` → static-item; mục thường → `nav-link`; 
 
 ## 8. Lộ trình (~7 ngày)
 
-### Sprint 1 — DB & Model (2d)
-- [ ] Migration tạo `pvn_menu_locations` + `pvn_menu_items` (+ `is_protected`) + index
-- [ ] Seed location `admin_sidebar` + import mảng `$menu` hiện tại (đánh dấu mục trọng yếu `is_protected=1`)
-- [ ] Gen model `MenuLocation`, `MenuItem` (giix) + quan hệ parent/children
-- [ ] Thêm 5 perm RBAC `menus.*` + gán vai trò admin
-- **AC:** migrate sạch (reversible); query trả cây đúng thứ tự; dữ liệu sidebar cũ đủ trong DB.
+### Sprint 1 — DB & Model (2d) ✅ HOÀN THÀNH
+- [x] Migration `m260731_000000_create_menu_tables.php`: tạo `pvn_menu_locations` + `pvn_menu_items` (+ `is_protected`) + index + FK
+- [x] Seed location `admin_sidebar` + import mảng `$menu` (17 mục; `Tổng quan` + `Quản lý menu` `is_protected=1`)
+- [x] Model `MenuLocation`, `MenuItem` (extends `BaseActiveRecord`) + quan hệ parent/children + validate
+- [x] Thêm 5 perm RBAC `menus.*` (view/create/update/delete/reorder) + gán admin/super_admin
+- **AC:** ✅ migrate chạy sạch; query trả cây đúng thứ tự; 17 mục đủ trong DB; RBAC gán đúng.
 
 ### Sprint 2 — CRUD & màn hình quản lý (2–3d)
 - [ ] `MenuController` (giix) + list location + trang `manage`
