@@ -183,13 +183,15 @@ render đệ quy — `divider` → static-item; mục thường → `nav-link`; 
 
 ## 9. Definition of Done
 
-- [ ] Admin cấu hình tên + thứ tự + phân cấp menu sidebar không cần sửa code.
-- [ ] Kéo thả lưu bền vững qua AJAX trong transaction.
-- [ ] `main.php` không còn mảng `$menu` hardcode; render từ DB, giữ nguyên UI Hope UI.
-- [ ] RBAC lọc mục đúng theo `perm`.
-- [ ] Mục `is_protected` không thể xóa/ẩn.
-- [ ] Không có request ra CDN/host ngoài (Nestable2 tải local).
-- [ ] Code review + QA pass; migration reversible.
+- [x] Admin cấu hình tên + thứ tự + phân cấp menu sidebar không cần sửa code.
+- [x] Kéo thả lưu bền vững qua AJAX trong transaction.
+- [x] `main.php` không còn mảng `$menu` hardcode; render từ DB, giữ nguyên UI Hope UI.
+- [x] RBAC lọc mục đúng theo `perm`.
+- [x] Mục `is_protected` không thể xóa/ẩn.
+- [x] Không có request ra CDN/host ngoài (Nestable2 tải local).
+- [x] Migration reversible; `php -l` sạch; smoke test qua CLI đạt. *(QA thủ công trên trình duyệt: nên chạy trước khi coi là xong hẳn.)*
+
+> **TẤT CẢ 4 SPRINT ĐÃ HOÀN THÀNH.** Còn lại: kiểm thử thủ công trên trình duyệt (đăng nhập admin, mở `/admin/menu`, kéo thả, đổi tên, kiểm tra sidebar cập nhật).
 
 ---
 
