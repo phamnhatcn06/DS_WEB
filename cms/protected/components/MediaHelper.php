@@ -36,6 +36,32 @@ class MediaHelper
     }
 
     /**
+     * Sinh thẻ <img> cho frontend với fallback local — KHÔNG BAO GIỜ src rỗng,
+     * không hotlink ra ngoài.
+     *
+     * Nhận vào một trong ba:
+     *   - MediaFile  → render ảnh từ CMS (kèm width/height, alt của bản ghi);
+     *   - string     → dùng làm src trực tiếp (asset tĩnh local);
+     *   - null/rỗng  → dùng $fallbackSrc (placeholder local).
+     *
+     * @param MediaFile|string|null $mediaOrSrc
+     * @param string $fallbackSrc  đường dẫn asset local khi không có ảnh
+     * @param string $alt
+     * @param array  $htmlOptions  class, loading, aria-hidden, …
+     */
+    public static function imgOr($mediaOrSrc, $fallbackSrc, $alt = '', $htmlOptions = array())
+    {
+        if ($mediaOrSrc instanceof MediaFile) {
+            return self::img($mediaOrSrc, $htmlOptions, $alt);
+        }
+
+        $src = (is_string($mediaOrSrc) && $mediaOrSrc !== '') ? $mediaOrSrc : $fallbackSrc;
+        $options = array_merge(array('loading' => 'lazy'), $htmlOptions);
+
+        return CHtml::image($src, $alt, $options);
+    }
+
+    /**
      * Kiểm tra file upload có an toàn không.
      *
      * Không tin `$_FILES['type']` (client gửi lên, giả được) — đọc mime thật
