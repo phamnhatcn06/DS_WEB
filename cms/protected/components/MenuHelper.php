@@ -117,19 +117,37 @@ class MenuHelper
      *
      * @return string HTML các <li>
      */
-    public static function renderFooterColumn($code)
+    public static function renderFooterColumn($code, $base = '')
     {
         $tree = self::publicTree($code);
         $html = '';
         foreach ($tree as $node) {
             $row = $node['row'];
-            $href = CHtml::encode($row['url'] !== null ? $row['url'] : '#');
+            $href = CHtml::encode(self::resolveUrl($row['url'], $base));
             $target = $row['target'] && $row['target'] !== '_self'
                 ? ' target="' . CHtml::encode($row['target']) . '"' : '';
             $html .= '<li><a class="footer-link" href="' . $href . '"' . $target . '>'
                 . CHtml::encode($row['title']) . '</a></li>';
         }
         return $html;
+    }
+
+    /**
+     * Phân giải URL của mục menu với base URL của frontend.
+     * Giữ nguyên link tuyệt đối, neo (#...), và đường dẫn gốc (/...);
+     * chỉ prefix base cho link tương đối (vd about.html).
+     */
+    protected static function resolveUrl($url, $base)
+    {
+        $url = (string) $url;
+        if ($url === '') {
+            return '#';
+        }
+        if ($base === '' || $url[0] === '#' || $url[0] === '/'
+            || strpos($url, '://') !== false || strpos($url, '//') === 0) {
+            return $url;
+        }
+        return rtrim($base, '/') . '/' . $url;
     }
 
     /** Tên hiển thị của location (dùng làm tiêu đề cột footer). */
