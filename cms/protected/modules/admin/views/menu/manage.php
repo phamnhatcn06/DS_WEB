@@ -9,7 +9,8 @@ $canUpdate = $user->checkAccess('menus.update');
 $canDelete = $user->checkAccess('menus.delete');
 
 /** Render đệ quy một nhánh cây thành markup tương thích Nestable2. */
-$renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, $that = $this) {
+$that = $this;
+$renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, $that) {
     if (empty($branch)) {
         return;
     }
