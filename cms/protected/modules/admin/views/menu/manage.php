@@ -83,6 +83,34 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
 };
 ?>
 
+<link rel="stylesheet" href="<?php echo $themeUrl; ?>/assets/vendor/nestable/jquery.nestable.min.css" />
+<style>
+  /* Ghi đè Nestable2: grip nhỏ bên trái, nội dung + nút bấm bên phải. */
+  #menu-tree.dd { max-width: 100%; font-size: 14px; }
+  #menu-tree .dd-item { margin: 6px 0; }
+  #menu-tree .dd-handle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 34px; height: auto; min-height: 42px; margin: 0; padding: 0;
+    color: #9aa0a6; background: #f6f7f9; border: 1px solid var(--bs-border-color, #dee2e6);
+    border-right: 0; border-radius: 6px 0 0 6px; cursor: grab; font-weight: 400;
+  }
+  #menu-tree .dd-handle:hover { color: var(--bs-primary, #9a1220); background: #eef0f2; }
+  #menu-tree .dd-item > .dd-handle + .dd-content {
+    display: flex; align-items: center; gap: .5rem; min-height: 42px;
+    padding: .35rem .75rem; background: #fff;
+    border: 1px solid var(--bs-border-color, #dee2e6); border-radius: 0 6px 6px 0;
+  }
+  /* Gộp handle + content thành một hàng ngang. */
+  #menu-tree .dd-item > .dd-handle { float: left; }
+  #menu-tree .dd-item > .dd-content { overflow: hidden; }
+  #menu-tree .dd-placeholder, #menu-tree .dd-empty {
+    min-height: 42px; margin: 6px 0; background: rgba(154,18,32,.06);
+    border: 1px dashed var(--bs-primary, #9a1220); border-radius: 6px;
+  }
+  #menu-tree .dd-dragel > .dd-item .dd-content { box-shadow: 0 6px 16px rgba(0,0,0,.15); }
+  #menu-tree.dd-dragging .dd-handle { cursor: grabbing; }
+</style>
+
 <div class="d-flex align-items-center mb-3">
   <a class="btn btn-sm btn-link text-muted ps-0" href="<?php echo $this->createUrl('index'); ?>">
     <i class="bi bi-arrow-left me-1"></i> Vị trí menu
