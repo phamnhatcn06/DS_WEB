@@ -199,11 +199,13 @@ body.admin-body {
 
 /* -------------------------------------------------- nút thao tác trong grid */
 
-/* Hàng nút thao tác: các nút đồng nhất, cách đều (mỗi nút bọc 1 form riêng). */
+/* Hàng nút thao tác: luôn nằm trên 1 hàng, cách đều (mỗi nút bọc 1 form riêng). */
 .table-actions {
   display: inline-flex;
   align-items: center;
   justify-content: flex-end;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   gap: .35rem;
 }
 
@@ -212,19 +214,14 @@ body.admin-body {
   margin: 0;
 }
 
-/* Nút thao tác chuẩn: cùng kích thước vuông, cùng viền/nền trung tính. */
+/* Nút thao tác chuẩn: kích thước theo .btn-sm, cùng viền/nền trung tính. */
 .btn-action {
-  --size: 34px;
-  width: var(--size);
-  height: var(--size);
-  padding: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 1px solid #d7dbe0;
   background: #fff;
   color: #6b7280;
-  border-radius: 6px;
   line-height: 1;
   transition: color .15s ease, background-color .15s ease, border-color .15s ease;
 }
