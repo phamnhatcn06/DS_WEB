@@ -30,6 +30,9 @@ return array(
         'application.models.*',
         'application.components.*',
         'application.components.behaviors.*',
+        // Nạp sẵn để autoload phân giải được khi unserialize ActiveRecord từ cache
+        // (CTimestampBehavior không nằm trong coreClasses của framework này).
+        'zii.behaviors.CTimestampBehavior',
     ),
 
     'modules' => array(
