@@ -91,7 +91,9 @@ return array(
                 'admin/dat-lai-mat-khau'                 => 'admin/auth/resetPassword',
                 // Luật cụ thể hơn phải đứng trước: Yii1 khớp theo thứ tự, nếu
                 // để luật 2 đoạn lên trên thì luật có <id> sẽ không bao giờ khớp.
-                'admin/<controller:\w+>/<action:\w+>/<id:\d+>' => 'admin/<controller>/<action>',
+                // <id> nhận cả số (bản ghi CRUD) lẫn chữ (mã vai trò RBAC như
+                // "viewer", "super_admin"; mã chức năng như "projects").
+                'admin/<controller:\w+>/<action:\w+>/<id:[\w\-]+>' => 'admin/<controller>/<action>',
                 'admin/<controller:\w+>/<action:\w+>'    => 'admin/<controller>/<action>',
                 'admin/<controller:\w+>'                 => 'admin/<controller>/index',
                 ''                                       => 'site/index',
