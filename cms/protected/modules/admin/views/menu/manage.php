@@ -136,8 +136,61 @@ $renderBranch = function ($branch) use (&$renderBranch, $canUpdate, $canDelete, 
       </div>
       <p class="form-hint mt-3 mb-0">
         <i class="bi bi-info-circle me-1"></i>
-        Kéo thả để sắp xếp và phân cấp sẽ được bật ở bước tiếp theo.
+        Kéo biểu tượng <i class="bi bi-grip-vertical"></i> để sắp xếp và lồng cấp
+        (tối đa <?php echo (int) $location->max_depth; ?> cấp). Thứ tự được lưu tự động.
       </p>
     <?php endif; ?>
   </div>
 </div>
+
+<?php if ($canReorder): ?>
+<script>
+  // Kéo thả cây menu bằng Nestable2. jQuery + libs nạp ở CUỐI body (layout),
+  // nên đợi 'load' rồi mới nạp động plugin để chắc chắn $ đã sẵn sàng.
+  window.addEventListener('load', function () {
+    if (typeof window.jQuery === 'undefined') { return; }
+    var $ = window.jQuery;
+
+    var script = document.createElement('script');
+    script.src = '<?php echo $themeUrl; ?>/assets/vendor/nestable/jquery.nestable.min.js';
+    script.onload = function () { initMenuNestable($); };
+    document.body.appendChild(script);
+  });
+
+  function initMenuNestable($) {
+    var $tree = $('#menu-tree');
+    if (!$tree.length || typeof $.fn.nestable === 'undefined') { return; }
+
+    var reorderUrl = $tree.data('reorder-url');
+    var csrfToken = '<?php echo Yii::app()->request->csrfToken; ?>';
+    var csrfName = '<?php echo Yii::app()->request->csrfTokenName; ?>';
+    var saving = false;
+
+    $tree.nestable({ maxDepth: <?php echo (int) $location->max_depth; ?>, handleClass: 'dd-handle' });
+
+    // Toast gọn dùng SweetAlert2 (đã nạp ở layout).
+    function toast(icon, title) {
+      if (typeof Swal === 'undefined') { return; }
+      Swal.fire({ toast: true, position: 'top-end', icon: icon, title: title,
+        showConfirmButton: false, timer: 2200, timerProgressBar: true });
+    }
+
+    $tree.on('change', function () {
+      if (saving) { return; }
+      saving = true;
+      var data = { tree: JSON.stringify($tree.nestable('serialize')) };
+      data[csrfName] = csrfToken;
+
+      $.ajax({ url: reorderUrl, method: 'POST', dataType: 'json', data: data })
+        .done(function (res) {
+          if (res && res.success) { toast('success', res.message || 'Đã lưu thứ tự.'); }
+          else { toast('error', (res && res.message) || 'Lưu thất bại.'); setTimeout(reload, 1200); }
+        })
+        .fail(function () { toast('error', 'Lỗi kết nối, đang tải lại…'); setTimeout(reload, 1200); })
+        .always(function () { saving = false; });
+    });
+
+    function reload() { window.location.reload(); }
+  }
+</script>
+<?php endif; ?>
