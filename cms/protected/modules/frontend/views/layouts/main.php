@@ -229,5 +229,6 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <script src="<?php echo $root; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
   <!-- Custom JS -->
   <script src="<?php echo $root; ?>/assets/js/main.js"></script>
+<?php echo $footerScript; ?>
 </body>
 </html>
