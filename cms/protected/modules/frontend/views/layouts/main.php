@@ -168,7 +168,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
 
           <!-- Brand + liên hệ + social -->
           <div class="col">
-            <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
+            <img src="<?php echo CHtml::encode($logoFooter); ?>" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
             <ul class="list-unstyled footer-contact mb-4">
               <li>
                 <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
