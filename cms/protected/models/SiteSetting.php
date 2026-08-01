@@ -129,10 +129,12 @@ class SiteSetting extends CActiveRecord
     public static function groupLabels()
     {
         return array(
-            'general' => 'Thông tin chung',
-            'contact' => 'Liên hệ',
-            'social'  => 'Mạng xã hội',
-            'seo'     => 'SEO',
+            'general'  => 'Thông tin chung',
+            'branding' => 'Thương hiệu',
+            'contact'  => 'Liên hệ',
+            'social'   => 'Mạng xã hội',
+            'seo'      => 'SEO',
+            'scripts'  => 'Script chèn',
         );
     }
 }
