@@ -3,8 +3,9 @@
  * Module frontend — gom toàn bộ logic trang public (trang chủ, giới thiệu,
  * dự án, tin tức) tách khỏi phần quản trị (module admin).
  *
- * KHÔNG setTheme('hope-ui'): theme đó chỉ dành cho admin. Trang public dùng
- * view/layout riêng của module với asset Bootstrap tải local ở thư mục gốc dự án.
+ * Kích hoạt theme `dongson` (cms/themes/dongson) cho toàn bộ trang public —
+ * đối xứng với module admin dùng theme `hope-ui`. Mọi CSS/JS/font/ảnh của
+ * frontend được phục vụ từ thư mục theme, tham chiếu qua Yii::app()->theme->baseUrl.
  */
 class FrontendModule extends CWebModule
 {
