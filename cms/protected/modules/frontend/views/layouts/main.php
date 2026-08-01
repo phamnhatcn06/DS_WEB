@@ -120,7 +120,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid px-4 px-xl-5">
         <a class="navbar-brand" href="#hero" aria-label="Đông Sơn Holdings">
-          <img src="<?php echo $root; ?>/assets/images/logo.webp" alt="Đông Sơn Holdings" class="brand-logo" />
+          <img src="<?php echo CHtml::encode($logoHeader); ?>" alt="Đông Sơn Holdings" class="brand-logo" />
         </a>
 
         <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
