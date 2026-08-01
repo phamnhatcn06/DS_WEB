@@ -23,7 +23,7 @@ return array(
     'sourceLanguage' => 'vi',
     'timeZone'    => 'Asia/Ho_Chi_Minh',
     'charset'     => 'utf-8',
-
+    'defaultController' => 'frontend/home',
     'preload' => array('log'),
 
     'import' => array(
