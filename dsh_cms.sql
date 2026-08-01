@@ -1,17 +1,17 @@
 /*
- Navicat Premium Data Transfer
+ Navicat Premium Dump SQL
 
- Source Server         : Localhost
+ Source Server         : Local_MySQL
  Source Server Type    : MySQL
- Source Server Version : 50724
+ Source Server Version : 50724 (5.7.24)
  Source Host           : localhost:3306
  Source Schema         : dsh_cms
 
  Target Server Type    : MySQL
- Target Server Version : 50724
+ Target Server Version : 50724 (5.7.24)
  File Encoding         : 65001
 
- Date: 31/07/2026 17:21:12
+ Date: 01/08/2026 07:49:56
 */
 
 SET NAMES utf8mb4;
@@ -25,7 +25,7 @@ CREATE TABLE `migrations`  (
   `version` varchar(180) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `apply_time` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`version`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -66,7 +66,7 @@ CREATE TABLE `pvn_audit_logs`  (
   INDEX `idx_audit_logs_user_id_created_at`(`user_id`, `created_at`) USING BTREE,
   INDEX `idx_audit_logs_created_at`(`created_at`) USING BTREE,
   CONSTRAINT `fk_audit_logs_users` FOREIGN KEY (`user_id`) REFERENCES `pvn_users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_audit_logs
@@ -110,7 +110,7 @@ CREATE TABLE `pvn_auth_assignments`  (
   `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`itemname`, `userid`) USING BTREE,
   CONSTRAINT `fk_auth_assignments_auth_items` FOREIGN KEY (`itemname`) REFERENCES `pvn_auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_auth_assignments
@@ -128,7 +128,7 @@ CREATE TABLE `pvn_auth_item_children`  (
   INDEX `fk_auth_item_children_child`(`child`) USING BTREE,
   CONSTRAINT `fk_auth_item_children_child` FOREIGN KEY (`child`) REFERENCES `pvn_auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_auth_item_children_parent` FOREIGN KEY (`parent`) REFERENCES `pvn_auth_items` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_auth_item_children
@@ -214,7 +214,7 @@ CREATE TABLE `pvn_auth_items`  (
   `bizrule` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT 'KHÔNG SỬ DỤNG — eval() là rủi ro bảo mật',
   `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_auth_items
@@ -320,7 +320,7 @@ CREATE TABLE `pvn_business_sectors`  (
   INDEX `fk_business_sectors_icon_media`(`icon_media_id`) USING BTREE,
   CONSTRAINT `fk_business_sectors_icon_media` FOREIGN KEY (`icon_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_business_sectors_image_media` FOREIGN KEY (`image_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_business_sectors
@@ -349,7 +349,7 @@ CREATE TABLE `pvn_core_values`  (
   INDEX `idx_core_values_sort_order`(`sort_order`) USING BTREE,
   INDEX `fk_core_values_icon_media`(`icon_media_id`) USING BTREE,
   CONSTRAINT `fk_core_values_icon_media` FOREIGN KEY (`icon_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_core_values
@@ -386,7 +386,7 @@ CREATE TABLE `pvn_hero_slides`  (
   INDEX `fk_hero_slides_logo_media`(`logo_media_id`) USING BTREE,
   CONSTRAINT `fk_hero_slides_bg_media` FOREIGN KEY (`background_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_hero_slides_logo_media` FOREIGN KEY (`logo_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_hero_slides
@@ -426,7 +426,7 @@ CREATE TABLE `pvn_media_files`  (
   INDEX `fk_media_files_users`(`uploaded_by`) USING BTREE,
   CONSTRAINT `fk_media_files_media_folders` FOREIGN KEY (`folder_id`) REFERENCES `pvn_media_folders` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_media_files_users` FOREIGN KEY (`uploaded_by`) REFERENCES `pvn_users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_media_files
@@ -491,7 +491,7 @@ CREATE TABLE `pvn_media_folders`  (
   UNIQUE INDEX `uniq_media_folders_slug`(`slug`) USING BTREE,
   INDEX `idx_media_folders_parent_id`(`parent_id`) USING BTREE,
   CONSTRAINT `fk_media_folders_media_folders` FOREIGN KEY (`parent_id`) REFERENCES `pvn_media_folders` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_media_folders
@@ -527,7 +527,7 @@ CREATE TABLE `pvn_menu_items`  (
   INDEX `idx_menu_items_sort`(`location_id`, `parent_id`, `sort_order`) USING BTREE,
   CONSTRAINT `fk_menu_items_location` FOREIGN KEY (`location_id`) REFERENCES `pvn_menu_locations` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_menu_items_parent` FOREIGN KEY (`parent_id`) REFERENCES `pvn_menu_items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_menu_items
@@ -594,7 +594,7 @@ CREATE TABLE `pvn_menu_locations`  (
   `deleted_at` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_menu_locations_code`(`code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_menu_locations
@@ -627,7 +627,7 @@ CREATE TABLE `pvn_news_categories`  (
   INDEX `idx_news_categories_sort_order`(`sort_order`) USING BTREE,
   INDEX `fk_news_categories_parent`(`parent_id`) USING BTREE,
   CONSTRAINT `fk_news_categories_parent` FOREIGN KEY (`parent_id`) REFERENCES `pvn_news_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_news_categories
@@ -672,7 +672,7 @@ CREATE TABLE `pvn_news_posts`  (
   CONSTRAINT `fk_news_posts_news_categories` FOREIGN KEY (`category_id`) REFERENCES `pvn_news_categories` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_news_posts_thumbnail_media` FOREIGN KEY (`thumbnail_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_news_posts_users` FOREIGN KEY (`author_id`) REFERENCES `pvn_users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_news_posts
@@ -702,7 +702,7 @@ CREATE TABLE `pvn_partners`  (
   INDEX `idx_partners_type_sort`(`partner_type`, `sort_order`) USING BTREE,
   INDEX `fk_partners_logo_media`(`logo_media_id`) USING BTREE,
   CONSTRAINT `fk_partners_logo_media` FOREIGN KEY (`logo_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_partners
@@ -752,7 +752,7 @@ CREATE TABLE `pvn_projects`  (
   INDEX `fk_projects_thumbnail_media`(`thumbnail_media_id`) USING BTREE,
   CONSTRAINT `fk_projects_business_sectors` FOREIGN KEY (`sector_id`) REFERENCES `pvn_business_sectors` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_projects_thumbnail_media` FOREIGN KEY (`thumbnail_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_projects
@@ -782,7 +782,7 @@ CREATE TABLE `pvn_sessions`  (
   INDEX `idx_sessions_user_id`(`user_id`) USING BTREE,
   INDEX `idx_sessions_expires_at`(`expires_at`) USING BTREE,
   CONSTRAINT `fk_sessions_users` FOREIGN KEY (`user_id`) REFERENCES `pvn_users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_sessions
@@ -807,7 +807,7 @@ CREATE TABLE `pvn_site_settings`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_site_settings_setting_key`(`setting_key`) USING BTREE,
   INDEX `idx_site_settings_group_name`(`group_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_site_settings
@@ -852,7 +852,7 @@ CREATE TABLE `pvn_timeline_milestones`  (
   INDEX `idx_timeline_milestones_sort_order`(`sort_order`) USING BTREE,
   INDEX `fk_timeline_milestones_media`(`image_media_id`) USING BTREE,
   CONSTRAINT `fk_timeline_milestones_media` FOREIGN KEY (`image_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_timeline_milestones
@@ -893,7 +893,7 @@ CREATE TABLE `pvn_users`  (
   INDEX `idx_users_is_active`(`is_active`) USING BTREE,
   INDEX `fk_users_media_files`(`avatar_media_id`) USING BTREE,
   CONSTRAINT `fk_users_media_files` FOREIGN KEY (`avatar_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_users
