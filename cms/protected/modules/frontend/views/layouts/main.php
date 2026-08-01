@@ -11,6 +11,42 @@
  */
 $root = $this->assetsBase();
 $base = $root;
+
+/**
+ * Resolve id media trong setting → URL công khai. Trả $fallback nếu chưa chọn.
+ */
+$settingImageUrl = function ($key, $fallback = null) {
+    $id = SiteSetting::get($key);
+    if ($id) {
+        $media = MediaFile::model()->findByPk($id);
+        if ($media !== null) {
+            return $media->getPublicUrl();
+        }
+    }
+    return $fallback;
+};
+
+$metaTitle       = $this->pageTitle ? $this->pageTitle
+    : SiteSetting::get('default_meta_title', 'Đông Sơn Holdings — Kiến tạo hạ tầng, vững bước tương lai');
+$metaDescription = SiteSetting::get('default_meta_description',
+    'Đông Sơn Holdings (DSH) — tập đoàn đầu tư hạ tầng BOT, bất động sản và năng lượng, '
+    . 'kiến tạo những công trình trọng điểm cho tương lai Việt Nam.');
+$metaKeywords    = SiteSetting::get('meta_keywords');
+$metaAuthor      = SiteSetting::get('meta_author');
+$metaRobots      = SiteSetting::get('meta_robots', 'index, follow');
+$canonicalBase   = rtrim((string) SiteSetting::get('canonical_base_url'), '/');
+$ogType          = SiteSetting::get('og_type', 'website');
+$twitterCard     = SiteSetting::get('twitter_card', 'summary_large_image');
+$googleVerify    = SiteSetting::get('google_site_verification');
+
+$logoHeader = $settingImageUrl('site_logo', $root . '/assets/images/logo.webp');
+$logoFooter = $settingImageUrl('site_logo_footer', $root . '/assets/images/logo.webp');
+$faviconUrl = $settingImageUrl('favicon');
+$ogImageUrl = $settingImageUrl('og_image');
+
+$headerScript     = (string) SiteSetting::get('header_script');
+$bodyStartScript  = (string) SiteSetting::get('body_start_script');
+$footerScript     = (string) SiteSetting::get('footer_script');
 ?>
 <!doctype html>
 <html lang="vi">
