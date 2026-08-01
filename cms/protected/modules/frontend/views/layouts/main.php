@@ -107,8 +107,10 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <link href="<?php echo $root; ?>/assets/css/section-9-tintuc.css" rel="stylesheet" />
   <!-- Lớp chuyển động (nạp cuối để override transition mặc định của section) -->
   <link href="<?php echo $root; ?>/assets/css/animations.css" rel="stylesheet" />
+<?php echo $headerScript; ?>
 </head>
 <body>
+<?php echo $bodyStartScript; ?>
 
   <!-- Sentinel: kích hoạt glassmorphism header khi rời khỏi đỉnh trang -->
   <span class="header-sentinel" aria-hidden="true"></span>
