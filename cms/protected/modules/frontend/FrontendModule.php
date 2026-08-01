@@ -19,6 +19,9 @@ class FrontendModule extends CWebModule
             'frontend.services.*',
         ));
 
+        // Theme public: cms/themes/dongson (asset css/js/font/ảnh nằm trong theme).
+        Yii::app()->setTheme('dongson');
+
         // Layout mặc định của module (dùng cho các trang có layout; trang chủ là
         // tài liệu HTML hoàn chỉnh nên render không layout).
         $this->layout = 'frontend.views.layouts.main';
