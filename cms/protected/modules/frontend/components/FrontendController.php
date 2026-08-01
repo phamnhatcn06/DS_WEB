@@ -7,23 +7,16 @@ class FrontendController extends Controller
     public $layout = 'frontend.views.layouts.main';
 
     /**
-     * Base URL tới gốc dự án (nơi chứa /assets). CMS chạy trong webroot con
-     * `cms/`, còn asset frontend nằm ở thư mục cha (cùng cấp static index.html).
+     * Base URL tới theme frontend `dongson` (cms/themes/dongson) — nơi chứa
+     * /assets (css, js, fonts, images, vendor). Trả về từ theme để mọi
+     * layout/view/partial tham chiếu asset nhất quán, ví dụ:
+     *   href "<?php echo $this->assetsBase(); ?>/assets/css/main.css"
+     *   → "/cms/themes/dongson/assets/css/main.css"
      *
-     * Lùi một cấp bằng cách BỎ đoạn cuối của baseUrl thay vì nối "/.." — cho ra
-     * URL tuyệt đối sạch (vd "/assets/..."), không phụ thuộc trình duyệt/Apache
-     * chuẩn hoá "/../". Ví dụ:
-     *   baseUrl "/cms"      → ""      → href "/assets/..."
-     *   baseUrl "/sub/cms"  → "/sub"  → href "/sub/assets/..."
-     *   baseUrl ""          → ""      → href "/assets/..."
-     *
-     * Đặt một chỗ để layout + mọi view/partial tham chiếu asset nhất quán.
+     * Theme được kích hoạt trong FrontendModule::init() qua setTheme('dongson').
      */
     public function assetsBase()
     {
-        $base  = rtrim(Yii::app()->getBaseUrl(), '/');
-        $slash = strrpos($base, '/');
-
-        return $slash === false ? '' : substr($base, 0, $slash);
+        return Yii::app()->theme->baseUrl;
     }
 }
