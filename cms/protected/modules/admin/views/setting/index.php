@@ -34,7 +34,9 @@ $firstGroup = $groupKeys === array() ? null : $groupKeys[0];
             <?php foreach ($settings as $setting): ?>
               <?php
               $inputId = 'setting-' . $setting->setting_key;
-              $isLong = mb_strlen((string) $setting->setting_value, 'UTF-8') > 90
+              // Nhóm script luôn là textarea (mặc định rỗng nên không tự nhận diện được).
+              $isLong = $setting->group_name === 'scripts'
+                  || mb_strlen((string) $setting->setting_value, 'UTF-8') > 90
                   || strpos((string) $setting->setting_value, "\n") !== false;
               ?>
               <div class="col-12 col-lg-<?php echo $isLong ? 12 : 6; ?>">
