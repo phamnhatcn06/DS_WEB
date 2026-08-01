@@ -55,9 +55,33 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- SEO -->
-  <title><?php echo CHtml::encode($this->pageTitle ? $this->pageTitle : 'Đông Sơn Holdings — Kiến tạo hạ tầng, vững bước tương lai'); ?></title>
-  <meta name="description"
-        content="Đông Sơn Holdings (DSH) — tập đoàn đầu tư hạ tầng BOT, bất động sản và năng lượng, kiến tạo những công trình trọng điểm cho tương lai Việt Nam." />
+  <title><?php echo CHtml::encode($metaTitle); ?></title>
+  <meta name="description" content="<?php echo CHtml::encode($metaDescription); ?>" />
+  <?php if ($metaKeywords): ?>
+  <meta name="keywords" content="<?php echo CHtml::encode($metaKeywords); ?>" />
+  <?php endif; ?>
+  <?php if ($metaAuthor): ?>
+  <meta name="author" content="<?php echo CHtml::encode($metaAuthor); ?>" />
+  <?php endif; ?>
+  <?php if ($metaRobots): ?>
+  <meta name="robots" content="<?php echo CHtml::encode($metaRobots); ?>" />
+  <?php endif; ?>
+  <?php if ($googleVerify): ?>
+  <meta name="google-site-verification" content="<?php echo CHtml::encode($googleVerify); ?>" />
+  <?php endif; ?>
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="<?php echo CHtml::encode($ogType); ?>" />
+  <meta property="og:title" content="<?php echo CHtml::encode($metaTitle); ?>" />
+  <meta property="og:description" content="<?php echo CHtml::encode($metaDescription); ?>" />
+  <?php if ($ogImageUrl): ?>
+  <meta property="og:image" content="<?php echo CHtml::encode($ogImageUrl); ?>" />
+  <?php endif; ?>
+  <meta name="twitter:card" content="<?php echo CHtml::encode($twitterCard); ?>" />
+
+  <?php if ($faviconUrl): ?>
+  <link rel="icon" href="<?php echo CHtml::encode($faviconUrl); ?>" />
+  <?php endif; ?>
 
   <!-- Fonts (local) -->
   <link href="<?php echo $root; ?>/assets/fonts/fonts.css" rel="stylesheet" />
