@@ -1,0 +1,170 @@
+/* ============================================================
+   Trang lưu trữ theo thẻ (/the/<slug>)
+   Dải đầu nền tối (header fixed chữ trắng đè lên vẫn đọc được),
+   thân nền sáng với lưới card lĩnh vực + tin tức.
+   ============================================================ */
+
+.tagp { background-color: #f6f7f9; }
+
+/* -------- Dải đầu trang (nền tối) -------- */
+.tagp-hero {
+  position: relative;
+  background:
+    radial-gradient(120% 140% at 85% -10%, rgba(154, 18, 32, .55), transparent 55%),
+    linear-gradient(160deg, var(--dsh-navy) 0%, #0b1526 60%, #060b16 100%);
+  color: var(--dsh-white);
+  /* padding-top đủ để lọt qua header fixed (min-height 80px) */
+  padding-top: clamp(120px, 15vw, 190px);
+  padding-bottom: clamp(40px, 6vw, 72px);
+}
+
+.tagp-crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: .8125rem;
+  color: rgba(255, 255, 255, .6);
+  margin-bottom: clamp(16px, 3vw, 28px);
+}
+
+.tagp-crumbs a {
+  color: rgba(255, 255, 255, .8);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.tagp-crumbs a:hover { color: var(--dsh-gold); }
+
+.tagp-eyebrow {
+  display: inline-block;
+  font-size: .8125rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dsh-gold);
+  margin-bottom: 10px;
+}
+
+.tagp-title {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin: 0 0 12px;
+}
+
+.tagp-sub {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, .78);
+  margin: 0;
+  max-width: 62ch;
+}
+
+/* -------- Thân nội dung (nền sáng) -------- */
+.tagp-body { padding-block: clamp(48px, 7vw, 96px); }
+
+.tagp-section-title {
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  font-weight: 700;
+  color: var(--dsh-ink);
+  margin: 0 0 clamp(20px, 3vw, 32px);
+}
+
+/* Cách nhau giữa hai khối (lĩnh vực → tin tức) */
+.tagp-grid + .tagp-section-title { margin-top: clamp(48px, 6vw, 80px); }
+
+/* -------- Card -------- */
+.tagp-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--dsh-white);
+  border: 1px solid rgba(13, 37, 69, .08);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 6px 24px rgba(8, 15, 29, .06);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.tagp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(8, 15, 29, .12);
+  border-color: rgba(201, 168, 76, .4);
+}
+
+.tagp-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background-color: #e9ecf1;
+}
+
+.tagp-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.tagp-card:hover .tagp-card-img { transform: scale(1.04); }
+
+.tagp-card-chip {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 4px 12px;
+  font-size: .6875rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--dsh-white);
+  background-color: var(--dsh-red);
+  border-radius: var(--radius);
+}
+
+.tagp-card-chip--gold {
+  color: #3a2e06;
+  background-color: var(--dsh-gold);
+}
+
+.tagp-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: clamp(16px, 2vw, 22px);
+}
+
+.tagp-card-date {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--dsh-slate);
+  margin: 0;
+}
+
+.tagp-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--dsh-ink);
+  margin: 0;
+}
+
+.tagp-card-desc {
+  font-size: .875rem;
+  line-height: 1.6;
+  color: var(--dsh-slate);
+  margin: 0;
+}
+
+/* -------- Trạng thái rỗng -------- */
+.tagp-empty {
+  text-align: center;
+  padding-block: clamp(32px, 6vw, 64px);
+}
+
+.tagp-empty p {
+  font-size: 1.0625rem;
+  color: var(--dsh-slate);
+  margin-bottom: 20px;
+}
