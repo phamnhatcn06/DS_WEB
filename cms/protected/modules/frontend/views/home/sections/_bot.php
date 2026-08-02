@@ -87,6 +87,7 @@ $total = count($slides);
           <div class="carousel-inner">
 <?php foreach ($slides as $i => $s): ?>
 <?php $chips = isset($s['chips']) ? $s['chips'] : $s['tags']; ?>
+<?php $chipItems = !empty($s['tagList']) ? $s['tagList'] : $chips; ?>
             <div class="carousel-item<?php echo $i === 0 ? ' active' : ''; ?>">
               <div class="row g-5 g-lg-4 align-items-center">
                 <div class="col-12 col-lg-6">
