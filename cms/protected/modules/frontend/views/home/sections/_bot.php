@@ -9,6 +9,11 @@
  */
 $root = $this->assetsBase();
 
+// URL trang lưu trữ theo thẻ (/the/<slug>).
+$tagUrl = function ($slug) {
+    return Yii::app()->createUrl('frontend/tag/view', array('slug' => $slug));
+};
+
 $slides = array();
 if (!empty($sectors)) {
     foreach ($sectors as $sector) {
@@ -17,10 +22,18 @@ if (!empty($sectors)) {
         }
         // Sau migrate: $sector->tags là mảng Tag. Chịu thêm dạng chuỗi cũ để
         // không vỡ trang nếu còn payload cache cũ chưa được làm mới.
+        // tagNames: dòng chữ "·"; tagList: chip có link tới trang thẻ.
         $tagNames = array();
+        $tagList = array();
         if (is_array($sector->tags)) {
             foreach ($sector->tags as $tag) {
-                $tagNames[] = is_object($tag) ? $tag->name : (string) $tag;
+                if (is_object($tag)) {
+                    $tagNames[] = $tag->name;
+                    $tagList[] = array('slug' => $tag->slug, 'name' => $tag->name);
+                } else {
+                    $tagNames[] = (string) $tag;
+                    $tagList[] = array('slug' => null, 'name' => (string) $tag);
+                }
             }
         }
         $slides[] = array(
@@ -28,6 +41,7 @@ if (!empty($sectors)) {
             'title'    => $sector->headline != '' ? $sector->headline : $sector->name,
             'lead'     => $sector->lead_text,
             'tags'     => $tagNames,
+            'tagList'  => $tagList,
             'image'    => $sector->image,
             'cardTitle'=> $sector->card_title != '' ? $sector->card_title : $sector->name,
             'cardDesc' => $sector->card_description,
