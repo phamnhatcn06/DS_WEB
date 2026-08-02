@@ -15,11 +15,15 @@ if (!empty($sectors)) {
         if (!$sector->show_in_slider) {
             continue;
         }
+        $tagNames = array();
+        foreach ($sector->tags as $tag) {
+            $tagNames[] = $tag->name;
+        }
         $slides[] = array(
             'eyebrow'  => $sector->eyebrow != '' ? $sector->eyebrow : $sector->name,
             'title'    => $sector->headline != '' ? $sector->headline : $sector->name,
             'lead'     => $sector->lead_text,
-            'tags'     => is_array($sector->tags) ? $sector->tags : array(),
+            'tags'     => $tagNames,
             'image'    => $sector->image,
             'cardTitle'=> $sector->card_title != '' ? $sector->card_title : $sector->name,
             'cardDesc' => $sector->card_description,
