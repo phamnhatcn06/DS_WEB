@@ -100,4 +100,12 @@ class NewsPostController extends AdminCrudController
             array('name' => 'is_active', 'type' => 'checkbox', 'width' => 2),
         );
     }
+
+    /**
+     * Sau khi lưu bài, đồng bộ liên kết thẻ vào bảng pvn_news_post_tags.
+     */
+    protected function afterSaveModel($model)
+    {
+        Tag::syncLinks('pvn_news_post_tags', 'post_id', $model->id, $model->tagIds);
+    }
 }
