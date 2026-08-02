@@ -365,8 +365,13 @@
 
       var FILTER_FADE_MS = PREFERS_REDUCED_MOTION ? 0 : 300;
 
-      function isMatched(item, category) {
-        return category === 'all' || item.dataset.category === category;
+      // Khớp khi chọn "Tất cả", trùng danh mục, hoặc slug nằm trong data-tags.
+      function isMatched(item, filter) {
+        if (filter === 'all' || item.dataset.category === filter) {
+          return true;
+        }
+        var tags = (item.dataset.tags || '').split(' ');
+        return tags.indexOf(filter) !== -1;
       }
 
       /** Bước 1: làm mờ các thẻ sắp bị ẩn trước khi gỡ khỏi luồng layout. */
