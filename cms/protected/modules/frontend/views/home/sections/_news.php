@@ -44,9 +44,14 @@ if (!empty($newsPosts)) {
     foreach ($newsPosts as $post) {
         $tagNames = array();
         $tagSlugs = array();
-        foreach ($post->tags as $tag) {
-            $tagNames[] = $tag->name;
-            $tagSlugs[] = $tag->slug;
+        if (is_array($post->tags)) {
+            foreach ($post->tags as $tag) {
+                if (!is_object($tag)) {
+                    continue;
+                }
+                $tagNames[] = $tag->name;
+                $tagSlugs[] = $tag->slug;
+            }
         }
         $posts[] = array(
             'img'      => $post->thumbnail,
