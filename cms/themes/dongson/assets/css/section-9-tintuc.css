@@ -186,6 +186,27 @@
 
 .news-card:hover .news-more img { transform: translateX(4px); }
 
+/* -------- Thẻ (tag) dùng chung — chip nhỏ dưới tiêu đề tin -------- */
+.news-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.news-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: .6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: .02em;
+  color: var(--dsh-gold);
+  border: 1px solid rgba(201, 168, 76, .35);
+  border-radius: var(--radius);
+  background-color: rgba(201, 168, 76, .08);
+}
+
 /* -------- Chiều cao theo bố cục Figma (mosaic 3 cột) --------
    Cột giữa cao nhất (746px), cột trái 597px, cột phải 2 card 368px. */
 @media (min-width: 992px) {
