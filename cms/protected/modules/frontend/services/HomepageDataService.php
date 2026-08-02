@@ -51,6 +51,18 @@ class HomepageDataService
                 'order'     => 't.published_at DESC',
                 'limit'     => 12,
             )),
+
+            // Chỉ những thẻ đang gắn cho ít nhất một bài đã xuất bản — làm nguồn
+            // cho hàng lọc theo thẻ ở Section 9.
+            'newsTags' => Tag::model()->findAll(array(
+                'condition' => 't.deleted_at IS NULL AND t.is_active = 1'
+                    . ' AND EXISTS (SELECT 1 FROM pvn_news_post_tags npt'
+                    . ' JOIN pvn_news_posts p ON p.id = npt.post_id'
+                    . ' WHERE npt.tag_id = t.id AND p.deleted_at IS NULL'
+                    . ' AND p.is_active = 1 AND p.status = :st)',
+                'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
+                'order'     => 't.sort_order ASC, t.name ASC',
+            )),
         );
 
         if ($cache) {
