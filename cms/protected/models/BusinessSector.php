@@ -8,6 +8,9 @@
  */
 class BusinessSector extends BaseActiveRecord
 {
+    /** @var int[]|null id các thẻ được chọn trong form (trường ảo, không phải cột). */
+    private $_tagIds;
+
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
