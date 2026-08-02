@@ -114,7 +114,7 @@ class m260802_000000_fix_media_paths_to_theme extends CDbMigration
                 'height'     => $height,
                 'alt_text'   => ucfirst(str_replace('-', ' ',
                     pathinfo($fileName, PATHINFO_FILENAME))),
-                'checksum'   => hash_file('sha256', $fullPath),
+                'checksum'   => $checksum,
                 'created_at' => $this->now,
                 'updated_at' => $this->now,
             ));
