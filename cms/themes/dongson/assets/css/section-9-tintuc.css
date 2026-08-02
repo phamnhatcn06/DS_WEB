@@ -283,10 +283,35 @@
   .news-card--tall { min-height: min(38.9vw, 746px); }
   .news-card--sm   { min-height: min(18.8vw, 361px); }
 
-  /* Khi đang lọc theo một danh mục, card lớn bám mép trên và cào bằng chiều cao */
-  .tintuc.is-filtered .tintuc-col--wide { align-self: stretch; }
+  /* -------- Khi đang lọc theo danh mục/thẻ --------
+     Bỏ hẳn kiểu mosaic chồng tiêu đề: tiêu đề về hàng riêng, các card khớp
+     tự dàn bằng auto-fit. Nhờ vậy lọc còn 1 card cũng không tràn lên tiêu đề,
+     và card lẻ giãn đầy bề rộng thay vì lọt thỏm 1 cột. */
+  .tintuc.is-filtered .tintuc-layout {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
+
+  .tintuc.is-filtered .tintuc-head {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: start;
+    margin-top: 0;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .tintuc.is-filtered .tintuc-col--wide,
+  .tintuc.is-filtered .tintuc-col--mid,
+  .tintuc.is-filtered .tintuc-col--narrow {
+    grid-column: auto;
+    grid-row: 2;
+    align-self: stretch;
+  }
+
+  /* Cào bằng chiều cao card khi lọc để lưới gọn gàng */
   .tintuc.is-filtered .news-card--lg,
-  .tintuc.is-filtered .news-card--tall { min-height: 480px; }
+  .tintuc.is-filtered .news-card--tall,
+  .tintuc.is-filtered .news-card--sm { min-height: min(28vw, 440px); }
 
   /* -------- Ít bài: bỏ mosaic chồng tiêu đề để không bị tràn --------
      Tiêu đề về hàng riêng ở trên, card xếp bên dưới theo thứ tự. */
