@@ -43,7 +43,7 @@ class BusinessSector extends BaseActiveRecord
             array('number_label', 'length', 'max' => 8),
             array('cta_label', 'length', 'max' => 100),
             array('cta_url', 'length', 'max' => 500),
-            array('lead_text, description, card_description, tags', 'safe'),
+            array('lead_text, description, card_description, tagIds', 'safe'),
             array('image_media_id, icon_media_id, sort_order', 'numerical',
                 'integerOnly' => true),
             array('show_in_slider, show_in_grid, is_active', 'boolean'),
@@ -56,6 +56,11 @@ class BusinessSector extends BaseActiveRecord
             'image'    => array(self::BELONGS_TO, 'MediaFile', 'image_media_id'),
             'icon'     => array(self::BELONGS_TO, 'MediaFile', 'icon_media_id'),
             'pvn_projects' => array(self::HAS_MANY, 'Project', 'sector_id'),
+            // Chip hiển thị trên slider/lưới — chỉ nạp thẻ đang bật.
+            'tags'     => array(self::MANY_MANY, 'Tag',
+                'pvn_business_sector_tags(sector_id, tag_id)',
+                'condition' => 'tags.deleted_at IS NULL AND tags.is_active = 1',
+                'order'     => 'tags.sort_order ASC, tags.name ASC'),
         );
     }
 
