@@ -151,6 +151,14 @@ $renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
               <button type="button" class="nav-link" role="tab" aria-selected="false" data-filter="<?php echo CHtml::encode($cat['slug']); ?>"><?php echo CHtml::encode($cat['name']); ?></button>
             </li>
 <?php endforeach; ?>
+<?php if (!empty($tags)): ?>
+            <li class="nav-item filter-sep" role="presentation" aria-hidden="true"></li>
+<?php foreach ($tags as $tag): ?>
+            <li class="nav-item" role="presentation">
+              <button type="button" class="nav-link nav-link--tag" role="tab" aria-selected="false" data-filter="<?php echo CHtml::encode($tag['slug']); ?>"># <?php echo CHtml::encode($tag['name']); ?></button>
+            </li>
+<?php endforeach; ?>
+<?php endif; ?>
           </ul>
         </div>
 
