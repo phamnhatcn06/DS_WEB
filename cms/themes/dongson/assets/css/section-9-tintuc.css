@@ -64,6 +64,32 @@
 
 .tintuc .filter-pills .nav-link.active { color: var(--dsh-white); }
 
+/* Ngăn cách giữa nhóm pill danh mục và nhóm pill thẻ */
+.tintuc .filter-pills .filter-sep {
+  align-self: stretch;
+  width: 1px;
+  padding: 0;
+  margin-inline: 6px;
+  background-color: rgba(13, 37, 69, .15);
+}
+
+/* Pill lọc theo thẻ — sắc vàng kim để phân biệt với pill danh mục */
+.tintuc .filter-pills .nav-link--tag {
+  color: #8a6d1f;
+  border-color: rgba(201, 168, 76, .45);
+}
+
+.tintuc .filter-pills .nav-link--tag:hover {
+  color: #8a6d1f;
+  border-color: var(--dsh-gold);
+}
+
+.tintuc .filter-pills .nav-link--tag.active {
+  color: var(--dsh-white);
+  background-color: var(--dsh-gold);
+  border-color: var(--dsh-gold);
+}
+
 /* Cột chứa card đã bị lọc bỏ thì thu lại, tránh để lỗ trống trong lưới */
 .tintuc .col:has(> .news-item.is-hidden),
 .tintuc [class*="col-"]:has(> .news-item.is-hidden) { display: none; }
