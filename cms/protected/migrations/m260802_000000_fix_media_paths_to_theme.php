@@ -89,9 +89,14 @@ class m260802_000000_fix_media_paths_to_theme extends CDbMigration
                 continue;
             }
 
+            // Bỏ qua nếu đã có bản ghi trùng tên HOẶC trùng nội dung (checksum).
+            // Theme chứa cả bản Figma đặt tên băm lẫn bản đặt tên ngữ nghĩa với
+            // nội dung y hệt — cột checksum là UNIQUE nên phải lọc trước khi chèn.
+            $checksum = hash_file('sha256', $fullPath);
             $exists = Yii::app()->db->createCommand()
                 ->select('COUNT(*)')->from('pvn_media_files')
-                ->where('file_name = :n', array(':n' => $fileName))
+                ->where('file_name = :n OR checksum = :c',
+                    array(':n' => $fileName, ':c' => $checksum))
                 ->queryScalar();
             if ($exists) {
                 continue;
