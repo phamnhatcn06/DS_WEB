@@ -29,10 +29,6 @@ class BusinessSector extends BaseActiveRecord
             'sourceAttribute' => 'name',
             'slugAttribute'   => 'slug',
         );
-        $behaviors['json'] = array(
-            'class'      => 'JsonAttributeBehavior',
-            'attributes' => array('tags'),
-        );
         return $behaviors;
     }
 
