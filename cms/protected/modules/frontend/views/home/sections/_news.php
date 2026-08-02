@@ -104,6 +104,13 @@ $renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
     if ($showExcerpt && $card['excerpt'] !== null && $card['excerpt'] !== '') {
         $out .= '      <p class="news-excerpt">' . CHtml::encode($card['excerpt']) . '</p>' . "\n";
     }
+    if (!empty($card['tags'])) {
+        $out .= '      <div class="news-tags">';
+        foreach ($card['tags'] as $tagName) {
+            $out .= '<span class="news-tag">' . CHtml::encode($tagName) . '</span>';
+        }
+        $out .= '</div>' . "\n";
+    }
     $out .= '      <span class="news-more">Đọc tiếp <img src="' . $root . '/assets/images/arrow-right.svg" alt="" aria-hidden="true" /></span>' . "\n";
     $out .= '    </div>' . "\n  </a>\n</article>";
     return $out;
