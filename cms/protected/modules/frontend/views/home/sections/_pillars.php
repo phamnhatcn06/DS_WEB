@@ -89,7 +89,13 @@ if (empty($items)) {
 <?php if (!empty($item['tags'])): ?>
                   <div class="linhvuc-tags">
 <?php foreach ($item['tags'] as $tag): ?>
-                    <span class="lv-tag"><?php echo CHtml::encode($tag); ?></span>
+<?php $tagName = is_array($tag) ? $tag['name'] : $tag; ?>
+<?php $tagSlug = is_array($tag) ? $tag['slug'] : null; ?>
+<?php if ($tagSlug): ?>
+                    <a class="lv-tag" href="<?php echo CHtml::encode($tagUrl($tagSlug)); ?>"><?php echo CHtml::encode($tagName); ?></a>
+<?php else: ?>
+                    <span class="lv-tag"><?php echo CHtml::encode($tagName); ?></span>
+<?php endif; ?>
 <?php endforeach; ?>
                   </div>
 <?php endif; ?>
