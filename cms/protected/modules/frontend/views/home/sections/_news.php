@@ -32,6 +32,10 @@ if (!empty($newsCategories)) {
 $posts = array();
 if (!empty($newsPosts)) {
     foreach ($newsPosts as $post) {
+        $tagNames = array();
+        foreach ($post->tags as $tag) {
+            $tagNames[] = $tag->name;
+        }
         $posts[] = array(
             'img'     => $post->thumbnail,
             'cat'     => $post->category ? $post->category->slug : '',
@@ -39,6 +43,7 @@ if (!empty($newsPosts)) {
             'date'    => $post->getFormattedDate(),
             'title'   => $post->title,
             'excerpt' => $post->excerpt,
+            'tags'    => $tagNames,
             'url'     => ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#tin-tuc',
             'size'    => $post->card_size,
         );
