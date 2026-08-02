@@ -139,7 +139,7 @@ $renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
 
         <!-- Lưới tin: tiêu đề+tab và card lớn cùng nằm ở lane cột 1,
              card cao giữa · 2 card nhỏ phải bám mép trên = tâm dòng tiêu đề -->
-        <div class="row g-3 g-lg-4 tintuc-layout">
+        <div class="<?php echo $layoutClass; ?>">
 
         <!-- Đầu section: tiêu đề + tab lọc danh mục -->
         <div class="col-12 tintuc-head">
