@@ -4,7 +4,9 @@
  *
  * Tabs: newsCategories (slug = data-filter). Lưới 3 ô theo thiết kế:
  * 1 card lớn (wide/lg) · 1 card cao (mid/tall) · các card nhỏ (narrow/sm).
- * Bài được phân vào ô theo card_size; rỗng → dữ liệu demo tĩnh.
+ * Bài được phân vào ô theo THỨ TỰ hiển thị (mới nhất trước), không theo
+ * card_size; rỗng → dữ liệu demo tĩnh. Khi ít hơn 3 bài, bố cục chuyển sang
+ * biến thể --one/--two để không tràn/chồng lên tiêu đề.
  * JS lọc client-side khớp data-filter với data-category HOẶC một slug trong
  * data-tags của card (main.js) — nên lọc được cả theo danh mục lẫn theo thẻ.
  *
