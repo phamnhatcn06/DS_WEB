@@ -94,6 +94,10 @@
 .tintuc .col:has(> .news-item.is-hidden),
 .tintuc [class*="col-"]:has(> .news-item.is-hidden) { display: none; }
 
+/* Cột card nhỏ bọc nhiều bài: ẩn cả cột khi không còn bài nào hiển thị,
+   để lưới auto-fit lúc lọc không chừa một track rỗng. */
+.tintuc .tintuc-col--narrow:not(:has(.news-item:not(.is-hidden))) { display: none; }
+
 /* -------- Card tin -------- */
 .news-card {
   position: relative;
