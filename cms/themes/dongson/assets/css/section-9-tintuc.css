@@ -287,6 +287,39 @@
   .tintuc.is-filtered .tintuc-col--wide { align-self: stretch; }
   .tintuc.is-filtered .news-card--lg,
   .tintuc.is-filtered .news-card--tall { min-height: 480px; }
+
+  /* -------- Ít bài: bỏ mosaic chồng tiêu đề để không bị tràn --------
+     Tiêu đề về hàng riêng ở trên, card xếp bên dưới theo thứ tự. */
+  .tintuc-layout--one,
+  .tintuc-layout--two {
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+  }
+
+  .tintuc-layout--one .tintuc-head,
+  .tintuc-layout--two .tintuc-head {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    align-self: start;
+    margin-top: 0;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  /* 1 bài → card lớn chiếm trọn bề rộng; 2 bài → hai card cạnh nhau */
+  .tintuc-layout--one .tintuc-col--wide { grid-column: 1 / -1; }
+  .tintuc-layout--two .tintuc-col--wide { grid-column: 1; }
+  .tintuc-layout--two .tintuc-col--mid  { grid-column: 2; }
+
+  .tintuc-layout--one .tintuc-col--wide,
+  .tintuc-layout--two .tintuc-col--wide,
+  .tintuc-layout--two .tintuc-col--mid {
+    grid-row: 2;
+    align-self: stretch;
+  }
+
+  .tintuc-layout--one .news-card--lg,
+  .tintuc-layout--two .news-card--lg,
+  .tintuc-layout--two .news-card--tall { min-height: min(30vw, 520px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
