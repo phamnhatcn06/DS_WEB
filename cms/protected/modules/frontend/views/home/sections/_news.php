@@ -101,7 +101,9 @@ if ($mid === null && !empty($narrow)) { $mid = array_shift($narrow); }
 
 // Closure render một news card theo ô (sizeClass) — không lặp markup 3 lần.
 $renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
-    $out  = '<article class="news-item" data-category="' . CHtml::encode($card['cat']) . '">' . "\n";
+    $tagSlugs = isset($card['tagSlugs']) ? implode(' ', $card['tagSlugs']) : '';
+    $out  = '<article class="news-item" data-category="' . CHtml::encode($card['cat']) . '"'
+        . ' data-tags="' . CHtml::encode($tagSlugs) . '">' . "\n";
     $out .= '  <a href="' . CHtml::encode($card['url']) . '" class="news-card news-card--' . $sizeClass . '">' . "\n";
     $out .= '    ' . MediaHelper::imgOr($card['img'], $root . '/assets/images/news-01.webp',
         $card['title'], array('class' => 'news-card-img')) . "\n";
