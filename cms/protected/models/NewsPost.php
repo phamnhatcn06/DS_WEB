@@ -74,7 +74,7 @@ class NewsPost extends BaseActiveRecord
             array('category_id, thumbnail_media_id, author_id, sort_order', 'numerical',
                 'integerOnly' => true),
             array('is_featured, is_active', 'boolean'),
-            array('excerpt, content', 'safe'),
+            array('excerpt, content, tagIds', 'safe'),
         );
     }
 
@@ -84,7 +84,37 @@ class NewsPost extends BaseActiveRecord
             'category'  => array(self::BELONGS_TO, 'NewsCategory', 'category_id'),
             'thumbnail' => array(self::BELONGS_TO, 'MediaFile', 'thumbnail_media_id'),
             'author'    => array(self::BELONGS_TO, 'User', 'author_id'),
+            // Chỉ nạp thẻ đang bật, theo thứ tự cấu hình — dùng để hiển thị chip.
+            'tags'      => array(self::MANY_MANY, 'Tag',
+                'pvn_news_post_tags(post_id, tag_id)',
+                'condition' => 'tags.deleted_at IS NULL AND tags.is_active = 1',
+                'order'     => 'tags.sort_order ASC, tags.name ASC'),
         );
+    }
+
+    /**
+     * Id các thẻ đang gắn — đọc thẳng từ bảng liên kết để tick sẵn trong form
+     * (không lọc theo is_active để không âm thầm bỏ liên kết khi lưu lại).
+     */
+    public function getTagIds()
+    {
+        if ($this->_tagIds === null) {
+            if ($this->getIsNewRecord()) {
+                $this->_tagIds = array();
+            } else {
+                $ids = Yii::app()->db->createCommand()
+                    ->select('tag_id')->from('pvn_news_post_tags')
+                    ->where('post_id = :id', array(':id' => (int) $this->id))
+                    ->queryColumn();
+                $this->_tagIds = array_map('intval', $ids);
+            }
+        }
+        return $this->_tagIds;
+    }
+
+    public function setTagIds($value)
+    {
+        $this->_tagIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
     }
 
     public function attributeLabels()
