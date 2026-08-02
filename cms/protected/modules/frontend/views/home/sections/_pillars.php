@@ -17,11 +17,15 @@ if (!empty($sectors)) {
             continue;
         }
         $index++;
+        $tagNames = array();
+        foreach ($sector->tags as $tag) {
+            $tagNames[] = $tag->name;
+        }
         $items[] = array(
             'num'   => $sector->number_label != '' ? $sector->number_label : sprintf('%02d', $index),
             'title' => $sector->name,
             'desc'  => $sector->description,
-            'tags'  => is_array($sector->tags) ? $sector->tags : array(),
+            'tags'  => $tagNames,
         );
     }
 }
