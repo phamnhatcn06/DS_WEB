@@ -5,11 +5,13 @@
  * Tabs: newsCategories (slug = data-filter). Lưới 3 ô theo thiết kế:
  * 1 card lớn (wide/lg) · 1 card cao (mid/tall) · các card nhỏ (narrow/sm).
  * Bài được phân vào ô theo card_size; rỗng → dữ liệu demo tĩnh.
- * JS lọc client-side khớp data-category = slug danh mục (main.js).
+ * JS lọc client-side khớp data-filter với data-category HOẶC một slug trong
+ * data-tags của card (main.js) — nên lọc được cả theo danh mục lẫn theo thẻ.
  *
  * @var Controller $this
  * @var NewsCategory[] $newsCategories
  * @var NewsPost[] $newsPosts
+ * @var Tag[] $newsTags
  */
 $root = $this->assetsBase();
 
@@ -28,24 +30,35 @@ if (!empty($newsCategories)) {
     );
 }
 
+// --- Thẻ (tag) làm bộ lọc phụ; chỉ có khi đọc dữ liệu thật ---
+$tags = array();
+if (!empty($newsTags)) {
+    foreach ($newsTags as $tag) {
+        $tags[] = array('slug' => $tag->slug, 'name' => $tag->name);
+    }
+}
+
 // --- Bài viết, chuẩn hoá + phân bổ vào 3 ô ---
 $posts = array();
 if (!empty($newsPosts)) {
     foreach ($newsPosts as $post) {
         $tagNames = array();
+        $tagSlugs = array();
         foreach ($post->tags as $tag) {
             $tagNames[] = $tag->name;
+            $tagSlugs[] = $tag->slug;
         }
         $posts[] = array(
-            'img'     => $post->thumbnail,
-            'cat'     => $post->category ? $post->category->slug : '',
-            'chip'    => $post->category ? $post->category->name : '',
-            'date'    => $post->getFormattedDate(),
-            'title'   => $post->title,
-            'excerpt' => $post->excerpt,
-            'tags'    => $tagNames,
-            'url'     => ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#tin-tuc',
-            'size'    => $post->card_size,
+            'img'      => $post->thumbnail,
+            'cat'      => $post->category ? $post->category->slug : '',
+            'chip'     => $post->category ? $post->category->name : '',
+            'date'     => $post->getFormattedDate(),
+            'title'    => $post->title,
+            'excerpt'  => $post->excerpt,
+            'tags'     => $tagNames,
+            'tagSlugs' => $tagSlugs,
+            'url'      => ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#tin-tuc',
+            'size'     => $post->card_size,
         );
     }
 } else {
