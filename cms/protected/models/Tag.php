@@ -72,6 +72,11 @@ class Tag extends BaseActiveRecord
      */
     public static function optionsForSelect()
     {
+        // Chưa migrate (bảng chưa tồn tại) → trả rỗng thay vì lỗi thiếu bảng.
+        if (Yii::app()->db->getSchema()->getTable('pvn_tags') === null) {
+            return array();
+        }
+
         $tags = self::model()->notDeleted()->findAll(array(
             'condition' => 't.is_active = 1',
             'order'     => 't.sort_order ASC, t.name ASC',
