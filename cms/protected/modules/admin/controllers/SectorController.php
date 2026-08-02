@@ -78,12 +78,10 @@ class SectorController extends AdminCrudController
     }
 
     /**
-     * `tagsText` là trường ảo — chuyển chuỗi nhập tay thành mảng JSON.
+     * Sau khi lưu lĩnh vực, đồng bộ liên kết thẻ vào pvn_business_sector_tags.
      */
-    protected function beforeSaveModel($model, $post)
+    protected function afterSaveModel($model)
     {
-        if (isset($post['tagsText'])) {
-            $model->setTagsText($post['tagsText']);
-        }
+        Tag::syncLinks('pvn_business_sector_tags', 'sector_id', $model->id, $model->tagIds);
     }
 }
