@@ -65,7 +65,6 @@ if (!empty($newsPosts)) {
             'tags'     => $tagNames,
             'tagSlugs' => $tagSlugs,
             'url'      => ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#tin-tuc',
-            'size'     => $post->card_size,
         );
     }
 } else {
