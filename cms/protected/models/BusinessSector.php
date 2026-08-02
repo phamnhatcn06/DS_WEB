@@ -89,17 +89,27 @@ class BusinessSector extends BaseActiveRecord
     }
 
     /**
-     * Nhập tag dạng chuỗi ngăn cách bởi dấu phẩy từ form.
+     * Id các thẻ đang gắn — đọc thẳng từ bảng liên kết để tick sẵn trong form.
      */
-    public function setTagsText($text)
+    public function getTagIds()
     {
-        $parts = array_filter(array_map('trim', explode(',', (string) $text)), 'strlen');
-        $this->tags = array_values($parts);
+        if ($this->_tagIds === null) {
+            if ($this->getIsNewRecord()) {
+                $this->_tagIds = array();
+            } else {
+                $ids = Yii::app()->db->createCommand()
+                    ->select('tag_id')->from('pvn_business_sector_tags')
+                    ->where('sector_id = :id', array(':id' => (int) $this->id))
+                    ->queryColumn();
+                $this->_tagIds = array_map('intval', $ids);
+            }
+        }
+        return $this->_tagIds;
     }
 
-    public function getTagsText()
+    public function setTagIds($value)
     {
-        return is_array($this->tags) ? implode(', ', $this->tags) : '';
+        $this->_tagIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
     }
 
     public static function optionsForSelect()
