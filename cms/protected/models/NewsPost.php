@@ -136,6 +136,7 @@ class NewsPost extends BaseActiveRecord
             'source_url'          => 'Nguồn (nếu trích báo ngoài)',
             'sort_order'          => 'Thứ tự',
             'is_active'           => 'Hiển thị',
+            'tagIds'              => 'Thẻ (Tag)',
         );
     }
 
