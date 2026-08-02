@@ -1,139 +1,256 @@
-# CLAUDE.md
+# Phân Tích Thiết Kế Website Đông Sơn Holdings (DSH) từ Figma & Kế Hoạch Triển Khai
 
-File này cung cấp hướng dẫn cho Claude Code (claude.ai/code) khi làm việc với mã nguồn trong repo này.
+---
 
-## Tổng quan dự án
+## 1. Danh Sách Các Trang (Pages)
 
-Website marketing tĩnh bằng HTML/CSS/JS cho **Đông Sơn Holdings (DSH)**, dựng từ thiết kế Figma (canvas rộng `1920px`). Không dùng framework frontend, không bundler, không package manager — đây là HTML/CSS/JS thuần, phục vụ dưới dạng file tĩnh.
+Trong file thiết kế Figma bao gồm 3 trang chính:
 
-Hiện trạng: repo mới ở dạng khung (scaffold). `index.html` và các thư mục `assets/css/`, `assets/js/`, `assets/images/` đã tồn tại nhưng còn trống — chưa section/trang nào bên dưới được triển khai.
+1. **Trang UI (`1134:23`) - BẢN THIẾT KẾ GIAO DIỆN CHÍNH (UI Final)**:
+   - **`Update ver 04` / `OP1 3` (`1134:25`)**: Trang chủ hoàn chỉnh quy mô lớn (Kích thước: `1920px` x `11331px`), tập hợp đầy đủ 10 khối nội dung chuẩn nhận diện thương hiệu Đông Sơn Holdings.
+2. **Trang WIREFRAME (`286:84`)**: Cấu trúc phác thảo wireframe các phiên bản thử nghiệm (OPTION 01, OLD, HOME FIX VER 01, UPDATE variants).
+3. **Trang MOODBOARD (`0:1`)**: Đề xuất định hướng giao diện (OPTION 01, OPTION 2, OPTION 3, OPTION 4) & phân tích đề xuất.
 
-## Lệnh (Commands)
+---
 
-Repo không có `package.json`, không build tool, không linter, không test runner. Quy trình phát triển:
+## 2. Danh Sách Các Section (Trang chủ UI)
 
-- **Xem trước (Preview)**: mở trực tiếp `index.html` trên trình duyệt, hoặc chạy một static file server bất kỳ trong thư mục gốc (vd `python -m http.server`) để các đường dẫn asset tương đối phân giải đúng.
-- **Pipeline asset**: `download_and_convert_assets.py` tải các ảnh được tham chiếu bởi một bản export Figma/Antigravity bên ngoài (các URL `http://localhost:3845/assets/...` tìm thấy trong thư mục "steps" của Antigravity IDE cục bộ), chuyển ảnh raster sang `.webp`, và sao chép nguyên các file `.svg` vào `assets/images/`. Chỉ hoạt động khi công cụ export cục bộ đó đang chạy và sinh ra file step; đây không phải trình tải file đa dụng. Chạy bằng `python download_and_convert_assets.py`.
+Trang chủ chính (`OP1 3`) bao gồm **10 Section** liên hoàn:
 
-## Kiến trúc
+1. **Section 1: HeroSlider (`1134:26`)** `[1920x853px]`
+   - Background Slider hình ảnh dự án quy mô lớn.
+   - Header / Navbar trong suốt nổi trên slider.
+   - Thương hiệu chính `ĐÔNG SƠN HOLDING`, Slogan/Tầm nhìn, cặp nút CTA hành động.
+   - Thanh điều khiển carousel slider (`02 / 04`, progress bar, nút Prev/Next).
+2. **Section 2: Lĩnh Vực Nổi Bật - Hạ Tầng BOT (`1134:90`)** `[1920x773px]`
+   - Tagline lĩnh vực: *"Đầu tư BOT & Hạ tầng"*.
+   - Tiêu đề chính: *"Kết nối hành lang kinh tế"*.
+   - Khối thẻ thông tin nổi bật (Tags: *BOT, Cao tốc, Cầu đường, Vành đai*).
+   - Banner hình ảnh minh họa quy mô dự án.
+3. **Section 3: AboutServices - Về Chúng Tôi & Tầm Nhìn Sứ Mệnh (`1134:471`)** `[1920x1734px]`
+   - Background minh họa đô thị (Cityscape Illustration).
+   - Khối Tầm nhìn & Sứ mệnh: *"Kiến tạo giá trị bền vững cho khách hàng, đối tác và cộng đồng."*
+   - Biểu tượng Quote nổi bật (`“”`).
+4. **Section 4: BusinessAreas - Các Trụ Cột Lĩnh Vực Kinh Doanh (`1134:1206`)** `[1920x868px]`
+   - Tiêu đề: *"Lĩnh vực kinh doanh"*.
+   - Giới thiệu 3 trụ cột cốt lõi: *01. Thi công & Xây lắp*, *02. Đầu tư BOT & Hạ tầng*, *03. Năng lượng & Bất động sản*.
+5. **Section 5: FeaturedProjects - Dự Án Tiêu Biểu (`1134:1265`)** `[1920x787px]`
+   - Tiêu đề: *"Dự án tiêu biểu - Các công trình trọng điểm quốc gia..."*.
+   - Nút hành động *"Xem tất cả dự án"*.
+   - Slider / Grid các thẻ dự án tiêu biểu.
+6. **Section 6: CompanyStats - Thống Kê & Năng Lực Công Ty (`1134:1588`)** `[1920x961px]`
+   - Khối số liệu ấn tượng (Năm kinh nghiệm, Số lượng dự án, Tổng vốn đầu tư, Quy mô nhân sự).
+7. **Section 7: FeaturedProjects Detail / Hoạt Động Chuyên Sâu (`1134:1628`)** `[1920x2611px]`
+   - Trình bày chi tiết các dự án trọng điểm và thông tin năng lực thi công.
+8. **Section 8: Đối Tác & Cổ Đông Chiến Lược (`1134:2742`)** `[1920x956px]`
+   - Tiêu đề: *"Đối tác & Cổ đông chiến lược"*.
+   - Slider logo các đối tác ngân hàng, tập đoàn kinh tế và cổ đông lớn.
+9. **Section 9: Tin Tức Nổi Bật & Bộ Lọc Tin Tức (`1134:2767`)** `[1920x956px]`
+   - Bộ lọc danh mục (Tabs: *Tất cả, Dự án, Thi công, Đầu tư, Cổ đông*).
+   - Grid bài viết tin tức mới nhất (ảnh thumbnail, ngày đăng, tiêu đề, mô tả ngắn).
+10. **Section 10: Footer - Chân Trang (`1134:2908`)** `[1920x833px]`
+    - Khối Call-to-Action kết nối top footer.
+    - Thông tin liên hệ tập đoàn & 4 cột menu điều hướng.
 
-Website là một trang chủ cuộn dài duy nhất (`OPTION 01` trong Figma), gồm 10 section xếp chồng, cộng thêm Header và Footer dùng chung. Khi triển khai, dựng từng section/component một, tách thành các file CSS partial (hoặc các khối được phân định rõ) thay vì một stylesheet khổng lồ, vì trang rất cao (~11.300px theo thiết kế) và nhiều nội dung.
+---
 
-**Cấu trúc file dự kiến** (theo kế hoạch triển khai bên dưới):
-- `assets/css/variables.css` — design token (màu, font, spacing) dưới dạng CSS custom properties
-- `assets/css/` — stylesheet cho component và section
-- `assets/js/` — điều khiển carousel/slider, tab lọc tin tức, hiệu ứng fade-in khi cuộn (IntersectionObserver)
-- `assets/images/` — ảnh đã export/convert
+## 3. Header
 
-**Thứ tự các section trên trang chủ** (mỗi cái là một khối hình riêng, đại khái theo trình tự): Hero slider → Điểm nhấn hạ tầng BOT → Giới thiệu/tầm nhìn–sứ mệnh → 3 trụ cột lĩnh vực kinh doanh → Dự án tiêu biểu → Số liệu công ty → Chi tiết dự án tiêu biểu → Đối tác/cổ đông → Tin tức có tab lọc theo danh mục → Footer kèm banner CTA.
+- **Vị trí & Quy cách**: Cố định (Sticky/Fixed top), chiều cao `80px`, Full-width `1920px`, container nội dung `1680px` với padding hai bên `120px`.
+- **Thành phần**:
+  - **Logo (Bên trái)**:
+    - Biểu tượng Vector ĐS đặt trong khung tròn (`38x38px`).
+    - Chữ tên thương hiệu: **ĐÔNG SƠN** (Size `14px`, Font Bold, Letter-spacing `3px`, Color `#ffd5d5`).
+    - Subtitle: **HOLDINGS · DSH** (Size `9px`, Font Regular, Letter-spacing `2.5px`, Color `#c9a84c` - Vàng kim).
+  - **Navigation (Ở giữa)**: Thanh menu 6 mục chính.
+  - **Button CTA (Bên phải)**: Nút *"Liên hệ ngay"* (Background đỏ `#9a1220`, Padding `10px 24px`, Text `13px` SemiBold, Color `#ffffff`).
 
-Nguồn Figma là trang **MOODBOARD**. Trang chủ được chọn là **OPTION 01** (node section Figma `12:11`, nằm trong section "ĐỀ XUẤT GIAO DIỆN" `24:22`). Có 3 option khác (`17:759`, `23:3`, `24:17`) — bỏ qua. Một section riêng "PHÂN TÍCH VÀ ĐỀ XUẤT" (`13:46`) chứa phần lý giải.
+---
 
-## Phân tích thiết kế (OPTION 01 — trang chủ `12:11`)
+## 4. Menu
 
-> **Trạng thái trích xuất Figma (2026-07-23):** Việc trích token trực tiếp theo từng node qua Figma desktop MCP hiện đang **bị chặn**: mỗi OPTION là một node *section* của Figma và MCP trả về phản hồi "sparse" cho section (không liệt kê ID các frame con, nên không gọi được `get_design_context` trên các frame bên trong); ảnh chụp node render ra **màu đen tuyền** vì phần image fill của thiết kế tham chiếu tới asset server `localhost:3845` đang offline; và `get_variable_defs` trả về `{}` (file **không có biến Figma nào được bind** — màu/kích thước là fill hardcode). Để lấy giá trị hex/px chính xác, **mở Figma desktop và chọn một frame con** (không phải section OPTION 01), rồi chạy lại `get_design_context` / `get_variable_defs` trên frame đó. Trước khi làm được điều đó: màu brand = **đã xác nhận**; palette phụ, thang typography và spacing = **giá trị mặc định đề xuất**, cần đối chiếu lại với Figma khi có thể chọn được frame.
+- **Danh sách mục Menu**:
+  1. `Về chúng tôi` *(Có icon mũi tên dropdown)*
+  2. `Lĩnh vực` *(Có icon mũi tên dropdown)*
+  3. `Dự án`
+  4. `Quan hệ cổ đông`
+  5. `Tin tức`
+- **Thông số Typography Menu**:
+  - Font family: `Inter` (Medium)
+  - Size: `18px`
+  - Line-height: `19.5px`
+  - Letter-spacing: `0.325px`
+  - Màu sắc: `#ffffff`
+  - Khoảng cách giữa các mục (Gap): `28px`
+  - Dropdown indicator: Icon chevron down (`12x12px`).
 
-### Design token
+---
 
-**Màu sắc — palette brand đã xác nhận:**
-| Token | Hex | Dùng cho |
-|-------|-----|----------|
-| `--dsh-red` | `#9a1220` | Đỏ brand chính — nút, điểm nhấn, gạch chân tab active, banner CTA |
-| `--dsh-gold` | `#c9a84c` | Vàng nhấn — đường kẻ mảnh, số liệu thống kê, divider trang trí, trạng thái hover |
-| `--dsh-navy` | `#080f1d` | Navy tối — nền section chính, footer |
+## 5. Footer
 
-**Màu sắc — palette phụ đề xuất (đối chiếu với Figma):**
-| Token | Hex (gợi ý) | Dùng cho |
-|-------|-----|----------|
-| `--dsh-navy-2` | `#0f1a2e` | Card/panel nổi trên nền navy |
-| `--dsh-white` | `#ffffff` | Chữ/tiêu đề trên nền navy |
-| `--dsh-muted` | `#c7ccd6` | Chữ body/phụ trên nền navy |
-| `--dsh-line` | `rgba(201,168,76,.25)` | Đường kẻ mảnh màu vàng |
+- **Màu nền**: Khung nền tối sang trọng `#080f1d` (Deep Navy) & Sub-card `#101c36` (Dark Slate Blue).
+- **Banner Top Footer**:
+  - Tiêu đề chữ hoa quy mô lớn: *"KHÁM PHÁ TIỀM NĂNG. BẮT ĐẦU KẾT NỐI."* (Size `60px`, ExtraBold, Line-height `69px`).
+  - Nút bấm chính: *"Liên lạc ngay"* (`#9a1220`, Padding `16px 36px`, Border-radius `8px`).
+- **Cấu trúc 4 Cột Main Footer**:
+  - **Cột 1 (Thông tin Tập đoàn & Liên hệ)**:
+    - Logo Đông Sơn Holdings.
+    - Điện thoại: `024 3933 5708`
+    - Email: `hatangdongson@htds.vn`
+    - Mạng xã hội: Icon đường liên kết (Facebook, LinkedIn, YouTube).
+  - **Cột 2 (Về Đông Sơn)**: *Giới thiệu, Tầm nhìn & Sứ mệnh, Ban lãnh đạo, Giá trị cốt lõi, Trách nhiệm xã hội*.
+  - **Cột 3 (Lĩnh vực)**: *Thi công & Xây lắp, Đầu tư BOT, Nhà ở & Đô thị, Năng lượng & KCN*.
+  - **Cột 4 (Dự án)**: *BOT Hà Nội – Bắc Giang, Nhà ở XH Bãi Viên, Cao tốc TQ–HG, Mỹ Đình – Bái Đính*.
 
-**Typography — đã xác nhận (Figma node `1134:25`): dùng `Inter` cho TOÀN BỘ** (heading + body), tải về local `assets/fonts/` (weight 400/500/600/700/800), không CDN. Thang chữ fluid bằng `clamp()`:
-| Vai trò | `clamp()` (min → max) |
-|---------|-----------------------|
-| Hero H1 | `clamp(2.5rem, 5vw, 4.5rem)` |
-| Section H2 | `clamp(1.75rem, 3.5vw, 3rem)` |
-| Card/H3 | `clamp(1.125rem, 2vw, 1.5rem)` |
-| Body | `clamp(0.95rem, 1.1vw, 1.125rem)` |
-| Eyebrow/nhãn | `0.8125rem`, letter-spacing `.12em`, viết hoa |
-| Số thống kê | `clamp(2.5rem, 5vw, 4rem)` |
+---
 
-**Thang spacing (đề xuất, gốc 8px):** `4 / 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128 px`. Padding dọc mỗi section: `clamp(64px, 8vw, 128px)`. Container nội dung max-width ≈ `1320px` (Bootstrap `.container`), canvas thiết kế 1920px.
+## 6. Component Dùng Chung (Reusable Components)
 
-### Bóc tách từng section (→ ánh xạ Bootstrap)
+1. **Primary Button (Nút Đỏ Thương Hiệu)**:
+   - Background: `#9a1220` (Đỏ rượu / Crimson Red).
+   - Border Radius: `8px`.
+   - Padding: `16px 36px` - `17px 41px`.
+   - Typography: `Inter` SemiBold `14px` - `16px`, Color `#ffffff`.
+   - Mũi tên icon đi kèm (`14x14px`).
+2. **Secondary Button (Nút Đen / Viền Mờ)**:
+   - Background: `#000000` hoặc mờ viền `0.65px` solid.
+   - Border Radius: `8px`.
+   - Typography: `Aeonik` / `Inter` Medium `14px`, Color `#ffffff`.
+3. **Card Component (Khối Lĩnh Vực / Dự Án)**:
+   - Nền tối mờ / Glassmorphism, bo góc `8px` - `12px`.
+   - Padding trong: `32px`.
+   - Tiêu đề card (`24px` Bold), Đoạn văn mô tả (`14px` Regular), Tag chip/badge bên dưới (BOT, Cao tốc, Cầu đường, Vành đai).
+4. **Category Filter Tabs (Bộ Lọc Tin Tức / Dự Án)**:
+   - Dạng nút filter ngang: *Tất cả, Dự án, Thi công, Đầu tư, Cổ đông*.
+   - Trạng thái Active: Highlight màu thương hiệu `#9a1220`.
+5. **Carousel Control & Progress Bar**:
+   - Chỉ số trang: `02 / 04` (`11px` Medium).
+   - Thanh tiến trình: Cao `2px`, active bar màu `#9a1220`.
+   - Cặp nút mũi tên chuyển slide: Kích thước `44x44px`, border `rgba(0,0,0,0.18)`.
 
-| # | Section | Mục đích | Bố cục | Ánh xạ Bootstrap |
-|---|---------|----------|--------|------------------|
-| — | **Header** | Nav sticky, glassmorphism khi cuộn | Logo trái, nav giữa/phải, CTA + đổi ngôn ngữ | `.navbar .navbar-expand-lg .fixed-top`, `.container`, toggler collapse ở `< lg` |
-| 1 | **Hero slider** | Tuyên ngôn brand + các slide xoay vòng | Full-bleed navy, tiêu đề + CTA trên ảnh, dot/mũi tên | `#carousel` (Bootstrap Carousel), overlay `.container`, `.btn` |
-| 2 | **Điểm nhấn hạ tầng BOT** | Câu chuyện hạ tầng chủ lực | 2 cột: ảnh + chữ | `.row`, `.col-lg-6` (xếp chồng ở `< lg`) |
-| 3 | **Giới thiệu / tầm nhìn–sứ mệnh** | Giới thiệu công ty, tầm nhìn & sứ mệnh | Tiêu đề + 2–3 khối giá trị | `.row .g-4`, `.col-md-6 / col-lg-4` |
-| 4 | **Trụ cột lĩnh vực kinh doanh** | 3 mảng kinh doanh cốt lõi | 3 card đều nhau: icon/tiêu đề/mô tả | `.row .row-cols-1 .row-cols-md-3`, `.card` |
-| 5 | **Dự án tiêu biểu** | Trưng bày các dự án chính | Grid hoặc carousel card dự án | `.row .g-4`, `.col-md-6 .col-lg-4`, `.card` |
-| 6 | **Số liệu công ty** | Con số chính (số năm, dự án, vốn…) | Dải ngang 3–4 bộ đếm | `.row .text-center`, `.col-6 .col-md-3`, số màu vàng |
-| 7 | **Chi tiết dự án tiêu biểu** | Đi sâu một dự án chủ lực | Các hàng ảnh/chữ xen kẽ | lặp `.row` với `.flex-lg-row-reverse` |
-| 8 | **Đối tác / cổ đông** | Logo đối tác & cổ đông | Grid logo responsive | `.row .row-cols-2 .row-cols-md-4 / md-6`, logo grayscale |
-| 9 | **Tin tức + tab lọc danh mục** | Tin mới nhất kèm lọc danh mục | Thanh tab + grid card | `.nav .nav-pills` (lọc), `.row .g-4`, `.card`; JS lọc |
-| — | **Footer** | Banner CTA + 4 cột link + copyright | Dải CTA full-width đỏ/navy trên footer tối | `.container`, `.row`, `.col-lg-3` × 4 |
+---
 
-### Đặc tả Header & Footer
+## 7. Font (Typography)
 
-- **Header:** trong suốt khi ở đỉnh hero; khi cuộn xuống thêm nền navy trong mờ + blur kiểu "glassmorphism" (bật/tắt một class qua scroll listener nhỏ hoặc sentinel IntersectionObserver). Gồm logo, các link nav chính, một nút CTA màu `--dsh-red`, và công tắc đổi ngôn ngữ VI/EN. Thu về hamburger (`.navbar-toggler`) dưới `lg`.
-- **Footer:** một banner CTA nổi bật (nền đỏ brand, tiêu đề + nút) nằm ngay trên footer 4 cột nền navy tối (thông tin/logo công ty, link nhanh, lĩnh vực kinh doanh, liên hệ). Thanh dưới cùng: copyright + icon mạng xã hội. Đường kẻ mảnh vàng (`--dsh-line`) ngăn banner với các cột.
+- **Font chữ chủ đạo**: **`Inter`** (Sans-serif hiện đại, độ phân giải cao).
+- **Font chữ phụ / Accent**: **`Aeonik`**.
+- **Thang kích thước chuẩn (Typography Hierarchy)**:
+  - **Hero Title (`H1 Super`)**: `96px` (Bold, Line-height `101.76px`, Tracking `-1px`, Color `#ffffff`).
+  - **Section Title (`H1 / Banner`)**: `60px` - `64px` (ExtraBold, Line-height `69px`).
+  - **Section Headline (`H2`)**: `36px` - `40px` (Bold).
+  - **Card Title (`H3`)**: `24px` (Bold / SemiBold, Line-height `33px`).
+  - **Navigation Menu Item**: `18px` (Medium, Line-height `19.5px`, Tracking `0.325px`).
+  - **Footer Heading (`H4`)**: `16px` (SemiBold).
+  - **Button Text**: `14px` - `16px` (SemiBold).
+  - **Logo Text**: `14px` (Bold, Tracking `3px`) / Subtitle `9px` (Tracking `2.5px`, `#c9a84c`).
+  - **Body / List Text**: `14px` (Regular, Line-height `18px`).
+  - **Meta / Carousel Indicator**: `11px` - `12px` (Medium).
 
-### Hành vi responsive
+---
 
-> **Thiết kế mobile đã xác nhận:** Figma node **`1241:23`** ("op1-3-mobile", khung 375px) là bản responsive chính thức — đối chiếu khi chỉnh mobile.
+## 8. Màu Sắc (Color Palette & Design Tokens)
 
-- Desktop (`≥ lg` / 992px+): grid nhiều cột đầy đủ như thiết kế (3–4 cột).
-- Tablet (`md` / 768–991px): grid 2 cột; các section ảnh+chữ giữ cạnh nhau hoặc bắt đầu xếp chồng; nav thu về hamburger.
-- Mobile (`< md` / < 768px): mọi thứ xếp về 1 cột (`col-12`); chữ hero co lại nhờ `clamp()`; số liệu wrap 2/hàng (`col-6`); logo đối tác 2/hàng.
-- Ưu tiên typography/spacing fluid bằng `clamp()` thay vì đè breakpoint cứng; dùng các class cột responsive của Bootstrap (`col-`, `col-md-`, `col-lg-`) cho thay đổi bố cục.
+- **Màu thương hiệu chính (Primary Red)**: `#9a1220` (Đỏ rượu vang / Crimson Red đại diện cho nhiệt huyết, năng lượng và uy tín).
+- **Màu nhấn thương hiệu (Brand Gold Accent)**: `#c9a84c` (Màu vàng kim sang trọng dùng cho logo subtitle và các điểm nhấn nhận diện).
+- **Màu nền tối (Dark Themes)**:
+  - Base Dark Background: `#080f1d` (Deep Navy)
+  - Container / Card Dark Background: `#101c36` (Dark Blue Slate)
+  - Card Mask Overlay: `rgba(0, 0, 0, 0.7)` / `#000000`
+- **Màu chữ (Text Colors)**:
+  - Chữ chính (Primary Text): `#ffffff` (Trắng tinh)
+  - Chữ đệm Logo (Light Pink Gold): `#ffd5d5`
+  - Chữ phụ (Muted Text): `rgba(255, 255, 255, 0.78)`
+  - Indicator Muted: `rgba(0, 0, 0, 0.3)` / `rgba(255, 255, 255, 0.45)`
+- **Màu đường viền (Border & Divider Colors)**:
+  - Viền mờ tối: `rgba(0, 0, 0, 0.18)`
+  - Viền mờ sáng: `rgba(255, 255, 255, 0.08)` / `rgba(255, 255, 255, 0.45)`
 
-**Hành vi mobile riêng theo section (khớp `op1-3-mobile`):**
-- **Section 2 (BOT):** cột nội dung canh giữa (eyebrow/tiêu đề/lead/tags/nút); card nổi rơi xuống dưới ảnh, chữ card vẫn canh trái.
-- **Section 5 (Dự án tiêu biểu):** bỏ slider ngang → xếp **dọc** từng thẻ, caption (tên + địa điểm) **luôn hiện** dưới ảnh (không dựa vào hover vì thiết bị cảm ứng).
-- **Section 7 (Timeline):** dồn về **một phía**, trục dọc nằm bên trái (`left: 8px`), card full-width.
-- **Section 9 (Tin tức):** tab lọc nằm **một hàng, cuộn ngang** khi tràn.
+---
 
-## CMS quản trị (thư mục `cms/` — Yii 1.x)
+## 9. Khoảng Cách (Spacing & Layout Grid)
 
-Ngoài site tĩnh, repo có một CMS chạy bằng **Yii Framework 1.x** trong `cms/` (webroot = `cms/`, entry `cms/index.php`). Nội dung động (hero slide, dự án, tin tức, đối tác, cấu hình…) quản trị qua module admin, model dưới `cms/protected/models/`, module dưới `cms/protected/modules/admin/`.
+- **Chiều rộng Canvas thiết kế**: `1920px`.
+- **Khung chứa nội dung chính (Max Container Width)**: `1680px` (Màn hình lớn) - `1760px` (Footer).
+- **Padding lề hai bên (Horizontal Container Padding)**: `120px` (Desktop Large), co giãn tự động trên màn hình nhỏ hơn.
+- **Khoảng cách dọc giữa các Section (Vertical Section Margin/Padding)**: `80px` đến `140px`.
+- **Khoảng cách giữa các thành phần (Component Gaps)**:
+  - Header Nav items gap: `28px`
+  - Cặp nút CTA Hero gap: `12px`
+  - Grid danh sách Card gap: `24px` - `32px`
+  - Cột Footer gap: `48px` - `64px`
 
-- **Theme giao diện admin — `hope-ui`:** module admin dùng theme **Hope UI** đặt tại `cms/themes/hope-ui/` (Bootstrap 5 admin dashboard). Asset (CSS/JS/ảnh) trong `cms/themes/hope-ui/assets/`, trang mẫu HTML trong `cms/themes/hope-ui/dashboard/`. Theme kích hoạt qua `AdminModule::init()` (`Yii::app()->setTheme('hope-ui')`), asset dùng `Yii::app()->theme->baseUrl`.
-  - **Layout admin nội bộ** = `cms/themes/hope-ui/views/layouts/main.php` (sidebar + navbar Hope UI). Controller trỏ tới bằng alias `webroot.themes.hope-ui.views.layouts.main` (đặt ở `AdminController::$layout` và `AdminModule::$layout`). **Layout đăng nhập/quên mật khẩu** riêng = `admin.views.layouts.login` (AuthController). Không còn `modules/admin/views/layouts/admin.php` (đã xoá).
-  - **Menu sidebar render theo phân quyền từng user:** mảng `$menu` trong `main.php`, mỗi mục có `perm` (khoá RBAC) — chỉ hiện khi `Yii::app()->user->checkAccess($perm)` (perm `null` = ai cũng thấy). KHÔNG có SSO/CacheHelper/MenuHelper (đã bỏ khi port sang dự án này).
-  - Bám markup + class Hope UI; giữ **Bootstrap Icons** (`bi-*`, load từ `assets/vendor/bootstrap-icons`) và `admin-assets/admin.css` cho vài component brand (stat card, bảng, nút đỏ).
-- **CRUD sinh bằng giix:** các controller/view CRUD của admin được **generate bằng giix component** đã đặt sẵn trong `cms/protected/extensions/` (`giix-core/` — generator `giixModel` + `giixCrud`; `giix-components/` — base class `GxActiveRecord`, `GxController`, `GxActiveForm`, `GxHtml`). Khi thêm CRUD mới cho một bảng, ưu tiên gen bằng giix rồi tùy biến, không viết tay từ đầu; giữ nguyên các base class giix.
-- **Xác thực:** đăng nhập admin qua `admin/auth/login` (route thân thiện `admin/dang-nhap`). Thành phần: `LoginForm` (`modules/admin/models/`), `UserIdentity` (`protected/components/`) xác thực bằng `email` + `password_hash` bcrypt, ghi audit vào `pvn_audit_logs`. Model tài khoản: `User` (bảng `pvn_users`). RBAC dùng `CDbAuthManager` (bảng `pvn_auth_*`).
-- **Khoá tài khoản:** đăng nhập sai ≥ 5 lần liên tiếp (`UserIdentity::MAX_FAILED_ATTEMPTS`) → **khoá vĩnh viễn** (`User::registerFailedLogin` đặt `locked_until = User::LOCK_FOREVER '9999-12-31'`). Chỉ mở lại được bằng đặt lại mật khẩu qua email (tự gọi `User::unlock()`) hoặc admin mở khoá thủ công.
-- **Quên/đặt lại mật khẩu qua email:** `admin/auth/requestPasswordReset` (route `admin/quen-mat-khau`) → nhập email → sinh token (`User::generatePasswordResetToken`, chỉ lưu **SHA-256 hash** + hạn `params['resetTokenTtl']` mặc định 1h vào cột `reset_token_hash` / `reset_token_expires_at`, migration `m260730_000000`) → gửi link `admin/auth/resetPassword?token=...` (route `admin/dat-lai-mat-khau`). Form: `PasswordResetRequestForm`, `SetPasswordForm`. Email gửi qua `Mailer::send()` (`protected/components/Mailer.php`, dùng `mail()` PHP; **luôn ghi log category `mailer`** để lấy link khi dev offline chưa cấu hình SMTP). Chống dò email: luôn hiện thông báo chung dù email có tồn tại hay không.
+---
 
-## Các trang khác (ngoài trang chủ)
+## 10. Responsive (Quy Tắc Co Giãn Phản Hồi)
 
-- **Trang Giới thiệu (About):** xem `About.md` (thư mục gốc) — bóc tách 4 section thân (HeroBanner, Lịch sử hình thành, Cột mốc phát triển, Tầm nhìn & Chiến lược) + Header/Footer dùng chung, kèm node ID Figma (`GIỚI THIỆU` `1251:11840`, trong section `ANOTHER PAGES` `1251:11839`).
+- **Các điểm ngắt (Breakpoints)**:
+  - `Desktop Full Wide`: `1920px` (Khung thiết kế chuẩn Figma).
+  - `Desktop Standard / Laptop`: `1440px` (Padding hai bên giảm từ 120px xuống 60px, container `1280px`).
+  - `Tablet Landscape / Laptop nhỏ`: `1024px` (Chuyển Navbar sang Mobile Menu Hamburger, Grid 3-4 cột chuyển thành 2 cột).
+  - `Tablet Portrait`: `768px` (Title Hero `96px` co giãn còn `48px`, các khối button xếp dọc theo cột).
+  - `Mobile Smart Phone`: `375px` - `480px` (Padding hai bên `16px`, full-width card, ẩn bớt chi tiết trang trí không cần thiết).
+- **Kỹ thuật co giãn mượt mà**:
+  - Sử dụng hàm `clamp()` cho Typography chính (Ví dụ Hero Title: `font-size: clamp(36px, 6vw, 96px)`).
+  - Khởi tạo CSS Variable cho Container Padding: `--container-pad: clamp(16px, 5vw, 120px)`.
 
-## Kế hoạch triển khai
+---
 
-> **Bóc tách section chi tiết để dựng lần lượt:** xem `.claude/SECTIONS.md` — nguồn thiết kế thật hiện tại là Figma node **`1134:25`** (10 section thân + header/footer, kèm node ID từng section, trạng thái ☐/☑). Bảng "Bóc tách từng section" phía trên (dựa trên design cũ `12:11`) đã lỗi thời ở vài điểm — ưu tiên `SECTIONS.md`.
+## 11. Hiệu Ứng (Effects, Animations & Micro-interactions)
 
-Thứ tự dựng dự kiến (xem tài liệu thiết kế để biết chi tiết từng phase):
+1. **Tương tác Nút & Card (Hover Effects)**:
+   - **Nút CTA đỏ `#9a1220`**: Tăng độ sáng nền nhẹ (`#b51627`), hiệu ứng phóng to nhẹ `transform: scale(1.02)` kèm bóng đổ viền `box-shadow` mượt thời gian `300ms ease`.
+   - **Thanh Menu Header**: Đổi màu chữ sang màu `#c9a84c` kết hợp underline trượt từ trái sang phải.
+   - **Khối Card Lĩnh vực / Dự án**: Hiệu ứng nổi lên nhẹ `transform: translateY(-6px)` kèm viền phát sáng mờ `border-color: rgba(201, 168, 76, 0.4)`.
+2. **Hiệu ứng Slider & Chuyển trang (Carousel Animations)**:
+   - Chuyển slide mượt (Fade opacity / Slide transform X `600ms cubic-bezier`).
+   - Progress bar tự động fill màu `#9a1220` từ `0%` đến `100%` theo thời gian chuyển slide.
+3. **Hiệu ứng Cuộn trang (Scroll & Parallax Effects)**:
+   - Xuất hiện từng phần (Fade-in up transition) cho các Section khi cuộn màn hình bằng `IntersectionObserver`.
+   - Parallax nhẹ cho hình nền minh họa đô thị (Cityscape Illustration).
 
-1. Design token & CSS reset (`variables.css`, layout/grid utilities cơ bản)
-2. Component tái sử dụng (button, typography, card, tab lọc, điều khiển carousel)
-3. Header (sticky, glassmorphism khi cuộn) và Footer (banner CTA + 4 cột link)
-4. Toàn bộ 10 section trang chủ, làm lần lượt từng section
-5. Tương tác JavaScript: carousel autoplay/điều khiển, tab lọc tin tức, fade-in khi cuộn
-6. Rà responsive (1920/1440/1024/768/375px) + SEO (meta tag, phân cấp heading ngữ nghĩa, alt text) + tối ưu hiệu năng
+---
 
-## Ràng buộc chính cần giữ khi triển khai
+## 12. Lập Kế Hoạch Triển Khai (Implementation Plan)
 
-- **Cách tiếp cận triển khai là Bootstrap 5.3** — xem `.claude/rules/frontend-bootstrap.md` để biết quy tắc code bắt buộc (ưu tiên grid/utilities/component, tối thiểu custom CSS, script cuối body, HTML ngữ nghĩa, Bootstrap Icons).
-- **Icon & asset phải giống Figma 100% — KHÔNG tự chọn icon thay thế** — xem `.claude/rules/figma-icons.md`. Export đúng SVG/ảnh từ Figma (`localhost:3845`) về `assets/images/`, giữ đúng tỉ lệ; chỉ dùng placeholder khi asset server offline.
-- **Không dùng CDN — mọi thư viện bên thứ ba phải tải về local** trong `assets/vendor/` (Bootstrap CSS/JS, Bootstrap Icons + font) và `assets/fonts/` (Google Fonts + file `.woff2`), tham chiếu qua đường dẫn tương đối. Trang phải chạy hoàn toàn offline, không request ra `cdn.jsdelivr.net`, `fonts.googleapis.com`, `fonts.gstatic.com` hay host ngoài nào. Cùng nguyên tắc với ảnh (export về local).
-- Màu, typography và spacing phải lấy từ design token, không dùng giá trị tùy tiện — đỏ brand `#9a1220`, vàng nhấn `#c9a84c`, nền navy tối `#080f1d` là palette cốt lõi đã xác nhận. Các giá trị palette phụ/type/spacing trong phần Phân tích thiết kế ở trên là mặc định đề xuất; đối chiếu lại với Figma khi có thể chọn được frame con (xem ghi chú trạng thái trích xuất).
-- Scaling responsive dùng `clamp()` cho typography/spacing fluid thay vì đè breakpoint cố định khi có thể, đặt trên nền các class cột responsive của Bootstrap.
-- Fade-in section khi cuộn dùng `IntersectionObserver`, không poll sự kiện scroll.
-- **Toàn bộ ảnh từ Figma phải export về local** trong `assets/images/` và tham chiếu qua đường dẫn tương đối — **không** hotlink tới `localhost:3845`, CDN ngoài, hay URL Figma. Ảnh raster → `.webp`, vector/logo → `.svg`. Trong khi asset thật chưa export được (server Figma offline), dùng placeholder local (SVG/`.webp` tạm) trong `assets/images/` và thay bằng ảnh thật sau; markup không được trỏ ra ngoài.
+### Giai đoạn 1: Khởi tạo hệ thống Design Tokens & CSS Base (Ngày 1)
+- Xây dựng file `variables.css` chứa toàn bộ Design Tokens:
+  - Bảng màu (`--color-primary: #9a1220`, `--color-gold: #c9a84c`, `--color-bg-dark: #080f1d`,...).
+  - Font chữ (`--font-main: 'Inter', sans-serif`, `--font-accent: 'Aeonik', sans-serif`).
+  - Font Size Scale & Line-height Scale.
+  - Spacing variables (`--container-padding`, `--section-gap`).
+- Cấu hình Reset CSS chuẩn và thiết lập Layout Grid / Flexbox utilities.
+
+### Giai đoạn 2: Triển khai các Component dùng chung (Reusable UI Components) (Ngày 2)
+- Triển khai **Button System** (Primary Button đỏ, Secondary Button viền đen).
+- Triển khai **Typography System** (Khung Headings H1, H2, H3, Body text, Subtitle).
+- Triển khai **Card Components** (Card Lĩnh vực, Card Dự án tiêu biểu, Card Tin tức).
+- Triển khai **Tabs Filter Component** & **Carousel Controller Component**.
+
+### Giai đoạn 3: Dựng Layout Header & Footer (Ngày 3)
+- Triển khai **Header / Navbar**:
+  - Logo vector + text thương hiệu Đông Sơn Holdings.
+  - Menu điều hướng với hiệu ứng hover & dropdown.
+  - Xử lý hiệu ứng Sticky Header khi cuộn trang (Đổi background mờ Glassmorphism).
+- Triển khai **Footer**:
+  - Khối Top CTA Banner *"Khám phá tiềm năng. Bắt đầu kết nối."*.
+  - 4 cột thông tin liên hệ và danh mục liên kết.
+
+### Giai đoạn 4: Triển khai toàn bộ 10 Section Trang chủ (Ngày 4 - 5)
+1. Dựng Section 1 (`HeroSlider`) với background slider và khối thông tin trung tâm.
+2. Dựng Section 2 (`Lĩnh vực Hạ tầng BOT`) với thẻ card nổi và minh họa công trình.
+3. Dựng Section 3 (`AboutServices - Tầm nhìn Sứ mệnh`).
+4. Dựng Section 4 (`BusinessAreas - 3 Trụ cột kinh doanh`).
+5. Dựng Section 5 & 7 (`FeaturedProjects - Danh sách & Chi tiết dự án tiêu biểu`).
+6. Dựng Section 6 (`CompanyStats - Thống kê con số ấn tượng`).
+7. Dựng Section 8 (`Đối tác & Cổ đông chiến lược`).
+8. Dựng Section 9 (`Tin tức nổi bật & Tab filter`).
+
+### Giai đoạn 5: Tích hợp JavaScript tương tác & Micro-animations (Ngày 6)
+- Viết JavaScript cho Carousel Slider (Tự động chuyển slide, điều khiển nút Prev/Next, đồng bộ thanh progress bar và chỉ số `02 / 04`).
+- Viết JavaScript cho bộ lọc tin tức (Filter tabs đổi danh mục bài viết mượt mà).
+- Thêm hiệu ứng cuộn trang Fade-in Up cho các section.
+
+### Giai đoạn 6: Tối ưu Responsive, SEO & Kiểm thử (Ngày 7)
+- Kiểm tra hiển thị chuẩn xác trên tất cả kích thước màn hình (Desktop 1920px, 1440px, Tablet 1024px, 768px, Mobile 375px).
+- Tối ưu hóa SEO: Thẻ `<title>`, `<meta description>`, cấu trúc `<h1>` -> `<h6>` chuẩn ngữ nghĩa, thuộc tính `alt` cho tất cả ảnh.
+- Kiểm tra hiệu năng tải trang và tinh chỉnh mượt mà mọi trải nghiệm người dùng.
