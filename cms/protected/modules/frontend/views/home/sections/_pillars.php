@@ -17,9 +17,12 @@ if (!empty($sectors)) {
             continue;
         }
         $index++;
+        // Chịu cả Tag object (sau migrate) lẫn chuỗi cũ (payload cache cũ).
         $tagNames = array();
-        foreach ($sector->tags as $tag) {
-            $tagNames[] = $tag->name;
+        if (is_array($sector->tags)) {
+            foreach ($sector->tags as $tag) {
+                $tagNames[] = is_object($tag) ? $tag->name : (string) $tag;
+            }
         }
         $items[] = array(
             'num'   => $sector->number_label != '' ? $sector->number_label : sprintf('%02d', $index),
