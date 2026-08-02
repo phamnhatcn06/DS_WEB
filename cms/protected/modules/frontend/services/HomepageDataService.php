@@ -16,10 +16,16 @@ class HomepageDataService
             return $cached;
         }
 
+        // Chỉ nạp quan hệ thẻ khi migration tạo bảng đã chạy — nhờ vậy trang chủ
+        // vẫn hoạt động (không có chip) nếu chưa migrate, thay vì lỗi thiếu bảng.
+        $hasTags = Yii::app()->db->getSchema()->getTable('pvn_news_post_tags') !== null;
+        $sectorWith = $hasTags ? array('image', 'tags') : array('image');
+        $newsWith   = $hasTags ? array('thumbnail', 'category', 'tags') : array('thumbnail', 'category');
+
         $payload = array(
             'heroSlides' => HeroSlide::model()->with('background', 'logo')->active()->findAll(),
 
-            'sectors' => BusinessSector::model()->with('image', 'tags')->findAll(array(
+            'sectors' => BusinessSector::model()->with($sectorWith)->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1',
                 'order'     => 't.sort_order ASC',
             )),
