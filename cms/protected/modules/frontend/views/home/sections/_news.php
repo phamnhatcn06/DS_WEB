@@ -85,25 +85,21 @@ if (!empty($newsPosts)) {
     );
 }
 
-// Phân bổ vào ô: ưu tiên đúng card_size, thiếu thì lấy bài kế tiếp.
-$wide = null;
-$mid = null;
-$narrow = array();
-$rest = array();
-foreach ($posts as $p) {
-    if ($wide === null && $p['size'] === 'lg') { $wide = $p; continue; }
-    if ($mid === null && $p['size'] === 'tall') { $mid = $p; continue; }
-    if ($p['size'] === 'sm') { $narrow[] = $p; continue; }
-    $rest[] = $p;
+// Phân bổ vào ô theo THỨ TỰ hiển thị: bài đầu → ô lớn, bài thứ hai → ô cao,
+// còn lại → cột card nhỏ. Không phụ thuộc card_size của từng bài.
+$wide   = isset($posts[0]) ? $posts[0] : null;
+$mid    = isset($posts[1]) ? $posts[1] : null;
+$narrow = array_slice($posts, 2);
+
+// Biến thể bố cục khi thiếu ô: tránh tiêu đề chồng lên card (mosaic 3 ô cần đủ
+// cả 3 zone mới cân). 1 bài → --one (card lớn full-width), 2 bài → --two.
+$filledZones = ($wide !== null ? 1 : 0) + ($mid !== null ? 1 : 0) + count($narrow);
+$layoutClass = 'row g-3 g-lg-4 tintuc-layout';
+if ($filledZones === 1) {
+    $layoutClass .= ' tintuc-layout--one';
+} elseif ($filledZones === 2) {
+    $layoutClass .= ' tintuc-layout--two';
 }
-// Lấp ô còn trống bằng bài chưa dùng.
-foreach ($rest as $p) {
-    if ($wide === null) { $wide = $p; }
-    elseif ($mid === null) { $mid = $p; }
-    else { $narrow[] = $p; }
-}
-if ($wide === null && !empty($narrow)) { $wide = array_shift($narrow); }
-if ($mid === null && !empty($narrow)) { $mid = array_shift($narrow); }
 
 // Closure render một news card theo ô (sizeClass) — không lặp markup 3 lần.
 $renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
