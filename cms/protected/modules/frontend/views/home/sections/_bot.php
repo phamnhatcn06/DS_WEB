@@ -113,8 +113,8 @@ $total = count($slides);
 <?php if ($s['cardDesc'] !== null && $s['cardDesc'] !== ''): ?>
                       <p><?php echo CHtml::encode($s['cardDesc']); ?></p>
 <?php endif; ?>
-<?php if (!empty($chips)): ?>
-                      <div class="bot-chips"><?php foreach ($chips as $chip): ?><span class="chip"><?php echo CHtml::encode($chip); ?></span><?php endforeach; ?></div>
+<?php if (!empty($chipItems)): ?>
+                      <div class="bot-chips"><?php foreach ($chipItems as $chip): ?><?php $cName = is_array($chip) ? $chip['name'] : $chip; $cSlug = is_array($chip) ? $chip['slug'] : null; ?><?php if ($cSlug): ?><a class="chip" href="<?php echo CHtml::encode($tagUrl($cSlug)); ?>"><?php echo CHtml::encode($cName); ?></a><?php else: ?><span class="chip"><?php echo CHtml::encode($cName); ?></span><?php endif; ?><?php endforeach; ?></div>
 <?php endif; ?>
                     </div>
                   </div>
