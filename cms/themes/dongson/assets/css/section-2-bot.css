@@ -188,6 +188,18 @@
   padding: 3px 10px;
 }
 
+/* Chip là link tới trang thẻ: bỏ gạch chân, hover ánh vàng kim */
+a.chip {
+  text-decoration: none;
+  transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+}
+
+a.chip:hover {
+  color: var(--dsh-white);
+  border-color: var(--dsh-gold);
+  background-color: rgba(201, 168, 76, .22);
+}
+
 /* -------- Điều khiển slider (trang trí, khớp Figma) -------- */
 .bot-slider {
   display: flex;
