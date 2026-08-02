@@ -352,8 +352,9 @@
   }
 
   /**
-   * Tab lọc tin tức theo danh mục (Section 9). Ẩn/hiện card qua class
-   * .is-hidden dựa trên [data-category], không tải lại trang.
+   * Tab lọc tin tức theo danh mục HOẶC theo thẻ (Section 9). Ẩn/hiện card qua
+   * class .is-hidden khi slug được chọn khớp [data-category] hoặc nằm trong
+   * [data-tags]; không tải lại trang.
    */
   function initNewsFilter() {
     var filterBars = document.querySelectorAll('[data-news-filter]');
