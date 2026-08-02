@@ -118,6 +118,34 @@ $isNew = $model->getIsNewRecord();
               )); ?>
               <?php break; ?>
 
+            <?php case 'checkboxlist': ?>
+              <?php
+              $modelName = get_class($model);
+              $options = isset($field['options']) ? $field['options'] : array();
+              $selectedValues = array_map('strval', (array) $model->$name);
+              ?>
+              <?php if ($options === array()): ?>
+                <p class="form-hint mb-0"><em>Chưa có mục nào để chọn.</em></p>
+              <?php else: ?>
+                <div class="d-flex flex-wrap gap-3 pt-1">
+                  <?php foreach ($options as $value => $label): ?>
+                    <div class="form-check">
+                      <?php $inputId = $name . '_' . $value; ?>
+                      <input type="checkbox" class="form-check-input" id="<?php echo $inputId; ?>"
+                             name="<?php echo $modelName . '[' . $name . '][]'; ?>"
+                             value="<?php echo CHtml::encode($value); ?>"
+                             <?php echo in_array((string) $value, $selectedValues, true) ? 'checked' : ''; ?> />
+                      <label class="form-check-label" for="<?php echo $inputId; ?>">
+                        <?php echo CHtml::encode($label); ?>
+                      </label>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
+              <?php // Luôn gửi kèm giá trị rỗng để khi bỏ chọn hết vẫn ghi nhận được. ?>
+              <input type="hidden" name="<?php echo $modelName . '[' . $name . '][]'; ?>" value="" />
+              <?php break; ?>
+
             <?php default: ?>
               <?php echo $form->textField($model, $name, array(
                   'class'       => 'form-control',
