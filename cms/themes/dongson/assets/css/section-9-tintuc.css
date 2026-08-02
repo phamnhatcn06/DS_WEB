@@ -309,7 +309,7 @@
   .tintuc.is-filtered .tintuc-col--narrow {
     grid-column: auto;
     grid-row: 2;
-    align-self: stretch;
+    align-self: start;
   }
 
   /* Cào bằng chiều cao card khi lọc để lưới gọn gàng */
