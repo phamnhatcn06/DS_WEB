@@ -43,13 +43,10 @@ section[id] {
 [data-reveal="zoom"]    { transform: scale(.94); }
 [data-reveal="blur"]    { transform: translate3d(0, 18px, 0); filter: blur(8px); }
 
-/* Timeline: mỗi mốc trượt vào từ đúng phía của nó */
-.tl-item.tl-left[data-reveal]  { transform: translate3d(-40px, 0, 0); }
-.tl-item.tl-right[data-reveal] { transform: translate3d(40px, 0, 0); }
-
-@media (max-width: 767.98px) {
-  .tl-item[data-reveal] { transform: translate3d(0, 32px, 0); }
-}
+/* Timeline: KHÔNG dịch cả .tl-item — nếu dịch, node đỏ (con của item) sẽ bị
+   kéo lệch khỏi trục vàng. Hiệu ứng trượt card + phóng node do
+   section-7-timeline.css xử lý (chỉ animate .tl-card và .tl-node), giữ node
+   luôn nằm đúng trên trục ở left:50%. */
 
 [data-reveal].is-visible {
   opacity: 1;
