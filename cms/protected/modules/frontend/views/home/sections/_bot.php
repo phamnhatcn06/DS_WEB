@@ -15,9 +15,13 @@ if (!empty($sectors)) {
         if (!$sector->show_in_slider) {
             continue;
         }
+        // Sau migrate: $sector->tags là mảng Tag. Chịu thêm dạng chuỗi cũ để
+        // không vỡ trang nếu còn payload cache cũ chưa được làm mới.
         $tagNames = array();
-        foreach ($sector->tags as $tag) {
-            $tagNames[] = $tag->name;
+        if (is_array($sector->tags)) {
+            foreach ($sector->tags as $tag) {
+                $tagNames[] = is_object($tag) ? $tag->name : (string) $tag;
+            }
         }
         $slides[] = array(
             'eyebrow'  => $sector->eyebrow != '' ? $sector->eyebrow : $sector->name,
