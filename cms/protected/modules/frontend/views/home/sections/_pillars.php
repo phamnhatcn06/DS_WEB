@@ -9,6 +9,11 @@
  */
 $root = $this->assetsBase();
 
+// URL trang lưu trữ theo thẻ (/the/<slug>).
+$tagUrl = function ($slug) {
+    return Yii::app()->createUrl('frontend/tag/view', array('slug' => $slug));
+};
+
 $items = array();
 if (!empty($sectors)) {
     $index = 0;
