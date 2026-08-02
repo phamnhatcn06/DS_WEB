@@ -179,6 +179,18 @@
   white-space: nowrap;
 }
 
+/* Thẻ là link tới trang thẻ: bỏ gạch chân, hover viền đỏ brand */
+a.lv-tag {
+  text-decoration: none;
+  transition: color var(--transition-base), border-color var(--transition-base), background-color var(--transition-base);
+}
+
+a.lv-tag:hover {
+  color: var(--dsh-red);
+  border-color: var(--dsh-red);
+  background-color: rgba(154, 18, 32, .06);
+}
+
 /* Khi các thẻ xếp chồng 1 cột, thêm đường kẻ ngăn cách */
 @media (max-width: 767.98px) {
   .linhvuc-col + .linhvuc-col .linhvuc-item {
