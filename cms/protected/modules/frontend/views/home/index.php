@@ -44,4 +44,5 @@ $this->renderPartial('sections/_partners', array(
 $this->renderPartial('sections/_news', array(
     'newsCategories' => isset($newsCategories) ? $newsCategories : array(),
     'newsPosts'      => isset($newsPosts) ? $newsPosts : array(),
+    'newsTags'       => isset($newsTags) ? $newsTags : array(),
 ));
