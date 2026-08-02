@@ -17,18 +17,21 @@ if (!empty($sectors)) {
             continue;
         }
         $index++;
-        // Chịu cả Tag object (sau migrate) lẫn chuỗi cũ (payload cache cũ).
-        $tagNames = array();
+        // Mỗi tag giữ cả slug (để link tới trang thẻ) lẫn tên. Chịu thêm dạng
+        // chuỗi cũ (payload cache cũ) — khi đó không có slug nên render span.
+        $tagList = array();
         if (is_array($sector->tags)) {
             foreach ($sector->tags as $tag) {
-                $tagNames[] = is_object($tag) ? $tag->name : (string) $tag;
+                $tagList[] = is_object($tag)
+                    ? array('slug' => $tag->slug, 'name' => $tag->name)
+                    : array('slug' => null, 'name' => (string) $tag);
             }
         }
         $items[] = array(
             'num'   => $sector->number_label != '' ? $sector->number_label : sprintf('%02d', $index),
             'title' => $sector->name,
             'desc'  => $sector->description,
-            'tags'  => $tagNames,
+            'tags'  => $tagList,
         );
     }
 }
