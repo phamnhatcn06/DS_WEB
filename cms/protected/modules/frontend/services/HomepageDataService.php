@@ -51,7 +51,7 @@ class HomepageDataService
                 'order'     => 't.sort_order ASC',
             )),
 
-            'newsPosts' => NewsPost::model()->with('thumbnail', 'category', 'tags')->findAll(array(
+            'newsPosts' => NewsPost::model()->with($newsWith)->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st',
                 'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
                 'order'     => 't.published_at DESC',
@@ -59,8 +59,8 @@ class HomepageDataService
             )),
 
             // Chỉ những thẻ đang gắn cho ít nhất một bài đã xuất bản — làm nguồn
-            // cho hàng lọc theo thẻ ở Section 9.
-            'newsTags' => Tag::model()->findAll(array(
+            // cho hàng lọc theo thẻ ở Section 9. Rỗng khi chưa migrate.
+            'newsTags' => $hasTags ? Tag::model()->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1'
                     . ' AND EXISTS (SELECT 1 FROM pvn_news_post_tags npt'
                     . ' JOIN pvn_news_posts p ON p.id = npt.post_id'
@@ -68,7 +68,7 @@ class HomepageDataService
                     . ' AND p.is_active = 1 AND p.status = :st)',
                 'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
                 'order'     => 't.sort_order ASC, t.name ASC',
-            )),
+            )) : array(),
         );
 
         if ($cache) {
