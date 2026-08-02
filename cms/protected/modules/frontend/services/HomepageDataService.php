@@ -19,7 +19,7 @@ class HomepageDataService
         $payload = array(
             'heroSlides' => HeroSlide::model()->with('background', 'logo')->active()->findAll(),
 
-            'sectors' => BusinessSector::model()->with('image')->findAll(array(
+            'sectors' => BusinessSector::model()->with('image', 'tags')->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1',
                 'order'     => 't.sort_order ASC',
             )),
