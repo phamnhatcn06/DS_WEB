@@ -55,9 +55,21 @@ if (!empty($newsPosts)) {
                 $tagSlugs[] = $tag->slug;
             }
         }
+        // Đa danh mục: gom slug tất cả danh mục để lọc khớp "bất kỳ".
+        $catSlugs = array();
+        if (is_array($post->categories)) {
+            foreach ($post->categories as $category) {
+                if (is_object($category)) {
+                    $catSlugs[] = $category->slug;
+                }
+            }
+        }
+        if ($catSlugs === array() && $post->category) {
+            $catSlugs[] = $post->category->slug; // fallback khi chưa migrate
+        }
         $posts[] = array(
             'img'      => $post->thumbnail,
-            'cat'      => $post->category ? $post->category->slug : '',
+            'cat'      => implode(' ', $catSlugs),
             'chip'     => $post->category ? $post->category->name : '',
             'date'     => $post->getFormattedDate(),
             'title'    => $post->title,
