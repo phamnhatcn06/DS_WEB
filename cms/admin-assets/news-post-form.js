@@ -62,7 +62,7 @@
       language: 'vi',
       height: 480,
       menubar: 'edit insert format table',
-      plugins: 'lists link image table code fullscreen media autolink paste',
+      plugins: 'advlist lists link image table code fullscreen media autolink wordcount',
       toolbar:
         'undo redo | blocks | bold italic underline | ' +
         'alignleft aligncenter alignright | bullist numlist | ' +
