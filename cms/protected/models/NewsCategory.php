@@ -76,6 +76,20 @@ class NewsCategory extends BaseActiveRecord
                 'Không thể xoá danh mục đang có ' . $this->postCount . ' bài viết.');
             return false;
         }
+
+        // Đa danh mục: danh mục có thể được gắn ở bảng liên kết mà không phải
+        // category_id chính — vẫn phải chặn để không vấp FK RESTRICT.
+        if (Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null) {
+            $linked = (int) Yii::app()->db->createCommand()
+                ->select('COUNT(*)')->from('pvn_news_post_categories')
+                ->where('category_id = :id', array(':id' => (int) $this->id))
+                ->queryScalar();
+            if ($linked > 0) {
+                Yii::app()->user->setFlash('error',
+                    'Không thể xoá danh mục đang được gắn cho ' . $linked . ' bài viết.');
+                return false;
+            }
+        }
         return true;
     }
 
