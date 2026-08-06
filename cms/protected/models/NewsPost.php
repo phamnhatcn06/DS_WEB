@@ -136,6 +136,30 @@ class NewsPost extends BaseActiveRecord
         $this->_tagIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
     }
 
+    /**
+     * Id các danh mục đang gắn — đọc thẳng từ bảng liên kết để tick sẵn trong form.
+     */
+    public function getCategoryIds()
+    {
+        if ($this->_categoryIds === null) {
+            if ($this->getIsNewRecord()) {
+                $this->_categoryIds = array();
+            } else {
+                $ids = Yii::app()->db->createCommand()
+                    ->select('category_id')->from('pvn_news_post_categories')
+                    ->where('post_id = :id', array(':id' => (int) $this->id))
+                    ->queryColumn();
+                $this->_categoryIds = array_map('intval', $ids);
+            }
+        }
+        return $this->_categoryIds;
+    }
+
+    public function setCategoryIds($value)
+    {
+        $this->_categoryIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
+    }
+
     public function attributeLabels()
     {
         return array(
