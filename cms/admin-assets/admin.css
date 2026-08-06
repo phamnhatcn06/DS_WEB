@@ -597,3 +597,8 @@ body.admin-body {
 .wp-checklist .form-check {
   margin-bottom: .35rem;
 }
+
+/* Modal chọn ảnh phải nổi trên cả TinyMCE fullscreen (z-index ~1200). */
+#mediaPickerModal {
+  z-index: 20000;
+}
