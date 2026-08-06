@@ -19,8 +19,16 @@ class HomepageDataService
         // Chỉ nạp quan hệ thẻ khi migration tạo bảng đã chạy — nhờ vậy trang chủ
         // vẫn hoạt động (không có chip) nếu chưa migrate, thay vì lỗi thiếu bảng.
         $hasTags = Yii::app()->db->getSchema()->getTable('pvn_news_post_tags') !== null;
+        // Đa danh mục: chỉ nạp quan hệ 'categories' khi bảng liên kết đã được tạo.
+        $hasCats = Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null;
         $sectorWith = $hasTags ? array('image', 'tags') : array('image');
-        $newsWith   = $hasTags ? array('thumbnail', 'category', 'tags') : array('thumbnail', 'category');
+        $newsWith   = array('thumbnail', 'category');
+        if ($hasCats) {
+            $newsWith[] = 'categories';
+        }
+        if ($hasTags) {
+            $newsWith[] = 'tags';
+        }
 
         $payload = array(
             'heroSlides' => HeroSlide::model()->with('background', 'logo')->active()->findAll(),
