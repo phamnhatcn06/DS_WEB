@@ -86,7 +86,8 @@ class MediaController extends AdminController
     }
 
     /**
-     * Lưu file xuống đĩa và tạo bản ghi. Trả true hoặc thông báo lỗi.
+     * Lưu file xuống đĩa và tạo bản ghi.
+     * Trả về đối tượng MediaFile khi thành công, hoặc chuỗi thông báo lỗi.
      */
     private function storeFile(CUploadedFile $file)
     {
