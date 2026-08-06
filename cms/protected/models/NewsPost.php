@@ -180,6 +180,7 @@ class NewsPost extends BaseActiveRecord
             'sort_order'          => 'Thứ tự',
             'is_active'           => 'Hiển thị',
             'tagIds'              => 'Thẻ (Tag)',
+            'categoryIds'         => 'Danh mục',
         );
     }
 
