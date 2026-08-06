@@ -137,6 +137,7 @@ class SiteSetting extends CActiveRecord
             'scripts'  => 'Script chèn',
             'about'    => 'Trang giới thiệu',
             'sodo'     => 'Trang sơ đồ tổ chức',
+            'sumenh'   => 'Trang sứ mệnh - tầm nhìn',
         );
     }
 }
