@@ -11,6 +11,7 @@ class NewsPostController extends AdminCrudController
     protected $withRelations      = array('thumbnail', 'category');
     protected $defaultOrder       = 't.published_at DESC';
     protected $sortable           = false;
+    protected $formView           = 'admin.views.newsPost.form';
 
     public $pageIcon = 'fa-newspaper-o';
 
