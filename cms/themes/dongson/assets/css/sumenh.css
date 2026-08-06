@@ -267,7 +267,9 @@
   /* Card giá trị gọn lại khi 2 cột trên mobile (khớp Figma 375px) */
   .sm-value-card { padding: 20px; border-radius: 8px; }
   .sm-value-icon { width: 48px; height: 48px; margin-bottom: 12px; }
-  .sm-value-icon img { height: 24px; }
+  .sm-value-icon img { width: 24px; height: 24px; }
+  .sm-value-icon--award img { width: 18px; height: 24px; }
+  .sm-value-icon--inner img { width: 24px; height: 24px; }
   .sm-value-card h3 { font-size: 1.125rem; margin-bottom: 10px; }
   .sm-value-card p { font-size: .875rem; }
 }
