@@ -17,6 +17,23 @@ class DefaultController extends AdminController
     }
 
     /**
+     * Xoá toàn bộ cache của website (trang chủ, menu, ...) một cách chủ động.
+     * Chỉ nhận POST + có quyền cập nhật cấu hình để tránh bị gọi tuỳ tiện.
+     */
+    public function actionClearCache()
+    {
+        $this->requirePermission('settings.update');
+
+        if (!Yii::app()->request->isPostRequest) {
+            throw new CHttpException(400, 'Yêu cầu không hợp lệ.');
+        }
+
+        Yii::app()->cache->flush();
+
+        $this->redirectWith(array('index'), 'success', 'Đã xoá toàn bộ cache website.');
+    }
+
+    /**
      * Đếm số bản ghi đang hiển thị của từng loại nội dung.
      */
     private function collectStats()
