@@ -135,6 +135,7 @@ class SiteSetting extends CActiveRecord
             'social'   => 'Mạng xã hội',
             'seo'      => 'SEO',
             'scripts'  => 'Script chèn',
+            'about'    => 'Trang giới thiệu',
         );
     }
 }
