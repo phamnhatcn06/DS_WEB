@@ -93,7 +93,7 @@ class m260807_000000_create_org_structure extends CDbMigration
         $sidebarId = $this->locationId('admin_sidebar');
         if ($sidebarId !== null) {
             // Chèn sau "Đối tác & cổ đông" (nhóm Nội dung trang chủ).
-            $maxSort = (int) $this->db->createCommand()
+            $maxSort = (int) Yii::app()->db->createCommand()
                 ->select('COALESCE(MAX(sort_order), 0)')->from('pvn_menu_items')
                 ->where('location_id = :loc', array(':loc' => $sidebarId))
                 ->queryScalar();
@@ -105,7 +105,7 @@ class m260807_000000_create_org_structure extends CDbMigration
         }
 
         // -------------------------- link menu công khai trỏ sang route động mới
-        $this->db->createCommand()->update('pvn_menu_items',
+        Yii::app()->db->createCommand()->update('pvn_menu_items',
             array('url' => '/so-do-to-chuc'),
             'url = :old', array(':old' => 'sodo-to-chuc.html'));
 
@@ -120,7 +120,7 @@ class m260807_000000_create_org_structure extends CDbMigration
             array('sodo_org_title',    'Hệ thống phân cấp',                   'Sơ đồ — Tiêu đề'),
         );
         foreach ($settings as $i => $s) {
-            $exists = (int) $this->db->createCommand()
+            $exists = (int) Yii::app()->db->createCommand()
                 ->select('COUNT(*)')->from('pvn_site_settings')
                 ->where('setting_key = :k', array(':k' => $s[0]))->queryScalar();
             if ($exists === 0) {
@@ -183,13 +183,13 @@ class m260807_000000_create_org_structure extends CDbMigration
             'parent_id' => null, 'name' => 'Hội đồng quản trị', 'level' => 1,
             'sort_order' => 1, 'is_active' => 1, 'created_at' => $now, 'updated_at' => $now,
         ));
-        $boardId = (int) $this->db->getLastInsertID();
+        $boardId = (int) Yii::app()->db->getLastInsertID();
 
         $this->insert('pvn_org_units', array(
             'parent_id' => $boardId, 'name' => 'Ban Tổng giám đốc', 'level' => 2,
             'sort_order' => 1, 'is_active' => 1, 'created_at' => $now, 'updated_at' => $now,
         ));
-        $execId = (int) $this->db->getLastInsertID();
+        $execId = (int) Yii::app()->db->getLastInsertID();
 
         $depts = array('Khối Đầu tư', 'Khối Tài chính', 'Khối Kỹ thuật', 'Khối Hành chính');
         foreach ($depts as $i => $dept) {
@@ -203,16 +203,16 @@ class m260807_000000_create_org_structure extends CDbMigration
     public function down()
     {
         // Menu công khai: trả link về HTML tĩnh.
-        $this->db->createCommand()->update('pvn_menu_items',
+        Yii::app()->db->createCommand()->update('pvn_menu_items',
             array('url' => 'sodo-to-chuc.html'),
             'url = :new', array(':new' => '/so-do-to-chuc'));
 
         // Mục quản trị.
-        $this->db->createCommand()->delete('pvn_menu_items',
+        Yii::app()->db->createCommand()->delete('pvn_menu_items',
             "route IN ('/admin/leader/index', '/admin/orgUnit/index')");
 
         // Cấu hình hero.
-        $this->db->createCommand()->delete('pvn_site_settings', "setting_group = 'sodo'");
+        Yii::app()->db->createCommand()->delete('pvn_site_settings', "setting_group = 'sodo'");
 
         // RBAC operations (gỡ luôn liên kết cha-con).
         $auth = Yii::app()->authManager;
@@ -241,7 +241,7 @@ class m260807_000000_create_org_structure extends CDbMigration
 
     private function locationId($code)
     {
-        $id = $this->db->createCommand()
+        $id = Yii::app()->db->createCommand()
             ->select('id')->from('pvn_menu_locations')
             ->where('code = :code', array(':code' => $code))->queryScalar();
         return ($id === false || $id === null) ? null : (int) $id;
@@ -249,7 +249,7 @@ class m260807_000000_create_org_structure extends CDbMigration
 
     private function insertSidebarItem($locationId, $title, $route, $icon, $perm, $sort, $now)
     {
-        $exists = (int) $this->db->createCommand()
+        $exists = (int) Yii::app()->db->createCommand()
             ->select('COUNT(*)')->from('pvn_menu_items')
             ->where('location_id = :loc AND route = :route',
                 array(':loc' => $locationId, ':route' => $route))

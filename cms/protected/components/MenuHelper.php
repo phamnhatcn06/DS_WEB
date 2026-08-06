@@ -88,7 +88,7 @@ class MenuHelper
         $html = '';
         foreach ($tree as $node) {
             $row = $node['row'];
-            $href = CHtml::encode(self::resolveUrl($row['url'], $base));
+            $href = CHtml::encode(self::publicHref($row, $base));
             $target = $row['target'] && $row['target'] !== '_self'
                 ? ' target="' . CHtml::encode($row['target']) . '"' : '';
             $caret = strpos((string) $row['css_class'], 'nav-caret') !== false ? ' nav-caret' : '';
@@ -97,7 +97,7 @@ class MenuHelper
                 $items = '';
                 foreach ($node['children'] as $child) {
                     $c = $child['row'];
-                    $items .= '<li><a class="dropdown-item" href="' . CHtml::encode(self::resolveUrl($c['url'], $base)) . '">'
+                    $items .= '<li><a class="dropdown-item" href="' . CHtml::encode(self::publicHref($c, $base)) . '">'
                         . CHtml::encode($c['title']) . '</a></li>';
                 }
                 $html .= '<li class="nav-item dropdown">'
