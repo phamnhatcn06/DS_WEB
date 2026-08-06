@@ -133,6 +133,22 @@ class MenuHelper
     }
 
     /**
+     * href công khai của một mục menu (dùng cho nav header + cột footer).
+     *
+     * Mục `route` (TYPE_ROUTE) → sinh URL sạch qua createUrl để độc lập vị trí
+     * triển khai (domain gốc hay thư mục con). Mọi loại khác quay về resolveUrl
+     * (link ngoài, neo #..., hoặc file tĩnh tương đối như about.html).
+     */
+    protected static function publicHref($row, $base)
+    {
+        if (isset($row['item_type']) && $row['item_type'] === MenuItem::TYPE_ROUTE
+            && !empty($row['route'])) {
+            return Yii::app()->createUrl($row['route']);
+        }
+        return self::resolveUrl($row['url'], $base);
+    }
+
+    /**
      * Phân giải URL của mục menu với base URL của frontend.
      * Giữ nguyên link tuyệt đối, neo (#...), và đường dẫn gốc (/...);
      * chỉ prefix base cho link tương đối (vd about.html).
