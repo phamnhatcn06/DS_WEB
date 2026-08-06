@@ -16,6 +16,19 @@
   </div>
 <?php endif; ?>
 
+<?php if (Yii::app()->user->checkAccess('settings.update')): ?>
+  <div class="d-flex justify-content-end mb-3">
+    <?php echo CHtml::beginForm($this->createUrl('clearCache'), 'post', array(
+        'data-confirm' => 'Xoá toàn bộ cache website (trang chủ, menu, ...)? '
+            . 'Trang sẽ được dựng lại từ dữ liệu mới nhất ở lần truy cập kế tiếp.',
+    )); ?>
+      <button class="btn btn-outline-danger btn-sm" title="Xoá toàn bộ cache website">
+        <i class="fa fa-refresh me-1"></i>Xoá cache
+      </button>
+    <?php echo CHtml::endForm(); ?>
+  </div>
+<?php endif; ?>
+
 <div class="row g-3 mb-4">
   <?php foreach ($stats as $stat): ?>
     <div class="col-6 col-md-4 col-xl-3">
