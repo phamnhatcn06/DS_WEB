@@ -29,7 +29,7 @@ $s = function ($key, $default = '') {
 };
 
 // Lưới giá trị: map biến thể icon của CoreValue sang lớp khung của card vision.
-$visionIconClass = array('inner' => ' vision-card-icon--fill', 'award' => ' vision-card-icon--award');
+$visionIconClass = array('inner' => ' vision-card-icon--inner', 'award' => ' vision-card-icon--award');
 ?>
 
     <!-- ===== Section 1: HeroBanner ===== -->
