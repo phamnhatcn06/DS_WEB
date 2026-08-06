@@ -252,5 +252,3 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
 <script>
   window.DSH_TINYMCE_BASE = '<?php echo $root; ?>/admin-assets/vendor/tinymce';
 </script>
-
-<?php $this->endWidget(); // (không dùng — giữ để rõ ràng) ?>
