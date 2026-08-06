@@ -29,11 +29,11 @@ class CoreValueController extends AdminCrudController
             array('name' => 'title', 'width' => 6),
             array('name' => 'icon_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'description', 'type' => 'textarea', 'width' => 12, 'rows' => 3),
-            array('name' => 'icon_variant', 'type' => 'select', 'width' => 4,
+            array('name' => 'icon_variant', 'type' => 'select', 'width' => 12,
                 'options' => CoreValue::iconVariants(),
                 'hint' => 'Quyết định kiểu khung bao quanh icon trên giao diện.'),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 4),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
         );
     }
 }
