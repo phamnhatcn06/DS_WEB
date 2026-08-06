@@ -64,24 +64,28 @@ $isNew = $model->getIsNewRecord();
 
             <?php case 'media': ?>
               <?php
-              // Kèm data-url vào từng option để JS xem trước được ảnh.
-              $mediaFiles = MediaFile::model()->notDeleted()->findAll(array('order' => 'file_name ASC'));
-              $options = array('' => '— Không chọn —');
-              $optionAttributes = array();
-              foreach ($mediaFiles as $file) {
-                  $options[$file->id] = $file->file_name;
-                  $optionAttributes[$file->id] = array('data-url' => $file->getPublicUrl());
-              }
               $current = $model->$name ? MediaFile::model()->findByPk($model->$name) : null;
+              $currentUrl = $current ? $current->getPublicUrl() : '';
+              $currentName = $current ? $current->file_name : '';
               ?>
-              <?php echo $form->dropDownList($model, $name, $options, array(
-                  'class'            => 'form-select',
-                  'options'          => $optionAttributes,
-                  'data-media-select' => $name,
-              )); ?>
-              <img class="field-preview" alt="" data-media-preview="<?php echo $name; ?>"
-                   src="<?php echo $current ? $current->getPublicUrl() : ''; ?>"
-                   <?php echo $current ? '' : 'hidden'; ?> />
+              <div class="media-field" data-media-field>
+                <?php echo $form->hiddenField($model, $name, array('data-media-input' => '1')); ?>
+                <div class="media-field-preview<?php echo $currentUrl ? '' : ' is-empty'; ?>" data-media-box>
+                  <img src="<?php echo CHtml::encode($currentUrl); ?>" alt="" data-media-img
+                       <?php echo $currentUrl ? '' : 'hidden'; ?> />
+                  <span class="media-field-empty" data-media-empty <?php echo $currentUrl ? 'hidden' : ''; ?>>
+                    <i class="fa fa-image"></i> Chưa chọn ảnh
+                  </span>
+                </div>
+                <div class="media-field-actions">
+                  <button type="button" class="btn btn-sm btn-dsh" data-media-open>
+                    <i class="fa fa-photo-video me-1"></i> Chọn / Tải ảnh
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" data-media-clear
+                          <?php echo $currentUrl ? '' : 'hidden'; ?>>Bỏ chọn</button>
+                  <span class="media-field-name" data-media-name><?php echo CHtml::encode($currentName); ?></span>
+                </div>
+              </div>
               <?php break; ?>
 
             <?php case 'checkbox': ?>
