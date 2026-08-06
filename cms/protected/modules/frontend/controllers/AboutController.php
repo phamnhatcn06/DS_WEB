@@ -10,7 +10,7 @@ class AboutController extends FrontendController
 {
     public function actionIndex()
     {
-        $this->pageTitle = 'Giới thiệu — Đông Sơn Holdings';
-        $this->render('index');
+        $this->pageTitle = SiteSetting::get('about_meta_title', 'Giới thiệu — Đông Sơn Holdings');
+        $this->render('index', AboutDataService::load());
     }
 }
