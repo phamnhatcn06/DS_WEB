@@ -1009,7 +1009,7 @@ CREATE TABLE `pvn_site_settings`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_site_settings_setting_key`(`setting_key`) USING BTREE,
   INDEX `idx_site_settings_group_name`(`group_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_site_settings
@@ -1043,6 +1043,40 @@ INSERT INTO `pvn_site_settings` VALUES (41, 'og_image', '21', 'media', 'seo', '�
 INSERT INTO `pvn_site_settings` VALUES (42, 'og_type', 'website', 'string', 'seo', 'Loại Open Graph', 'Thường là website.', 15, 1, '2026-08-02 15:59:35', '2026-08-02 15:59:35');
 INSERT INTO `pvn_site_settings` VALUES (43, 'twitter_card', 'summary_large_image', 'string', 'seo', 'Kiểu Twitter card', 'summary hoặc summary_large_image.', 16, 1, '2026-08-02 15:59:35', '2026-08-02 15:59:35');
 INSERT INTO `pvn_site_settings` VALUES (44, 'google_site_verification', '', 'string', 'seo', 'Mã Google Search Console', 'Chỉ nhập phần content của thẻ verify, để trống nếu không dùng.', 17, 1, '2026-08-02 15:59:35', '2026-08-02 15:59:35');
+INSERT INTO `pvn_site_settings` VALUES (45, 'about_meta_title', 'Giới thiệu — Đông Sơn Holdings', 'string', 'about', 'Tiêu đề trang (SEO)', 'Thẻ <title> trang giới thiệu', 10, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (46, 'about_hero_eyebrow', 'Về Đông Sơn Holdings', 'string', 'about', 'Hero — Eyebrow', '', 20, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (47, 'about_hero_title', 'GIỚI THIỆU', 'string', 'about', 'Hero — Tiêu đề (H1)', '', 30, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (48, 'about_hero_subtitle', 'Hành trình từ nhà thầu đến nhà đầu tư và phát triển hạ tầng quốc gia', 'string', 'about', 'Hero — Mô tả', '', 40, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (49, 'about_hero_bg', '108', 'media', 'about', 'Hero — Ảnh nền', '', 50, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (50, 'about_history_eyebrow', 'Giới thiệu · Lịch sử', 'string', 'about', 'Lịch sử — Eyebrow', '', 60, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (51, 'about_history_title', 'Hành trình kiến tạo giá trị cốt lõi', 'string', 'about', 'Lịch sử — Tiêu đề', '', 70, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (52, 'about_history_lead_pre', 'Công ty Cổ phần Đông Sơn Holdings được thành lập ngày', 'string', 'about', 'Lịch sử — Câu dẫn (trước ngày)', '', 80, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (53, 'about_history_founded_date', '09/12/2009', 'string', 'about', 'Lịch sử — Ngày thành lập (tô nổi bật)', '', 90, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (54, 'about_history_lead_post', ', đánh dấu bước khởi đầu cho hành trình vươn lên trở thành nhà đầu tư và phát triển hạ tầng quốc gia.', 'string', 'about', 'Lịch sử — Câu dẫn (sau ngày)', '', 100, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (55, 'about_history_subhead', 'Trên cơ sở góp vốn của ba doanh nghiệp uy tín hàng đầu:', 'string', 'about', 'Lịch sử — Câu giới thiệu cổ đông', '', 110, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (56, 'about_history_founder_1', 'Tổng công ty 319 – Bộ Quốc phòng', 'string', 'about', 'Lịch sử — Cổ đông sáng lập 1', '', 120, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (57, 'about_history_founder_2', 'Công ty Cổ phần VINA INVEST', 'string', 'about', 'Lịch sử — Cổ đông sáng lập 2', '', 130, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (58, 'about_history_founder_3', 'Công ty Cổ phần Thép Châu Âu', 'string', 'about', 'Lịch sử — Cổ đông sáng lập 3', 'Để trống nếu không dùng', 140, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (59, 'about_history_image', '2', 'media', 'about', 'Lịch sử — Ảnh minh hoạ', '', 150, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (60, 'about_history_badge_year', '2009', 'string', 'about', 'Lịch sử — Badge: năm', '', 160, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (61, 'about_history_badge_label', 'Năm thành lập', 'string', 'about', 'Lịch sử — Badge: nhãn', '', 170, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (62, 'about_milestone_eyebrow', 'Cột mốc phát triển', 'string', 'about', 'Cột mốc — Eyebrow', '', 180, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (63, 'about_milestone_title', 'Vươn mình mạnh mẽ', 'string', 'about', 'Cột mốc — Tiêu đề', '', 190, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (64, 'about_milestone_subtitle', 'Sức mạnh từ nội lực vững vàng', 'string', 'about', 'Cột mốc — Tiêu đề phụ', '', 200, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (65, 'about_milestone_text_1', 'Khởi đầu là một công ty con của Tổng công ty 319, Đông Sơn Holdings đã từng bước khẳng định năng lực vượt trội trong lĩnh vực xây dựng và đầu tư hạ tầng kỹ thuật.', 'string', 'about', 'Cột mốc — Đoạn 1', '', 210, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (66, 'about_milestone_text_2', 'Chúng tôi đã tham gia thi công hàng loạt công trình giao thông trọng điểm và dự án hạ tầng quy mô lớn trên phạm vi toàn quốc, xây dựng niềm tin vững chắc với các đối tác và cơ quan quản lý nhà nước.', 'string', 'about', 'Cột mốc — Đoạn 2', '', 220, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (67, 'about_milestone_stat_1_value', '100', 'number', 'about', 'Cột mốc — Số liệu 1: giá trị', '', 230, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (68, 'about_milestone_stat_1_suffix', '+', 'string', 'about', 'Cột mốc — Số liệu 1: hậu tố', '', 240, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (69, 'about_milestone_stat_1_label', 'Dự án quy mô quốc gia', 'string', 'about', 'Cột mốc — Số liệu 1: nhãn', '', 250, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (70, 'about_milestone_stat_2_value', '63', 'number', 'about', 'Cột mốc — Số liệu 2: giá trị', '', 260, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (71, 'about_milestone_stat_2_suffix', '', 'string', 'about', 'Cột mốc — Số liệu 2: hậu tố', '', 270, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (72, 'about_milestone_stat_2_label', 'Tỉnh thành hiện diện', 'string', 'about', 'Cột mốc — Số liệu 2: nhãn', '', 280, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (73, 'about_vision_eyebrow', 'Tầm nhìn & Chiến lược', 'string', 'about', 'Tầm nhìn — Eyebrow', '', 290, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (74, 'about_vision_title', 'Định hướng vươn tới tầm cao mới', 'string', 'about', 'Tầm nhìn — Tiêu đề', '', 300, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (75, 'about_vision_text', 'Định hướng này không chỉ nâng tầm vị thế doanh nghiệp mà còn đóng góp trực tiếp vào việc xây dựng hệ thống hạ tầng đồng bộ, thúc đẩy phát triển bền vững.', 'string', 'about', 'Tầm nhìn — Nội dung', '', 310, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (76, 'about_vision_cta_label', 'Chiến lược 2025-2030', 'string', 'about', 'Tầm nhìn — Nút CTA: nhãn', '', 320, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (77, 'about_vision_cta_url', '#', 'string', 'about', 'Tầm nhìn — Nút CTA: liên kết', '', 330, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
+INSERT INTO `pvn_site_settings` VALUES (78, 'about_vision_bg', '16', 'media', 'about', 'Tầm nhìn — Ảnh nền', 'Lưới 4 thẻ giá trị lấy từ mục Giá trị cốt lõi', 340, 1, '2026-08-07 01:09:31', '2026-08-07 01:09:31');
 
 -- ----------------------------
 -- Table structure for pvn_tags
