@@ -224,7 +224,11 @@
 
 .sm-value-card:hover .sm-value-icon { transform: translateY(-2px) scale(1.06); }
 
-.sm-value-icon img { width: auto; height: 30px; }
+/* Icon export Figma dùng preserveAspectRatio="none" → khai báo cố định cả rộng
+   lẫn cao theo tỉ lệ gốc từng biến thể, tránh bị kéo giãn méo. */
+.sm-value-icon img { width: 30px; height: 30px; }
+.sm-value-icon--award img { width: 23px; height: 30px; } /* viewBox 19×25 */
+.sm-value-icon--inner img { width: 30px; height: 30px; } /* viewBox 24×24 */
 
 .sm-value-card h3 {
   font-family: var(--sm-font-heading);
