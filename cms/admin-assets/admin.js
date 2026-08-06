@@ -160,7 +160,7 @@
             remaining--;
             if (remaining === 0) {
               if (lastItem) {
-                applyToField(lastItem);
+                finishPick(lastItem);
                 setStatus('Đã tải lên xong.');
               }
               loadList(searchInput.value);
