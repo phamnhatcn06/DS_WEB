@@ -219,7 +219,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initSidebarToggle();
     initDeleteConfirm();
-    initMediaPreview();
+    initMediaPicker();
     initSubmitLock();
   });
 })();
