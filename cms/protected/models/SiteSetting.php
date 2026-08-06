@@ -136,6 +136,7 @@ class SiteSetting extends CActiveRecord
             'seo'      => 'SEO',
             'scripts'  => 'Script chèn',
             'about'    => 'Trang giới thiệu',
+            'sodo'     => 'Trang sơ đồ tổ chức',
         );
     }
 }
