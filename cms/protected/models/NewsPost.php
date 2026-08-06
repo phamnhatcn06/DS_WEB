@@ -60,8 +60,9 @@ class NewsPost extends BaseActiveRecord
     public function rules()
     {
         return array(
-            array('title, category_id, published_at', 'required',
+            array('title, published_at', 'required',
                 'message' => '{attribute} không được để trống.'),
+            array('categoryIds', 'validateCategoryIds'),
             array('title', 'length', 'max' => 300),
             array('slug', 'length', 'max' => 220),
             array('slug', 'unique', 'message' => 'Slug này đã được dùng cho bài khác.'),
