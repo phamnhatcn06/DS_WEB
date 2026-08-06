@@ -110,26 +110,30 @@ class m260807_000000_create_org_structure extends CDbMigration
             'url = :old', array(':old' => 'sodo-to-chuc.html'));
 
         // ------------------------------------------------ cấu hình hero (settings)
+        // [key, value, label] — nhóm `sodo`, hiển thị ở Cấu hình website.
         $settings = array(
-            'sodo_meta_title'   => 'Sơ đồ - Tổ chức — Đông Sơn Holdings',
-            'sodo_hero_eyebrow' => 'Định hướng chiến lược',
-            'sodo_hero_title'   => 'SƠ ĐỒ - TỔ CHỨC',
-            'sodo_bod_title'    => 'Hội đồng quản trị',
-            'sodo_bod_sub'      => 'Board of Directors',
-            'sodo_org_title'    => 'Hệ thống phân cấp',
+            array('sodo_meta_title',   'Sơ đồ - Tổ chức — Đông Sơn Holdings', 'Tiêu đề trang (SEO)'),
+            array('sodo_hero_eyebrow', 'Định hướng chiến lược',               'Hero — Eyebrow'),
+            array('sodo_hero_title',   'SƠ ĐỒ - TỔ CHỨC',                     'Hero — Tiêu đề (H1)'),
+            array('sodo_bod_title',    'Hội đồng quản trị',                   'Hội đồng — Tiêu đề'),
+            array('sodo_bod_sub',      'Board of Directors',                  'Hội đồng — Phụ đề'),
+            array('sodo_org_title',    'Hệ thống phân cấp',                   'Sơ đồ — Tiêu đề'),
         );
-        foreach ($settings as $key => $value) {
+        foreach ($settings as $i => $s) {
             $exists = (int) $this->db->createCommand()
                 ->select('COUNT(*)')->from('pvn_site_settings')
-                ->where('setting_key = :k', array(':k' => $key))->queryScalar();
+                ->where('setting_key = :k', array(':k' => $s[0]))->queryScalar();
             if ($exists === 0) {
                 $this->insert('pvn_site_settings', array(
-                    'setting_key'  => $key,
-                    'setting_value' => $value,
-                    'setting_group' => 'sodo',
-                    'value_type'   => 'text',
-                    'created_at'   => $now,
-                    'updated_at'   => $now,
+                    'setting_key'   => $s[0],
+                    'setting_value' => $s[1],
+                    'value_type'    => 'string',
+                    'group_name'    => 'sodo',
+                    'label'         => $s[2],
+                    'sort_order'    => $i + 1,
+                    'is_public'     => 1,
+                    'created_at'    => $now,
+                    'updated_at'    => $now,
                 ));
             }
         }
