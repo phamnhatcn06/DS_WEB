@@ -12,9 +12,9 @@
   function removeVietnameseTones(str) {
     return str
       .normalize('NFD')
-      .replace(/[̀-ͯ]/g, '') // bỏ dấu thanh
-      .replace(/đ/g, 'd')
-      .replace(/Đ/g, 'D');
+      .replace(/[̀-ͯ]/g, '') // bỏ dấu thanh (combining marks)
+      .replace(/đ/g, 'd')          // đ
+      .replace(/Đ/g, 'D');         // Đ
   }
 
   function slugify(text) {
