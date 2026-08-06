@@ -182,3 +182,45 @@ $isNew = $model->getIsNewRecord();
 </div>
 
 <?php $this->endWidget(); ?>
+
+<?php
+// Bộ chọn ảnh dùng chung: chỉ nhúng khi form có ít nhất một trường media.
+$hasMediaField = false;
+foreach ($fields as $field) {
+    if (isset($field['type']) && $field['type'] === 'media') {
+        $hasMediaField = true;
+        break;
+    }
+}
+?>
+<?php if ($hasMediaField): ?>
+  <div class="modal fade" id="mediaPickerModal" tabindex="-1" aria-hidden="true"
+       data-list-url="<?php echo $this->createUrl('/admin/media/listJson'); ?>"
+       data-upload-url="<?php echo $this->createUrl('/admin/media/ajaxUpload'); ?>"
+       data-csrf-name="<?php echo Yii::app()->request->csrfTokenName; ?>"
+       data-csrf-value="<?php echo Yii::app()->request->csrfToken; ?>">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fa fa-photo-video me-2"></i>Thư viện ảnh</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <div class="modal-body">
+          <div class="media-picker-toolbar">
+            <label class="btn btn-dsh btn-sm mb-0">
+              <i class="fa fa-upload me-1"></i> Tải ảnh lên
+              <input type="file" accept="image/*" multiple hidden data-media-file />
+            </label>
+            <input type="search" class="form-control form-control-sm media-picker-search"
+                   placeholder="Tìm theo tên hoặc mô tả…" data-media-search />
+            <span class="media-picker-status" data-media-status></span>
+          </div>
+          <div class="media-picker-grid" data-media-grid>
+            <p class="text-muted m-0 p-3">Đang tải…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.js" defer></script>
+<?php endif; ?>
