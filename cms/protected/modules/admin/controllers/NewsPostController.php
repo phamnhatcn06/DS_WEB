@@ -107,6 +107,7 @@ class NewsPostController extends AdminCrudController
      */
     protected function afterSaveModel($model)
     {
+        $model->syncCategories();
         Tag::syncLinks('pvn_news_post_tags', 'post_id', $model->id, $model->tagIds);
     }
 }
