@@ -32,20 +32,24 @@ class HeroSlideController extends AdminCrudController
     protected function formFields()
     {
         return array(
-            array('name' => 'title', 'width' => 6),
-            array('name' => 'subtitle', 'type' => 'textarea', 'width' => 6, 'rows' => 2,
+            // Nội dung dài: chiếm trọn một hàng để không bị lệch.
+            array('name' => 'title', 'width' => 12),
+            array('name' => 'subtitle', 'type' => 'textarea', 'width' => 12, 'rows' => 2,
                 'hint' => 'Xuống dòng trong ô này tương ứng với ngắt dòng trên giao diện.'),
+            // Hai ảnh: mỗi ô nửa hàng.
             array('name' => 'background_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'logo_media_id', 'type' => 'media', 'width' => 6),
-            array('name' => 'primary_cta_label', 'width' => 3),
-            array('name' => 'primary_cta_url', 'width' => 3,
+            // Nút CTA: cặp nhãn + đường dẫn trên cùng một hàng (2 cột).
+            array('name' => 'primary_cta_label', 'width' => 6),
+            array('name' => 'primary_cta_url', 'width' => 6,
                 'hint' => 'Ví dụ: <code>#du-an</code>'),
-            array('name' => 'secondary_cta_label', 'width' => 3),
-            array('name' => 'secondary_cta_url', 'width' => 3),
-            array('name' => 'overlay_opacity', 'type' => 'number', 'width' => 4,
+            array('name' => 'secondary_cta_label', 'width' => 6),
+            array('name' => 'secondary_cta_url', 'width' => 6),
+            // Số liệu ngắn: 2 cột.
+            array('name' => 'overlay_opacity', 'type' => 'number', 'width' => 6,
                 'hint' => 'Càng cao thì ảnh nền càng tối, chữ càng dễ đọc.'),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 4),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 12),
         );
     }
 }
