@@ -27,6 +27,9 @@ abstract class AdminCrudController extends AdminController
     /** @var array quan hệ cần eager load để tránh N+1 */
     protected $withRelations = array();
 
+    /** @var string view biểu mẫu — controller con có thể trỏ tới view riêng (vd giao diện kiểu WordPress) */
+    protected $formView = 'admin.views.crud.form';
+
     /**
      * Cột hiển thị ở danh sách.
      * Mỗi phần tử: array('name'=>, 'label'=>, 'type'=>'text|image|badge|bool|date', 'width'=>)
