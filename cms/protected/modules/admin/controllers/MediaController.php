@@ -67,7 +67,7 @@ class MediaController extends AdminController
             }
 
             $result = $this->storeFile($file);
-            if ($result === true) {
+            if ($result instanceof MediaFile) {
                 $uploaded++;
             } else {
                 $errors[] = $file->getName() . ': ' . $result;
