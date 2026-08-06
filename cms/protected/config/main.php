@@ -107,6 +107,8 @@ return array(
                 'du-lieu-trang-chu'                      => 'frontend/home/dataSource',
                 // Trang giới thiệu (about): hành trình, cột mốc, tầm nhìn.
                 'gioi-thieu'                             => 'frontend/about/index',
+                // Trang sơ đồ tổ chức: hội đồng quản trị + hệ thống phân cấp.
+                'so-do-to-chuc'                          => 'frontend/sodo/index',
                 // Trang sứ mệnh - tầm nhìn: tuyên ngôn tầm nhìn, sứ mệnh, giá trị cốt lõi.
                 'su-menh-tam-nhin'                       => 'frontend/sumenh/index',
                 // Trang tin tức & sự kiện: nội dung động từ pvn_news_posts.
