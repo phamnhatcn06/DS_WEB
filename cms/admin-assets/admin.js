@@ -51,7 +51,20 @@
     var csrfValue = modalEl.getAttribute('data-csrf-value');
 
     var activeField = null; // trường media đang được chọn ảnh
+    var pickCallback = null; // callback khi mở picker ở chế độ "chọn ảnh trả về" (vd TinyMCE)
     var searchTimer = null;
+
+    // Chọn xong một ảnh: nếu đang ở chế độ callback thì trả ảnh về nơi gọi,
+    // ngược lại gán vào trường media đang mở.
+    function finishPick(item) {
+      if (pickCallback) {
+        var cb = pickCallback;
+        pickCallback = null;
+        cb(item);
+      } else {
+        applyToField(item);
+      }
+    }
 
     function setStatus(text, isError) {
       status.textContent = text || '';
