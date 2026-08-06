@@ -7,6 +7,9 @@ class NewsPost extends BaseActiveRecord
     /** @var int[]|null id các thẻ được chọn trong form (trường ảo, không phải cột). */
     private $_tagIds;
 
+    /** @var int[]|null id các danh mục được chọn trong form (trường ảo, không phải cột). */
+    private $_categoryIds;
+
     /**
      * Kích thước card trong lưới tin của trang chủ.
      * Thiết kế có 3 ô khác nhau: 1 card lớn, 1 card cao, các card nhỏ.
