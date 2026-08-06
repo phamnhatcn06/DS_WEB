@@ -66,11 +66,27 @@
       toolbar:
         'undo redo | blocks | bold italic underline | ' +
         'alignleft aligncenter alignright | bullist numlist | ' +
-        'link image media table | code fullscreen',
+        'link dshmedia image media table | code fullscreen',
       branding: false,
       promotion: false,
       convert_urls: false,
-      content_style: 'body{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6}'
+      content_style: 'body{font-family:Inter,system-ui,sans-serif;font-size:15px;line-height:1.6}',
+      setup: function (editor) {
+        // Nút "Ảnh từ thư viện" — dùng chung media picker sẵn có, chèn ảnh vào nội dung.
+        editor.ui.registry.addButton('dshmedia', {
+          icon: 'gallery',
+          tooltip: 'Ảnh từ thư viện',
+          onAction: function () {
+            if (!window.DSHMediaPicker) {
+              return;
+            }
+            window.DSHMediaPicker.open(function (item) {
+              var alt = (item.name || '').replace(/"/g, '&quot;');
+              editor.insertContent('<img src="' + item.url + '" alt="' + alt + '" />');
+            });
+          }
+        });
+      }
     });
 
     // Đồng bộ nội dung editor về textarea trước khi submit.
