@@ -11,7 +11,7 @@
  * MenuHelper::publicHref sinh URL sạch qua createUrl cho mục item_type='route',
  * nên link đúng dù CMS chạy ở domain gốc hay thư mục con.
  */
-class m260807_000000_convert_about_menu_to_routes extends CDbMigration
+class m260807_010000_convert_about_menu_to_routes extends CDbMigration
 {
     /** Ánh xạ tiêu đề mục (trong header) → route nội bộ. */
     private function map()
