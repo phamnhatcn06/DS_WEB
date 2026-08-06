@@ -70,10 +70,10 @@ class SectorController extends AdminCrudController
             array('name' => 'icon_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'cta_label', 'width' => 6),
             array('name' => 'cta_url', 'width' => 6),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 3),
-            array('name' => 'show_in_slider', 'type' => 'checkbox', 'width' => 3),
-            array('name' => 'show_in_grid', 'type' => 'checkbox', 'width' => 3),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 3),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'show_in_slider', 'type' => 'checkbox', 'width' => 6),
+            array('name' => 'show_in_grid', 'type' => 'checkbox', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
         );
     }
 
