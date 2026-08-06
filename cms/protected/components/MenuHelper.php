@@ -123,7 +123,7 @@ class MenuHelper
         $html = '';
         foreach ($tree as $node) {
             $row = $node['row'];
-            $href = CHtml::encode(self::resolveUrl($row['url'], $base));
+            $href = CHtml::encode(self::publicHref($row, $base));
             $target = $row['target'] && $row['target'] !== '_self'
                 ? ' target="' . CHtml::encode($row['target']) . '"' : '';
             $html .= '<li><a class="footer-link" href="' . $href . '"' . $target . '>'
