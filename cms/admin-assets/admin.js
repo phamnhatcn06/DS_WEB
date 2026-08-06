@@ -60,6 +60,7 @@
       if (pickCallback) {
         var cb = pickCallback;
         pickCallback = null;
+        modal.hide();
         cb(item);
       } else {
         applyToField(item);
