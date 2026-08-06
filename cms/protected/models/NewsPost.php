@@ -190,6 +190,12 @@ class NewsPost extends BaseActiveRecord
             return false;
         }
 
+        // Danh mục đầu tiên được chọn làm category_id (lưới quản trị + tương thích ngược).
+        $categoryIds = $this->getCategoryIds();
+        if ($categoryIds !== array()) {
+            $this->category_id = $categoryIds[0];
+        }
+
         if ($this->getIsNewRecord() && empty($this->author_id)
             && Yii::app() instanceof CWebApplication && !Yii::app()->user->getIsGuest()) {
             $this->author_id = Yii::app()->user->id;
