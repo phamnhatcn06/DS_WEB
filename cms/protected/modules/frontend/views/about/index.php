@@ -205,7 +205,7 @@ foreach ($founders as $founder):
 <?php else: ?>
               <div class="col">
                 <article class="vision-card" data-reveal="up">
-                  <span class="vision-card-icon">
+                  <span class="vision-card-icon vision-card-icon--inner">
                     <img src="<?php echo $root; ?>/assets/images/giatri-icon-innovation.svg" alt="" aria-hidden="true" />
                   </span>
                   <h3>Đổi mới</h3>
@@ -214,7 +214,7 @@ foreach ($founders as $founder):
               </div>
               <div class="col">
                 <article class="vision-card" data-reveal="up">
-                  <span class="vision-card-icon vision-card-icon--fill">
+                  <span class="vision-card-icon">
                     <img src="<?php echo $root; ?>/assets/images/giatri-icon-person.svg" alt="" aria-hidden="true" />
                   </span>
                   <h3>Hợp tác</h3>
@@ -223,7 +223,7 @@ foreach ($founders as $founder):
               </div>
               <div class="col">
                 <article class="vision-card" data-reveal="up">
-                  <span class="vision-card-icon vision-card-icon--fill">
+                  <span class="vision-card-icon">
                     <img src="<?php echo $root; ?>/assets/images/giatri-icon-shield.svg" alt="" aria-hidden="true" />
                   </span>
                   <h3>Bền vững</h3>
