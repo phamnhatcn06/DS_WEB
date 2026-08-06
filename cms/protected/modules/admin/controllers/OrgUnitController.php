@@ -16,8 +16,11 @@ class OrgUnitController extends AdminCrudController
     {
         return array(
             array('name' => 'name', 'label' => 'Tên đơn vị', 'type' => 'primary'),
-            array('name' => 'level', 'label' => 'Cấp', 'type' => 'badge',
-                'map' => OrgUnit::levelOptions(), 'width' => '220px'),
+            array('name' => 'level', 'label' => 'Cấp', 'type' => 'badge', 'width' => '220px',
+                'value' => function ($item) {
+                    $map = OrgUnit::levelOptions();
+                    return isset($map[$item->level]) ? $map[$item->level] : $item->level;
+                }),
             array('name' => 'sort_order', 'label' => 'Thứ tự', 'width' => '80px'),
             array('name' => 'is_active', 'label' => 'Trạng thái', 'type' => 'bool', 'width' => '110px'),
         );
