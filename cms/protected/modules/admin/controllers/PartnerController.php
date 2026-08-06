@@ -45,12 +45,12 @@ class PartnerController extends AdminCrudController
                 'hint' => 'Dùng làm thuộc tính <code>alt</code> của logo — hãy viết đầy đủ, rõ nghĩa.'),
             array('name' => 'logo_media_id', 'type' => 'media', 'width' => 4),
             array('name' => 'website_url', 'width' => 6),
-            array('name' => 'partner_type', 'type' => 'select', 'width' => 3,
+            array('name' => 'partner_type', 'type' => 'select', 'width' => 6,
                 'options' => Partner::typeOptions()),
-            array('name' => 'ownership_percent', 'type' => 'number', 'width' => 3, 'step' => '0.01',
+            array('name' => 'ownership_percent', 'type' => 'number', 'width' => 6, 'step' => '0.01',
                 'hint' => 'Chỉ điền khi là cổ đông.'),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 4),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 12),
         );
     }
 }
