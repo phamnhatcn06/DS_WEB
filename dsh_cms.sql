@@ -695,8 +695,8 @@ CREATE TABLE `pvn_menu_items`  (
 -- ----------------------------
 -- Records of pvn_menu_items
 -- ----------------------------
-INSERT INTO `pvn_menu_items` VALUES (18, 2, NULL, 'Về chúng tôi', 'url', NULL, 'about.html', '_self', NULL, NULL, 1, 0, 0, 'nav-caret', 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
-INSERT INTO `pvn_menu_items` VALUES (19, 2, 18, 'Giới thiệu', 'url', NULL, 'about.html', '_self', NULL, NULL, 1, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (18, 2, NULL, 'Về chúng tôi', 'url', NULL, '/gioi-thieu', '_self', NULL, NULL, 1, 0, 0, 'nav-caret', 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
+INSERT INTO `pvn_menu_items` VALUES (19, 2, 18, 'Giới thiệu', 'url', NULL, '/gioi-thieu', '_self', NULL, NULL, 1, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
 INSERT INTO `pvn_menu_items` VALUES (20, 2, 18, 'Sứ mệnh - Tầm nhìn', 'url', NULL, 'sumenh.html', '_self', NULL, NULL, 2, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
 INSERT INTO `pvn_menu_items` VALUES (21, 2, 18, 'Sơ đồ tổ chức', 'url', NULL, 'sodo-to-chuc.html', '_self', NULL, NULL, 3, 1, 0, NULL, 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
 INSERT INTO `pvn_menu_items` VALUES (22, 2, NULL, 'Lĩnh vực', 'url', NULL, '#linh-vuc', '_self', NULL, NULL, 2, 0, 0, 'nav-caret', 1, '2026-07-31 10:31:03', '2026-07-31 10:31:03', NULL);
