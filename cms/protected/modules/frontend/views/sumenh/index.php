@@ -132,9 +132,10 @@ $valueIconClass = array('award' => ' sm-value-icon--award', 'inner' => ' sm-valu
 <?php if (!empty($coreValues)): ?>
 <?php foreach (array_values($coreValues) as $i => $cv): ?>
 <?php $fallbackIcon = isset($valueFallbackIcons[$i]) ? $valueFallbackIcons[$i] : $valueFallbackIcons[0]; ?>
+<?php $iconCls = isset($valueIconClass[$cv->icon_variant]) ? $valueIconClass[$cv->icon_variant] : ''; ?>
           <div class="col">
             <article class="sm-value-card" data-reveal="up" style="--reveal-delay:<?php echo $i * 100; ?>ms">
-              <span class="sm-value-icon">
+              <span class="sm-value-icon<?php echo $iconCls; ?>">
                 <?php echo MediaHelper::imgOr($cv->icon, $fallbackIcon, '', array('aria-hidden' => 'true')); ?>
               </span>
               <h3><?php echo CHtml::encode($cv->title); ?></h3>
