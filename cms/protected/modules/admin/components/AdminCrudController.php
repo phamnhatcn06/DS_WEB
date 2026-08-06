@@ -102,7 +102,7 @@ abstract class AdminCrudController extends AdminController
         $this->handleForm($model, 'Đã lưu thay đổi.');
 
         $this->pageTitle = 'Sửa ' . mb_strtolower($this->titleSingular, 'UTF-8');
-        $this->render('admin.views.crud.form', array(
+        $this->render($this->formView, array(
             'model'  => $model,
             'fields' => $this->formFields(),
         ));
