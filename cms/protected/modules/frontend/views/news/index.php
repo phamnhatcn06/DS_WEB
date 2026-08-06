@@ -82,7 +82,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg) {
     </section>
 
     <!-- ===== Section 1: Nổi bật (Light Mode) ===== -->
-    <section class="tt-featured fade-section" id="noi-bat" style="min-height:100vh;">
+    <section class="tt-featured fade-section" id="noi-bat">
       <div class="container tt-page">
 
         <div class="tt-section-head">
