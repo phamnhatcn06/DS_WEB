@@ -68,10 +68,10 @@ class UserController extends AdminCrudController
                 'hint' => 'Tối thiểu 10 ký tự, gồm chữ thường, chữ hoa và chữ số. '
                     . 'Để trống nếu không muốn đổi mật khẩu.'),
             array('name' => 'newPasswordRepeat', 'type' => 'password', 'width' => 6),
-            array('name' => 'roleName', 'type' => 'select', 'width' => 4,
+            array('name' => 'roleName', 'type' => 'select', 'width' => 6,
                 'options' => User::roleOptions()),
-            array('name' => 'phone', 'width' => 4),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'phone', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 12),
         );
     }
 
