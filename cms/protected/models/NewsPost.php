@@ -218,6 +218,48 @@ class NewsPost extends BaseActiveRecord
         return date($this->date_display_format, strtotime($this->published_at));
     }
 
+    /**
+     * Đồng bộ liên kết danh mục vào bảng pvn_news_post_categories.
+     * Ghi phẳng: xoá liên kết cũ rồi thêm lại theo danh sách đã chọn, chỉ giữ
+     * những danh mục còn tồn tại (chưa xoá mềm) để tránh chèn rác.
+     */
+    public function syncCategories()
+    {
+        $db = Yii::app()->db;
+        $postId = (int) $this->id;
+
+        $ids = $this->getCategoryIds();
+        if ($ids !== array()) {
+            $criteria = new CDbCriteria();
+            $criteria->select = 'id';
+            $criteria->addInCondition('id', $ids);
+            $criteria->addCondition('deleted_at IS NULL');
+            $valid = array();
+            foreach (NewsCategory::model()->findAll($criteria) as $category) {
+                $valid[] = (int) $category->id;
+            }
+            $ids = $valid;
+        }
+
+        $transaction = $db->beginTransaction();
+        try {
+            $db->createCommand()->delete('pvn_news_post_categories',
+                'post_id = :id', array(':id' => $postId));
+            foreach ($ids as $categoryId) {
+                $db->createCommand()->insert('pvn_news_post_categories', array(
+                    'post_id'     => $postId,
+                    'category_id' => $categoryId,
+                ));
+            }
+            $transaction->commit();
+        } catch (Exception $e) {
+            $transaction->rollback();
+            Yii::log('Đồng bộ danh mục bài viết thất bại: ' . $e->getMessage(),
+                CLogger::LEVEL_ERROR, 'app');
+            throw $e;
+        }
+    }
+
     public function getIsPublished()
     {
         return $this->status === self::STATUS_PUBLISHED;
