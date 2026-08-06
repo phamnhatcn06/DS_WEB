@@ -105,12 +105,13 @@
   overflow: hidden;
 }
 
-/* Icon dùng preserveAspectRatio="none" → khai báo đúng kích thước gốc để không méo.
-   person/shield tự chứa nền tròn trắng nên lấp đầy khung; innovation/award là
-   glyph đỏ trần, đặt kích thước nhỏ hơn nằm giữa nền tròn trắng. */
-.vision-card-icon img { width: 24px; height: 24px; }
-.vision-card-icon--fill img { width: 100%; height: 100%; }
-.vision-card-icon--award img { width: 19px; height: 25px; }
+/* Icon dùng preserveAspectRatio="none" → khai báo đúng tỉ lệ gốc để không méo.
+   Mục tiêu: cả 4 badge trông BẰNG NHAU — nền tròn trắng 56px + glyph đỏ ~32px.
+   - shield/person (mặc định): SVG tự chứa nền tròn trắng → lấp đầy khung 56px.
+   - innovation/award: glyph đỏ trần → đặt ~32px, canh giữa nền tròn trắng của khung. */
+.vision-card-icon img { width: 100%; height: 100%; }
+.vision-card-icon--inner img { width: 32px; height: 32px; }
+.vision-card-icon--award img { width: 24px; height: 32px; }
 
 .vision-card h3 {
   color: var(--dsh-white);
