@@ -206,6 +206,23 @@
         loadList(searchInput.value);
       }, 300);
     });
+
+    // Đóng modal mà chưa chọn → huỷ chế độ callback để không trả ảnh nhầm lần sau.
+    modalEl.addEventListener('hidden.bs.modal', function () {
+      pickCallback = null;
+    });
+
+    // API dùng chung: mở thư viện ảnh, trả ảnh đã chọn về callback (vd cho TinyMCE).
+    // callback nhận { id, url, name }.
+    window.DSHMediaPicker = {
+      open: function (callback) {
+        pickCallback = callback;
+        activeField = null;
+        setStatus('');
+        modal.show();
+        loadList('');
+      }
+    };
   }
 
   /** Chặn double-submit: khoá nút ngay khi form được gửi. */
