@@ -34,6 +34,10 @@ $valueFallbackIcons = array(
     $root . '/assets/images/sumenh-value-doimoi.svg',
     $root . '/assets/images/sumenh-value-tincay.svg',
 );
+
+// SVG icon (export Figma) dùng preserveAspectRatio="none" → phải cố định đúng
+// tỉ lệ gốc theo biến thể, nếu không ảnh sẽ bị kéo giãn méo.
+$valueIconClass = array('award' => ' sm-value-icon--award', 'inner' => ' sm-value-icon--inner');
 ?>
 
   <div class="sumenh-page">
