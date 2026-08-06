@@ -107,6 +107,8 @@ return array(
                 'du-lieu-trang-chu'                      => 'frontend/home/dataSource',
                 // Trang giới thiệu (about): hành trình, cột mốc, tầm nhìn.
                 'gioi-thieu'                             => 'frontend/about/index',
+                // Trang sứ mệnh - tầm nhìn: tuyên ngôn tầm nhìn, sứ mệnh, giá trị cốt lõi.
+                'su-menh-tam-nhin'                       => 'frontend/sumenh/index',
                 // Trang tin tức & sự kiện: nội dung động từ pvn_news_posts.
                 'tin-tuc'                                => 'frontend/news/index',
                 // Trang lưu trữ theo thẻ: liệt kê tin tức + lĩnh vực gắn thẻ.
