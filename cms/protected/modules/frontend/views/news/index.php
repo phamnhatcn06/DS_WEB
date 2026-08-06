@@ -116,7 +116,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg) {
                 </li>
 <?php foreach ($categories as $cat): ?>
 <?php $count = isset($categoryCounts[$cat->id]) ? $categoryCounts[$cat->id] : 0; ?>
-                <li><a href="<?php echo CHtml::encode(Yii::app()->createUrl('the/' . $cat->slug)); ?>"><?php echo CHtml::encode($cat->name); ?> <span>(<?php echo (int) $count; ?>)</span></a></li>
+                <li><a href="<?php echo CHtml::encode($home . '#tin-tuc'); ?>"><?php echo CHtml::encode($cat->name); ?> <span>(<?php echo (int) $count; ?>)</span></a></li>
 <?php endforeach; ?>
               </ul>
             </div>
