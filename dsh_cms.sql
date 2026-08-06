@@ -1,17 +1,17 @@
 /*
- Navicat Premium Dump SQL
+ Navicat Premium Data Transfer
 
- Source Server         : Local_MySQL
+ Source Server         : Localhost
  Source Server Type    : MySQL
- Source Server Version : 50724 (5.7.24)
+ Source Server Version : 50724
  Source Host           : localhost:3306
  Source Schema         : dsh_cms
 
  Target Server Type    : MySQL
- Target Server Version : 50724 (5.7.24)
+ Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 03/08/2026 06:40:25
+ Date: 06/08/2026 23:06:20
 */
 
 SET NAMES utf8mb4;
@@ -48,6 +48,7 @@ INSERT INTO `migrations` VALUES ('m260801_000000_seed_roles_module_and_sidebar',
 INSERT INTO `migrations` VALUES ('m260801_010000_add_branding_seo_script_settings', 1785661175);
 INSERT INTO `migrations` VALUES ('m260802_000000_fix_media_paths_to_theme', 1785661224);
 INSERT INTO `migrations` VALUES ('m260803_000000_create_tags_and_taggables', 1785663467);
+INSERT INTO `migrations` VALUES ('m260806_000000_create_news_post_categories', 1786010111);
 
 -- ----------------------------
 -- Table structure for pvn_audit_logs
@@ -69,7 +70,7 @@ CREATE TABLE `pvn_audit_logs`  (
   INDEX `idx_audit_logs_user_id_created_at`(`user_id`, `created_at`) USING BTREE,
   INDEX `idx_audit_logs_created_at`(`created_at`) USING BTREE,
   CONSTRAINT `fk_audit_logs_users` FOREIGN KEY (`user_id`) REFERENCES `pvn_users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_audit_logs
@@ -103,6 +104,7 @@ INSERT INTO `pvn_audit_logs` VALUES (26, 1, 'login', 'User', 1, NULL, NULL, '127
 INSERT INTO `pvn_audit_logs` VALUES (27, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-07-31 10:05:52');
 INSERT INTO `pvn_audit_logs` VALUES (28, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-08-02 17:34:05');
 INSERT INTO `pvn_audit_logs` VALUES (29, 1, 'create', 'MediaFile', 158, NULL, '{\"file_size\":2453978,\"file_name\":\"gemini-generated-image-p82qu2p82qu2p82q-20260802173508-15a1ca.png\",\"file_path\":\"uploads\\/202608\\/gemini-generated-image-p82qu2p82qu2p82q-20260802173508-15a1ca.png\",\"mime_type\":\"image\\/png\",\"width\":864,\"height\":1184,\"checksum\":\"e78ec02a69b8c5bf68775128d6d73e6906186342b527c36c4083f13f9c428876\",\"uploaded_by\":1,\"created_at\":{\"expression\":\"NOW()\",\"params\":[]},\"updated_at\":{\"expression\":\"NOW()\",\"params\":[]},\"id\":\"158\",\"folder_id\":null,\"file_url\":null,\"alt_text\":null,\"title\":null,\"caption\":null,\"variants\":null,\"deleted_at\":null}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-08-02 17:35:08');
+INSERT INTO `pvn_audit_logs` VALUES (30, 1, 'login', 'User', 1, NULL, NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36', '2026-08-06 16:08:29');
 
 -- ----------------------------
 -- Table structure for pvn_auth_assignments
@@ -314,7 +316,7 @@ CREATE TABLE `pvn_business_sector_tags`  (
   INDEX `idx_business_sector_tags_tag`(`tag_id`) USING BTREE,
   CONSTRAINT `fk_business_sector_tags_sector` FOREIGN KEY (`sector_id`) REFERENCES `pvn_business_sectors` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_business_sector_tags_tag` FOREIGN KEY (`tag_id`) REFERENCES `pvn_tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_business_sector_tags
@@ -800,6 +802,27 @@ INSERT INTO `pvn_news_categories` VALUES (9, 'dau-tu', 'Đầu tư', NULL, NULL,
 INSERT INTO `pvn_news_categories` VALUES (10, 'co-dong', 'Cổ đông', NULL, NULL, 4, 1, 1, '2026-07-24 16:45:10', '2026-07-24 16:45:10', NULL);
 
 -- ----------------------------
+-- Table structure for pvn_news_post_categories
+-- ----------------------------
+DROP TABLE IF EXISTS `pvn_news_post_categories`;
+CREATE TABLE `pvn_news_post_categories`  (
+  `post_id` int(10) UNSIGNED NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`post_id`, `category_id`) USING BTREE,
+  INDEX `idx_news_post_categories_cat`(`category_id`) USING BTREE,
+  CONSTRAINT `fk_news_post_categories_cat` FOREIGN KEY (`category_id`) REFERENCES `pvn_news_categories` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_news_post_categories_post` FOREIGN KEY (`post_id`) REFERENCES `pvn_news_posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pvn_news_post_categories
+-- ----------------------------
+INSERT INTO `pvn_news_post_categories` VALUES (5, 7);
+INSERT INTO `pvn_news_post_categories` VALUES (7, 8);
+INSERT INTO `pvn_news_post_categories` VALUES (6, 9);
+INSERT INTO `pvn_news_post_categories` VALUES (8, 10);
+
+-- ----------------------------
 -- Table structure for pvn_news_post_tags
 -- ----------------------------
 DROP TABLE IF EXISTS `pvn_news_post_tags`;
@@ -810,7 +833,7 @@ CREATE TABLE `pvn_news_post_tags`  (
   INDEX `idx_news_post_tags_tag`(`tag_id`) USING BTREE,
   CONSTRAINT `fk_news_post_tags_post` FOREIGN KEY (`post_id`) REFERENCES `pvn_news_posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_news_post_tags_tag` FOREIGN KEY (`tag_id`) REFERENCES `pvn_tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_news_post_tags
@@ -856,7 +879,7 @@ CREATE TABLE `pvn_news_posts`  (
 -- ----------------------------
 -- Records of pvn_news_posts
 -- ----------------------------
-INSERT INTO `pvn_news_posts` VALUES (5, 'dau-tu-du-an-nha-o-xa-hoi-bai-vien-nam-dinh', 7, 'Đông Sơn Holdings đầu tư dự án nhà ở xã hội Bãi Viên – Nam Định', 'CTCP Đông Sơn Holdings chính thức công bố đầu tư Khu nhà ở xã hội Bãi Viên tại TP. Nam Định, tổng mức đầu tư hơn 909 tỷ đồng với 1.100 căn hộ, khởi công tháng 5/2025.', NULL, 29, '2026-03-09 08:00:00', 'd/m/Y', NULL, 'lg', 1, 1, 0, 'published', NULL, 1, '2026-07-24 16:45:10', '2026-07-24 16:45:10', NULL);
+INSERT INTO `pvn_news_posts` VALUES (5, 'dau-tu-du-an-nha-o-xa-hoi-bai-vien-nam-dinh', 7, 'Đông Sơn Holdings đầu tư dự án nhà ở xã hội Bãi Viên – Nam Định', 'CTCP Đông Sơn Holdings chính thức công bố đầu tư Khu nhà ở xã hội Bãi Viên tại TP. Nam Định, tổng mức đầu tư hơn 909 tỷ đồng với 1.100 căn hộ, khởi công tháng 5/2025.', NULL, 29, '2026-03-09 08:00:00', 'd/m/Y', NULL, 'lg', 1, 1, 0, 'published', NULL, 1, '2026-07-24 16:45:10', '2026-08-06 16:56:46', NULL);
 INSERT INTO `pvn_news_posts` VALUES (6, 'tang-von-dieu-le-len-350-ty-dong', 9, 'Tăng vốn điều lệ lên 350 tỷ đồng, mở rộng danh mục đầu tư', NULL, NULL, 30, '2025-11-01 08:00:00', 'm/Y', NULL, 'tall', 0, 1, 0, 'published', NULL, 2, '2026-07-24 16:45:10', '2026-07-24 16:45:10', NULL);
 INSERT INTO `pvn_news_posts` VALUES (7, 'khoi-cong-goi-thau-xay-lap-trong-diem', 8, 'Khởi công gói thầu xây lắp trọng điểm, bảo đảm tiến độ toàn tuyến', NULL, NULL, 15, '2025-05-01 08:00:00', 'm/Y', NULL, 'sm', 0, 1, 0, 'published', NULL, 3, '2026-07-24 16:45:10', '2026-07-24 16:45:10', NULL);
 INSERT INTO `pvn_news_posts` VALUES (8, 'co-phieu-dsh-giao-dich-tren-upcom', 10, 'Cổ phiếu DSH chính thức giao dịch trên UPCOM', NULL, NULL, 12, '2025-04-22 08:00:00', 'd/m/Y', NULL, 'sm', 0, 1, 0, 'published', NULL, 4, '2026-07-24 16:45:10', '2026-07-24 16:45:10', NULL);
@@ -1038,7 +1061,7 @@ CREATE TABLE `pvn_tags`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uniq_tags_slug`(`slug`) USING BTREE,
   INDEX `idx_tags_sort_order`(`sort_order`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_tags
@@ -1127,6 +1150,6 @@ CREATE TABLE `pvn_users`  (
 -- ----------------------------
 -- Records of pvn_users
 -- ----------------------------
-INSERT INTO `pvn_users` VALUES (1, 'admin@htds.vn', '$2y$12$Ir1BnogCBiXXsY0uc3KYoOqHHws6CybhpXpmIcqlGYqkDQxYNUJEu', 'Quản trị hệ thống', NULL, NULL, 1, NULL, '2026-08-02 17:34:05', '127.0.0.1', 0, NULL, NULL, NULL, NULL, '2026-07-24 16:34:47', '2026-07-30 16:34:12', NULL);
+INSERT INTO `pvn_users` VALUES (1, 'admin@htds.vn', '$2y$12$Ir1BnogCBiXXsY0uc3KYoOqHHws6CybhpXpmIcqlGYqkDQxYNUJEu', 'Quản trị hệ thống', NULL, NULL, 1, NULL, '2026-08-06 16:08:29', '127.0.0.1', 0, NULL, NULL, NULL, NULL, '2026-07-24 16:34:47', '2026-07-30 16:34:12', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
