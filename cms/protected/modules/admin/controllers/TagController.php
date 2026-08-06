@@ -55,8 +55,8 @@ class TagController extends AdminCrudController
                 'hint' => 'Để trống sẽ tự sinh từ tên thẻ.'),
             array('name' => 'description', 'width' => 12,
                 'hint' => 'Mô tả ngắn (không bắt buộc).'),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 3),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 3),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
         );
     }
 }
