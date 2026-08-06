@@ -78,8 +78,18 @@ class NewsPost extends BaseActiveRecord
             array('category_id, thumbnail_media_id, author_id, sort_order', 'numerical',
                 'integerOnly' => true),
             array('is_featured, is_active', 'boolean'),
-            array('excerpt, content, tagIds', 'safe'),
+            array('excerpt, content, tagIds, categoryIds', 'safe'),
         );
+    }
+
+    /**
+     * Bài viết phải thuộc ít nhất một danh mục (thay cho ràng buộc category_id cũ).
+     */
+    public function validateCategoryIds($attribute, $params)
+    {
+        if ($this->getCategoryIds() === array()) {
+            $this->addError('categoryIds', 'Vui lòng chọn ít nhất một danh mục.');
+        }
     }
 
     public function relations()
