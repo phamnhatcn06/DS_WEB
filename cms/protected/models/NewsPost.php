@@ -96,6 +96,11 @@ class NewsPost extends BaseActiveRecord
     {
         return array(
             'category'  => array(self::BELONGS_TO, 'NewsCategory', 'category_id'),
+            // Đa danh mục: một bài thuộc nhiều danh mục qua bảng liên kết.
+            'categories' => array(self::MANY_MANY, 'NewsCategory',
+                'pvn_news_post_categories(post_id, category_id)',
+                'condition' => 'categories.deleted_at IS NULL',
+                'order'     => 'categories.sort_order ASC, categories.name ASC'),
             'thumbnail' => array(self::BELONGS_TO, 'MediaFile', 'thumbnail_media_id'),
             'author'    => array(self::BELONGS_TO, 'User', 'author_id'),
             // Chỉ nạp thẻ đang bật, theo thứ tự cấu hình — dùng để hiển thị chip.
