@@ -126,7 +126,75 @@ class MediaController extends AdminController
             return 'không lưu được thông tin file: ' . implode(', ', $media->getErrors('file_name'));
         }
 
-        return true;
+        return $media;
+    }
+
+    /**
+     * Trả JSON danh sách ảnh cho bộ chọn ảnh (media picker) trong form CRUD.
+     * Chỉ trả về file ảnh, mới nhất trước.
+     */
+    public function actionListJson()
+    {
+        $search = trim((string) Yii::app()->request->getParam('q', ''));
+
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'deleted_at IS NULL AND mime_type LIKE :img';
+        $criteria->params = array(':img' => 'image/%');
+        if ($search !== '') {
+            $criteria->condition .= ' AND (file_name LIKE :q OR alt_text LIKE :q)';
+            $criteria->params[':q'] = '%' . $search . '%';
+        }
+        $criteria->order = 'created_at DESC, id DESC';
+        $criteria->limit = 200;
+
+        $items = array();
+        foreach (MediaFile::model()->findAll($criteria) as $file) {
+            $items[] = array(
+                'id'   => (int) $file->id,
+                'url'  => $file->getPublicUrl(),
+                'name' => $file->file_name,
+                'alt'  => (string) $file->alt_text,
+            );
+        }
+
+        $this->renderJson(array('success' => true, 'items' => $items));
+    }
+
+    /**
+     * Tải một ảnh lên qua AJAX (dùng trong media picker). Trả JSON.
+     */
+    public function actionAjaxUpload()
+    {
+        $this->requirePermission('media.create');
+
+        if (!Yii::app()->request->getIsPostRequest()) {
+            $this->renderJson(array('success' => false, 'message' => 'Chỉ chấp nhận POST.'), 405);
+        }
+
+        $file = CUploadedFile::getInstanceByName('file');
+        if ($file === null) {
+            $this->renderJson(array('success' => false, 'message' => 'Bạn chưa chọn file nào.'), 400);
+        }
+
+        $error = MediaHelper::validateUpload($file);
+        if ($error !== null) {
+            $this->renderJson(array('success' => false, 'message' => $error), 422);
+        }
+
+        $result = $this->storeFile($file);
+        if (!($result instanceof MediaFile)) {
+            $this->renderJson(array('success' => false, 'message' => $result), 422);
+        }
+
+        $this->renderJson(array(
+            'success' => true,
+            'item'    => array(
+                'id'   => (int) $result->id,
+                'url'  => $result->getPublicUrl(),
+                'name' => $result->file_name,
+                'alt'  => (string) $result->alt_text,
+            ),
+        ));
     }
 
     /**
