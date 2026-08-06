@@ -366,9 +366,14 @@
 
       var FILTER_FADE_MS = PREFERS_REDUCED_MOTION ? 0 : 300;
 
-      // Khớp khi chọn "Tất cả", trùng danh mục, hoặc slug nằm trong data-tags.
+      // Khớp khi chọn "Tất cả", slug nằm trong danh mục (đa danh mục, cách nhau
+      // bởi khoảng trắng), hoặc slug nằm trong data-tags.
       function isMatched(item, filter) {
-        if (filter === 'all' || item.dataset.category === filter) {
+        if (filter === 'all') {
+          return true;
+        }
+        var categories = (item.dataset.category || '').split(' ');
+        if (categories.indexOf(filter) !== -1) {
           return true;
         }
         var tags = (item.dataset.tags || '').split(' ');
