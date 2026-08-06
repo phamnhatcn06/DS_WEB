@@ -39,19 +39,19 @@ class TimelineController extends AdminCrudController
     protected function formFields()
     {
         return array(
-            array('name' => 'year_label', 'width' => 3,
+            array('name' => 'year_label', 'width' => 6,
                 'hint' => 'Chuỗi hiển thị, có thể là <code>2024–2025</code>.'),
-            array('name' => 'year_value', 'type' => 'number', 'width' => 3,
+            array('name' => 'year_value', 'type' => 'number', 'width' => 6,
                 'hint' => 'Số năm dùng để sắp xếp.'),
-            array('name' => 'event_date', 'type' => 'date', 'width' => 3),
-            array('name' => 'eyebrow', 'width' => 3),
+            array('name' => 'event_date', 'type' => 'date', 'width' => 6),
+            array('name' => 'eyebrow', 'width' => 6),
             array('name' => 'title', 'width' => 12),
             array('name' => 'description', 'type' => 'textarea', 'width' => 12, 'rows' => 4),
             array('name' => 'image_media_id', 'type' => 'media', 'width' => 6),
-            array('name' => 'side', 'type' => 'select', 'width' => 2,
+            array('name' => 'side', 'type' => 'select', 'width' => 6,
                 'options' => TimelineMilestone::sideOptions()),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 2),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 2),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
         );
     }
 }
