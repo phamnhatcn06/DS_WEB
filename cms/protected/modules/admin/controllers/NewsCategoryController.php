@@ -37,11 +37,11 @@ class NewsCategoryController extends AdminCrudController
                 'hint' => 'Phải khớp giá trị <code>data-filter</code> trong markup frontend. '
                     . 'Đổi slug sẽ làm tab lọc ngừng hoạt động cho tới khi markup được cập nhật.'),
             array('name' => 'description', 'type' => 'textarea', 'width' => 12, 'rows' => 2),
-            array('name' => 'parent_id', 'type' => 'select', 'width' => 4,
+            array('name' => 'parent_id', 'type' => 'select', 'width' => 6,
                 'options' => NewsCategory::optionsForSelect(), 'empty' => '— Không có —'),
-            array('name' => 'sort_order', 'type' => 'number', 'width' => 2),
-            array('name' => 'show_in_filter', 'type' => 'checkbox', 'width' => 3),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 3),
+            array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
+            array('name' => 'show_in_filter', 'type' => 'checkbox', 'width' => 6),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
         );
     }
 
