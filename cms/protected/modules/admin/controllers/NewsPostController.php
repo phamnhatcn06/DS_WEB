@@ -78,13 +78,14 @@ class NewsPostController extends AdminCrudController
     {
         return array(
             array('name' => 'title', 'width' => 8, 'maxlength' => 300),
-            array('name' => 'category_id', 'type' => 'select', 'width' => 4,
-                'options' => NewsCategory::optionsForSelect()),
+            array('name' => 'categoryIds', 'type' => 'checkboxlist', 'width' => 4,
+                'options' => NewsCategory::optionsForSelect(),
+                'hint' => 'Chọn một hoặc nhiều danh mục.'),
             array('name' => 'slug', 'width' => 8, 'hint' => 'Để trống sẽ tự sinh từ tiêu đề.'),
             array('name' => 'thumbnail_media_id', 'type' => 'media', 'width' => 4),
             array('name' => 'excerpt', 'type' => 'textarea', 'width' => 12, 'rows' => 3,
                 'hint' => 'Chỉ card lớn hiển thị trích dẫn — bắt buộc nhập nếu chọn card lớn.'),
-            array('name' => 'content', 'type' => 'textarea', 'width' => 12, 'rows' => 10),
+            array('name' => 'content', 'type' => 'richtext', 'width' => 12, 'rows' => 10),
             array('name' => 'tagIds', 'type' => 'checkboxlist', 'width' => 12,
                 'options' => Tag::optionsForSelect(),
                 'hint' => 'Chọn các thẻ dùng chung. Quản lý danh sách thẻ ở mục "Thẻ (Tag)".'),
