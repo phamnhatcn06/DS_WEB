@@ -30,24 +30,167 @@
     });
   }
 
-  /** Xem trước ảnh khi chọn trong dropdown media. */
-  function initMediaPreview() {
-    document.querySelectorAll('select[data-media-select]').forEach(function (select) {
-      var preview = document.querySelector(
-        '[data-media-preview="' + select.getAttribute('data-media-select') + '"]'
-      );
-      if (!preview) {
+  /**
+   * Bộ chọn ảnh: mỗi trường media có nút mở modal thư viện dùng chung.
+   * Modal cho phép tải ảnh mới lên (AJAX) hoặc chọn ảnh có sẵn.
+   */
+  function initMediaPicker() {
+    var modalEl = document.getElementById('mediaPickerModal');
+    if (!modalEl || typeof bootstrap === 'undefined') {
+      return;
+    }
+
+    var modal = new bootstrap.Modal(modalEl);
+    var grid = modalEl.querySelector('[data-media-grid]');
+    var status = modalEl.querySelector('[data-media-status]');
+    var searchInput = modalEl.querySelector('[data-media-search]');
+    var fileInput = modalEl.querySelector('[data-media-file]');
+    var listUrl = modalEl.getAttribute('data-list-url');
+    var uploadUrl = modalEl.getAttribute('data-upload-url');
+    var csrfName = modalEl.getAttribute('data-csrf-name');
+    var csrfValue = modalEl.getAttribute('data-csrf-value');
+
+    var activeField = null; // trường media đang được chọn ảnh
+    var searchTimer = null;
+
+    function setStatus(text, isError) {
+      status.textContent = text || '';
+      status.classList.toggle('is-error', !!isError);
+    }
+
+    function applyToField(item) {
+      if (!activeField) {
         return;
       }
-      select.addEventListener('change', function () {
-        var url = select.options[select.selectedIndex].getAttribute('data-url');
-        if (url) {
-          preview.src = url;
-          preview.hidden = false;
-        } else {
-          preview.hidden = true;
+      activeField.querySelector('[data-media-input]').value = item.id;
+      var img = activeField.querySelector('[data-media-img]');
+      img.src = item.url;
+      img.hidden = false;
+      activeField.querySelector('[data-media-empty]').hidden = true;
+      activeField.querySelector('[data-media-box]').classList.remove('is-empty');
+      activeField.querySelector('[data-media-name]').textContent = item.name;
+      activeField.querySelector('[data-media-clear]').hidden = false;
+    }
+
+    function renderItems(items) {
+      grid.innerHTML = '';
+      if (!items.length) {
+        grid.innerHTML = '<p class="text-muted m-0 p-3">Chưa có ảnh nào phù hợp.</p>';
+        return;
+      }
+      var selectedId = activeField
+        ? activeField.querySelector('[data-media-input]').value
+        : '';
+      items.forEach(function (item) {
+        var cell = document.createElement('button');
+        cell.type = 'button';
+        cell.className = 'media-picker-item';
+        if (String(item.id) === String(selectedId)) {
+          cell.classList.add('is-selected');
         }
+        cell.innerHTML =
+          '<img src="' + item.url + '" alt="" loading="lazy" />' +
+          '<span class="media-picker-item-name">' + item.name + '</span>';
+        cell.addEventListener('click', function () {
+          applyToField(item);
+          modal.hide();
+        });
+        grid.appendChild(cell);
       });
+    }
+
+    function loadList(query) {
+      setStatus('Đang tải…');
+      var url = listUrl + (listUrl.indexOf('?') === -1 ? '?' : '&') +
+        'q=' + encodeURIComponent(query || '');
+      fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          renderItems(data.items || []);
+          setStatus('');
+        })
+        .catch(function () {
+          setStatus('Không tải được danh sách ảnh.', true);
+        });
+    }
+
+    function uploadFiles(files) {
+      if (!files.length) {
+        return;
+      }
+      var remaining = files.length;
+      var lastItem = null;
+      setStatus('Đang tải lên ' + remaining + ' ảnh…');
+
+      Array.prototype.forEach.call(files, function (file) {
+        var formData = new FormData();
+        formData.append('file', file);
+        formData.append(csrfName, csrfValue);
+
+        fetch(uploadUrl, {
+          method: 'POST',
+          body: formData,
+          headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.success) {
+              lastItem = data.item;
+            } else {
+              setStatus(data.message || 'Tải lên thất bại.', true);
+            }
+          })
+          .catch(function () {
+            setStatus('Lỗi kết nối khi tải lên.', true);
+          })
+          .then(function () {
+            remaining--;
+            if (remaining === 0) {
+              if (lastItem) {
+                applyToField(lastItem);
+                setStatus('Đã tải lên xong.');
+              }
+              loadList(searchInput.value);
+            }
+          });
+      });
+    }
+
+    // Mở modal từ nút của từng trường media.
+    document.querySelectorAll('[data-media-open]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        activeField = button.closest('[data-media-field]');
+        setStatus('');
+        modal.show();
+        loadList(searchInput.value);
+      });
+    });
+
+    // Nút bỏ chọn ảnh của từng trường.
+    document.querySelectorAll('[data-media-clear]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var field = button.closest('[data-media-field]');
+        field.querySelector('[data-media-input]').value = '';
+        var img = field.querySelector('[data-media-img]');
+        img.hidden = true;
+        img.src = '';
+        field.querySelector('[data-media-empty]').hidden = false;
+        field.querySelector('[data-media-box]').classList.add('is-empty');
+        field.querySelector('[data-media-name]').textContent = '';
+        button.hidden = true;
+      });
+    });
+
+    fileInput.addEventListener('change', function () {
+      uploadFiles(fileInput.files);
+      fileInput.value = '';
+    });
+
+    searchInput.addEventListener('input', function () {
+      window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(function () {
+        loadList(searchInput.value);
+      }, 300);
     });
   }
 
