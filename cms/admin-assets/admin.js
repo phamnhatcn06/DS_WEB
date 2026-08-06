@@ -105,7 +105,7 @@
           '<img src="' + item.url + '" alt="" loading="lazy" />' +
           '<span class="media-picker-item-name">' + item.name + '</span>';
         cell.addEventListener('click', function () {
-          applyToField(item);
+          finishPick(item);
           modal.hide();
         });
         grid.appendChild(cell);
