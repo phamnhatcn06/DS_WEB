@@ -318,13 +318,13 @@ $base = $root;
           <p>&ldquo;Trở thành doanh nghiệp uy tín trong <span class="hl">lĩnh vực năng lượng, bất động sản và xây lắp</span>. Kiến tạo các giá trị bền vững và đồng hành cùng sự phát triển của xã hội.&rdquo;</p>
         </blockquote>
 
-        <!-- Card 1: Sứ mệnh (desktop: chữ trái · ảnh phải; mobile: ảnh trên) -->
+        <!-- Card 1: Sứ mệnh (desktop: chữ trái · ảnh phải; mobile: chữ trên · ảnh dưới) -->
         <article class="about-card" data-reveal="left">
           <div class="row g-0 align-items-stretch">
-            <div class="col-12 col-lg-7 about-media">
+            <div class="col-12 col-lg-7 about-media order-2">
               <img src="<?php echo $root; ?>/assets/images/about-construction.webp" alt="Công trình xây dựng của Đông Sơn Holdings" loading="lazy" />
             </div>
-            <div class="col-12 col-lg-5 about-text order-lg-first">
+            <div class="col-12 col-lg-5 about-text order-1">
               <img src="<?php echo $root; ?>/assets/images/logo-red.webp" alt="" class="card-logo" aria-hidden="true" />
               <h3>Sứ mệnh</h3>
               <p>Kiến tạo giá trị bền vững cho khách hàng, đối tác và cộng đồng.</p>
