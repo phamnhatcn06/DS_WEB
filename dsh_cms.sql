@@ -11,7 +11,7 @@
  Target Server Version : 50724 (5.7.24)
  File Encoding         : 65001
 
- Date: 07/08/2026 01:43:16
+ Date: 10/08/2026 01:01:41
 */
 
 SET NAMES utf8mb4;
@@ -489,7 +489,7 @@ CREATE TABLE `pvn_leaders`  (
   INDEX `idx_leaders_is_active`(`is_active`) USING BTREE,
   INDEX `fk_leaders_photo_media`(`photo_media_id`) USING BTREE,
   CONSTRAINT `fk_leaders_photo_media` FOREIGN KEY (`photo_media_id`) REFERENCES `pvn_media_files` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_leaders
@@ -960,7 +960,7 @@ CREATE TABLE `pvn_org_units`  (
   INDEX `idx_org_units_parent`(`parent_id`) USING BTREE,
   INDEX `idx_org_units_sort_order`(`sort_order`) USING BTREE,
   CONSTRAINT `fk_org_units_parent` FOREIGN KEY (`parent_id`) REFERENCES `pvn_org_units` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pvn_org_units
