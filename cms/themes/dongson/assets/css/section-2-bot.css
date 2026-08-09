@@ -99,17 +99,18 @@
   mask: url("../images/arrow-right.svg") center / contain no-repeat;
 }
 
+/* Khớp Figma (node 1247:3961): nút phụ nền trắng, chữ đỏ brand */
 .bot-actions .btn-outline-light-2 {
-  --bs-btn-color: #ffffff;
-  --bs-btn-border-color: rgba(255, 255, 255, .55);
-  --bs-btn-bg: transparent;
+  --bs-btn-color: var(--dsh-red);
+  --bs-btn-border-color: #ffffff;
+  --bs-btn-bg: #ffffff;
   --bs-btn-hover-color: var(--dsh-red);
-  --bs-btn-hover-bg: #ffffff;
-  --bs-btn-hover-border-color: #ffffff;
-  --bs-btn-padding-x: 32px;
-  --bs-btn-padding-y: 14px;
-  font-size: .875rem;
-  font-weight: 500;
+  --bs-btn-hover-bg: rgba(255, 255, 255, .88);
+  --bs-btn-hover-border-color: rgba(255, 255, 255, .88);
+  --bs-btn-padding-x: 40px;
+  --bs-btn-padding-y: 16px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 /* -------- Cột ảnh + card nổi -------- */
