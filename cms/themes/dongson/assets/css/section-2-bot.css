@@ -251,10 +251,25 @@ a.chip:hover {
 .bot-slider .nav-btn:hover { background-color: rgba(255, 255, 255, .15); }
 .bot-slider .nav-btn img { width: 16px; height: 16px; }
 
+/* Tablet/mobile: ảnh + card ghép thành 1 khối liền mạch (khớp Figma mobile
+   node 1248:4523) — ảnh bo góc trên, card đen dính ngay dưới bo góc dưới. */
 @media (max-width: 991.98px) {
   .bot-visual { padding-right: 0; padding-bottom: 0; }
-  .bot-card { position: static; width: auto; max-width: none; margin-top: var(--space-4); right: auto; bottom: auto; }
-  .bot-image { box-shadow: 12px 10px 2px rgba(0, 0, 0, .22); }
+  .bot-image {
+    box-shadow: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    margin-bottom: -1px; /* khít với card, tránh khe hở do làm tròn pixel */
+  }
+  .bot-card {
+    position: static;
+    width: auto;
+    max-width: none;
+    margin-top: 0;
+    right: auto;
+    bottom: auto;
+    border-top: 0;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
 }
 
 /* Mobile (Figma op1-3-mobile, node 1248:4359): cột nội dung canh giữa,
