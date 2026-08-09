@@ -140,4 +140,18 @@
 @media (max-width: 991.98px) {
   .about-card .row { min-height: 0; }
   .about-media { min-height: 260px; }
+
+  /* Mobile: chữ nằm trên ảnh → logo về luồng thường, nội dung căn trên */
+  .about-text {
+    justify-content: flex-start;
+    padding: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .about-text .card-logo {
+    position: static;
+    top: auto;
+    left: auto;
+    width: 100px;
+    margin-bottom: var(--space-3);
+  }
 }
