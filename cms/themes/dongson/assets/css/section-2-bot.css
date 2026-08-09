@@ -291,6 +291,13 @@ a.chip:hover {
     --bs-btn-padding-y: 10px;
     font-size: .875rem;
   }
+  /* Figma mobile (node 1248:4379): nút chính đổi sang đỏ brand, không phải đen */
+  .bot-actions .btn-discover {
+    --bs-btn-bg: var(--dsh-red);
+    --bs-btn-border-color: var(--dsh-red);
+    --bs-btn-hover-bg: var(--dsh-red);
+    --bs-btn-hover-border-color: var(--dsh-red);
+  }
 
   .bot-card { text-align: left; }
 }
