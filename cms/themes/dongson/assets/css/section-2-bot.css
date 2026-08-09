@@ -74,16 +74,18 @@
 
 .bot-actions .btn { border-radius: 8px; }
 
+/* Khớp Figma (node 1134:143): nút chính nền đen, chữ trắng + mũi tên */
 .bot-actions .btn-discover {
-  --bs-btn-color: var(--dsh-red);
-  --bs-btn-bg: #ffffff;
-  --bs-btn-border-color: #ffffff;
-  --bs-btn-hover-color: var(--dsh-red);
-  --bs-btn-hover-bg: rgba(255, 255, 255, .88);
-  --bs-btn-hover-border-color: rgba(255, 255, 255, .88);
-  --bs-btn-padding-x: 32px;
-  --bs-btn-padding-y: 14px;
-  font-size: .875rem;
+  --bs-btn-color: #ffffff;
+  --bs-btn-bg: #000000;
+  --bs-btn-border-color: #000000;
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-hover-bg: #1a1a1a;
+  --bs-btn-hover-border-color: #1a1a1a;
+  --bs-btn-padding-x: 40px;
+  --bs-btn-padding-y: 16px;
+  font-size: 1rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 10px;
