@@ -332,13 +332,13 @@ $base = $root;
           </div>
         </article>
 
-        <!-- Card 2: Tầm nhìn (desktop: ảnh trái · chữ phải; mobile: ảnh trên) -->
+        <!-- Card 2: Tầm nhìn (desktop: ảnh trái · chữ phải; mobile: chữ trên · ảnh dưới) -->
         <article class="about-card" data-reveal="right">
           <div class="row g-0 align-items-stretch">
-            <div class="col-12 col-lg-7 about-media">
+            <div class="col-12 col-lg-7 about-media order-2 order-lg-1">
               <img src="<?php echo $root; ?>/assets/images/about-energy.webp" alt="Dự án năng lượng tái tạo của Đông Sơn Holdings" loading="lazy" />
             </div>
-            <div class="col-12 col-lg-5 about-text">
+            <div class="col-12 col-lg-5 about-text order-1 order-lg-2">
               <img src="<?php echo $root; ?>/assets/images/logo-red.webp" alt="" class="card-logo" aria-hidden="true" />
               <h3>Tầm nhìn</h3>
               <p>Kiến tạo giá trị bền vững cho khách hàng, đối tác và cộng đồng.</p>
