@@ -124,8 +124,9 @@
 
 .bot-image {
   width: 100%;
-  /* Khớp Figma: khung ảnh 761×508 (~3:2), ảnh crop cover vào khung */
-  aspect-ratio: 761 / 508;
+  /* Chiều cao cố định theo viewport => mọi slide có ảnh cao BẰNG NHAU,
+     ảnh crop cover giữ tỉ lệ ~3:2 như Figma (761×508). */
+  height: clamp(240px, 28vw, 500px);
   object-fit: cover;
   border-radius: var(--radius-lg);
   /* Khớp Figma: bóng cứng lệch xuống phải (x22 y18, blur 2) */
