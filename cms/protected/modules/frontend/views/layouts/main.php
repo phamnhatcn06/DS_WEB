@@ -85,6 +85,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
 
   <?php if ($faviconUrl): ?>
     <link rel="icon" href="<?php echo CHtml::encode($faviconUrl); ?>" />
+    <link rel="apple-touch-icon" href="<?php echo CHtml::encode($faviconUrl); ?>" />
   <?php endif; ?>
 
   <!-- Fonts (local) -->
