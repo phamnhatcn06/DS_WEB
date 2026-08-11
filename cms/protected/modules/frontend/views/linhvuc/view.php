@@ -137,8 +137,8 @@ $ctaSecondary    = $val($sector->detail_cta_secondary_label, 'Xem năng lực c�
 <?php if ($val($sector->quote_text) !== ''): ?>
           <blockquote class="lv-quote-text"><?php echo CHtml::encode($sector->quote_text); ?></blockquote>
 <?php endif; ?>
-<?php if ($statsHtml !== ''): ?>
-          <div class="lv-stats"><?php echo $statsHtml; ?></div>
+<?php if ($statsQuoteHtml !== ''): ?>
+          <div class="lv-stats"><?php echo $statsQuoteHtml; ?></div>
 <?php endif; ?>
         </div>
       </div>
