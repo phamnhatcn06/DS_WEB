@@ -174,8 +174,8 @@ $heroTitle = $currentCategory !== null
 <?php endif; ?>
 
 <?php if (!empty($restPosts)): ?>
-        <!-- Các tin còn lại: lưới 2 cột -->
-        <div class="row row-cols-1 row-cols-md-2 g-4 mt-1">
+        <!-- Các tin còn lại: lưới 3 cột -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-1">
 <?php foreach ($restPosts as $post): ?>
           <div class="col"><?php echo $renderNewsCard($post); ?></div>
 <?php endforeach; ?>
