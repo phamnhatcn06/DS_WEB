@@ -147,6 +147,68 @@ $heroTitle = $currentCategory !== null
 
         </div>
 
+<?php if ($featurePost !== null): ?>
+<?php $featureUrl = $postUrl($featurePost); ?>
+        <!-- Tin thứ 3: card ngang trải hết chiều rộng container -->
+        <a href="<?php echo CHtml::encode($featureUrl); ?>" class="text-decoration-none d-block mt-4 mt-lg-5">
+          <article class="tt-feature-card" data-reveal="up" style="--reveal-delay:150ms">
+            <div class="tt-feature-media">
+              <?php echo MediaHelper::imgOr($featurePost->thumbnail, $fallbackImg, $featurePost->title); ?>
+            </div>
+            <div class="tt-feature-body">
+<?php if ($featurePost->category !== null): ?>
+              <span class="tt-badge"><?php echo CHtml::encode($featurePost->category->name); ?></span>
+<?php endif; ?>
+              <h3><?php echo CHtml::encode($featurePost->title); ?></h3>
+<?php if ($featurePost->excerpt !== null && $featurePost->excerpt !== ''): ?>
+              <p><?php echo CHtml::encode(TextHelper::truncate($featurePost->excerpt, 200)); ?></p>
+<?php endif; ?>
+              <div class="tt-meta">
+                <span><?php echo CHtml::encode($publisher); ?></span>
+                <span class="tt-dot">•</span>
+                <span><?php echo CHtml::encode($featurePost->getFormattedDate()); ?></span>
+              </div>
+            </div>
+          </article>
+        </a>
+<?php endif; ?>
+
+<?php if (!empty($restPosts)): ?>
+        <!-- Các tin còn lại: lưới 2 cột -->
+        <div class="row row-cols-1 row-cols-md-2 g-4 mt-1">
+<?php foreach ($restPosts as $post): ?>
+          <div class="col"><?php echo $renderNewsCard($post); ?></div>
+<?php endforeach; ?>
+        </div>
+<?php endif; ?>
+
+<?php
+  $pages = isset($pages) ? $pages : null;
+  if ($pages !== null && $pages->pageCount > 1):
+?>
+        <nav class="tt-pagination mt-4 mt-lg-5" aria-label="Phân trang tin tức">
+          <ul class="pagination justify-content-center flex-wrap">
+<?php
+    $current = $pages->currentPage;      // 0-based
+    $pageCount = $pages->pageCount;
+    $prevDisabled = $current <= 0 ? ' disabled' : '';
+    $nextDisabled = $current >= $pageCount - 1 ? ' disabled' : '';
+?>
+            <li class="page-item<?php echo $prevDisabled; ?>">
+              <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $current - 1)); ?>" aria-label="Trang trước">&laquo;</a>
+            </li>
+<?php for ($i = 0; $i < $pageCount; $i++): ?>
+            <li class="page-item<?php echo $i === $current ? ' active' : ''; ?>">
+              <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $i)); ?>"><?php echo $i + 1; ?></a>
+            </li>
+<?php endfor; ?>
+            <li class="page-item<?php echo $nextDisabled; ?>">
+              <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $current + 1)); ?>" aria-label="Trang sau">&raquo;</a>
+            </li>
+          </ul>
+        </nav>
+<?php endif; ?>
+
       </div>
     </section>
 
