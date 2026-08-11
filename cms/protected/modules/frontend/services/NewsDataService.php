@@ -101,37 +101,16 @@ class NewsDataService
             'offset'    => $pages->currentPage * $pages->pageSize,
         ));
 
-        // Section 2: Dự án trọng điểm — lấy bài viết thuộc danh mục du-an và có is_featured_project = 1
-        $duAnCategory = NewsCategory::model()->find(array(
-            'condition' => 't.deleted_at IS NULL AND (t.slug = :s OR t.name = :n)',
-            'params'    => array(':s' => 'du-an', ':n' => 'Dự án'),
-        ));
-
-        $projectPosts = array();
-        if ($duAnCategory !== null) {
-            $projectPosts = NewsPost::model()
-                ->belongingToCategory($duAnCategory->id)
-                ->with('thumbnail', 'category')
-                ->findAll(array(
-                    'condition' => $publishedCond . ' AND t.is_featured_project = 1',
-                    'params'    => $publishedParams,
-                    'order'     => 't.published_at DESC, t.id DESC',
-                    'limit'     => 4,
-                ));
-
-            // Fallback nếu chưa có bài nào đánh dấu is_featured_project = 1: lấy bài thuộc danh mục du-an
-            if (empty($projectPosts)) {
-                $projectPosts = NewsPost::model()
-                    ->belongingToCategory($duAnCategory->id)
-                    ->with('thumbnail', 'category')
-                    ->findAll(array(
-                        'condition' => $publishedCond,
-                        'params'    => $publishedParams,
-                        'order'     => 't.published_at DESC, t.id DESC',
-                        'limit'     => 4,
-                    ));
-            }
-        }
+        // Section 2: Dự án trọng điểm — mọi tin được đánh dấu is_featured_project = 1
+        // (không phụ thuộc danh mục), mới nhất trước.
+        $projectPosts = NewsPost::model()
+            ->with('thumbnail', 'category')
+            ->findAll(array(
+                'condition' => $publishedCond . ' AND t.is_featured_project = 1',
+                'params'    => $publishedParams,
+                'order'     => 't.published_at DESC, t.id DESC',
+                'limit'     => 4,
+            ));
 
         // Danh mục hiện trên thanh lọc, kèm số bài đã xuất bản của từng danh mục.
         $categories = NewsCategory::model()->findAll(array(
