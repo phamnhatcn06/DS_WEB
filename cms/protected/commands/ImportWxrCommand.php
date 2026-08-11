@@ -176,7 +176,11 @@ class ImportWxrCommand extends CConsoleCommand
         return $map;
     }
 
-    /** Trả về mảng id danh mục CMS cho một item bài viết. */
+    /**
+     * Trả về mảng id danh mục CMS cho một item bài viết.
+     * Giữ nguyên toàn bộ danh mục WP: mỗi nicename -> một danh mục CMS
+     * (tạo theo nhu cầu), bỏ các danh mục spam trong skipCategories.
+     */
     private function mapPostCategories($item)
     {
         $ids = array();
@@ -185,16 +189,12 @@ class ImportWxrCommand extends CConsoleCommand
                 continue;
             }
             $nicename = (string) $cat['nicename'];
-            if (in_array($nicename, $this->skipCategories, true)) {
+            if ($nicename === '' || in_array($nicename, $this->skipCategories, true)) {
                 continue;
             }
-            if (!isset($this->categoryMap[$nicename])) {
-                continue; // danh mục lạ -> bỏ qua liên kết này
-            }
-            $cmsSlug = $this->categoryMap[$nicename];
-            if (isset($this->categoryIdBySlug[$cmsSlug])) {
-                $ids[$this->categoryIdBySlug[$cmsSlug]] = true;
-            }
+            $name = trim((string) $cat);
+            $id = $this->ensureCategory($nicename, $name !== '' ? $name : $nicename);
+            $ids[$id] = true;
         }
         return array_keys($ids);
     }
