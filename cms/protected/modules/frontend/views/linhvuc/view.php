@@ -35,16 +35,23 @@ $resolveUrl = function ($url) use ($home) {
 };
 
 // Số liệu dạng count-up: giá trị số → animate; ngược lại in thẳng.
-$renderStat = function ($value, $suffix, $label) {
+// $withBar: Section 3 dùng gạch đỏ (VerticalBorder theo Figma); Section 2 thì không.
+$renderStat = function ($value, $suffix, $label, $withBar = true) {
     if ($value === null || $value === '') {
         return '';
     }
     $num = is_numeric($value)
         ? '<span class="count-up" data-count-to="' . CHtml::encode($value) . '">1</span>'
         : CHtml::encode($value);
-    return '<div class="lv-stat lv-stat--bar">'
+    $cls = 'lv-stat' . ($withBar ? ' lv-stat--bar' : '');
+    return '<div class="' . $cls . '">'
         . '<span class="lv-stat-num">' . $num . CHtml::encode($suffix) . '</span>'
         . '<span class="lv-stat-label">' . CHtml::encode($label) . '</span></div>';
+};
+
+// Đọc thuộc tính an toàn (chịu được khi migration nhãn ngắn chưa chạy).
+$attr = function ($name) use ($sector) {
+    return $sector->hasAttribute($name) ? $sector->getAttribute($name) : null;
 };
 
 // Ảnh/icon của thẻ năng lực: ưu tiên media, fallback asset theme, else rỗng.
