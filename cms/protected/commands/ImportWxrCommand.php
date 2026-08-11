@@ -114,12 +114,12 @@ class ImportWxrCommand extends CConsoleCommand
                 continue;
             }
 
-            // Danh mục CMS cho bài này.
+            // Danh mục CMS cho bài này. Giữ TOÀN BỘ bài: bài không map được
+            // danh mục (hoặc chỉ dính danh mục spam) -> gán mặc định "Tin tức".
             $catIds = $this->mapPostCategories($item);
             if ($catIds === array()) {
-                echo "  [BỎ] Không map được danh mục: {$title}\n";
-                $stat['skippedNoCat']++;
-                continue;
+                $catIds = array($this->ensureCategory('tin-tuc', 'Tin tức'));
+                $stat['fallbackCat']++;
             }
 
             if ($dryRun) {
