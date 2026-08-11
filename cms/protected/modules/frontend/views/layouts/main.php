@@ -44,7 +44,7 @@ $googleVerify    = SiteSetting::get('google_site_verification');
 
 $logoHeader = $settingImageUrl('site_logo', $root . '/assets/images/logo.webp');
 $logoFooter = $settingImageUrl('site_logo_footer', $root . '/assets/images/logo.webp');
-$faviconUrl = $settingImageUrl('favicon', $logoHeader);
+$faviconUrl = $settingImageUrl('favicon', $root . '/assets/images/favicon.png');
 $ogImageUrl = $settingImageUrl('og_image');
 
 $headerScript     = (string) SiteSetting::get('header_script');
