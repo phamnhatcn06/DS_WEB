@@ -77,6 +77,47 @@ class NewsPostController extends AdminCrudController
         return $html;
     }
 
+    /**
+     * Bộ lọc danh mục ở đầu danh sách (ô tìm theo tiêu đề đã có sẵn từ lớp cha).
+     */
+    protected function indexFilters()
+    {
+        return array(
+            array('name' => 'category', 'label' => 'Danh mục',
+                'options' => NewsCategory::optionsForSelect(),
+                'all'     => 'Tất cả danh mục'),
+        );
+    }
+
+    /**
+     * Lọc bài viết theo danh mục — khớp cả category_id chính lẫn bảng liên kết
+     * nhiều-nhiều pvn_news_post_categories (một bài có thể thuộc nhiều danh mục).
+     */
+    protected function applyIndexFilter(CDbCriteria $criteria, $name, $value)
+    {
+        if ($name !== 'category') {
+            return;
+        }
+
+        $categoryId = (int) $value;
+        $hasCatsTable = Yii::app()->db->getSchema()
+            ->getTable('pvn_news_post_categories') !== null;
+
+        if ($hasCatsTable) {
+            $criteria->mergeWith(array(
+                'condition' => '(t.category_id = :fcat OR EXISTS ('
+                    . 'SELECT 1 FROM pvn_news_post_categories npc '
+                    . 'WHERE npc.post_id = t.id AND npc.category_id = :fcat))',
+                'params'    => array(':fcat' => $categoryId),
+            ));
+        } else {
+            $criteria->mergeWith(array(
+                'condition' => 't.category_id = :fcat',
+                'params'    => array(':fcat' => $categoryId),
+            ));
+        }
+    }
+
     protected function formFields()
     {
         return array(
