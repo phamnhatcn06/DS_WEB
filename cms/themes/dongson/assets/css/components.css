@@ -188,9 +188,15 @@
   box-shadow: 0 0 0 .2rem rgba(154, 18, 32, .15);
 }
 
-.contact-modal .cta-btn .btn-arrow,
 .contact-modal #contactSubmitBtn .btn-arrow {
   width: 14px;
   height: 14px;
   margin-left: .4rem;
+}
+
+/* Hai nút footer bằng nhau: cùng padding + chiều cao với nút "Đóng" */
+.contact-modal .modal-footer .btn {
+  padding: .5rem 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
