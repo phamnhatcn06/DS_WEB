@@ -160,10 +160,10 @@ $footerScript     = (string) SiteSetting::get('footer_script');
       <img src="<?php echo $root; ?>/assets/images/cta-bridge.webp" alt="" class="cta-bg" aria-hidden="true" data-parallax="0.16" />
       <div class="cta-inner text-center">
         <h2 class="cta-title" data-reveal="up">Khám phá tiềm năng<br />Bắt đầu kết nối.</h2>
-        <a href="mailto:hatangdongson@htds.vn" class="btn btn-dsh cta-btn">
-          Liên lạc ngay
+        <button type="button" class="btn btn-dsh cta-btn" data-bs-toggle="modal" data-bs-target="#contactModal">
+          Liên hệ ngay
           <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
-        </a>
+        </button>
       </div>
     </div>
 
