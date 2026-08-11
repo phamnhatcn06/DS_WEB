@@ -253,9 +253,17 @@ class ImportWxrCommand extends CConsoleCommand
         $contentHtml = $rewrite['html'];
         $imgCount += $rewrite['count'];
 
+        // Slug = post_name (hoặc slugify tiêu đề nếu trống) + hậu tố -{post_id}
+        // để mỗi bài WP là một slug duy nhất, không đụng slug bài khác.
+        $baseSlug = trim((string) $wp->post_name);
+        if ($baseSlug === '') {
+            $baseSlug = TextHelper::slugify(trim((string) $item->title));
+        }
+        $slug = TextHelper::truncate($baseSlug, 210, '') . '-' . (string) $wp->post_id;
+
         $post = new NewsPost();
         $post->title = TextHelper::truncate(trim((string) $item->title), 300, '');
-        $post->slug = TextHelper::truncate(trim((string) $wp->post_name), 220, '');
+        $post->slug = $slug;
         $post->excerpt = $excerptText !== '' ? $excerptText : null;
         $post->content = $contentHtml;
         $post->thumbnail_media_id = $thumbMediaId;
