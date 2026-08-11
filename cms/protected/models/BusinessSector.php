@@ -98,6 +98,26 @@ class BusinessSector extends BaseActiveRecord
             'show_in_grid'     => 'Hiện ở lưới (Section 4)',
             'sort_order'       => 'Thứ tự',
             'is_active'        => 'Hiển thị',
+            // -- Trang chi tiết (/linh-vuc/<slug>)
+            'hero_subtitle'              => 'Phụ đề hero (chi tiết)',
+            'hero_bg_media_id'           => 'Ảnh nền hero',
+            'detail_cta_secondary_label' => 'Nhãn nút phụ (hero)',
+            'legacy_media_id'            => 'Ảnh khối di sản',
+            'legacy_year'                => 'Năm mốc di sản',
+            'legacy_title'               => 'Tiêu đề khối di sản',
+            'legacy_text'                => 'Mô tả khối di sản',
+            'quote_text'                 => 'Trích dẫn nổi bật',
+            'stat1_value'                => 'Số liệu 1 — giá trị',
+            'stat1_suffix'               => 'Số liệu 1 — hậu tố',
+            'stat1_label'                => 'Số liệu 1 — nhãn',
+            'stat2_value'                => 'Số liệu 2 — giá trị',
+            'stat2_suffix'               => 'Số liệu 2 — hậu tố',
+            'stat2_label'                => 'Số liệu 2 — nhãn',
+            'heritage_title'             => 'Tiêu đề khối kế thừa',
+            'heritage_body'              => 'Nội dung khối kế thừa',
+            'heritage_media_id'          => 'Ảnh khối kế thừa',
+            'capability_title'           => 'Tiêu đề "Năng lực cốt lõi"',
+            'capability_lead'            => 'Đoạn dẫn "Năng lực cốt lõi"',
         );
     }
 
