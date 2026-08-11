@@ -100,7 +100,7 @@ class ImportWxrCommand extends CConsoleCommand
 
         // Bước 2: duyệt bài viết.
         $stat = array('imported' => 0, 'skippedExisting' => 0, 'skippedNoCat' => 0,
-            'skippedNotPublish' => 0, 'images' => 0, 'errors' => 0);
+            'skippedNotPublish' => 0, 'skippedForeign' => 0, 'images' => 0, 'errors' => 0);
         $processed = 0;
 
         foreach ($xml->channel->item as $item) {
