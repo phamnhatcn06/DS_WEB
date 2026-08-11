@@ -140,18 +140,14 @@ class NewsDataService
         ));
         $counts = self::publishedCountByCategory();
 
-        $currentCatId = $targetCategory !== null ? (int) $targetCategory->id : null;
-        $totalPublished = ($currentCatId !== null && isset($counts[$currentCatId]))
-            ? $counts[$currentCatId]
-            : count($posts);
-
         return array(
             'heroBgUrl'       => self::mediaUrl('news_hero_bg', '/assets/images/news-hero.webp'),
             'posts'           => $posts,
+            'pages'           => $pages,
             'projectPosts'    => $projectPosts,
             'categories'      => $categories,
             'categoryCounts'  => $counts,
-            'totalPublished'  => $totalPublished,
+            'totalPublished'  => $total,
             'currentCategory' => $targetCategory,
         );
     }
