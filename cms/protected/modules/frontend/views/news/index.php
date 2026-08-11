@@ -113,40 +113,14 @@ $heroTitle = $currentCategory !== null
 
         <div class="row g-4 g-lg-5">
 
-          <!-- Cột chính: danh sách tin (20 bài / trang, có phân trang) -->
+          <!-- Cột chính: 2 thẻ tin trên -->
           <div class="col-12 col-lg-8">
-<?php if (!empty($posts)): ?>
+<?php if (!empty($topPosts)): ?>
             <div class="row row-cols-1 row-cols-md-2 g-4">
-<?php foreach ($posts as $post): ?>
+<?php foreach ($topPosts as $post): ?>
               <div class="col"><?php echo $renderNewsCard($post); ?></div>
 <?php endforeach; ?>
             </div>
-<?php
-  $pages = isset($pages) ? $pages : null;
-  if ($pages !== null && $pages->pageCount > 1):
-?>
-            <nav class="tt-pagination mt-4 mt-lg-5" aria-label="Phân trang tin tức">
-              <ul class="pagination justify-content-center flex-wrap">
-<?php
-    $current = $pages->currentPage;      // 0-based
-    $pageCount = $pages->pageCount;
-    $prevDisabled = $current <= 0 ? ' disabled' : '';
-    $nextDisabled = $current >= $pageCount - 1 ? ' disabled' : '';
-?>
-                <li class="page-item<?php echo $prevDisabled; ?>">
-                  <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $current - 1)); ?>" aria-label="Trang trước">&laquo;</a>
-                </li>
-<?php for ($i = 0; $i < $pageCount; $i++): ?>
-                <li class="page-item<?php echo $i === $current ? ' active' : ''; ?>">
-                  <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $i)); ?>"><?php echo $i + 1; ?></a>
-                </li>
-<?php endfor; ?>
-                <li class="page-item<?php echo $nextDisabled; ?>">
-                  <a class="page-link" href="<?php echo CHtml::encode($pages->createPageUrl($this, $current + 1)); ?>" aria-label="Trang sau">&raquo;</a>
-                </li>
-              </ul>
-            </nav>
-<?php endif; ?>
 <?php else: ?>
             <p class="text-muted py-5 m-0">Chưa có bài viết trong danh mục này.</p>
 <?php endif; ?>
