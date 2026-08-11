@@ -129,10 +129,11 @@ $footerScript     = (string) SiteSetting::get('footer_script');
         </a>
 
         <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
-        <a href="#lien-he" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3">
+        <button type="button" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3"
+          data-bs-toggle="modal" data-bs-target="#contactModal">
           <span class="d-lg-none">Liên hệ</span>
           <span class="d-none d-lg-inline">Liên hệ ngay</span>
-        </a>
+        </button>
 
         <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
           data-bs-target="#mainNav" aria-controls="mainNav"
