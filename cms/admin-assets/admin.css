@@ -278,6 +278,37 @@ body.admin-body {
   padding: 4px;
 }
 
+/* ------------------------------------------------------------------ badge
+   Theme Hope UI dùng bản Bootstrap cũ: .badge ép color:#fff và KHÔNG có các
+   lớp bg-*-subtle / text-*-emphasis của Bootstrap 5.3 mà toàn bộ view admin
+   đang dùng. Hậu quả: badge trạng thái (Hiển thị, Kích hoạt…) mất nền + chữ
+   trắng nên bị chìm trên nền bảng sáng. Bổ sung lại bảng màu subtle ở đây
+   (file nạp sau cùng) để mọi badge hiển thị rõ, nổi bật — không phải sửa từng
+   trang. Selector .badge.<lớp> (0,2,0) ưu tiên cao hơn .badge (0,1,0) nên
+   thắng màu chữ trắng mặc định. */
+
+/* Nền tint nhạt + viền cùng tông để badge thành "viên" rõ nét, nổi trên bảng. */
+.badge.bg-primary-subtle   { background-color: #cfe2ff; border: 1px solid #9ec5fe; }
+.badge.bg-secondary-subtle { background-color: #e2e3e5; border: 1px solid #c4c8cb; }
+.badge.bg-success-subtle   { background-color: #d1e7dd; border: 1px solid #a3cfbb; }
+.badge.bg-danger-subtle    { background-color: #f8d7da; border: 1px solid #f1aeb5; }
+.badge.bg-warning-subtle   { background-color: #fff3cd; border: 1px solid #ffe69c; }
+.badge.bg-info-subtle      { background-color: #cff4fc; border: 1px solid #9eeaf9; }
+
+/* Chữ đậm màu, tương phản mạnh với nền tint (áp cho cả text-*-emphasis lẫn
+   text-* mà các view dùng). */
+.badge.text-primary-emphasis,   .badge.bg-primary-subtle.text-primary     { color: #052c65; }
+.badge.text-secondary-emphasis, .badge.bg-secondary-subtle.text-secondary { color: #2b2f32; }
+.badge.text-success-emphasis,   .badge.bg-success-subtle.text-success     { color: #0a3622; }
+.badge.text-danger-emphasis,    .badge.bg-danger-subtle.text-danger       { color: #58151c; }
+.badge.text-warning-emphasis,   .badge.bg-warning-subtle.text-warning     { color: #664d03; }
+.badge.text-info-emphasis,      .badge.bg-info-subtle.text-info           { color: #055160; }
+
+/* Badge nhãn nền sáng (Slider, Lưới, thẻ phân loại…): chữ tối trên nền sáng. */
+.badge.bg-light.text-dark   { color: #212529; }
+.badge.bg-light.text-muted  { color: #6c757d; }
+.badge.bg-warning.text-dark { color: #212529; }
+
 /* ------------------------------------------------------------------ media */
 
 .media-grid {
