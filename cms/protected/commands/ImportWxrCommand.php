@@ -385,7 +385,7 @@ class ImportWxrCommand extends CConsoleCommand
             return null;
         }
         $rel = substr($url, $pos + strlen($marker));
-        $rel = preg_replace('#[?#].*$#', '', $rel); // bỏ query string
+        $rel = preg_replace('~[?#].*$~', '', $rel); // bỏ query string
         // Chặn path traversal.
         $rel = str_replace(array('..', '\\'), '', $rel);
         return ltrim($rel, '/');
