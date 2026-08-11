@@ -47,6 +47,7 @@ class BusinessSector extends BaseActiveRecord
             array('legacy_year, stat1_value, stat2_value', 'length', 'max' => 20),
             array('stat1_suffix, stat2_suffix', 'length', 'max' => 8),
             array('stat1_label, stat2_label', 'length', 'max' => 100),
+            array('stat1_short_label, stat2_short_label', 'length', 'max' => 60),
             array('lead_text, description, card_description, tagIds', 'safe'),
             array('hero_subtitle, legacy_text, quote_text, heritage_body, capability_title, capability_lead', 'safe'),
             array('image_media_id, icon_media_id, sort_order, hero_bg_media_id, '
