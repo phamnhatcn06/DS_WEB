@@ -46,6 +46,49 @@ class NewsDataService
     }
 
     /**
+     * Nạp nội dung chi tiết một bài viết theo slug.
+     *
+     * Trả null nếu không có bài phù hợp (đã xoá mềm / ẩn / chưa xuất bản) để
+     * controller trả 404. Kèm: tin mới nhất (sidebar, loại chính bài đang xem),
+     * danh mục + số bài (widget "Chuyên mục").
+     *
+     * @param string $slug
+     * @return array|null
+     */
+    public static function loadDetail($slug)
+    {
+        $post = NewsPost::model()->with('thumbnail', 'category', 'author')->find(array(
+            'condition' => 't.slug = :slug AND t.deleted_at IS NULL'
+                . ' AND t.is_active = 1 AND t.status = :st',
+            'params'    => array(':slug' => $slug, ':st' => NewsPost::STATUS_PUBLISHED),
+        ));
+        if ($post === null) {
+            return null;
+        }
+
+        // Tin mới nhất cho sidebar — bỏ chính bài đang xem.
+        $latest = NewsPost::model()->with('thumbnail')->findAll(array(
+            'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st'
+                . ' AND t.id <> :id',
+            'params'    => array(':st' => NewsPost::STATUS_PUBLISHED, ':id' => (int) $post->id),
+            'order'     => 't.published_at DESC',
+            'limit'     => 3,
+        ));
+
+        $categories = NewsCategory::model()->findAll(array(
+            'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.show_in_filter = 1',
+            'order'     => 't.sort_order ASC',
+        ));
+
+        return array(
+            'post'           => $post,
+            'latest'         => $latest,
+            'categories'     => $categories,
+            'categoryCounts' => self::publishedCountByCategory(),
+        );
+    }
+
+    /**
      * Số bài đã xuất bản theo từng danh mục (đếm theo category_id chính) →
      * [category_id => count]. Dùng cho con số trong sidebar.
      */
