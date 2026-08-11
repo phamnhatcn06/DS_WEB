@@ -24,7 +24,7 @@ class ImportWxrCommand extends CConsoleCommand
 
     /** Nicename WP là spam/rác -> không tạo danh mục, không gán. */
     private $skipCategories = array(
-        'bez-rubriki', 'semaglutide-online-2', '25',
+        'bez-rubriki', 'semaglutide-online-2', '25', 'public',
     );
 
     /** slug -> tên hiển thị cho danh mục sẽ tạo (thu thập khi duyệt). */
