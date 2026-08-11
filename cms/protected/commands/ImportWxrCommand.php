@@ -346,7 +346,11 @@ class ImportWxrCommand extends CConsoleCommand
         $absPath = str_replace('\\', '/', $absPath);
 
         if (!file_exists($absPath)) {
-            $data = $this->httpGet($url);
+            // Luôn tải từ host đang phục vụ tệp (pvnsoft.cloud), kể cả khi URL
+            // gốc trong nội dung còn trỏ htds.vn (đã 404).
+            $fetchUrl = 'https://' . $this->downloadHost
+                . '/wp-content/uploads/' . $relFromUploads;
+            $data = $this->httpGet($fetchUrl);
             if ($data === null || strlen($data) < 100) {
                 return null;
             }
