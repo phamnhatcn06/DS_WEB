@@ -133,7 +133,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
         </div>
 
 <?php if ($featurePost !== null): ?>
-<?php $featureUrl = ($featurePost->source_url !== null && $featurePost->source_url !== '') ? $featurePost->source_url : '#'; ?>
+<?php $featureUrl = $postUrl($featurePost); ?>
         <!-- Featured full card — trải hết chiều rộng container -->
         <a href="<?php echo CHtml::encode($featureUrl); ?>" class="text-decoration-none d-block mt-4 mt-lg-5">
           <article class="tt-feature-card" data-reveal="up" style="--reveal-delay:150ms">
