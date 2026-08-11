@@ -75,13 +75,9 @@ class ImportWxrCommand extends CConsoleCommand
         $ns = $xml->getNamespaces(true);
 
         if (!$dryRun) {
-            $this->prepareCategories();
+            // Bảo đảm các danh mục hiện trên thanh tab trang chủ luôn tồn tại.
+            $this->ensureFilterCategories();
             $this->newsFolderId = $this->findOrCreateFolder('Ảnh tin tức', 'anh-tin-tuc');
-        } else {
-            // Dry run: dùng slug làm id giả để thống kê mapping mà không ghi DB.
-            foreach (array('du-an', 'thi-cong', 'dau-tu', 'co-dong', 'tin-tuc') as $s) {
-                $this->categoryIdBySlug[$s] = $s;
-            }
         }
 
         // Bước 1: map post_id attachment -> URL file (để tra ảnh đại diện).
