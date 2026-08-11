@@ -70,20 +70,35 @@ class NewsDataService
             }
         }
 
-        $model = NewsPost::model();
-        if ($targetCategory !== null) {
-            $model = $model->belongingToCategory($targetCategory->id);
-        } elseif (!empty($categorySlug)) {
+        if ($targetCategory === null && !empty($categorySlug)) {
             // Trường hợp slug truyền vào không tồn tại trong DB -> không lấy bài nào
             $publishedCond .= ' AND 1 = 0';
         }
 
-        // Danh sách bài mới nhất thuộc danh mục đã chọn (mới nhất -> cũ nhất).
-        $posts = $model->with('thumbnail', 'category')->findAll(array(
+        // Yii1 reset scope sau mỗi truy vấn -> tạo lại model đã gắn scope danh mục
+        // cho từng lần gọi (count + findAll).
+        $scopedModel = function () use ($targetCategory) {
+            $m = NewsPost::model();
+            if ($targetCategory !== null) {
+                $m = $m->belongingToCategory($targetCategory->id);
+            }
+            return $m;
+        };
+
+        // Phân trang: 20 bài / trang, mới nhất -> cũ nhất.
+        $total = (int) $scopedModel()->count(array(
+            'condition' => $publishedCond,
+            'params'    => $publishedParams,
+        ));
+        $pages = new CPagination($total);
+        $pages->pageSize = self::POSTS_PER_PAGE;
+
+        $posts = $scopedModel()->with('thumbnail', 'category')->findAll(array(
             'condition' => $publishedCond,
             'params'    => $publishedParams,
             'order'     => 't.published_at DESC, t.id DESC',
-            'limit'     => self::POST_LIMIT,
+            'limit'     => $pages->pageSize,
+            'offset'    => $pages->currentPage * $pages->pageSize,
         ));
 
         // Section 2: Dự án trọng điểm — lấy bài viết thuộc danh mục du-an và có is_featured_project = 1
