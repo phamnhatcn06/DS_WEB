@@ -37,9 +37,17 @@ $projectList    = array_slice($posts, 4, 3);    // danh sách tin nhỏ section 
 
 $fallbackImg = $root . '/assets/images/news-01.webp';
 
+/** URL đích của một bài: nguồn ngoài nếu có, ngược lại trang chi tiết nội bộ. */
+$postUrl = function (NewsPost $post) {
+    if ($post->source_url !== null && $post->source_url !== '') {
+        return $post->source_url;
+    }
+    return Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug));
+};
+
 /** Render một thẻ tin cột trên (ảnh + tiêu đề + trích + ngày). */
-$renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg) {
-    $url = ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#';
+$renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) {
+    $url = $postUrl($post);
     ob_start(); ?>
     <a href="<?php echo CHtml::encode($url); ?>" class="text-decoration-none">
       <article class="tt-news-card" data-reveal="up">
