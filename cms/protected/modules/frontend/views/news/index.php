@@ -37,7 +37,7 @@ $restPosts   = array_slice($posts, 3);                 // các tin còn lại: l
 // Section 2: Dự án trọng điểm (lấy từ danh mục du-an & is_featured_project = 1)
 $projectPosts   = isset($projectPosts) ? $projectPosts : array();
 $projectFeature = isset($projectPosts[0]) ? $projectPosts[0] : null; // card lớn section 2
-$projectList    = array_slice($projectPosts, 1, 3);    // danh sách tin nhỏ section 2
+$projectList    = array_slice($projectPosts, 1, 4);    // danh sách tin nhỏ section 2
 
 $fallbackImg = $root . '/assets/images/news-01.webp';
 
