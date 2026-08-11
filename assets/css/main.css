@@ -48,6 +48,33 @@ a { text-decoration: none; }
 .main-nav a:hover::after,
 .main-nav a.is-active::after { width: 100%; }
 .main-nav a.is-active { color: var(--dsh-gold); }
+
+/* Dropdown menu (Quan hệ cổ đông) */
+.nav-item { position: relative; }
+.nav-item__menu {
+  position: absolute; top: 100%; left: 0;
+  min-width: 240px; padding: 10px 0; margin-top: 10px;
+  background: var(--dsh-navy, #0b1526);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 10px;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .45);
+  opacity: 0; visibility: hidden; transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+  z-index: 30;
+}
+.nav-item:hover .nav-item__menu,
+.nav-item:focus-within .nav-item__menu {
+  opacity: 1; visibility: visible; transform: translateY(0);
+}
+.nav-item__menu a {
+  display: block; padding: 11px 24px;
+  font-size: 15px; font-weight: 500; color: #fff;
+  white-space: nowrap;
+}
+.nav-item__menu a::after { display: none; }
+.nav-item__menu a:hover,
+.nav-item__menu a.is-active { color: var(--dsh-gold); background: rgba(255, 255, 255, .05); }
+
 .btn-dsh {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--dsh-red); color: #fff; border: 0;
