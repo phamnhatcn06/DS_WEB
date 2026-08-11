@@ -178,7 +178,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
 
           <!-- Card lớn: ảnh trên, nội dung dưới -->
           <div class="col-12 <?php echo $hasList ? 'col-lg-8' : ''; ?>">
-<?php $pfUrl = ($projectFeature->source_url !== null && $projectFeature->source_url !== '') ? $projectFeature->source_url : '#'; ?>
+<?php $pfUrl = $postUrl($projectFeature); ?>
             <a href="<?php echo CHtml::encode($pfUrl); ?>" class="text-decoration-none">
               <article class="tt-project-feature" data-reveal="up">
                 <div class="tt-project-media">
