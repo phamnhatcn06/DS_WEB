@@ -1,0 +1,453 @@
+/* ==========================================================================
+   chitiet-tin-tuc.css — Trang chi tiết tin tức / sự kiện (News Detail)
+   Figma frame 1353:894 "CHI TIẾT SỰ KIỆN".
+   Layout 2 cột: nội dung bài viết (8) + sidebar (4). Nền sáng để dễ đọc.
+   ========================================================================== */
+
+.news-detail-page {
+  background: #f5f6f8;
+}
+
+/* ---- Vùng article tổng ---- */
+.nd-article {
+  padding: clamp(40px, 6vw, 64px) 0 clamp(56px, 7vw, 88px);
+}
+
+/* ==========================================================================
+   Cột trái: Nội dung bài viết
+   ========================================================================== */
+.nd-content {
+  background: var(--dsh-white);
+  border-radius: var(--radius-lg);
+  padding: clamp(20px, 3vw, 40px);
+  box-shadow: 0 12px 40px rgba(8, 15, 29, .06);
+}
+
+/* Breadcrumb trong nội dung */
+.nd-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+
+.nd-breadcrumb a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.nd-breadcrumb a:hover { color: var(--dsh-red); }
+.nd-bc-sep { color: #d0d4db; }
+.nd-bc-current { color: var(--dsh-red); }
+
+/* Header bài viết */
+.nd-header {
+  border-bottom: 1px solid rgba(8, 15, 29, .08);
+  padding-bottom: 20px;
+  margin-bottom: 28px;
+}
+
+.nd-badge {
+  display: inline-block;
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.nd-title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.25;
+  color: var(--dsh-ink);
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.nd-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.nd-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--dsh-slate);
+}
+
+.nd-meta-item img { width: 15px; height: 15px; object-fit: contain; }
+
+/* Ảnh đại diện */
+.nd-featured {
+  margin: 0 0 28px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.nd-featured img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+}
+
+/* Sapo / lead có viền trái */
+.nd-lead {
+  border-left: 4px solid var(--dsh-red);
+  background: #fafafa;
+  padding: 16px 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--dsh-ink);
+  margin: 0 0 36px;
+}
+
+/* Khối section trong bài */
+.nd-block { margin-bottom: 36px; }
+
+.nd-block-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  color: var(--dsh-ink);
+  margin: 0 0 16px;
+}
+
+.nd-block-desc {
+  font-size: 15px;
+  color: var(--dsh-slate);
+  margin: 0 0 16px;
+}
+
+/* ---- Section 1: 2 card so sánh trước / sau ---- */
+.nd-compare-card {
+  height: 100%;
+  border: 1px solid rgba(8, 15, 29, .1);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  background: #fafbfc;
+}
+
+.nd-compare-card.is-after {
+  border-color: rgba(154, 18, 32, .35);
+  background: rgba(154, 18, 32, .04);
+}
+
+.nd-compare-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--dsh-slate);
+  margin-bottom: 12px;
+}
+
+.nd-compare-card.is-after .nd-compare-label { color: var(--dsh-red); }
+
+.nd-compare-name {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--dsh-ink);
+  margin: 0 0 6px;
+}
+
+.nd-compare-en {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--dsh-slate);
+  margin: 0;
+}
+
+/* ---- Section 2: bảng ngành nghề ---- */
+.nd-table-wrap {
+  border: 1px solid rgba(8, 15, 29, .1);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.nd-table { margin: 0; --bs-table-bg: transparent; }
+
+.nd-table thead th {
+  background: var(--dsh-ink);
+  color: var(--dsh-white);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  padding: 14px 16px;
+  border: 0;
+  vertical-align: middle;
+}
+
+.nd-table tbody td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: var(--dsh-ink);
+  border-top: 1px solid rgba(8, 15, 29, .08);
+  vertical-align: middle;
+}
+
+.nd-table tbody tr:nth-child(even) { background: #fafbfc; }
+
+.nd-col-stt, .nd-table tbody td:first-child { width: 70px; text-align: center; color: var(--dsh-slate); }
+.nd-col-code { width: 120px; text-align: right; }
+
+.nd-code {
+  text-align: right;
+  font-weight: 700;
+  color: var(--dsh-red);
+}
+
+.nd-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--dsh-slate);
+  margin-top: 4px;
+}
+
+/* ---- Section 3 & 4: lý do + ngày hiệu lực ---- */
+.nd-reason-card {
+  height: 100%;
+  border: 1px solid rgba(8, 15, 29, .1);
+  border-radius: var(--radius);
+  padding: 24px;
+  background: #fafbfc;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--dsh-ink);
+}
+
+.nd-effective-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  border-radius: var(--radius);
+  padding: 24px;
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+}
+
+.nd-effective-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: .85;
+}
+
+.nd-effective-date {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1;
+}
+
+.nd-effective-note {
+  font-size: 12.5px;
+  opacity: .8;
+}
+
+/* ---- Full disclosure: tải tài liệu ---- */
+.nd-disclosure {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(8, 15, 29, .1);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  background: #fafbfc;
+}
+
+.nd-disclosure-ic {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(154, 18, 32, .1);
+}
+
+.nd-disclosure-ic img { width: 24px; height: 24px; }
+
+.nd-disclosure-text { flex: 1 1 200px; }
+.nd-disclosure-text h4 { font-size: 16px; font-weight: 700; color: var(--dsh-ink); margin: 0 0 4px; }
+.nd-disclosure-text p { font-size: 13px; color: var(--dsh-slate); margin: 0; }
+
+.nd-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(154, 18, 32, .4);
+  color: var(--dsh-red);
+  background: var(--dsh-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  transition: all var(--transition-base);
+}
+
+.nd-download-btn img { width: 14px; height: 14px; }
+
+.nd-download-btn:hover {
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+  border-color: var(--dsh-red);
+}
+
+.nd-download-btn:hover img { filter: brightness(0) invert(1); }
+
+/* ==========================================================================
+   Cột phải: Sidebar
+   ========================================================================== */
+.nd-sidebar {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.nd-widget {
+  background: var(--dsh-white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(8, 15, 29, .05);
+}
+
+.nd-widget-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dsh-ink);
+  padding-bottom: 12px;
+  margin: 0 0 16px;
+  border-bottom: 2px solid var(--dsh-red);
+  display: inline-block;
+}
+
+/* Tin mới nhất */
+.nd-related li + li { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(8, 15, 29, .08); }
+
+.nd-related a {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  text-decoration: none;
+}
+
+.nd-related-thumb {
+  flex: 0 0 auto;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.nd-related-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.nd-related-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--dsh-ink);
+  transition: color var(--transition-base);
+}
+
+.nd-related a:hover .nd-related-title { color: var(--dsh-red); }
+
+.nd-related-date {
+  display: block;
+  font-size: 12px;
+  color: var(--dsh-slate);
+  margin-top: 6px;
+}
+
+/* Chuyên mục */
+.nd-cat-list li + li { border-top: 1px solid rgba(8, 15, 29, .08); }
+
+.nd-cat-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dsh-ink);
+  text-decoration: none;
+  transition: color var(--transition-base);
+}
+
+.nd-cat-list a:hover { color: var(--dsh-red); }
+
+.nd-cat-count {
+  min-width: 30px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dsh-slate);
+  background: rgba(8, 15, 29, .06);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+/* Hỗ trợ cổ đông (card đỏ) */
+.nd-support {
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+}
+
+.nd-support-title { font-size: 18px; font-weight: 700; margin: 0 0 10px; }
+.nd-support-desc { font-size: 14px; line-height: 1.6; opacity: .9; margin: 0 0 18px; }
+
+.nd-support-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dsh-white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .4);
+  padding-bottom: 2px;
+}
+
+.nd-support-mail img { width: 15px; height: 12px; }
+.nd-support-mail:hover { color: var(--dsh-gold); }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .nd-sidebar { position: static; margin-top: 8px; }
+}
