@@ -228,18 +228,16 @@ $heroTitle = $currentCategory !== null
 
         <div class="row g-4 g-lg-5">
 
-          <!-- Card lớn: ảnh trên, nội dung dưới -->
-          <div class="col-12 <?php echo $hasList ? 'col-lg-5' : ''; ?>">
+          <!-- Card lớn: ảnh (badge overlay) trên, tiêu đề + mô tả dưới -->
+          <div class="col-12 <?php echo $hasList ? 'col-lg-6' : ''; ?>">
 <?php $pfUrl = $postUrl($projectFeature); ?>
             <a href="<?php echo CHtml::encode($pfUrl); ?>" class="text-decoration-none">
               <article class="tt-project-feature" data-reveal="up">
                 <div class="tt-project-media">
                   <?php echo MediaHelper::imgOr($projectFeature->thumbnail, $fallbackImg, $projectFeature->title); ?>
+                  <span class="tt-badge">Dự án trọng điểm</span>
                 </div>
                 <div class="tt-project-body">
-<?php if ($projectFeature->category !== null): ?>
-                  <span class="tt-badge"><?php echo CHtml::encode($projectFeature->category->name); ?></span>
-<?php endif; ?>
                   <h3><?php echo CHtml::encode($projectFeature->title); ?></h3>
 <?php if ($projectFeature->excerpt !== null && $projectFeature->excerpt !== ''): ?>
                   <p><?php echo CHtml::encode(TextHelper::truncate($projectFeature->excerpt, 180)); ?></p>
@@ -250,8 +248,8 @@ $heroTitle = $currentCategory !== null
           </div>
 
 <?php if ($hasList): ?>
-          <!-- Danh sách tin nhỏ -->
-          <div class="col-12 col-lg-7">
+          <!-- Danh sách 3 tin nhỏ -->
+          <div class="col-12 col-lg-6">
             <div class="tt-project-list">
 <?php foreach ($projectList as $i => $post): ?>
 <?php $itemUrl = $postUrl($post); ?>
