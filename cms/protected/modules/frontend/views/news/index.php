@@ -251,7 +251,7 @@ $heroTitle = $currentCategory !== null
 
 <?php if ($hasList): ?>
           <!-- Danh sách tin nhỏ -->
-          <div class="col-12 col-lg-4">
+          <div class="col-12 col-lg-7">
             <div class="tt-project-list">
 <?php foreach ($projectList as $i => $post): ?>
 <?php $itemUrl = $postUrl($post); ?>
