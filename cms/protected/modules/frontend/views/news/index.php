@@ -29,10 +29,6 @@ $s = function ($key, $default = '') {
 };
 $publisher = $s('news_publisher', 'HTDS Media');
 
-// --- Phân bổ bài vào các ô hiển thị ---
-$topPosts       = array_slice($posts, 0, 2);   // 2 thẻ tin cột trên (section 1)
-$featurePost    = isset($posts[2]) ? $posts[2] : null; // featured full card
-
 // Section 2: Dự án trọng điểm (lấy từ danh mục du-an & is_featured_project = 1)
 $projectPosts   = isset($projectPosts) ? $projectPosts : array();
 $projectFeature = isset($projectPosts[0]) ? $projectPosts[0] : null; // card lớn section 2
