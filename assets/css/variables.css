@@ -1,0 +1,39 @@
+/* ===== Đông Sơn Holdings — Design Tokens ===== */
+:root {
+  /* Brand */
+  --dsh-red: #9a1220;
+  --dsh-red-hover: #b51627;
+  --dsh-red-deep: #730011; /* link "Tải về PDF", breadcrumb active */
+  --dsh-gold: #c9a84c;
+  --dsh-navy: #080f1d;
+  --dsh-navy-2: #101c36;
+
+  /* Neutral text (light mode) */
+  --dsh-ink: #191c1d;
+  --dsh-muted: #5f5e5e;
+  --dsh-muted-2: #7a7f85;
+
+  /* Surfaces & borders (light) */
+  --dsh-card-bg: #ffffff;
+  --dsh-card-line: #e7e8e9;
+  --dsh-chip-bg: #f3f4f5;
+  --dsh-chip-line: #e1bebc;
+  --dsh-page-bg: #ffffff;
+
+  /* Radius */
+  --dsh-radius-card: 2px;
+  --dsh-radius-pill: 12px;
+  --dsh-radius-btn: 8px;
+
+  /* Layout */
+  --container-max: 1680px;
+  --container-pad: clamp(16px, 5vw, 120px);
+
+  /* Fonts */
+  --font-base: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+
+  /* Bootstrap overrides */
+  --bs-primary: #9a1220;
+  --bs-body-font-family: var(--font-base);
+  --bs-body-color: var(--dsh-ink);
+}
