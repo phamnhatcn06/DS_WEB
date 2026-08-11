@@ -231,6 +231,59 @@ $footerScript     = (string) SiteSetting::get('footer_script');
     </div>
   </footer>
 
+  <!-- ===== Popup: Liên hệ ngay ===== -->
+  <div class="modal fade contact-modal" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="contactModalLabel">Liên hệ ngay</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <form id="contactForm" action="<?php echo $this->createUrl('/frontend/contact/submit'); ?>" method="post" novalidate>
+          <div class="modal-body">
+            <p class="text-muted small mb-3">
+              Để lại thông tin, đội ngũ Đông Sơn Holdings sẽ liên hệ lại với bạn trong thời gian sớm nhất.
+            </p>
+
+            <div class="alert d-none" id="contactFormAlert" role="alert"></div>
+
+            <div class="mb-3">
+              <label for="contactFullName" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="contactFullName" name="ContactMessage[full_name]"
+                maxlength="150" required />
+            </div>
+            <div class="mb-3">
+              <label for="contactPhone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+              <input type="tel" class="form-control" id="contactPhone" name="ContactMessage[phone]"
+                maxlength="30" required />
+            </div>
+            <div class="mb-3">
+              <label for="contactEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="contactEmail" name="ContactMessage[email]"
+                maxlength="190" />
+            </div>
+            <div class="mb-1">
+              <label for="contactContent" class="form-label">Nội dung liên hệ <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="contactContent" name="ContactMessage[content]" rows="4"
+                maxlength="5000" required></textarea>
+            </div>
+
+            <input type="hidden" name="<?php echo Yii::app()->request->csrfTokenName; ?>"
+              value="<?php echo Yii::app()->request->csrfToken; ?>" />
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-dsh" id="contactSubmitBtn">
+              Gửi liên hệ
+              <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Bootstrap JS bundle (kèm Popper) — local -->
   <script src="<?php echo $root; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
   <!-- Custom JS -->
