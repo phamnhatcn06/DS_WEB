@@ -26,12 +26,12 @@ $items = $dataProvider->getData();
       <span class="badge bg-secondary"><?php echo $dataProvider->getTotalItemCount(); ?></span>
     </span>
 
-    <div class="d-flex gap-2">
-      <form method="get" class="d-flex flex-wrap gap-2">
+    <div class="d-flex gap-2 align-items-center">
+      <form method="get" class="d-flex gap-2 align-items-center">
         <?php foreach ($filters as $filter): ?>
           <?php $selected = isset($activeFilters[$filter['name']]) ? $activeFilters[$filter['name']] : ''; ?>
           <select name="<?php echo CHtml::encode($filter['name']); ?>"
-                  class="form-select form-select-sm" style="min-width:180px"
+                  class="form-select form-select-sm w-auto" style="min-width:160px"
                   aria-label="<?php echo CHtml::encode($filter['label']); ?>"
                   onchange="this.form.submit()">
             <option value=""><?php echo CHtml::encode(
