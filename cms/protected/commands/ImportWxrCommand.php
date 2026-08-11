@@ -471,6 +471,16 @@ class ImportWxrCommand extends CConsoleCommand
     // Tiện ích
     // ---------------------------------------------------------------------
 
+    /** Tiêu đề có chứa ký tự tiếng Việt có dấu không (dấu hiệu bài thật). */
+    private function isVietnamese($text)
+    {
+        return (bool) preg_match(
+            '/[ăâđêôơưàáạảãằắặẳẵầấậẩẫèéẹẻẽềếệểễìíịỉĩòóọỏõồốộổỗờớợởỡ'
+            . 'ùúụủũừứựửữỳýỵỷỹ]/ui',
+            $text
+        );
+    }
+
     private function postExists($sourceUrl)
     {
         $n = Yii::app()->db->createCommand()
