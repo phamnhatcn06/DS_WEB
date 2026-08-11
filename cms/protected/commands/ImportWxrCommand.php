@@ -151,6 +151,14 @@ class ImportWxrCommand extends CConsoleCommand
         echo "Bỏ (không publish): {$stat['skippedNotPublish']}\n";
         echo "Ảnh đã tải:         {$stat['images']}\n";
         echo "Lỗi:                {$stat['errors']}\n";
+
+        if ($this->dryRun && $this->categoryNameBySlug !== array()) {
+            echo "\n--- Danh mục sẽ dùng (" . count($this->categoryNameBySlug) . ") ---\n";
+            foreach ($this->categoryNameBySlug as $slug => $name) {
+                $onBar = in_array($slug, $this->filterSlugs, true) ? '  [tab trang chủ]' : '';
+                echo "  - {$name} ({$slug}){$onBar}\n";
+            }
+        }
     }
 
     /** Tiền tố URL cho ảnh trong nội dung. */
