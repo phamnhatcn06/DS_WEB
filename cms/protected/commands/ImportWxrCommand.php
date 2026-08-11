@@ -403,35 +403,52 @@ class ImportWxrCommand extends CConsoleCommand
     // Chuẩn bị danh mục / thư mục
     // ---------------------------------------------------------------------
 
-    /** Bảo đảm 4 danh mục đích tồn tại, nạp map slug->id. */
-    private function prepareCategories()
+    /** Bảo đảm các danh mục hiện trên thanh tab trang chủ luôn tồn tại. */
+    private function ensureFilterCategories()
     {
-        $needed = array(
+        $names = array(
             'du-an'   => 'Dự án',
             'thi-cong'=> 'Thi công',
             'dau-tu'  => 'Đầu tư',
             'co-dong' => 'Cổ đông',
             'tin-tuc' => 'Tin tức',
         );
-        $order = 1;
-        foreach ($needed as $slug => $name) {
-            $cat = NewsCategory::model()->find('slug = :s', array(':s' => $slug));
-            if ($cat === null) {
-                $cat = new NewsCategory();
-                $cat->name = $name;
-                $cat->slug = $slug;
-                $cat->show_in_filter = 1;
-                $cat->is_active = 1;
-                $cat->sort_order = $order;
-                if (!$cat->save()) {
-                    $this->fail('Không tạo được danh mục ' . $slug . ': '
-                        . implode('; ', $this->flattenErrors($cat->getErrors())));
-                }
-                echo "  + Tạo danh mục: {$name} ({$slug})\n";
-            }
-            $this->categoryIdBySlug[$slug] = (int) $cat->id;
-            $order++;
+        foreach ($names as $slug => $name) {
+            $this->ensureCategory($slug, $name);
         }
+    }
+
+    /**
+     * Tìm hoặc tạo danh mục CMS theo slug. Trả về id (dry-run: trả về slug).
+     * show_in_filter = 1 nếu slug nằm trong danh sách tab trang chủ, ngược lại 0.
+     */
+    private function ensureCategory($slug, $name)
+    {
+        if (isset($this->categoryIdBySlug[$slug])) {
+            return $this->categoryIdBySlug[$slug];
+        }
+        if ($this->dryRun) {
+            $this->categoryNameBySlug[$slug] = $name;
+            $this->categoryIdBySlug[$slug] = $slug; // id giả để thống kê
+            return $slug;
+        }
+
+        $cat = NewsCategory::model()->find('slug = :s', array(':s' => $slug));
+        if ($cat === null) {
+            $cat = new NewsCategory();
+            $cat->name = $name;
+            $cat->slug = $slug;
+            $cat->show_in_filter = in_array($slug, $this->filterSlugs, true) ? 1 : 0;
+            $cat->is_active = 1;
+            $cat->sort_order = count($this->categoryIdBySlug) + 1;
+            if (!$cat->save()) {
+                $this->fail('Không tạo được danh mục ' . $slug . ': '
+                    . implode('; ', $this->flattenErrors($cat->getErrors())));
+            }
+            echo "  + Tạo danh mục: {$name} ({$slug})\n";
+        }
+        $this->categoryIdBySlug[$slug] = (int) $cat->id;
+        return (int) $cat->id;
     }
 
     private function findOrCreateFolder($name, $slug)
