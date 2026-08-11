@@ -1,0 +1,9 @@
+# Ignore zip archive files
+*.zip
+cms.zip
+
+# System & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
