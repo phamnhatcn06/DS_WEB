@@ -168,31 +168,6 @@ $heroTitle = $currentCategory !== null
 
         </div>
 
-<?php if ($featurePost !== null): ?>
-<?php $featureUrl = $postUrl($featurePost); ?>
-        <!-- Featured full card — trải hết chiều rộng container -->
-        <a href="<?php echo CHtml::encode($featureUrl); ?>" class="text-decoration-none d-block mt-4 mt-lg-5">
-          <article class="tt-feature-card" data-reveal="up" style="--reveal-delay:150ms">
-            <div class="tt-feature-media">
-              <?php echo MediaHelper::imgOr($featurePost->thumbnail, $fallbackImg, $featurePost->title); ?>
-            </div>
-            <div class="tt-feature-body">
-<?php if ($featurePost->category !== null): ?>
-              <span class="tt-badge"><?php echo CHtml::encode($featurePost->category->name); ?></span>
-<?php endif; ?>
-              <h3><?php echo CHtml::encode($featurePost->title); ?></h3>
-<?php if ($featurePost->excerpt !== null && $featurePost->excerpt !== ''): ?>
-              <p><?php echo CHtml::encode(TextHelper::truncate($featurePost->excerpt, 200)); ?></p>
-<?php endif; ?>
-              <div class="tt-meta">
-                <span><?php echo CHtml::encode($publisher); ?></span>
-                <span class="tt-dot">•</span>
-                <span><?php echo CHtml::encode($featurePost->getFormattedDate()); ?></span>
-              </div>
-            </div>
-          </article>
-        </a>
-<?php endif; ?>
       </div>
     </section>
 
