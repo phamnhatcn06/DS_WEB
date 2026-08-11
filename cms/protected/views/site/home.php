@@ -533,9 +533,9 @@ $base = $root;
 
       <div class="container giatri-inner">
         <div class="row justify-content-end">
-          <div class="col-12 col-lg-9 col-xl-8">
+          <div class="col-12 col-lg-9 col-xl-6">
             <h2 class="giatri-title text-lg-end" data-reveal="right">
-              Xây dựng niềm tin,<em>vươn tới xuất sắc</em>
+              Xây dựng niềm tin,<em>kiến tạo giá trị</em>
             </h2>
 
             <div class="row row-cols-1 row-cols-md-2 g-4">
