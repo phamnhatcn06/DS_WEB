@@ -58,6 +58,7 @@ class ImportWxrCommand extends CConsoleCommand
         $dryRun = (int) $dryRun;
         $limit = (int) $limit;
         $skipForeign = (int) $skipForeign;
+        $this->dryRun = (bool) $dryRun;
         $this->imgBase = rtrim($imgBase, '/') . '/';
 
         $path = $this->resolvePath($file);
