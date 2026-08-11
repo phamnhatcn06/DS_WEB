@@ -113,6 +113,9 @@ return array(
                 'so-do-to-chuc'                          => 'frontend/sodo/index',
                 // Trang sứ mệnh - tầm nhìn: tuyên ngôn tầm nhìn, sứ mệnh, giá trị cốt lõi.
                 'su-menh-tam-nhin'                       => 'frontend/sumenh/index',
+                // Quan hệ cổ đông: danh sách tài liệu công bố theo danh mục.
+                'quan-he-co-dong'                        => 'frontend/investor/index',
+                'quan-he-co-dong/<category:[a-z0-9\-]+>' => 'frontend/investor/index',
                 // Trang tin tức & sự kiện: nội dung động từ pvn_news_posts.
                 'tin-tuc'                                => 'frontend/news/index',
                 'tin-tuc/danh-muc/<category:[a-z0-9\-]+>'=> 'frontend/news/index',
