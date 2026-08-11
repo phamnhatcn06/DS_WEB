@@ -223,7 +223,7 @@
    ========================================================================== */
 .tt-projects {
   position: relative;
-  background: var(--dsh-navy);
+  background: #7e101b; /* Figma 1272:19775 — nền đỏ đậm thương hiệu */
   padding-block: var(--section-py);
   overflow: hidden;
   isolation: isolate;
@@ -235,81 +235,77 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.14;
+  opacity: 0.08;
   z-index: -1;
 }
 
 .tt-projects .tt-section-title { color: #ffffff; }
 
-/* Card lớn: ảnh trên, nội dung dưới (khớp Figma node 1272:19786) */
+/* Card lớn: ảnh (badge overlay) trên, tiêu đề + mô tả dưới — khớp Figma 1272:19786 */
 .tt-project-feature {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   height: 100%;
 }
 
 .tt-project-media {
+  position: relative;
   background: #1f2937;
-  border-radius: 4px;
+  border-radius: 8px;
   overflow: hidden;
+  aspect-ratio: 800 / 431;
+  width: 100%;
 }
 
 .tt-project-media img {
   width: 100%;
-  aspect-ratio: 1186 / 368;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.tt-project-feature .tt-project-body { padding-top: 24px; color: #ffffff; }
+/* Badge nằm đè lên góc trên trái của ảnh */
+.tt-project-media .tt-badge {
+  position: absolute;
+  top: 17px;
+  left: 23px;
+  margin: 0;
+}
+
+.tt-project-feature .tt-project-body { padding: 0; color: #ffffff; }
 
 .tt-project-body h3 {
   font-family: var(--tt-font-heading);
   font-weight: 700;
-  font-size: clamp(1.25rem, 2.2vw, 26px);
-  line-height: 1.25;
-  margin: 16px 0 12px;
+  font-size: clamp(1.375rem, 2.2vw, 30px);
+  line-height: 1.2;
+  text-transform: uppercase;
+  margin: 0 0 12px;
 }
 
 .tt-project-body p {
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--dsh-muted);
+  font-size: clamp(1rem, 1.4vw, 20px);
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
 }
 
-/* Danh sách 3 tin nhỏ bên phải */
-.tt-project-list { display: flex; flex-direction: column; gap: 20px; }
-
-/* Từ lg trở lên: xếp 4 tin thành lưới 2×2 cho cân chiều cao với card lớn */
-@media (min-width: 992px) {
-  .tt-project-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 24px;
-    align-content: start;
-  }
-  /* Bỏ đường kẻ dưới của 2 item hàng cuối, thêm cho item hàng trên */
-  .tt-project-list .tt-project-item { padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-  .tt-project-list .tt-project-item:nth-last-child(-n+2) { border-bottom: 0; padding-bottom: 0; }
-}
+/* Danh sách 3 tin bên phải — thumbnail lớn + tiêu đề + ngày */
+.tt-project-list { display: flex; flex-direction: column; gap: 40px; }
 
 .tt-project-item {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   align-items: center;
   text-decoration: none;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tt-project-list .tt-project-item:last-child { border-bottom: 0; padding-bottom: 0; }
-
 .tt-project-item .tt-thumb-sm {
-  flex: 0 0 96px;
-  width: 96px;
-  height: 66px;
-  border-radius: 4px;
+  flex: 0 0 clamp(160px, 18vw, 250px);
+  width: clamp(160px, 18vw, 250px);
+  aspect-ratio: 250 / 165;
+  border-radius: 8px;
   overflow: hidden;
   background: var(--dsh-navy-2);
 }
@@ -319,10 +315,10 @@
 .tt-project-item h4 {
   font-family: var(--tt-font-heading);
   font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
+  font-size: clamp(1rem, 1.4vw, 20px);
+  line-height: 1.4;
   color: #ffffff;
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   transition: color var(--transition-base);
 }
 
@@ -330,10 +326,10 @@
 
 .tt-project-item .tt-date-sm {
   font-weight: 600;
-  font-size: 12px;
+  font-size: clamp(0.8125rem, 1vw, 16px);
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* ==========================================================================
