@@ -510,11 +510,15 @@ class ImportWxrCommand extends CConsoleCommand
 
     private function postExists($sourceUrl)
     {
-        $n = Yii::app()->db->createCommand()
-            ->select('COUNT(*)')->from('pvn_news_posts')
-            ->where('source_url = :u AND deleted_at IS NULL', array(':u' => $sourceUrl))
-            ->queryScalar();
-        return (int) $n > 0;
+        return $this->findExistingPost($sourceUrl) !== null;
+    }
+
+    /** Bài đã nhập trước đó (khớp source_url, chưa xoá mềm) hoặc null. */
+    private function findExistingPost($sourceUrl)
+    {
+        return NewsPost::model()->notDeleted()->find(
+            'source_url = :u', array(':u' => $sourceUrl)
+        );
     }
 
     private function resolvePath($file)
