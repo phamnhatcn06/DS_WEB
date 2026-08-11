@@ -241,6 +241,11 @@
 
 .tt-projects .tt-section-title { color: #ffffff; }
 
+/* Link "Xem thêm" trên nền đỏ: chữ + mũi tên màu trắng (Figma 1272:19863) */
+.tt-projects .tt-more { color: #ffffff; }
+.tt-projects .tt-more:hover { color: var(--dsh-gold); }
+.tt-projects .tt-more img { filter: brightness(0) invert(1); }
+
 /* Card lớn: ảnh (badge overlay) trên, tiêu đề + mô tả dưới — khớp Figma 1272:19786 */
 .tt-project-feature {
   display: flex;
