@@ -113,6 +113,8 @@ return array(
                 'so-do-to-chuc'                          => 'frontend/sodo/index',
                 // Trang sứ mệnh - tầm nhìn: tuyên ngôn tầm nhìn, sứ mệnh, giá trị cốt lõi.
                 'su-menh-tam-nhin'                       => 'frontend/sumenh/index',
+                // Trang chi tiết lĩnh vực theo slug (từ pvn_business_sectors).
+                'linh-vuc/<slug:[a-z0-9\-]+>'            => 'frontend/linhvuc/view',
                 // Quan hệ cổ đông: danh sách tài liệu công bố theo danh mục.
                 'quan-he-co-dong'                        => 'frontend/investor/index',
                 'quan-he-co-dong/<category:[a-z0-9\-]+>' => 'frontend/investor/index',
