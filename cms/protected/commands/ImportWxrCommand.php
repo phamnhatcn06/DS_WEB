@@ -307,8 +307,12 @@ class ImportWxrCommand extends CConsoleCommand
     private function rewriteContentImages($html)
     {
         $count = 0;
-        $host = preg_quote($this->sourceHost, '#');
-        $pattern = '#https?://' . $host . '/wp-content/uploads/[^\s"\'\\\\)]+#i';
+        $hosts = array();
+        foreach ($this->sourceHosts as $h) {
+            $hosts[] = preg_quote($h, '#');
+        }
+        $pattern = '#https?://(?:' . implode('|', $hosts)
+            . ')/wp-content/uploads/[^\s"\'\\\\)]+#i';
 
         $html = preg_replace_callback($pattern, function ($m) use (&$count) {
             $url = $m[0];
