@@ -6,7 +6,7 @@
  * Bổ sung cho m260811_000000 (đã tạo danh mục + menu). Idempotent: chỉ cập nhật
  * đúng mục có route cũ.
  */
-class m260811_010000_repoint_investor_menu_to_investor_controller extends CDbMigration
+class m260811_040000_repoint_investor_menu_to_investor_controller extends CDbMigration
 {
     /** slug danh mục ↔ tiêu đề mục menu con. */
     private $map = array(
