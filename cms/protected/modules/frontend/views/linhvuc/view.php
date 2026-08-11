@@ -159,8 +159,8 @@ $ctaSecondary    = $val($sector->detail_cta_secondary_label, 'Xem năng lực c�
 <?php foreach (preg_split('/\R{2,}/', (string) $sector->heritage_body, -1, PREG_SPLIT_NO_EMPTY) as $para): ?>
           <p data-reveal="up"><?php echo CHtml::encode(trim($para)); ?></p>
 <?php endforeach; ?>
-<?php if ($statsHtml !== ''): ?>
-          <div class="lv-stats" data-reveal="up"><?php echo $statsHtml; ?></div>
+<?php if ($statsFullHtml !== ''): ?>
+          <div class="lv-stats" data-reveal="up"><?php echo $statsFullHtml; ?></div>
 <?php endif; ?>
         </div>
 
