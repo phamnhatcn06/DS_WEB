@@ -281,6 +281,19 @@
 /* Danh sách 3 tin nhỏ bên phải */
 .tt-project-list { display: flex; flex-direction: column; gap: 20px; }
 
+/* Từ lg trở lên: xếp 4 tin thành lưới 2×2 cho cân chiều cao với card lớn */
+@media (min-width: 992px) {
+  .tt-project-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 24px;
+    align-content: start;
+  }
+  /* Bỏ đường kẻ dưới của 2 item hàng cuối, thêm cho item hàng trên */
+  .tt-project-list .tt-project-item { padding-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  .tt-project-list .tt-project-item:nth-last-child(-n+2) { border-bottom: 0; padding-bottom: 0; }
+}
+
 .tt-project-item {
   display: flex;
   gap: 16px;
