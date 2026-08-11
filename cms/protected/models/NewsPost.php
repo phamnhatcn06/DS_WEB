@@ -77,7 +77,7 @@ class NewsPost extends BaseActiveRecord
                 'message' => 'Trạng thái không hợp lệ.'),
             array('category_id, thumbnail_media_id, author_id, sort_order', 'numerical',
                 'integerOnly' => true),
-            array('is_featured, is_active', 'boolean'),
+            array('is_featured, is_featured_project, is_active', 'boolean'),
             array('excerpt, content, tagIds, categoryIds', 'safe'),
         );
     }
@@ -174,6 +174,7 @@ class NewsPost extends BaseActiveRecord
             'author_id'           => 'Tác giả',
             'card_size'           => 'Kích thước card',
             'is_featured'         => 'Bài nổi bật',
+            'is_featured_project' => 'Dự án trọng điểm',
             'view_count'          => 'Lượt xem',
             'status'              => 'Trạng thái',
             'source_url'          => 'Nguồn (nếu trích báo ngoài)',
@@ -263,5 +264,25 @@ class NewsPost extends BaseActiveRecord
     public function getIsPublished()
     {
         return $this->status === self::STATUS_PUBLISHED;
+    }
+
+    /**
+     * Scope lọc bài viết thuộc một danh mục (hỗ trợ cả cột category_id chính lẫn bảng liên kết pvn_news_post_categories).
+     */
+    public function belongingToCategory($categoryId)
+    {
+        $hasCatsTable = Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null;
+        if ($hasCatsTable) {
+            $this->getDbCriteria()->mergeWith(array(
+                'condition' => '(t.category_id = :catId OR EXISTS (SELECT 1 FROM pvn_news_post_categories npc WHERE npc.post_id = t.id AND npc.category_id = :catId))',
+                'params'    => array(':catId' => (int) $categoryId),
+            ));
+        } else {
+            $this->getDbCriteria()->mergeWith(array(
+                'condition' => 't.category_id = :catId',
+                'params'    => array(':catId' => (int) $categoryId),
+            ));
+        }
+        return $this;
     }
 }

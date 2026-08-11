@@ -68,7 +68,7 @@ class SiteController extends Controller
             'newsPosts' => NewsPost::model()->with('thumbnail', 'category')->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st',
                 'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
-                'order'     => 't.published_at DESC',
+                'order'     => 't.published_at DESC, t.id DESC',
                 'limit'     => 12,
             )),
         );

@@ -29,19 +29,19 @@ $s = function ($key, $default = '') {
 };
 $publisher = $s('news_publisher', 'HTDS Media');
 
-// --- Phân bổ bài vào các ô hiển thị (theo thứ tự mới nhất) ---
+// --- Phân bổ bài vào các ô hiển thị ---
 $topPosts       = array_slice($posts, 0, 2);   // 2 thẻ tin cột trên (section 1)
 $featurePost    = isset($posts[2]) ? $posts[2] : null; // featured full card
-$projectFeature = isset($posts[3]) ? $posts[3] : null; // card lớn section 2
-$projectList    = array_slice($posts, 4, 3);    // danh sách tin nhỏ section 2
+
+// Section 2: Dự án trọng điểm (lấy từ danh mục du-an & is_featured_project = 1)
+$projectPosts   = isset($projectPosts) ? $projectPosts : array();
+$projectFeature = isset($projectPosts[0]) ? $projectPosts[0] : null; // card lớn section 2
+$projectList    = array_slice($projectPosts, 1, 3);    // danh sách tin nhỏ section 2
 
 $fallbackImg = $root . '/assets/images/news-01.webp';
 
-/** URL đích của một bài: nguồn ngoài nếu có, ngược lại trang chi tiết nội bộ. */
+/** URL đích của một bài: trang chi tiết nội bộ /tin-tuc/<slug>. */
 $postUrl = function (NewsPost $post) {
-    if ($post->source_url !== null && $post->source_url !== '') {
-        return $post->source_url;
-    }
     return Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug));
 };
 
@@ -64,6 +64,11 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
 <?php
     return ob_get_clean();
 };
+$currentCategory = isset($currentCategory) ? $currentCategory : null;
+$categoryName = $currentCategory !== null ? $currentCategory->name : 'Nổi bật';
+$heroTitle = $currentCategory !== null
+    ? mb_strtoupper($currentCategory->name, 'UTF-8')
+    : $s('news_hero_title', 'TIN TỨC VÀ SỰ KIỆN');
 ?>
 
     <!-- ===== HeroBanner ===== -->
@@ -74,13 +79,19 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
       <nav class="about-hero-breadcrumb" aria-label="Breadcrumb">
         <a href="<?php echo CHtml::encode($home); ?>">Trang chủ</a>
         <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+<?php if ($currentCategory !== null): ?>
+        <a href="<?php echo CHtml::encode(Yii::app()->createUrl('frontend/news/index')); ?>">Tin tức</a>
+        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+        <span class="bc-current"><?php echo CHtml::encode($currentCategory->name); ?></span>
+<?php else: ?>
         <span class="bc-current">Tin tức</span>
+<?php endif; ?>
       </nav>
 
       <!-- Nội dung giữa -->
       <div class="container about-hero-content">
         <span class="about-hero-eyebrow" data-reveal="up"><span><?php echo CHtml::encode($s('news_hero_eyebrow', 'Đông Sơn Holdings')); ?></span></span>
-        <h1 class="about-hero-title" data-reveal="up" style="--reveal-delay:120ms"><?php echo CHtml::encode($s('news_hero_title', 'TIN TỨC VÀ SỰ KIỆN')); ?></h1>
+        <h1 class="about-hero-title" data-reveal="up" style="--reveal-delay:120ms"><?php echo CHtml::encode($heroTitle); ?></h1>
         <p class="about-hero-subtitle" data-reveal="up" style="--reveal-delay:220ms">
           <?php echo CHtml::encode($s('news_hero_subtitle',
             'Cập nhật những thông tin mới nhất về dự án, hoạt động kinh doanh và các sự kiện '
@@ -94,8 +105,8 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
       <div class="container tt-page">
 
         <div class="tt-section-head">
-          <h2 class="tt-section-title">Nổi bật</h2>
-          <a class="tt-more" href="<?php echo CHtml::encode($home); ?>#tin-tuc">Xem thêm
+          <h2 class="tt-section-title"><?php echo CHtml::encode($categoryName); ?></h2>
+          <a class="tt-more" href="<?php echo CHtml::encode(Yii::app()->createUrl('frontend/news/index')); ?>">Xem tất cả
             <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" /></a>
         </div>
 
@@ -110,7 +121,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
 <?php endforeach; ?>
             </div>
 <?php else: ?>
-            <p class="text-muted py-5 m-0">Chưa có bài viết nổi bật.</p>
+            <p class="text-muted py-5 m-0">Chưa có bài viết trong danh mục này.</p>
 <?php endif; ?>
           </div>
 
@@ -119,12 +130,15 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
             <div class="tt-categories" data-reveal="up" style="--reveal-delay:120ms">
               <h4>Danh mục tin tức</h4>
               <ul class="tt-cat-list">
-                <li class="is-active">
-                  <a href="<?php echo CHtml::encode($home); ?>#tin-tuc">Tất cả tin tức <span>(<?php echo (int) $totalPublished; ?>)</span></a>
-                </li>
 <?php foreach ($categories as $cat): ?>
-<?php $count = isset($categoryCounts[$cat->id]) ? $categoryCounts[$cat->id] : 0; ?>
-                <li><a href="<?php echo CHtml::encode($home . '#tin-tuc'); ?>"><?php echo CHtml::encode($cat->name); ?> <span>(<?php echo (int) $count; ?>)</span></a></li>
+<?php
+  $count = isset($categoryCounts[$cat->id]) ? $categoryCounts[$cat->id] : 0;
+  $isCatActive = ($currentCategory !== null && (int)$currentCategory->id === (int)$cat->id);
+  $catUrl = Yii::app()->createUrl('frontend/news/index', array('category' => $cat->slug));
+?>
+                <li class="<?php echo $isCatActive ? 'is-active' : ''; ?>">
+                  <a href="<?php echo CHtml::encode($catUrl); ?>"><?php echo CHtml::encode($cat->name); ?> <span>(<?php echo (int) $count; ?>)</span></a>
+                </li>
 <?php endforeach; ?>
               </ul>
             </div>

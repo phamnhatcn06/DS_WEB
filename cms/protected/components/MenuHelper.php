@@ -143,7 +143,13 @@ class MenuHelper
     {
         if (isset($row['item_type']) && $row['item_type'] === MenuItem::TYPE_ROUTE
             && !empty($row['route'])) {
-            return Yii::app()->createUrl($row['route']);
+            $route = $row['route'];
+            if (strpos($route, '?') !== false) {
+                list($routePath, $queryStr) = explode('?', $route, 2);
+                parse_str($queryStr, $params);
+                return Yii::app()->createUrl($routePath, $params);
+            }
+            return Yii::app()->createUrl($route);
         }
         return self::resolveUrl($row['url'], $base);
     }

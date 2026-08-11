@@ -8,12 +8,23 @@
  */
 class NewsController extends FrontendController
 {
-    public function actionIndex()
+    public function actionIndex($category = null)
     {
-        $this->pageTitle = SiteSetting::get('news_meta_title',
-            'Tin tức & Sự kiện — Đông Sơn Holdings');
+        if (empty($category) && isset($_GET['category'])) {
+            $category = $_GET['category'];
+        }
 
-        $this->render('index', NewsDataService::load());
+        $data = NewsDataService::load($category);
+        $currentCat = isset($data['currentCategory']) ? $data['currentCategory'] : null;
+
+        if ($currentCat !== null) {
+            $this->pageTitle = $currentCat->name . ' — Đông Sơn Holdings';
+        } else {
+            $this->pageTitle = SiteSetting::get('news_meta_title',
+                'Tin tức & Sự kiện — Đông Sơn Holdings');
+        }
+
+        $this->render('index', $data);
     }
 
     /**

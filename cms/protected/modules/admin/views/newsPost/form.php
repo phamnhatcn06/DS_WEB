@@ -135,6 +135,10 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
           <?php echo $form->checkBox($model, 'is_featured', array('class' => 'form-check-input')); ?>
           <?php echo $form->label($model, 'is_featured', array('class' => 'form-check-label')); ?>
         </div>
+        <div class="form-check mb-2">
+          <?php echo $form->checkBox($model, 'is_featured_project', array('class' => 'form-check-input')); ?>
+          <?php echo $form->label($model, 'is_featured_project', array('class' => 'form-check-label')); ?>
+        </div>
         <div class="form-check mb-3">
           <?php echo $form->checkBox($model, 'is_active', array('class' => 'form-check-input')); ?>
           <?php echo $form->label($model, 'is_active', array('class' => 'form-check-label')); ?>

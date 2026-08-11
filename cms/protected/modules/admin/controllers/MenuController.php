@@ -396,13 +396,21 @@ class MenuController extends AdminController
         return $options;
     }
 
-    /** Datalist route nội bộ đã dùng (gợi ý khi nhập route). */
+    /** Datalist route nội bộ đã dùng + gợi ý danh mục tin tức (gợi ý khi nhập route). */
     public function routeSuggestions($locationId)
     {
+        $suggestions = array('frontend/news/index');
+        $categories = NewsCategory::model()->findAll('deleted_at IS NULL AND is_active = 1');
+        foreach ($categories as $cat) {
+            $suggestions[] = 'frontend/news/index?category=' . $cat->slug;
+        }
+
         $rows = MenuItem::model()->getDbConnection()->createCommand()
             ->selectDistinct('route')->from('pvn_menu_items')
-            ->where('route IS NOT NULL')->queryColumn();
-        sort($rows);
-        return $rows;
+            ->where('route IS NOT NULL AND route <> ""')->queryColumn();
+
+        $all = array_unique(array_merge($suggestions, $rows));
+        sort($all);
+        return array_values($all);
     }
 }

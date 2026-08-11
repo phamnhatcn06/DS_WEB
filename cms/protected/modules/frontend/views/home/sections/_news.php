@@ -76,7 +76,7 @@ if (!empty($newsPosts)) {
             'excerpt'  => $post->excerpt,
             'tags'     => $tagNames,
             'tagSlugs' => $tagSlugs,
-            'url'      => ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#tin-tuc',
+            'url'      => Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug)),
         );
     }
 } else {

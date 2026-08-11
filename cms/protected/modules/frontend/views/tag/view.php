@@ -73,7 +73,7 @@ $total        = $totalPosts + $totalSectors;
           <h2 class="tagp-section-title">Tin tức</h2>
           <div class="row g-4 tagp-grid">
 <?php foreach ($posts as $post): ?>
-<?php $url = ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : $home . '#tin-tuc'; ?>
+<?php $url = Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug)); ?>
             <div class="col-12 col-md-6 col-lg-4">
               <a href="<?php echo CHtml::encode($url); ?>" class="tagp-card">
                 <div class="tagp-card-media">

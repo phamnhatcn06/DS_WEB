@@ -71,6 +71,9 @@ class NewsPostController extends AdminCrudController
         if ($item->is_featured) {
             $html .= ' <i class="fa fa-star text-warning" title="Bài nổi bật"></i>';
         }
+        if ($item->is_featured_project) {
+            $html .= ' <i class="fa fa-building text-danger" title="Dự án trọng điểm"></i>';
+        }
         return $html;
     }
 
@@ -98,8 +101,9 @@ class NewsPostController extends AdminCrudController
             array('name' => 'status', 'type' => 'select', 'width' => 6,
                 'options' => NewsPost::statusOptions()),
             array('name' => 'source_url', 'width' => 12),
-            array('name' => 'is_featured', 'type' => 'checkbox', 'width' => 6),
-            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
+            array('name' => 'is_featured', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'is_featured_project', 'type' => 'checkbox', 'width' => 4),
+            array('name' => 'is_active', 'type' => 'checkbox', 'width' => 4),
         );
     }
 

@@ -16,18 +16,107 @@ class NewsDataService
     /** Số bài nạp tối đa cho toàn trang (đủ cho 2 section: 3 nổi bật + 4 dự án). */
     const POST_LIMIT = 9;
 
-    public static function load()
+    /** Số bài hiển thị trên mỗi trang danh sách tin tức (có phân trang). */
+    const POSTS_PER_PAGE = 20;
+
+    /**
+     * Lấy ID của danh mục "Tin tức" (slug = 'tin-tuc' hoặc name = 'Tin tức').
+     * Tự động khởi tạo danh mục nếu chưa có trong CSDL.
+     *
+     * @return int|null
+     */
+    public static function getNewsCategoryId()
+    {
+        $category = NewsCategory::model()->find(array(
+            'condition' => 't.deleted_at IS NULL AND (t.slug = :slug OR t.name = :name)',
+            'params'    => array(':slug' => 'tin-tuc', ':name' => 'Tin tức'),
+        ));
+        if ($category !== null) {
+            return (int) $category->id;
+        }
+
+        // Tự tạo danh mục nếu chưa có để đảm bảo luôn đúng logic.
+        $newCat = new NewsCategory();
+        $newCat->name = 'Tin tức';
+        $newCat->slug = 'tin-tuc';
+        $newCat->show_in_filter = 1;
+        $newCat->is_active = 1;
+        if ($newCat->save(false)) {
+            return (int) $newCat->id;
+        }
+
+        return null;
+    }
+
+    public static function load($categorySlug = null)
     {
         $publishedCond = 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st';
         $publishedParams = array(':st' => NewsPost::STATUS_PUBLISHED);
 
-        // Danh sách bài mới nhất (dùng chung cho cả 2 section, phân bổ ở view).
-        $posts = NewsPost::model()->with('thumbnail', 'category')->findAll(array(
+        // Tìm danh mục theo categorySlug nếu có truyền vào
+        $targetCategory = null;
+        if (!empty($categorySlug)) {
+            $targetCategory = NewsCategory::model()->find(array(
+                'condition' => 't.deleted_at IS NULL AND (t.slug = :s OR t.name = :s)',
+                'params'    => array(':s' => $categorySlug),
+            ));
+        }
+
+        // Nếu không truyền categorySlug -> mặc định là danh mục "Tin tức" (slug: tin-tuc)
+        if ($targetCategory === null && empty($categorySlug)) {
+            $newsCatId = self::getNewsCategoryId();
+            if ($newsCatId !== null) {
+                $targetCategory = NewsCategory::model()->findByPk($newsCatId);
+            }
+        }
+
+        $model = NewsPost::model();
+        if ($targetCategory !== null) {
+            $model = $model->belongingToCategory($targetCategory->id);
+        } elseif (!empty($categorySlug)) {
+            // Trường hợp slug truyền vào không tồn tại trong DB -> không lấy bài nào
+            $publishedCond .= ' AND 1 = 0';
+        }
+
+        // Danh sách bài mới nhất thuộc danh mục đã chọn (mới nhất -> cũ nhất).
+        $posts = $model->with('thumbnail', 'category')->findAll(array(
             'condition' => $publishedCond,
             'params'    => $publishedParams,
-            'order'     => 't.published_at DESC, t.sort_order ASC',
+            'order'     => 't.published_at DESC, t.id DESC',
             'limit'     => self::POST_LIMIT,
         ));
+
+        // Section 2: Dự án trọng điểm — lấy bài viết thuộc danh mục du-an và có is_featured_project = 1
+        $duAnCategory = NewsCategory::model()->find(array(
+            'condition' => 't.deleted_at IS NULL AND (t.slug = :s OR t.name = :n)',
+            'params'    => array(':s' => 'du-an', ':n' => 'Dự án'),
+        ));
+
+        $projectPosts = array();
+        if ($duAnCategory !== null) {
+            $projectPosts = NewsPost::model()
+                ->belongingToCategory($duAnCategory->id)
+                ->with('thumbnail', 'category')
+                ->findAll(array(
+                    'condition' => $publishedCond . ' AND t.is_featured_project = 1',
+                    'params'    => $publishedParams,
+                    'order'     => 't.published_at DESC, t.id DESC',
+                    'limit'     => 4,
+                ));
+
+            // Fallback nếu chưa có bài nào đánh dấu is_featured_project = 1: lấy bài thuộc danh mục du-an
+            if (empty($projectPosts)) {
+                $projectPosts = NewsPost::model()
+                    ->belongingToCategory($duAnCategory->id)
+                    ->with('thumbnail', 'category')
+                    ->findAll(array(
+                        'condition' => $publishedCond,
+                        'params'    => $publishedParams,
+                        'order'     => 't.published_at DESC, t.id DESC',
+                        'limit'     => 4,
+                    ));
+            }
+        }
 
         // Danh mục hiện trên thanh lọc, kèm số bài đã xuất bản của từng danh mục.
         $categories = NewsCategory::model()->findAll(array(
@@ -36,12 +125,19 @@ class NewsDataService
         ));
         $counts = self::publishedCountByCategory();
 
+        $currentCatId = $targetCategory !== null ? (int) $targetCategory->id : null;
+        $totalPublished = ($currentCatId !== null && isset($counts[$currentCatId]))
+            ? $counts[$currentCatId]
+            : count($posts);
+
         return array(
-            'heroBgUrl'    => self::mediaUrl('news_hero_bg', '/assets/images/news-hero.webp'),
-            'posts'        => $posts,
-            'categories'   => $categories,
-            'categoryCounts' => $counts,
-            'totalPublished' => array_sum($counts),
+            'heroBgUrl'       => self::mediaUrl('news_hero_bg', '/assets/images/news-hero.webp'),
+            'posts'           => $posts,
+            'projectPosts'    => $projectPosts,
+            'categories'      => $categories,
+            'categoryCounts'  => $counts,
+            'totalPublished'  => $totalPublished,
+            'currentCategory' => $targetCategory,
         );
     }
 
@@ -66,11 +162,20 @@ class NewsDataService
             return null;
         }
 
-        // Tin mới nhất cho sidebar — bỏ chính bài đang xem.
-        $latest = NewsPost::model()->with('thumbnail')->findAll(array(
-            'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st'
-                . ' AND t.id <> :id',
-            'params'    => array(':st' => NewsPost::STATUS_PUBLISHED, ':id' => (int) $post->id),
+        // Tin mới nhất cho sidebar — bỏ chính bài đang xem, chỉ lấy thuộc danh mục Tin tức.
+        $latestCond = 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st'
+            . ' AND t.id <> :id';
+        $latestParams = array(':st' => NewsPost::STATUS_PUBLISHED, ':id' => (int) $post->id);
+
+        $newsCatId = self::getNewsCategoryId();
+        $latestModel = NewsPost::model();
+        if ($newsCatId !== null) {
+            $latestModel = $latestModel->belongingToCategory($newsCatId);
+        }
+
+        $latest = $latestModel->with('thumbnail')->findAll(array(
+            'condition' => $latestCond,
+            'params'    => $latestParams,
             'order'     => 't.published_at DESC',
             'limit'     => 3,
         ));
@@ -89,18 +194,30 @@ class NewsDataService
     }
 
     /**
-     * Số bài đã xuất bản theo từng danh mục (đếm theo category_id chính) →
-     * [category_id => count]. Dùng cho con số trong sidebar.
+     * Số bài đã xuất bản theo từng danh mục → [category_id => count].
+     * Hỗ trợ đếm chính xác khi một bài thuộc nhiều danh mục (qua bảng pvn_news_post_categories).
      */
     private static function publishedCountByCategory()
     {
-        $rows = Yii::app()->db->createCommand()
-            ->select('category_id, COUNT(*) AS c')
-            ->from('pvn_news_posts')
-            ->where('deleted_at IS NULL AND is_active = 1 AND status = :st AND category_id IS NOT NULL',
-                array(':st' => NewsPost::STATUS_PUBLISHED))
-            ->group('category_id')
-            ->queryAll();
+        $hasCatsTable = Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null;
+        if ($hasCatsTable) {
+            $rows = Yii::app()->db->createCommand()
+                ->select('npc.category_id, COUNT(DISTINCT p.id) AS c')
+                ->from('pvn_news_post_categories npc')
+                ->join('pvn_news_posts p', 'p.id = npc.post_id')
+                ->where('p.deleted_at IS NULL AND p.is_active = 1 AND p.status = :st',
+                    array(':st' => NewsPost::STATUS_PUBLISHED))
+                ->group('npc.category_id')
+                ->queryAll();
+        } else {
+            $rows = Yii::app()->db->createCommand()
+                ->select('category_id, COUNT(*) AS c')
+                ->from('pvn_news_posts')
+                ->where('deleted_at IS NULL AND is_active = 1 AND status = :st AND category_id IS NOT NULL',
+                    array(':st' => NewsPost::STATUS_PUBLISHED))
+                ->group('category_id')
+                ->queryAll();
+        }
 
         $counts = array();
         foreach ($rows as $row) {

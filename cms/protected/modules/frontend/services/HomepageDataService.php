@@ -62,9 +62,7 @@ class HomepageDataService
             'newsPosts' => NewsPost::model()->with($newsWith)->findAll(array(
                 'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st',
                 'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
-                // Theo "Thứ tự" (sort_order) do admin sắp — không theo card_size;
-                // published_at DESC chỉ để phá hoà khi trùng sort_order.
-                'order'     => 't.sort_order ASC, t.published_at DESC',
+                'order'     => 't.published_at DESC, t.id DESC',
                 'limit'     => 12,
             )),
 
