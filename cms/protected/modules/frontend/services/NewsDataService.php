@@ -109,7 +109,7 @@ class NewsDataService
                 'condition' => $publishedCond . ' AND t.is_featured_project = 1',
                 'params'    => $publishedParams,
                 'order'     => 't.published_at DESC, t.id DESC',
-                'limit'     => 5,
+                'limit'     => 4,
             ));
 
         // Danh mục hiện trên thanh lọc, kèm số bài đã xuất bản của từng danh mục.
