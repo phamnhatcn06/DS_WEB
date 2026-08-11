@@ -62,8 +62,15 @@ $capAsset = function ($media, $path) use ($themeBase) {
     return ($path !== null && $path !== '') ? rtrim($themeBase, '/') . '/' . $path : '';
 };
 
-$statsHtml = $renderStat($sector->stat1_value, $sector->stat1_suffix, $sector->stat1_label)
+// Section 3 (Kế Thừa): nhãn dài + gạch đỏ.
+$statsFullHtml = $renderStat($sector->stat1_value, $sector->stat1_suffix, $sector->stat1_label)
     . $renderStat($sector->stat2_value, $sector->stat2_suffix, $sector->stat2_label);
+
+// Section 2 (panel trích dẫn): nhãn ngắn (fallback nhãn dài) + không gạch đỏ.
+$statsQuoteHtml = $renderStat($sector->stat1_value, $sector->stat1_suffix,
+        $val($attr('stat1_short_label'), $sector->stat1_label), false)
+    . $renderStat($sector->stat2_value, $sector->stat2_suffix,
+        $val($attr('stat2_short_label'), $sector->stat2_label), false);
 
 $ctaPrimaryLabel = $val($sector->cta_label, 'Khám phá dự án');
 $ctaPrimaryUrl   = $resolveUrl($val($sector->cta_url, '#du-an'));
