@@ -1,0 +1,323 @@
+/* ==========================================================================
+   linhvuc-detail.css — Trang chi tiết Lĩnh vực ("Thi công & Xây lắp")
+   Figma: file ĐÔNG SƠN WEBSITE — frame 1484:2784 (hero node 1484:2789)
+   Template dùng chung cho 4 lĩnh vực (data động thay nội dung/ảnh).
+   ========================================================================== */
+
+/* ===== Section 1: HeroBanner — nền gradient đỏ→đen (không dùng ảnh) ===== */
+.lv-hero {
+  position: relative;
+  min-height: 619px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(
+    180deg,
+    var(--dsh-navy, #080f1d) 0%,
+    #3a0a12 55%,
+    var(--dsh-red, #9a1220) 100%
+  );
+}
+
+/* Breadcrumb góc trên trái */
+.lv-hero-breadcrumb {
+  position: absolute;
+  top: 104px;
+  left: clamp(16px, 8vw, 131px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 19.5px;
+  z-index: 1;
+}
+
+.lv-hero-breadcrumb a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lv-hero-breadcrumb a:hover { color: #ffffff; }
+.lv-hero-breadcrumb .bc-current { color: var(--dsh-gold, #c9a84c); }
+.lv-hero-breadcrumb .bc-sep { color: rgba(255, 255, 255, 0.4); font-size: 11px; }
+
+.lv-hero-content {
+  text-align: center;
+  color: #ffffff;
+  padding-block: 40px;
+  max-width: 900px;
+}
+
+.lv-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.lv-hero-eyebrow span {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--dsh-gold, #c9a84c);
+}
+
+.lv-hero-eyebrow::before,
+.lv-hero-eyebrow::after {
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--dsh-gold, #c9a84c);
+}
+
+.lv-hero-title {
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5.5vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.lv-hero-subtitle {
+  margin: 20px auto 32px;
+  max-width: 760px;
+  font-size: clamp(1rem, 1.4vw, 18px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lv-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ===== Section 2: Intro / Legacy — ảnh "1979" + quote + stats ===== */
+.lv-intro { padding: 0; }
+
+.lv-intro .row { --bs-gutter-x: 0; }
+
+/* Cột ảnh có overlay số năm + nhãn */
+.lv-legacy-visual {
+  position: relative;
+  min-height: 480px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.lv-legacy-visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.lv-legacy-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(8, 15, 29, 0.15) 0%, rgba(8, 15, 29, 0.75) 100%);
+}
+
+.lv-legacy-caption {
+  margin-top: auto;
+  padding: clamp(32px, 5vw, 64px);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 480px;
+}
+
+.lv-legacy-year {
+  font-weight: 800;
+  font-size: clamp(3rem, 6vw, 72px);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.lv-legacy-caption h3 {
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2vw, 24px);
+  margin: 16px 0 12px;
+}
+
+.lv-legacy-caption p {
+  margin: 0;
+  max-width: 420px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Cột quote bên phải */
+.lv-quote-panel {
+  background: #f6f7f9;
+  padding: clamp(40px, 6vw, 96px) clamp(24px, 6vw, 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 480px;
+}
+
+.lv-quote-mark {
+  display: inline-flex;
+  gap: 5px;
+  margin-bottom: 28px;
+}
+
+.lv-quote-mark span {
+  width: 10px;
+  height: 26px;
+  background: var(--dsh-red, #9a1220);
+  border-radius: 2px;
+}
+
+.lv-quote-text {
+  font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 32px);
+  line-height: 1.35;
+  color: var(--dsh-ink, #0d2545);
+  margin: 0 0 32px;
+}
+
+.lv-quote-panel .lv-stats { border-top: 1px solid rgba(8, 15, 29, 0.1); padding-top: 28px; }
+
+/* ===== Stat block dùng chung (số đỏ + nhãn) ===== */
+.lv-stats { display: flex; gap: clamp(32px, 5vw, 64px); }
+
+.lv-stat .lv-stat-num {
+  display: block;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 40px);
+  line-height: 1;
+  color: var(--dsh-red, #9a1220);
+}
+
+.lv-stat .lv-stat-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--dsh-slate, #5a6880);
+}
+
+/* Biến thể có gạch đỏ bên trái (section 3) */
+.lv-stat--bar { padding-left: 16px; border-left: 3px solid var(--dsh-red, #9a1220); }
+
+/* ===== Section 3: Kế thừa di sản — text + ảnh ===== */
+.lv-heritage h2 {
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  color: var(--dsh-ink, #0d2545);
+  margin-bottom: 24px;
+}
+
+.lv-heritage p {
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--dsh-slate, #5a6880);
+  margin-bottom: 20px;
+}
+
+.lv-heritage .lv-stats { margin-top: 32px; }
+
+.lv-heritage-img {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  border-radius: var(--radius-lg, 1rem);
+}
+
+/* ===== Section 4: Năng Lực Cốt Lõi — grid card bento ===== */
+.lv-capability h2 {
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  color: var(--dsh-ink, #0d2545);
+  margin-bottom: 16px;
+}
+
+.lv-capability .lv-lead {
+  max-width: 760px;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+  color: var(--dsh-slate, #5a6880);
+  margin-bottom: 40px;
+}
+
+/* Card lĩnh vực */
+.lv-cap-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  min-height: 220px;
+  padding: 28px;
+  border-radius: var(--radius-lg, 1rem);
+  overflow: hidden;
+  isolation: isolate;
+  color: #ffffff;
+  background: #eceef1;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.lv-cap-card:hover { transform: translateY(-6px); box-shadow: 0 1rem 2.5rem rgba(8, 15, 29, .18); }
+
+.lv-cap-card img.lv-cap-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.lv-cap-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(8, 15, 29, 0) 30%, rgba(8, 15, 29, 0.82) 100%);
+}
+
+/* Card ảnh xám (Công nghiệp) — theo thiết kế grayscale */
+.lv-cap-card--gray img.lv-cap-bg { filter: grayscale(1) contrast(1.05); }
+
+/* Card không có ảnh (Dân dụng) — nền sáng, chữ tối */
+.lv-cap-card--plain { color: var(--dsh-ink, #0d2545); background: #eceef1; }
+.lv-cap-card--plain::after { display: none; }
+
+.lv-cap-card--tall { min-height: 460px; }
+
+.lv-cap-icon { margin-bottom: 16px; }
+.lv-cap-icon img { width: 26px; height: 26px; display: block; }
+
+.lv-cap-card h3 {
+  font-weight: 700;
+  font-size: clamp(1.125rem, 1.8vw, 22px);
+  margin: 0 0 8px;
+}
+
+.lv-cap-card p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: inherit;
+  opacity: 0.82;
+}
+
+@media (max-width: 991.98px) {
+  .lv-legacy-visual, .lv-legacy-caption, .lv-quote-panel { min-height: 360px; }
+  .lv-cap-card--tall { min-height: 300px; }
+}
