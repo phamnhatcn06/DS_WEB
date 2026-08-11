@@ -602,3 +602,59 @@ body.admin-body {
 #mediaPickerModal {
   z-index: 20000;
 }
+
+/* ===== Phân trang (Yii CLinkPager) =====
+   CLinkPager render <ul class="pagination"><li><a> nhưng KHÔNG kèm
+   class .page-item/.page-link của Bootstrap 5, nên mất hết style
+   (dính chùm "Đầu«123456789»Cuối"). Vá lại bằng cách style trực tiếp
+   cấu trúc li > a/span mà pager sinh ra. */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25rem;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  position: relative;
+  display: block;
+  padding: .375rem .75rem;
+  min-width: 2.25rem;
+  text-align: center;
+  color: #2271b1;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid var(--bs-border-color, #dee2e6);
+  border-radius: 6px;
+  line-height: 1.25;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out,
+              border-color .15s ease-in-out;
+}
+.pagination.pagination-sm > li > a,
+.pagination.pagination-sm > li > span {
+  padding: .25rem .5rem;
+  min-width: 2rem;
+  font-size: .875rem;
+}
+.pagination > li > a:hover {
+  color: #135e96;
+  background-color: #f0f6fc;
+  border-color: #2271b1;
+}
+.pagination > li.active > a,
+.pagination > li.active > span {
+  color: #fff;
+  background-color: #2271b1;
+  border-color: #2271b1;
+  cursor: default;
+}
+.pagination > li.disabled > a,
+.pagination > li.disabled > span,
+.pagination > li.hidden {
+  color: #adb5bd;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: var(--bs-border-color, #dee2e6);
+}
