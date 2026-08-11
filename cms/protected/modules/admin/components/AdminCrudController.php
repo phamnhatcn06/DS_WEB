@@ -62,6 +62,17 @@ abstract class AdminCrudController extends AdminController
             $this->applySearch($criteria, $search);
         }
 
+        // Bộ lọc bổ sung (vd lọc theo danh mục): đọc giá trị đã chọn và áp vào truy vấn.
+        $filters = $this->indexFilters();
+        $activeFilters = array();
+        foreach ($filters as $filter) {
+            $value = trim((string) Yii::app()->request->getParam($filter['name'], ''));
+            if ($value !== '') {
+                $activeFilters[$filter['name']] = $value;
+                $this->applyIndexFilter($criteria, $filter['name'], $value);
+            }
+        }
+
         $dataProvider = new CActiveDataProvider($this->modelClass, array(
             'criteria'   => $criteria,
             'pagination' => array('pageSize' => Yii::app()->params['pageSize']),
@@ -69,9 +80,11 @@ abstract class AdminCrudController extends AdminController
 
         $this->pageTitle = $this->titlePlural;
         $this->render('admin.views.crud.index', array(
-            'dataProvider' => $dataProvider,
-            'columns'      => $this->gridColumns(),
-            'search'       => $search,
+            'dataProvider'  => $dataProvider,
+            'columns'       => $this->gridColumns(),
+            'search'        => $search,
+            'filters'       => $filters,
+            'activeFilters' => $activeFilters,
         ));
     }
 
