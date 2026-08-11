@@ -216,6 +216,22 @@ abstract class AdminCrudController extends AdminController
         }
     }
 
+    /**
+     * Bộ lọc bổ sung hiển thị cạnh ô tìm kiếm ở danh sách.
+     * Mỗi phần tử: array('name'=>, 'label'=>, 'options'=>array(value=>label), 'all'=>'Nhãn mục tất cả')
+     * Controller con override để khai báo; mặc định không có bộ lọc nào.
+     */
+    protected function indexFilters()
+    {
+        return array();
+    }
+
+    /**
+     * Áp một bộ lọc đã chọn vào truy vấn. Controller con override để xử lý điều
+     * kiện riêng cho model của mình (vd lọc theo bảng liên kết nhiều-nhiều).
+     */
+    protected function applyIndexFilter(CDbCriteria $criteria, $name, $value) {}
+
     /** Hook cho controller con can thiệp trước khi lưu. */
     protected function beforeSaveModel($model, $post) {}
 
