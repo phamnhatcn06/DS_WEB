@@ -3,6 +3,15 @@
 /* @var $dataProvider CActiveDataProvider */
 /* @var $columns array */
 /* @var $search string */
+/* @var $filters array */
+/* @var $activeFilters array */
+
+$filters = isset($filters) ? $filters : array();
+$activeFilters = isset($activeFilters) ? $activeFilters : array();
+$hasFilter = false;
+foreach ($activeFilters as $activeValue) {
+    if ($activeValue !== '') { $hasFilter = true; break; }
+}
 
 $user = Yii::app()->user;
 $resource = $this->getPermissionResource();
