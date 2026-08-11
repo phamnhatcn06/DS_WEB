@@ -53,11 +53,12 @@ class ImportWxrCommand extends CConsoleCommand
      * @param int    $limit   giới hạn số bài xử lý (0 = tất cả).
      * @param string $imgBase tiền tố URL cho ảnh viết lại trong nội dung.
      */
-    public function actionIndex($file, $dryRun = 0, $limit = 0, $imgBase = '/', $skipForeign = 1)
+    public function actionIndex($file, $dryRun = 0, $limit = 0, $imgBase = '/', $skipForeign = 1, $update = 0)
     {
         $dryRun = (int) $dryRun;
         $limit = (int) $limit;
         $skipForeign = (int) $skipForeign;
+        $update = (int) $update;
         $this->dryRun = (bool) $dryRun;
         $this->imgBase = rtrim($imgBase, '/') . '/';
 
