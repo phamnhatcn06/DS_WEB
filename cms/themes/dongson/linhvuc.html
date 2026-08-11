@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO -->
+  <title>Thi công &amp; Xây lắp — Lĩnh vực | Đông Sơn Holdings</title>
+  <meta name="description"
+        content="Lĩnh vực Thi công & Xây lắp của Đông Sơn Holdings (DSH) — kế thừa kỷ luật và uy tín từ Lữ đoàn 319, cung cấp giải pháp thi công toàn diện cho hạ tầng giao thông, công nghiệp và dân dụng." />
+
+  <!-- Fonts (local) -->
+  <link href="assets/fonts/fonts.css" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3 CSS (local) -->
+  <link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons (local) -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="assets/css/variables.css" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+  <link href="assets/css/components.css" rel="stylesheet" />
+  <link href="assets/css/header-footer.css" rel="stylesheet" />
+  <link href="assets/css/linhvuc-detail.css" rel="stylesheet" />
+  <!-- Lớp chuyển động (nạp cuối để override transition mặc định của section) -->
+  <link href="assets/css/animations.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Sentinel: kích hoạt glassmorphism header khi rời khỏi đỉnh trang -->
+  <span class="header-sentinel" aria-hidden="true"></span>
+
+  <!-- ===== Header (dùng chung với trang chủ) ===== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-4 px-xl-5">
+        <a class="navbar-brand" href="index.html" aria-label="Đông Sơn Holdings">
+          <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="brand-logo" />
+        </a>
+
+        <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
+        <a href="index.html#lien-he" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3">
+          <span class="d-lg-none">Liên hệ</span>
+          <span class="d-none d-lg-inline">Liên hệ ngay</span>
+        </a>
+
+        <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNav" aria-controls="mainNav"
+                aria-expanded="false" aria-label="Mở menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link nav-caret" href="about.html" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">Về chúng tôi</a>
+              <ul class="dropdown-menu dsh-dropdown">
+                <li><a class="dropdown-item" href="about.html">Giới thiệu</a></li>
+                <li><a class="dropdown-item" href="sumenh.html">Sứ mệnh - Tầm nhìn</a></li>
+                <li><a class="dropdown-item" href="sodo-to-chuc.html">Sơ đồ tổ chức</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link nav-caret active" href="linhvuc.html" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">Lĩnh vực</a>
+              <ul class="dropdown-menu dsh-dropdown">
+                <li><a class="dropdown-item active" href="linhvuc.html">Thi công &amp; Xây lắp</a></li>
+                <li><a class="dropdown-item" href="linhvuc.html">Đầu tư BOT</a></li>
+                <li><a class="dropdown-item" href="linhvuc.html">Nhà ở &amp; Đô thị</a></li>
+                <li><a class="dropdown-item" href="linhvuc.html">Năng lượng &amp; KCN</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="index.html#du-an">Dự án</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#co-dong">Quan hệ cổ đông</a></li>
+            <li class="nav-item"><a class="nav-link" href="tintuc.html">Tin tức</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== Section 1: HeroBanner (Figma node 1484:2789) ===== -->
+    <section class="lv-hero" id="hero-banner">
+      <!-- Breadcrumb -->
+      <nav class="lv-hero-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+        <a href="linhvuc.html">Lĩnh vực</a>
+        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+        <span class="bc-current">Thi công &amp; Xây lắp</span>
+      </nav>
+
+      <!-- Nội dung giữa -->
+      <div class="container lv-hero-content">
+        <span class="lv-hero-eyebrow"><span>Đông Sơn Holdings</span></span>
+        <h1 class="lv-hero-title">Thi công và Xây lắp</h1>
+        <p class="lv-hero-subtitle">
+          Kế thừa truyền thống kỷ luật và uy tín từ Lữ đoàn 319, chúng tôi tiên phong ứng dụng
+          công nghệ hiện đại để xây dựng những công trình mang tầm vóc quốc gia, đảm bảo tiến độ,
+          chất lượng và hiệu quả vượt trội.
+        </p>
+        <div class="lv-hero-actions">
+          <a href="index.html#du-an" class="btn btn-dsh">
+            Khám phá dự án
+            <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+          </a>
+          <a href="#nang-luc" class="btn btn-dsh-outline">Xem thi công chúng tôi</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 2: Intro / Legacy — ảnh "1979" + quote ===== -->
+    <section class="lv-intro fade-section" id="di-san">
+      <div class="row align-items-stretch">
+
+        <!-- Cột trái: ảnh + overlay năm -->
+        <div class="col-12 col-lg-6 lv-legacy-visual">
+          <img src="assets/images/linhvuc-building.webp"
+               alt="Công trình do Đông Sơn Holdings thi công" loading="lazy" />
+          <div class="lv-legacy-caption">
+            <span class="lv-legacy-year">1979</span>
+            <h3>Kế Thừa Kỷ Luật</h3>
+            <p>Từ Lữ đoàn 319, chúng tôi mang theo tinh thần thép và sự chính xác tuyệt đối
+              vào mỗi công trình kiến tạo.</p>
+          </div>
+        </div>
+
+        <!-- Cột phải: quote + stats -->
+        <div class="col-12 col-lg-6 lv-quote-panel">
+          <span class="lv-quote-mark" aria-hidden="true"><span></span><span></span></span>
+          <blockquote class="lv-quote-text">
+            Chúng tôi không chỉ xây dựng các công trình, mà còn kiến tạo những giá trị bền vững
+            cho xã hội.
+          </blockquote>
+          <div class="lv-stats">
+            <div class="lv-stat">
+              <span class="lv-stat-num">100+</span>
+              <span class="lv-stat-label">Dự án</span>
+            </div>
+            <div class="lv-stat">
+              <span class="lv-stat-num">5K+</span>
+              <span class="lv-stat-label">Nhân sự</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== Section 3: Kế Thừa Di Sản, Kiến Tạo Tương Lai ===== -->
+    <section class="lv-heritage section fade-section">
+      <div class="container">
+        <div class="row g-4 g-lg-5 align-items-center">
+
+          <!-- Cột trái: nội dung + stats -->
+          <div class="col-12 col-lg-6">
+            <h2 data-reveal="up">Kế Thừa Di Sản, Kiến Tạo Tương Lai</h2>
+            <p data-reveal="up">
+              Mảng thi công xây lắp của Đông Sơn Holdings tự hào kế thừa truyền thống kỷ luật,
+              chuyên nghiệp và uy tín từ Lữ đoàn 319. Chúng tôi không chỉ xây dựng các công trình,
+              mà còn kiến tạo những giá trị bền vững cho xã hội.
+            </p>
+            <p data-reveal="up">
+              Với đội ngũ lãnh đạo dày dạn kinh nghiệm, lực lượng lao động tay nghề cao và sự đầu tư
+              mạnh mẽ vào công nghệ quản lý dự án hiện đại, Đông Sơn cam kết mang đến những giải pháp
+              thi công tối ưu, đáp ứng những tiêu chuẩn khắt khe nhất về an toàn, chất lượng và tiến độ.
+            </p>
+            <div class="lv-stats" data-reveal="up">
+              <div class="lv-stat lv-stat--bar">
+                <span class="lv-stat-num">100+</span>
+                <span class="lv-stat-label">Dự án hoàn thành</span>
+              </div>
+              <div class="lv-stat lv-stat--bar">
+                <span class="lv-stat-num">5000+</span>
+                <span class="lv-stat-label">Nhân sự chất lượng cao</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cột phải: ảnh -->
+          <div class="col-12 col-lg-6">
+            <img src="assets/images/linhvuc-building.webp"
+                 alt="Đội ngũ thi công tại công trường Đông Sơn Holdings"
+                 class="lv-heritage-img" loading="lazy" data-reveal="right" />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Section 4: Năng Lực Cốt Lõi ===== -->
+    <section class="lv-capability section fade-section" id="nang-luc">
+      <div class="container">
+        <h2 data-reveal="up">Năng Lực Cốt Lõi</h2>
+        <p class="lv-lead" data-reveal="up">
+          Chúng tôi cung cấp các giải pháp thi công toàn diện, bao phủ nhiều lĩnh vực trọng điểm
+          của nền kinh tế, đảm bảo năng lực thực thi vượt trội cho mọi quy mô dự án.
+        </p>
+
+        <div class="row g-4">
+          <!-- Card lớn: Giao thông -->
+          <div class="col-12 col-lg-7">
+            <article class="lv-cap-card lv-cap-card--tall" data-reveal="up">
+              <img src="assets/images/linhvuc-giaothong.webp" alt="Dự án hạ tầng giao thông"
+                   class="lv-cap-bg" loading="lazy" />
+              <span class="lv-cap-icon">
+                <img src="assets/images/linhvuc-icon-giaothong.svg" alt="" aria-hidden="true" />
+              </span>
+              <h3>Giao thông</h3>
+              <p>Thi công đường cao tốc, quốc lộ, cầu lớn, hầm đường bộ, và các dự án hạ tầng
+                giao thông huyết mạch, áp dụng công nghệ thi công tiên tiến nhất.</p>
+            </article>
+          </div>
+
+          <!-- Cột phải: 2 card nhỏ -->
+          <div class="col-12 col-lg-5">
+            <div class="row g-4 h-100">
+              <!-- Công nghiệp -->
+              <div class="col-12">
+                <article class="lv-cap-card lv-cap-card--gray" data-reveal="up">
+                  <img src="assets/images/linhvuc-congnghiep.webp" alt="Nhà máy, khu công nghiệp"
+                       class="lv-cap-bg" loading="lazy" />
+                  <span class="lv-cap-icon">
+                    <img src="assets/images/linhvuc-icon-congnghiep.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <h3>Công nghiệp</h3>
+                  <p>Nhà máy, khu công nghiệp, kho bãi logistics.</p>
+                </article>
+              </div>
+              <!-- Dân dụng -->
+              <div class="col-12">
+                <article class="lv-cap-card lv-cap-card--plain" data-reveal="up">
+                  <span class="lv-cap-icon">
+                    <img src="assets/images/linhvuc-icon-dandung.svg" alt="" aria-hidden="true" />
+                  </span>
+                  <h3>Dân dụng</h3>
+                  <p>Khu đô thị cao cấp, trung tâm thương mại, tòa nhà văn phòng.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer (dùng chung với trang chủ) ===== -->
+  <footer class="site-footer" id="lien-he">
+
+    <!-- CTA banner nền ảnh cầu -->
+    <div class="cta-banner fade-section">
+      <img src="assets/images/cta-bridge.webp" alt="" class="cta-bg" aria-hidden="true" data-parallax="0.16" />
+      <div class="cta-inner text-center">
+        <h2 class="cta-title" data-reveal="up">Khám phá tiềm năng<br />Bắt đầu kết nối.</h2>
+        <a href="mailto:hatangdongson@htds.vn" class="btn btn-dsh cta-btn">
+          Liên lạc ngay
+          <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Khối cột -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 g-lg-5">
+
+          <!-- Brand + liên hệ + social -->
+          <div class="col">
+            <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
+            <ul class="list-unstyled footer-contact mb-4">
+              <li>
+                <span class="contact-ic"><img src="assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Điện thoại</small><strong>024 3933 5708</strong></span>
+              </li>
+              <li>
+                <span class="contact-ic"><img src="assets/images/icon-email.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Email</small><strong>hatangdongson@htds.vn</strong></span>
+              </li>
+            </ul>
+            <div class="social-links d-flex gap-2">
+              <a href="#" aria-label="Facebook"><img src="assets/images/social-facebook.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="LinkedIn"><img src="assets/images/social-linkedin.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="YouTube"><img src="assets/images/social-youtube.svg" alt="" aria-hidden="true" /></a>
+            </div>
+          </div>
+
+          <!-- Về Đông Sơn -->
+          <div class="col">
+            <h6>Về Đông Sơn</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="about.html">Giới thiệu</a></li>
+              <li><a class="footer-link" href="about.html">Tầm nhìn &amp; Sứ mệnh</a></li>
+              <li><a class="footer-link" href="about.html">Ban lãnh đạo</a></li>
+              <li><a class="footer-link" href="about.html">Giá trị cốt lõi</a></li>
+              <li><a class="footer-link" href="about.html">Trách nhiệm XH</a></li>
+            </ul>
+          </div>
+
+          <!-- Lĩnh vực -->
+          <div class="col">
+            <h6>Lĩnh vực</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="linhvuc.html">Thi công &amp; Xây lắp</a></li>
+              <li><a class="footer-link" href="linhvuc.html">Đầu tư BOT</a></li>
+              <li><a class="footer-link" href="linhvuc.html">Nhà ở &amp; Đô thị</a></li>
+              <li><a class="footer-link" href="linhvuc.html">Năng lượng &amp; KCN</a></li>
+            </ul>
+          </div>
+
+          <!-- Dự án -->
+          <div class="col">
+            <h6>Dự án</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="index.html#du-an">BOT Hà Nội – Bắc Giang</a></li>
+              <li><a class="footer-link" href="index.html#du-an">Nhà ở XH Bãi Viên</a></li>
+              <li><a class="footer-link" href="index.html#du-an">Cao tốc TQ–HG</a></li>
+              <li><a class="footer-link" href="index.html#du-an">Mỹ Đình – Bái Đính</a></li>
+            </ul>
+          </div>
+
+          <!-- Nhà đầu tư -->
+          <div class="col">
+            <h6>Nhà đầu tư</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="index.html#co-dong">Báo cáo tài chính</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">Công bố thông tin</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">Báo cáo thường niên</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">ĐHĐCĐ 2026</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanh dưới cùng -->
+    <div class="footer-bottom">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0">© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.</p>
+        <div class="d-flex gap-4">
+          <a class="footer-link" href="#">Chính sách bảo mật</a>
+          <a class="footer-link" href="#">Điều khoản sử dụng</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle (kèm Popper) — local -->
+  <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
