@@ -77,19 +77,25 @@ class InvestorDataService
      */
     private static function publishedYears($categoryId)
     {
-        $rows = NewsPost::model()->belongingToCategory($categoryId)->findAll(array(
-            'select'    => 'DISTINCT YEAR(t.published_at) AS y',
-            'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st'
-                . ' AND t.published_at IS NOT NULL',
-            'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
-            'order'     => 'y DESC',
-        ));
+        $hasCatsTable = Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null;
+        $catCond = $hasCatsTable
+            ? '(t.category_id = :catId OR EXISTS (SELECT 1 FROM pvn_news_post_categories npc'
+                . ' WHERE npc.post_id = t.id AND npc.category_id = :catId))'
+            : 't.category_id = :catId';
+
+        $rows = Yii::app()->db->createCommand()
+            ->select('DISTINCT YEAR(t.published_at) AS y')
+            ->from('pvn_news_posts t')
+            ->where('t.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st'
+                . ' AND t.published_at IS NOT NULL AND ' . $catCond,
+                array(':st' => NewsPost::STATUS_PUBLISHED, ':catId' => (int) $categoryId))
+            ->order('y DESC')
+            ->queryColumn();
 
         $years = array();
-        foreach ($rows as $row) {
-            $year = (int) $row->getAttribute('y');
-            if ($year > 0) {
-                $years[] = $year;
+        foreach ($rows as $y) {
+            if ((int) $y > 0) {
+                $years[] = (int) $y;
             }
         }
         return $years;
