@@ -27,13 +27,36 @@ $items = $dataProvider->getData();
     </span>
 
     <div class="d-flex gap-2">
-      <form method="get" class="d-flex gap-2">
+      <form method="get" class="d-flex flex-wrap gap-2">
+        <?php foreach ($filters as $filter): ?>
+          <?php $selected = isset($activeFilters[$filter['name']]) ? $activeFilters[$filter['name']] : ''; ?>
+          <select name="<?php echo CHtml::encode($filter['name']); ?>"
+                  class="form-select form-select-sm" style="min-width:180px"
+                  aria-label="<?php echo CHtml::encode($filter['label']); ?>"
+                  onchange="this.form.submit()">
+            <option value=""><?php echo CHtml::encode(
+                isset($filter['all']) ? $filter['all'] : 'Tất cả'); ?></option>
+            <?php foreach ($filter['options'] as $value => $label): ?>
+              <option value="<?php echo CHtml::encode($value); ?>"
+                <?php echo ((string) $selected === (string) $value) ? 'selected' : ''; ?>>
+                <?php echo CHtml::encode($label); ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        <?php endforeach; ?>
+
         <input type="search" name="q" class="form-control form-control-sm"
-               placeholder="Tìm kiếm…" value="<?php echo CHtml::encode($search); ?>"
+               placeholder="Tìm theo tiêu đề…" value="<?php echo CHtml::encode($search); ?>"
                style="min-width:200px" />
         <button class="btn btn-sm btn-outline-secondary" type="submit">
           <i class="fa fa-search"></i>
         </button>
+        <?php if ($search !== '' || $hasFilter): ?>
+          <a class="btn btn-sm btn-outline-secondary" href="<?php echo $this->createUrl('index'); ?>"
+             title="Xoá bộ lọc">
+            <i class="fa fa-times"></i>
+          </a>
+        <?php endif; ?>
       </form>
 
       <?php if ($user->checkAccess($resource . '.create')): ?>
