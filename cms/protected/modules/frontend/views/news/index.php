@@ -229,7 +229,7 @@ $heroTitle = $currentCategory !== null
         <div class="row g-4 g-lg-5">
 
           <!-- Card lớn: ảnh trên, nội dung dưới -->
-          <div class="col-12 <?php echo $hasList ? 'col-lg-8' : ''; ?>">
+          <div class="col-12 <?php echo $hasList ? 'col-lg-5' : ''; ?>">
 <?php $pfUrl = $postUrl($projectFeature); ?>
             <a href="<?php echo CHtml::encode($pfUrl); ?>" class="text-decoration-none">
               <article class="tt-project-feature" data-reveal="up">
