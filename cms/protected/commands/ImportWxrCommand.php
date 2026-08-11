@@ -15,33 +15,22 @@
  */
 class ImportWxrCommand extends CConsoleCommand
 {
-    /** Nicename danh mục WP -> slug danh mục CMS. */
-    private $categoryMap = array(
-        // Quan hệ cổ đông
-        'ban-tin-co-dong'          => 'co-dong',
-        'bao-cao-tai-chinh'        => 'co-dong',
-        'bao-cao-thuong-nien'      => 'co-dong',
-        'bao-cao-thuong-nien-2025' => 'co-dong',
-        'dai-hoi-dong-co-dong'     => 'co-dong',
-        'dieu-le'                  => 'co-dong',
-        'quan-he-co-dong'          => 'co-dong',
-        // Dự án
-        'du-an'                        => 'du-an',
-        'du-an-tieu-bieu'              => 'du-an',
-        'cong-trinh-ha-tang'           => 'du-an',
-        'cong-trinh-giao-thong'        => 'du-an',
-        'du-an-xay-dung-cong-nghiep'   => 'du-an',
-        // Đầu tư
-        'du-an-dau-tu' => 'dau-tu',
-        // Tin tức (danh mục tạo mới)
-        'tin-tuc'          => 'tin-tuc',
-        'khong-phan-loai'  => 'tin-tuc',
+    /**
+     * Giữ nguyên toàn bộ danh mục WP: mỗi danh mục WP -> một danh mục CMS
+     * (slug = nicename, tên = cat_name), tạo theo nhu cầu khi có bài đi kèm.
+     * Chỉ các slug dưới đây được đánh dấu hiện trên thanh tab trang chủ.
+     */
+    private $filterSlugs = array('du-an', 'thi-cong', 'dau-tu', 'co-dong', 'tin-tuc');
+
+    /** Nicename WP là spam/rác -> không tạo danh mục, không gán. */
+    private $skipCategories = array(
+        'bez-rubriki', 'semaglutide-online-2', '25',
     );
 
-    /** Nicename WP là spam/rác -> không tạo liên kết danh mục. */
-    private $skipCategories = array(
-        'bez-rubriki', 'semaglutide-online-2', '25', 'public',
-    );
+    /** slug -> tên hiển thị cho danh mục sẽ tạo (thu thập khi duyệt). */
+    private $categoryNameBySlug = array();
+
+    private $dryRun = false;
 
     /** Host của WordPress nguồn — chỉ tải ảnh thuộc host này. */
     private $sourceHost = 'htds.vn';
