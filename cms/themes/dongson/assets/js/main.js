@@ -569,5 +569,6 @@
     initCustomSliders();
     initScrollSliders();
     initNewsFilter();
+    initContactForm();
   });
 })();
