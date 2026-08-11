@@ -61,7 +61,14 @@ class BusinessSector extends BaseActiveRecord
         return array(
             'image'    => array(self::BELONGS_TO, 'MediaFile', 'image_media_id'),
             'icon'     => array(self::BELONGS_TO, 'MediaFile', 'icon_media_id'),
+            'heroBg'   => array(self::BELONGS_TO, 'MediaFile', 'hero_bg_media_id'),
+            'legacyImage'   => array(self::BELONGS_TO, 'MediaFile', 'legacy_media_id'),
+            'heritageImage' => array(self::BELONGS_TO, 'MediaFile', 'heritage_media_id'),
             'pvn_projects' => array(self::HAS_MANY, 'Project', 'sector_id'),
+            // Thẻ năng lực trang chi tiết — chỉ nạp thẻ đang bật, đúng thứ tự.
+            'capabilities' => array(self::HAS_MANY, 'SectorCapability', 'sector_id',
+                'condition' => 'capabilities.deleted_at IS NULL AND capabilities.is_active = 1',
+                'order'     => 'capabilities.sort_order ASC'),
             // Chip hiển thị trên slider/lưới — chỉ nạp thẻ đang bật.
             'tags'     => array(self::MANY_MANY, 'Tag',
                 'pvn_business_sector_tags(sector_id, tag_id)',
