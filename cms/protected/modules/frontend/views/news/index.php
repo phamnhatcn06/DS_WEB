@@ -202,7 +202,7 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
           <div class="col-12 col-lg-4">
             <div class="tt-project-list">
 <?php foreach ($projectList as $i => $post): ?>
-<?php $itemUrl = ($post->source_url !== null && $post->source_url !== '') ? $post->source_url : '#'; ?>
+<?php $itemUrl = $postUrl($post); ?>
               <a class="tt-project-item" href="<?php echo CHtml::encode($itemUrl); ?>" data-reveal="left" style="--reveal-delay:<?php echo 120 + $i * 100; ?>ms">
                 <span class="tt-thumb-sm">
                   <?php echo MediaHelper::imgOr($post->thumbnail, $fallbackImg, $post->title); ?>
