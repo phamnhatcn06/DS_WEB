@@ -70,6 +70,37 @@ class SectorController extends AdminCrudController
             array('name' => 'icon_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'cta_label', 'width' => 6),
             array('name' => 'cta_url', 'width' => 6),
+
+            // ===== Trang chi tiết lĩnh vực (/linh-vuc/<slug>) =====
+            array('name' => 'hero_subtitle', 'type' => 'textarea', 'width' => 12, 'rows' => 3,
+                'hint' => 'Đoạn mô tả dưới tiêu đề ở đầu trang chi tiết.'),
+            array('name' => 'hero_bg_media_id', 'type' => 'media', 'width' => 6),
+            array('name' => 'detail_cta_secondary_label', 'width' => 6,
+                'hint' => 'Nút phụ ở hero, cuộn xuống phần "Năng lực cốt lõi".'),
+
+            array('name' => 'legacy_media_id', 'type' => 'media', 'width' => 6),
+            array('name' => 'legacy_year', 'width' => 3),
+            array('name' => 'legacy_title', 'width' => 3),
+            array('name' => 'legacy_text', 'type' => 'textarea', 'width' => 6, 'rows' => 3),
+            array('name' => 'quote_text', 'type' => 'textarea', 'width' => 6, 'rows' => 3),
+
+            array('name' => 'stat1_value', 'width' => 2),
+            array('name' => 'stat1_suffix', 'width' => 2,
+                'hint' => 'Ví dụ <code>+</code> hoặc <code> tỷ</code>.'),
+            array('name' => 'stat1_label', 'width' => 8),
+            array('name' => 'stat2_value', 'width' => 2),
+            array('name' => 'stat2_suffix', 'width' => 2),
+            array('name' => 'stat2_label', 'width' => 8),
+
+            array('name' => 'heritage_title', 'width' => 12),
+            array('name' => 'heritage_body', 'type' => 'textarea', 'width' => 12, 'rows' => 5,
+                'hint' => 'Nhiều đoạn văn — tách các đoạn bằng một dòng trống.'),
+            array('name' => 'heritage_media_id', 'type' => 'media', 'width' => 6),
+
+            array('name' => 'capability_title', 'width' => 6),
+            array('name' => 'capability_lead', 'type' => 'textarea', 'width' => 12, 'rows' => 2,
+                'hint' => 'Quản lý từng thẻ năng lực ở mục "Năng lực lĩnh vực".'),
+
             array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
             array('name' => 'show_in_slider', 'type' => 'checkbox', 'width' => 6),
             array('name' => 'show_in_grid', 'type' => 'checkbox', 'width' => 6),
