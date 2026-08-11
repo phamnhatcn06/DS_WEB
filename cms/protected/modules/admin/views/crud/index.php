@@ -71,9 +71,13 @@ $items = $dataProvider->getData();
     <div class="card-body text-center text-muted py-5">
       <i class="fa fa-inbox" style="font-size:2rem"></i>
       <p class="mt-2 mb-0">
-        <?php echo $search !== ''
-            ? 'Không tìm thấy kết quả nào cho “' . CHtml::encode($search) . '”.'
-            : 'Chưa có dữ liệu. Bấm “Thêm mới” để bắt đầu.'; ?>
+        <?php if ($search !== ''): ?>
+          Không tìm thấy kết quả nào cho “<?php echo CHtml::encode($search); ?>”.
+        <?php elseif ($hasFilter): ?>
+          Không có bản ghi nào khớp bộ lọc đã chọn.
+        <?php else: ?>
+          Chưa có dữ liệu. Bấm “Thêm mới” để bắt đầu.
+        <?php endif; ?>
       </p>
     </div>
   <?php else: ?>
