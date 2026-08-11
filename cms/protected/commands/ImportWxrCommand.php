@@ -120,6 +120,12 @@ class ImportWxrCommand extends CConsoleCommand
             $title = trim((string) $item->title);
             $link = trim((string) $item->link);
 
+            // Lọc spam nước ngoài: bài thật đều là tiếng Việt có dấu.
+            if ($skipForeign && !$this->isVietnamese($title)) {
+                $stat['skippedForeign']++;
+                continue;
+            }
+
             // Danh mục CMS cho bài này.
             $catIds = $this->mapPostCategories($item);
             if ($catIds === array()) {
