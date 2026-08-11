@@ -47,7 +47,7 @@ $items = $dataProvider->getData();
 
         <input type="search" name="q" class="form-control form-control-sm"
                placeholder="Tìm theo tiêu đề…" value="<?php echo CHtml::encode($search); ?>"
-               style="min-width:200px" />
+               style="min-width:180px" />
         <button class="btn btn-sm btn-outline-secondary" type="submit">
           <i class="fa fa-search"></i>
         </button>
