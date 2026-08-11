@@ -161,6 +161,7 @@ class ImportWxrCommand extends CConsoleCommand
         echo "Đã nhập:            {$stat['imported']}\n";
         echo "Bỏ (đã tồn tại):    {$stat['skippedExisting']}\n";
         echo "Bỏ (không danh mục):{$stat['skippedNoCat']}\n";
+        echo "Bỏ (spam nước ngoài):{$stat['skippedForeign']}\n";
         echo "Bỏ (không publish): {$stat['skippedNotPublish']}\n";
         echo "Ảnh đã tải:         {$stat['images']}\n";
         echo "Lỗi:                {$stat['errors']}\n";
