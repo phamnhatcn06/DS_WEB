@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Layout công khai (module frontend) — <head> + Header + Footer dùng chung cho
  * mọi trang public. Nội dung từng trang chèn qua $content.
@@ -16,21 +17,23 @@ $base = $root;
  * Resolve id media trong setting → URL công khai. Trả $fallback nếu chưa chọn.
  */
 $settingImageUrl = function ($key, $fallback = null) {
-    $id = SiteSetting::get($key);
-    if ($id) {
-        $media = MediaFile::model()->findByPk($id);
-        if ($media !== null) {
-            return $media->getPublicUrl();
-        }
+  $id = SiteSetting::get($key);
+  if ($id) {
+    $media = MediaFile::model()->findByPk($id);
+    if ($media !== null) {
+      return $media->getPublicUrl();
     }
-    return $fallback;
+  }
+  return $fallback;
 };
 
 $metaTitle       = $this->pageTitle ? $this->pageTitle
-    : SiteSetting::get('default_meta_title', 'Đông Sơn Holdings — Kiến tạo hạ tầng, vững bước tương lai');
-$metaDescription = SiteSetting::get('default_meta_description',
-    'Đông Sơn Holdings (DSH) — tập đoàn đầu tư hạ tầng BOT, bất động sản và năng lượng, '
-    . 'kiến tạo những công trình trọng điểm cho tương lai Việt Nam.');
+  : SiteSetting::get('default_meta_title', 'Đông Sơn Holdings — Kiến tạo hạ tầng, vững bước tương lai');
+$metaDescription = SiteSetting::get(
+  'default_meta_description',
+  'Đông Sơn Holdings (DSH) — tập đoàn đầu tư hạ tầng BOT, bất động sản và năng lượng, '
+    . 'kiến tạo những công trình trọng điểm cho tương lai Việt Nam.'
+);
 $metaKeywords    = SiteSetting::get('meta_keywords');
 $metaAuthor      = SiteSetting::get('meta_author');
 $metaRobots      = SiteSetting::get('meta_robots', 'index, follow');
@@ -50,6 +53,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
 ?>
 <!doctype html>
 <html lang="vi">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -58,16 +62,16 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <title><?php echo CHtml::encode($metaTitle); ?></title>
   <meta name="description" content="<?php echo CHtml::encode($metaDescription); ?>" />
   <?php if ($metaKeywords): ?>
-  <meta name="keywords" content="<?php echo CHtml::encode($metaKeywords); ?>" />
+    <meta name="keywords" content="<?php echo CHtml::encode($metaKeywords); ?>" />
   <?php endif; ?>
   <?php if ($metaAuthor): ?>
-  <meta name="author" content="<?php echo CHtml::encode($metaAuthor); ?>" />
+    <meta name="author" content="<?php echo CHtml::encode($metaAuthor); ?>" />
   <?php endif; ?>
   <?php if ($metaRobots): ?>
-  <meta name="robots" content="<?php echo CHtml::encode($metaRobots); ?>" />
+    <meta name="robots" content="<?php echo CHtml::encode($metaRobots); ?>" />
   <?php endif; ?>
   <?php if ($googleVerify): ?>
-  <meta name="google-site-verification" content="<?php echo CHtml::encode($googleVerify); ?>" />
+    <meta name="google-site-verification" content="<?php echo CHtml::encode($googleVerify); ?>" />
   <?php endif; ?>
 
   <!-- Open Graph / Twitter -->
@@ -75,12 +79,12 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <meta property="og:title" content="<?php echo CHtml::encode($metaTitle); ?>" />
   <meta property="og:description" content="<?php echo CHtml::encode($metaDescription); ?>" />
   <?php if ($ogImageUrl): ?>
-  <meta property="og:image" content="<?php echo CHtml::encode($ogImageUrl); ?>" />
+    <meta property="og:image" content="<?php echo CHtml::encode($ogImageUrl); ?>" />
   <?php endif; ?>
   <meta name="twitter:card" content="<?php echo CHtml::encode($twitterCard); ?>" />
 
   <?php if ($faviconUrl): ?>
-  <link rel="icon" href="<?php echo CHtml::encode($faviconUrl); ?>" />
+    <link rel="icon" href="<?php echo CHtml::encode($faviconUrl); ?>" />
   <?php endif; ?>
 
   <!-- Fonts (local) -->
@@ -107,10 +111,11 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <link href="<?php echo $root; ?>/assets/css/section-9-tintuc.css" rel="stylesheet" />
   <!-- Lớp chuyển động (nạp cuối để override transition mặc định của section) -->
   <link href="<?php echo $root; ?>/assets/css/animations.css" rel="stylesheet" />
-<?php echo $headerScript; ?>
+  <?php echo $headerScript; ?>
 </head>
+
 <body>
-<?php echo $bodyStartScript; ?>
+  <?php echo $bodyStartScript; ?>
 
   <!-- Sentinel: kích hoạt glassmorphism header khi rời khỏi đỉnh trang -->
   <span class="header-sentinel" aria-hidden="true"></span>
@@ -119,7 +124,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <header class="site-header" id="siteHeader">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid px-4 px-xl-5">
-        <a class="navbar-brand" href="#hero" aria-label="Đông Sơn Holdings">
+        <a class="navbar-brand" href="/" aria-label="Đông Sơn Holdings">
           <img src="<?php echo CHtml::encode($logoHeader); ?>" alt="Đông Sơn Holdings" class="brand-logo" />
         </a>
 
@@ -130,8 +135,8 @@ $footerScript     = (string) SiteSetting::get('footer_script');
         </a>
 
         <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
-                data-bs-target="#mainNav" aria-controls="mainNav"
-                aria-expanded="false" aria-label="Mở menu">
+          data-bs-target="#mainNav" aria-controls="mainNav"
+          aria-expanded="false" aria-label="Mở menu">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -143,7 +148,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   </header>
 
   <main>
-<?php echo $content; ?>
+    <?php echo $content; ?>
   </main>
 
   <!-- ===== Footer ===== -->
@@ -229,6 +234,7 @@ $footerScript     = (string) SiteSetting::get('footer_script');
   <script src="<?php echo $root; ?>/assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
   <!-- Custom JS -->
   <script src="<?php echo $root; ?>/assets/js/main.js"></script>
-<?php echo $footerScript; ?>
+  <?php echo $footerScript; ?>
 </body>
+
 </html>
