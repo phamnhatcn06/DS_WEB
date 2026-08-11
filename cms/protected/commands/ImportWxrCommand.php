@@ -127,9 +127,21 @@ class ImportWxrCommand extends CConsoleCommand
             }
 
             // Idempotent theo source_url.
-            if ($link !== '' && $this->postExists($link)) {
-                $stat['skippedExisting']++;
-                continue;
+            if ($link !== '') {
+                $existing = $this->findExistingPost($link);
+                if ($existing !== null) {
+                    if ($update) {
+                        // Cập nhật lại danh mục cho đúng bản giữ-nguyên (không đụng
+                        // nội dung, không tải lại ảnh).
+                        $existing->categoryIds = $catIds;
+                        $existing->syncCategories();
+                        $stat['updatedCats']++;
+                        echo "  [CẬP NHẬT DM] {$title}  ->  " . implode(',', $catIds) . "\n";
+                    } else {
+                        $stat['skippedExisting']++;
+                    }
+                    continue;
+                }
             }
 
             try {
