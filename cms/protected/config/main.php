@@ -105,6 +105,8 @@ return array(
                 // Trang chủ mặc định: '/' vào thẳng module frontend.
                 ''                                       => 'frontend/home/index',
                 'du-lieu-trang-chu'                      => 'frontend/home/dataSource',
+                // Gửi form "Liên hệ ngay" (AJAX POST) → lưu vào pvn_contact_messages.
+                'lien-he/gui'                            => 'frontend/contact/submit',
                 // Trang giới thiệu (about): hành trình, cột mốc, tầm nhìn.
                 'gioi-thieu'                             => 'frontend/about/index',
                 // Trang sơ đồ tổ chức: hội đồng quản trị + hệ thống phân cấp.
