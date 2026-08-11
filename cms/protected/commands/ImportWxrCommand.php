@@ -32,8 +32,14 @@ class ImportWxrCommand extends CConsoleCommand
 
     private $dryRun = false;
 
-    /** Host của WordPress nguồn — chỉ tải ảnh thuộc host này. */
-    private $sourceHost = 'htds.vn';
+    /**
+     * Các host WordPress nguồn xuất hiện trong nội dung (link ảnh/tệp).
+     * Nội dung bài cũ còn trỏ htds.vn (đã 404), thư viện ảnh nay ở pvnsoft.cloud.
+     */
+    private $sourceHosts = array('pvnsoft.cloud', 'htds.vn');
+
+    /** Host thực sự đang phục vụ tệp — mọi ảnh/tệp đều tải từ đây. */
+    private $downloadHost = 'pvnsoft.cloud';
 
     /** slug danh mục CMS -> id (nạp 1 lần). */
     private $categoryIdBySlug = array();
