@@ -214,11 +214,11 @@ a { text-decoration: none; }
 }
 .footer-bottom a { margin-left: 20px; }
 
-/* ===== Fade-in ===== */
-.fade-section { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
-.fade-section.is-visible { opacity: 1; transform: none; }
+/* ===== Fade-in (chỉ ẩn khi có JS — tránh nội dung biến mất nếu JS lỗi) ===== */
+.js .fade-section { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.js .fade-section.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .fade-section { opacity: 1; transform: none; transition: none; }
+  .js .fade-section { opacity: 1; transform: none; transition: none; }
 }
 
 /* ===== Responsive ===== */
