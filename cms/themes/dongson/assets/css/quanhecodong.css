@@ -1,0 +1,160 @@
+/* =====================================================================
+   Quan hệ cổ đông — trang danh sách tài liệu (Báo cáo tài chính, Công bố
+   thông tin, Báo cáo thường niên, Đại hội đồng cổ đông).
+
+   Bố cục "report list" light-mode: hero đỏ + breadcrumb + lọc theo năm +
+   danh sách thẻ báo cáo (tải PDF) + sidebar tin mới nhất.
+
+   Mọi class prefix `qhcd-` để không đụng .hero/.pager/.news-item của theme.
+   Token gói trong .qhcd-page để độc lập với biến toàn cục của theme.
+   ===================================================================== */
+.qhcd-page {
+  --qhcd-red: #9a1220;
+  --qhcd-red-hover: #b51627;
+  --qhcd-red-deep: #730011;
+  --qhcd-ink: #191c1d;
+  --qhcd-muted: #5f5e5e;
+  --qhcd-muted-2: #7a7f85;
+  --qhcd-card-bg: #ffffff;
+  --qhcd-card-line: #e7e8e9;
+  --qhcd-chip-bg: #f3f4f5;
+  --qhcd-chip-line: #e1bebc;
+  --qhcd-radius-card: 2px;
+  --qhcd-radius-pill: 12px;
+  --qhcd-pad: clamp(16px, 5vw, 120px);
+  background: #fff;
+  color: var(--qhcd-ink);
+}
+
+/* ===== Hero Banner ===== */
+.qhcd-hero {
+  position: relative;
+  min-height: 440px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+.qhcd-hero__bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(115, 0, 17, .82) 0%, rgba(154, 18, 32, .92) 100%),
+    var(--qhcd-red);
+}
+.qhcd-hero__inner { position: relative; z-index: 2; padding: 120px 16px 64px; }
+.qhcd-hero__eyebrow { font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #ffd5d5; margin-bottom: 18px; }
+.qhcd-hero__title {
+  font-weight: 800; text-transform: uppercase;
+  font-size: clamp(34px, 5vw, 60px); line-height: 1.15;
+  letter-spacing: 1px; text-wrap: balance; margin: 0;
+}
+.qhcd-hero__crumb { position: absolute; top: 96px; left: var(--qhcd-pad); font-size: 13px; color: rgba(255, 255, 255, .78); z-index: 2; }
+.qhcd-hero__crumb a { color: rgba(255, 255, 255, .78); }
+.qhcd-hero__crumb a:hover { color: #fff; }
+
+/* ===== Breadcrumb bar ===== */
+.qhcd-crumb-bar { padding: 26px 0 8px; }
+.qhcd-crumb {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  font-size: 12px; letter-spacing: .6px; text-transform: uppercase;
+  color: var(--qhcd-muted); margin: 0;
+}
+.qhcd-crumb a { color: var(--qhcd-muted); text-decoration: none; }
+.qhcd-crumb a:hover { color: var(--qhcd-red); }
+.qhcd-crumb .bi { font-size: 12px; color: var(--qhcd-muted-2); }
+.qhcd-crumb .is-current { color: var(--qhcd-red-deep); font-weight: 600; }
+
+/* ===== Year filter ===== */
+.qhcd-year-filter { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 10px 0 28px; }
+.qhcd-year-filter__label { font-size: 14px; color: var(--qhcd-muted); }
+.qhcd-year-chip {
+  border: 1px solid transparent; background: none; color: var(--qhcd-ink);
+  font-size: 14px; font-weight: 500; padding: 6px 16px;
+  border-radius: var(--qhcd-radius-pill); cursor: pointer;
+  transition: background .25s ease, color .25s ease;
+}
+.qhcd-year-chip:hover { color: var(--qhcd-red); }
+.qhcd-year-chip.is-active { background: var(--qhcd-red); color: #fff; }
+
+/* ===== Main content layout ===== */
+.qhcd-content { padding-bottom: 72px; }
+
+/* ===== Report card ===== */
+.qhcd-card {
+  background: var(--qhcd-card-bg);
+  border: 1px solid var(--qhcd-card-line);
+  border-radius: var(--qhcd-radius-card);
+  padding: 25px;
+  display: flex; flex-direction: column;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.qhcd-card + .qhcd-card { margin-top: 24px; }
+.qhcd-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--qhcd-chip-line);
+  box-shadow: 0 14px 30px rgba(25, 28, 29, .08);
+}
+.qhcd-card__top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; }
+.qhcd-date-chip {
+  background: var(--qhcd-chip-bg); border: 1px solid var(--qhcd-chip-line);
+  border-radius: var(--qhcd-radius-pill); padding: 5px 13px;
+  font-size: 12px; font-weight: 500; color: var(--qhcd-ink);
+  letter-spacing: 1.2px; text-transform: uppercase; line-height: 12px;
+}
+.qhcd-card__top .bi { font-size: 16px; color: var(--qhcd-muted-2); }
+.qhcd-card__title {
+  font-size: 20px; font-weight: 600; color: var(--qhcd-ink);
+  line-height: 28px; margin: 0 0 8px; text-wrap: balance;
+}
+.qhcd-card__title a { color: inherit; text-decoration: none; }
+.qhcd-card__title a:hover { color: var(--qhcd-red); }
+.qhcd-card__desc {
+  font-size: 16px; font-weight: 400; color: var(--qhcd-muted);
+  line-height: 25.6px; margin: 0;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.qhcd-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 12px; font-size: 14px; font-weight: 600;
+  letter-spacing: .7px; color: var(--qhcd-red-deep); text-decoration: none;
+}
+.qhcd-link .bi { font-size: 14px; }
+.qhcd-link:hover { color: var(--qhcd-red); }
+.qhcd-link:hover span { text-decoration: underline; }
+
+.qhcd-empty { color: var(--qhcd-muted); padding: 40px 0; margin: 0; }
+
+/* ===== Pagination ===== */
+.qhcd-pager { display: flex; gap: 10px; justify-content: center; padding-top: 40px; }
+.qhcd-pager a {
+  min-width: 40px; height: 40px; padding: 0 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--qhcd-card-line); border-radius: 6px;
+  color: var(--qhcd-ink); font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.qhcd-pager a:hover { border-color: var(--qhcd-chip-line); background: var(--qhcd-chip-bg); }
+.qhcd-pager a.is-active { background: var(--qhcd-red); border-color: var(--qhcd-red); color: #fff; }
+.qhcd-pager .is-disabled { opacity: .4; pointer-events: none; }
+
+/* ===== Sidebar ===== */
+.qhcd-sidebar__title { font-size: 22px; font-weight: 600; color: var(--qhcd-ink); margin: 0 0 20px; }
+.qhcd-news-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 14px 0; border-bottom: 1px solid var(--qhcd-card-line); text-decoration: none;
+}
+.qhcd-news-item:first-of-type { padding-top: 0; }
+.qhcd-news-date {
+  flex-shrink: 0; width: 46px; text-align: center;
+  background: var(--qhcd-chip-bg); border-radius: 6px; padding: 6px 4px;
+}
+.qhcd-news-date b { display: block; font-size: 18px; font-weight: 700; color: var(--qhcd-ink); line-height: 1; }
+.qhcd-news-date span { font-size: 10px; letter-spacing: .5px; color: var(--qhcd-muted); text-transform: uppercase; }
+.qhcd-news-item__title { font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--qhcd-ink); margin: 0; }
+.qhcd-news-item:hover .qhcd-news-item__title { color: var(--qhcd-red); }
+
+/* ===== Responsive ===== */
+@media (max-width: 991.98px) {
+  .qhcd-hero__crumb { left: 16px; }
+}

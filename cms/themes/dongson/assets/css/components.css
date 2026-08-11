@@ -160,3 +160,37 @@
   padding: .25rem .75rem;
   border-radius: 999px;
 }
+
+/* -------- Popup "Liên hệ ngay" -------- */
+.contact-modal .modal-content {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.contact-modal .modal-header {
+  background-color: var(--dsh-navy);
+  color: #fff;
+  border-bottom: none;
+}
+
+.contact-modal .modal-header .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+.contact-modal .form-label {
+  font-weight: 600;
+  font-size: var(--fs-body);
+}
+
+.contact-modal .form-control:focus {
+  border-color: var(--dsh-red);
+  box-shadow: 0 0 0 .2rem rgba(154, 18, 32, .15);
+}
+
+.contact-modal .cta-btn .btn-arrow,
+.contact-modal #contactSubmitBtn .btn-arrow {
+  width: 14px;
+  height: 14px;
+  margin-left: .4rem;
+}
