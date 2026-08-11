@@ -185,16 +185,11 @@
 }
 
 /* Section 2 — stat trong panel trích dẫn: theo Figma là số đỏ 48px + nhãn hoa,
-   KHÔNG có gạch đỏ dọc như Section 3 (renderStat luôn gắn .lv-stat--bar → trung hoà ở đây). */
+   chia cách bằng gap (KHÔNG gạch đỏ dọc như Section 3). */
 .lv-quote-panel .lv-stats {
   gap: clamp(32px, 3.4vw, 48px);
   border-top: 1px solid #e1e3e4;
   padding-top: 41px;
-}
-
-.lv-quote-panel .lv-stat--bar {
-  padding-left: 0;
-  border-left: 0;
 }
 
 .lv-quote-panel .lv-stat-label {
