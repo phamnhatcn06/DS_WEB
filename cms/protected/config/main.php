@@ -113,6 +113,8 @@ return array(
                 'su-menh-tam-nhin'                       => 'frontend/sumenh/index',
                 // Trang tin tức & sự kiện: nội dung động từ pvn_news_posts.
                 'tin-tuc'                                => 'frontend/news/index',
+                // Chi tiết bài viết tin tức theo slug.
+                'tin-tuc/<slug:[a-z0-9\-]+>'             => 'frontend/news/view',
                 // Trang lưu trữ theo thẻ: liệt kê tin tức + lĩnh vực gắn thẻ.
                 'the/<slug:[a-z0-9\-]+>'                 => 'frontend/tag/view',
                 '<action:(error|contact)>'               => 'site/<action>',
