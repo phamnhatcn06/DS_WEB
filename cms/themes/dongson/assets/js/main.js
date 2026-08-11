@@ -485,6 +485,78 @@
     numbers.forEach(function (number) { observer.observe(number); });
   }
 
+  /* ------------------------------------------------------------------ *
+   * Popup "Liên hệ ngay": gửi AJAX, khoá nút khi đang gửi, báo kết quả.
+   * ------------------------------------------------------------------ */
+  function initContactForm() {
+    var form = document.getElementById('contactForm');
+    if (!form) {
+      return;
+    }
+
+    var submitBtn = document.getElementById('contactSubmitBtn');
+    var alertBox = document.getElementById('contactFormAlert');
+    var originalBtnHtml = submitBtn ? submitBtn.innerHTML : '';
+
+    function showAlert(type, message) {
+      if (!alertBox) {
+        return;
+      }
+      alertBox.className = 'alert alert-' + type;
+      alertBox.textContent = message;
+    }
+
+    function hideAlert() {
+      if (alertBox) {
+        alertBox.className = 'alert d-none';
+      }
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      hideAlert();
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Đang gửi…';
+      }
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+        .then(function (response) {
+          return response.json().then(function (data) {
+            return { ok: response.ok, data: data };
+          });
+        })
+        .then(function (result) {
+          if (result.ok && result.data.success) {
+            form.reset();
+            showAlert('success', result.data.message);
+          } else {
+            showAlert('danger', result.data.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+          }
+        })
+        .catch(function () {
+          showAlert('danger', 'Không thể kết nối máy chủ, vui lòng thử lại sau.');
+        })
+        .then(function () {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+          }
+        });
+    });
+
+    // Xoá thông báo cũ mỗi khi mở lại popup.
+    var modal = document.getElementById('contactModal');
+    if (modal) {
+      modal.addEventListener('show.bs.modal', hideAlert);
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     markRevealTargets();
     initScrollReveal();
