@@ -231,12 +231,18 @@
       pickCallback = null;
     });
 
-    // API dùng chung: mở thư viện ảnh, trả ảnh đã chọn về callback (vd cho TinyMCE).
-    // callback nhận { id, url, name }.
+    // API dùng chung: mở thư viện media, trả file đã chọn về callback (vd cho TinyMCE).
+    // callback nhận { id, url, name, mime, isImage, size }.
+    // options.scope: 'image' (mặc định) | 'doc' | 'all'.
+    // options.accept: giá trị thuộc tính accept cho ô tải lên (mặc định 'image/*').
     window.DSHMediaPicker = {
-      open: function (callback) {
+      open: function (callback, options) {
+        options = options || {};
         pickCallback = callback;
         activeField = null;
+        currentScope = options.scope || 'image';
+        fileInput.setAttribute('accept', options.accept || defaultAccept);
+        searchInput.value = '';
         setStatus('');
         modal.show();
         loadList('');
