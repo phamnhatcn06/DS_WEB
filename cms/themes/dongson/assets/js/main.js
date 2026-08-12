@@ -365,6 +365,8 @@
       var section = bar.closest('.tintuc');
 
       var FILTER_FADE_MS = PREFERS_REDUCED_MOTION ? 0 : 300;
+      // Mỗi tab (kể cả "Tất cả") chỉ hiển thị tối đa 4 tin theo thứ tự mới nhất.
+      var MAX_VISIBLE = 4;
 
       // Khớp khi chọn "Tất cả", slug nằm trong danh mục (đa danh mục, cách nhau
       // bởi khoảng trắng), hoặc slug nằm trong data-tags.
