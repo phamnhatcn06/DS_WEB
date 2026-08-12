@@ -525,3 +525,39 @@
 @media (max-width: 991.98px) {
   .nd-sidebar { position: static; margin-top: 8px; }
 }
+
+/* ==========================================================================
+   Popup xem PDF (link tệp trong thân bài mở trong modal, không rời trang)
+   ========================================================================== */
+.pdf-modal .modal-dialog {
+  max-width: min(1100px, 96vw);
+}
+
+.pdf-modal .modal-content {
+  height: 90vh;
+}
+
+.pdf-modal .modal-body {
+  padding: 0;
+  background: #52565b;
+}
+
+.pdf-modal .pdf-frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.pdf-modal .modal-title {
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Con trỏ gợi ý link PDF trong thân bài sẽ mở popup */
+.nd-body a[href$=".pdf"],
+.nd-body a[href*=".pdf?"] {
+  cursor: zoom-in;
+}

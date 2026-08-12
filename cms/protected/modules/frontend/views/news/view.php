@@ -22,6 +22,8 @@ $cs = Yii::app()->clientScript;
 $cs->registerCssFile($root . '/assets/fonts/montserrat.css');
 $cs->registerCssFile($root . '/assets/css/about-hero.css');
 $cs->registerCssFile($root . '/assets/css/chitiet-tin-tuc.css');
+// Popup xem PDF cho các link tệp trong thân bài (nạp cuối trang).
+$cs->registerScriptFile($root . '/assets/js/news-pdf-viewer.js', CClientScript::POS_END);
 
 $s = function ($key, $default = '') {
     return SiteSetting::get($key, $default);
