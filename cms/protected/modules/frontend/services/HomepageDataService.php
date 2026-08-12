@@ -30,6 +30,16 @@ class HomepageDataService
             $newsWith[] = 'tags';
         }
 
+        // --- Tin tức Section 9: mỗi danh mục có show_in_filter = 1 là một tab.
+        // Lấy tối đa 4 bài mới nhất CHO TỪNG danh mục (không phải 12 bài mới nhất
+        // toàn cục) — nếu không, danh mục nào ít bài sẽ trống khi bấm sang tab.
+        $filterCategories = NewsCategory::model()->findAll(array(
+            'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.show_in_filter = 1',
+            'order'     => 't.sort_order ASC',
+        ));
+
+        $newsPosts = self::loadNewsPosts($filterCategories, $newsWith, $hasCats);
+
         $payload = array(
             'heroSlides' => HeroSlide::model()->with('background', 'logo')->active()->findAll(),
 
