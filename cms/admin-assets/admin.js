@@ -88,10 +88,19 @@
       activeField.querySelector('[data-media-clear]').hidden = false;
     }
 
+    // Chọn icon FontAwesome theo loại tệp (dùng cho item không phải ảnh).
+    function fileIconClass(item) {
+      var mime = item.mime || '';
+      if (mime === 'application/pdf' || /\.pdf$/i.test(item.name)) {
+        return 'fa-file-pdf-o';
+      }
+      return 'fa-file-o';
+    }
+
     function renderItems(items) {
       grid.innerHTML = '';
       if (!items.length) {
-        grid.innerHTML = '<p class="text-muted m-0 p-3">Chưa có ảnh nào phù hợp.</p>';
+        grid.innerHTML = '<p class="text-muted m-0 p-3">Chưa có tệp nào phù hợp.</p>';
         return;
       }
       var selectedId = activeField
