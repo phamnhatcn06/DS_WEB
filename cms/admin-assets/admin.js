@@ -53,6 +53,8 @@
     var activeField = null; // trường media đang được chọn ảnh
     var pickCallback = null; // callback khi mở picker ở chế độ "chọn ảnh trả về" (vd TinyMCE)
     var searchTimer = null;
+    var currentScope = 'image'; // image | doc | all — loại file được liệt kê/tải lên
+    var defaultAccept = fileInput ? fileInput.getAttribute('accept') : 'image/*';
 
     // Chọn xong một ảnh: nếu đang ở chế độ callback thì trả ảnh về nơi gọi,
     // ngược lại gán vào trường media đang mở.
