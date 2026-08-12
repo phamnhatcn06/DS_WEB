@@ -249,10 +249,16 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
   </div>
 </div>
 
+<?php
+// Cache-busting theo thời điểm sửa file — buộc trình duyệt tải bản mới nhất.
+$assetDir = Yii::getPathOfAlias('webroot') . '/admin-assets';
+$adminJsV = @filemtime($assetDir . '/admin.js');
+$formJsV  = @filemtime($assetDir . '/news-post-form.js');
+?>
 <!-- TinyMCE (self-host, không CDN) -->
 <script src="<?php echo $root; ?>/admin-assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="<?php echo $root; ?>/admin-assets/admin.js" defer></script>
-<script src="<?php echo $root; ?>/admin-assets/news-post-form.js" defer></script>
+<script src="<?php echo $root; ?>/admin-assets/admin.js?v=<?php echo $adminJsV; ?>" defer></script>
+<script src="<?php echo $root; ?>/admin-assets/news-post-form.js?v=<?php echo $formJsV; ?>" defer></script>
 <script>
   window.DSH_TINYMCE_BASE = '<?php echo $root; ?>/admin-assets/vendor/tinymce';
 </script>
