@@ -87,4 +87,60 @@ class HomepageDataService
 
         return $payload;
     }
+
+    /**
+     * Nạp bài viết cho Section 9: gom tối đa 4 bài mới nhất của MỖI danh mục tab
+     * (dedup theo id, giữ thứ tự mới nhất trước). Khi chưa có bảng đa danh mục
+     * hoặc chưa chọn tab nào → fallback về 4 bài mới nhất toàn cục.
+     *
+     * @param NewsCategory[] $filterCategories danh mục show_in_filter = 1
+     * @param string[]       $newsWith         quan hệ eager-load
+     * @param bool           $hasCats          bảng pvn_news_post_categories tồn tại
+     * @return NewsPost[]
+     */
+    private static function loadNewsPosts($filterCategories, $newsWith, $hasCats)
+    {
+        $perCategory = 4;
+
+        if (!$hasCats || empty($filterCategories)) {
+            return NewsPost::model()->with($newsWith)->findAll(array(
+                'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st',
+                'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
+                'order'     => 't.published_at DESC, t.id DESC',
+                'limit'     => $perCategory,
+            ));
+        }
+
+        // Top-4 id mỗi danh mục — dedup bằng key mảng, một bài thuộc nhiều danh
+        // mục chỉ xuất hiện một lần.
+        $db      = Yii::app()->db;
+        $postIds = array();
+        foreach ($filterCategories as $category) {
+            $ids = $db->createCommand()
+                ->select('p.id')
+                ->from('pvn_news_posts p')
+                ->join('pvn_news_post_categories pc', 'pc.post_id = p.id')
+                ->where(
+                    'p.deleted_at IS NULL AND p.is_active = 1 AND p.status = :st'
+                        . ' AND pc.category_id = :cid',
+                    array(':st' => NewsPost::STATUS_PUBLISHED, ':cid' => (int) $category->id)
+                )
+                ->order('p.published_at DESC, p.id DESC')
+                ->limit($perCategory)
+                ->queryColumn();
+            foreach ($ids as $id) {
+                $postIds[(int) $id] = true;
+            }
+        }
+
+        if (empty($postIds)) {
+            return array();
+        }
+
+        $ids = implode(',', array_map('intval', array_keys($postIds)));
+        return NewsPost::model()->with($newsWith)->findAll(array(
+            'condition' => 't.id IN (' . $ids . ')',
+            'order'     => 't.published_at DESC, t.id DESC',
+        ));
+    }
 }
