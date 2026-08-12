@@ -197,3 +197,25 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
         </div>
       </div>
     </section>
+
+    <!-- ===== Popup: Xem PDF (mở khi bấm link tệp trong thân bài) ===== -->
+    <div class="modal fade pdf-modal" id="pdfViewerModal" tabindex="-1"
+         aria-labelledby="pdfViewerTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title" id="pdfViewerTitle" data-pdf-title>Tài liệu PDF</h2>
+            <div class="d-flex align-items-center gap-2 ms-auto me-2">
+              <a href="#" class="btn btn-sm btn-outline-secondary" data-pdf-open
+                 target="_blank" rel="noopener">Mở tab mới</a>
+              <a href="#" class="btn btn-sm btn-dsh" data-pdf-download download>Tải xuống</a>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <div class="modal-body">
+            <iframe class="pdf-frame" data-pdf-frame src="about:blank"
+                    title="Trình xem tài liệu PDF"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
