@@ -194,9 +194,9 @@ $renderCard = function ($card, $sizeClass, $showExcerpt, $hidden = false) use ($
 <?php if (!empty($narrow)): ?>
           <div class="col-12 tintuc-col--narrow">
             <div class="row g-3 g-lg-4">
-<?php foreach ($narrow as $card): ?>
+<?php foreach ($narrow as $i => $card): ?>
               <div class="col-12">
-                <?php echo $renderCard($card, 'sm', false); ?>
+                <?php echo $renderCard($card, 'sm', false, $i >= 2); ?>
               </div>
 <?php endforeach; ?>
             </div>
