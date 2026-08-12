@@ -114,9 +114,12 @@ if ($filledZones === 1) {
 }
 
 // Closure render một news card theo ô (sizeClass) — không lặp markup 3 lần.
-$renderCard = function ($card, $sizeClass, $showExcerpt) use ($root) {
+$renderCard = function ($card, $sizeClass, $showExcerpt, $hidden = false) use ($root) {
     $tagSlugs = isset($card['tagSlugs']) ? implode(' ', $card['tagSlugs']) : '';
-    $out  = '<article class="news-item" data-category="' . CHtml::encode($card['cat']) . '"'
+    // Ẩn sẵn (is-hidden) các tin dư ở lượt "Tất cả" khi tải trang — chỉ 4 tin
+    // đầu hiển thị, phần còn lại vẫn nằm trong DOM để bộ lọc danh mục dùng.
+    $itemClass = $hidden ? 'news-item is-hidden' : 'news-item';
+    $out  = '<article class="' . $itemClass . '" data-category="' . CHtml::encode($card['cat']) . '"'
         . ' data-tags="' . CHtml::encode($tagSlugs) . '">' . "\n";
     $out .= '  <a href="' . CHtml::encode($card['url']) . '" class="news-card news-card--' . $sizeClass . '">' . "\n";
     $out .= '    ' . MediaHelper::imgOr($card['img'], $root . '/assets/images/news-01.webp',
