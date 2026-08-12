@@ -132,7 +132,8 @@
     function loadList(query) {
       setStatus('Đang tải…');
       var url = listUrl + (listUrl.indexOf('?') === -1 ? '?' : '&') +
-        'q=' + encodeURIComponent(query || '');
+        'q=' + encodeURIComponent(query || '') +
+        '&scope=' + encodeURIComponent(currentScope);
       fetch(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
         .then(function (res) { return res.json(); })
         .then(function (data) {
