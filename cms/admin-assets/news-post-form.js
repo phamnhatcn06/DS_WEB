@@ -66,7 +66,7 @@
       toolbar:
         'undo redo | blocks | bold italic underline | ' +
         'alignleft aligncenter alignright | bullist numlist | ' +
-        'link dshmedia image media table | code fullscreen',
+        'link dshmedia dshfile image media table | code fullscreen',
       branding: false,
       promotion: false,
       convert_urls: false,
