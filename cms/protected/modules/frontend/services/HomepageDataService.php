@@ -64,17 +64,9 @@ class HomepageDataService
 
             'partners' => Partner::model()->with('logo')->active()->findAll(),
 
-            'newsCategories' => NewsCategory::model()->findAll(array(
-                'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.show_in_filter = 1',
-                'order'     => 't.sort_order ASC',
-            )),
+            'newsCategories' => $filterCategories,
 
-            'newsPosts' => NewsPost::model()->with($newsWith)->findAll(array(
-                'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st',
-                'params'    => array(':st' => NewsPost::STATUS_PUBLISHED),
-                'order'     => 't.published_at DESC, t.id DESC',
-                'limit'     => 12,
-            )),
+            'newsPosts' => $newsPosts,
 
             // Chỉ những thẻ đang gắn cho ít nhất một bài đã xuất bản — làm nguồn
             // cho hàng lọc theo thẻ ở Section 9. Rỗng khi chưa migrate.
