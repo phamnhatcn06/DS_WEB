@@ -90,7 +90,7 @@
         // Nút "Tệp đính kèm / PDF" — mở media picker lọc tài liệu, cho phép tải
         // PDF lên rồi chèn một đường dẫn tải xuống vào nội dung bài viết.
         editor.ui.registry.addButton('dshfile', {
-          icon: 'new-document',
+          icon: 'upload',
           tooltip: 'Tệp đính kèm / PDF',
           onAction: function () {
             if (!window.DSHMediaPicker) {
