@@ -191,6 +191,8 @@
     document.querySelectorAll('[data-media-open]').forEach(function (button) {
       button.addEventListener('click', function () {
         activeField = button.closest('[data-media-field]');
+        currentScope = 'image';
+        fileInput.setAttribute('accept', defaultAccept);
         setStatus('');
         modal.show();
         loadList(searchInput.value);
