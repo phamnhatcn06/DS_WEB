@@ -399,11 +399,12 @@
         }
 
         items.forEach(function (item) {
-          var matched = isMatched(item, category);
-          item.classList.toggle('is-hidden', !matched);
+          // Khớp danh mục/thẻ nhưng vẫn cắt còn tối đa MAX_VISIBLE tin.
+          var show = isMatched(item, category) && enterIndex < MAX_VISIBLE;
+          item.classList.toggle('is-hidden', !show);
           item.classList.remove('is-entering');
 
-          if (!matched) {
+          if (!show) {
             return;
           }
           item.classList.remove('is-leaving');
