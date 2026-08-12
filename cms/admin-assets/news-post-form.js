@@ -86,6 +86,27 @@
             });
           }
         });
+
+        // Nút "Tệp đính kèm / PDF" — mở media picker lọc tài liệu, cho phép tải
+        // PDF lên rồi chèn một đường dẫn tải xuống vào nội dung bài viết.
+        editor.ui.registry.addButton('dshfile', {
+          icon: 'new-document',
+          tooltip: 'Tệp đính kèm / PDF',
+          onAction: function () {
+            if (!window.DSHMediaPicker) {
+              return;
+            }
+            window.DSHMediaPicker.open(function (item) {
+              // Ưu tiên đoạn văn bản đang bôi đen làm nhãn liên kết.
+              var selected = editor.selection.getContent({ format: 'text' });
+              var label = (selected || item.name || 'Tải tệp về').replace(/</g, '&lt;');
+              var url = item.url.replace(/"/g, '&quot;');
+              editor.insertContent(
+                '<a href="' + url + '" target="_blank" rel="noopener" download>' + label + '</a>'
+              );
+            }, { scope: 'doc', accept: 'application/pdf' });
+          }
+        });
       }
     });
 
