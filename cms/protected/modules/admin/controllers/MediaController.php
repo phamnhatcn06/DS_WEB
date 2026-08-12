@@ -130,16 +130,27 @@ class MediaController extends AdminController
     }
 
     /**
-     * Trả JSON danh sách ảnh cho bộ chọn ảnh (media picker) trong form CRUD.
-     * Chỉ trả về file ảnh, mới nhất trước.
+     * Trả JSON danh sách file cho bộ chọn media (media picker) trong form CRUD.
+     * Lọc theo `scope`: image (mặc định — chỉ ảnh), doc (chỉ tài liệu như PDF),
+     * hoặc all (tất cả). Mới nhất trước.
      */
     public function actionListJson()
     {
         $search = trim((string) Yii::app()->request->getParam('q', ''));
+        $scope  = (string) Yii::app()->request->getParam('scope', 'image');
 
         $criteria = new CDbCriteria();
-        $criteria->condition = 'deleted_at IS NULL AND mime_type LIKE :img';
-        $criteria->params = array(':img' => 'image/%');
+        $criteria->condition = 'deleted_at IS NULL';
+        $criteria->params = array();
+
+        if ($scope === 'image') {
+            $criteria->condition .= ' AND mime_type LIKE :img';
+            $criteria->params[':img'] = 'image/%';
+        } elseif ($scope === 'doc') {
+            $criteria->condition .= ' AND mime_type NOT LIKE :img';
+            $criteria->params[':img'] = 'image/%';
+        }
+
         if ($search !== '') {
             $criteria->condition .= ' AND (file_name LIKE :q OR alt_text LIKE :q)';
             $criteria->params[':q'] = '%' . $search . '%';
@@ -150,10 +161,13 @@ class MediaController extends AdminController
         $items = array();
         foreach (MediaFile::model()->findAll($criteria) as $file) {
             $items[] = array(
-                'id'   => (int) $file->id,
-                'url'  => $file->getPublicUrl(),
-                'name' => $file->file_name,
-                'alt'  => (string) $file->alt_text,
+                'id'      => (int) $file->id,
+                'url'     => $file->getPublicUrl(),
+                'name'    => $file->file_name,
+                'alt'     => (string) $file->alt_text,
+                'mime'    => (string) $file->mime_type,
+                'isImage' => $file->getIsImage(),
+                'size'    => $file->getFormattedSize(),
             );
         }
 
