@@ -104,8 +104,13 @@
         if (String(item.id) === String(selectedId)) {
           cell.classList.add('is-selected');
         }
+        // Ảnh hiện thumbnail; tệp khác (PDF…) hiện icon theo phần mở rộng.
+        var thumb = item.isImage
+          ? '<img src="' + item.url + '" alt="" loading="lazy" />'
+          : '<span class="media-picker-item-icon"><i class="fa ' + fileIconClass(item) + '"></i>'
+            + (item.size ? '<small>' + item.size + '</small>' : '') + '</span>';
         cell.innerHTML =
-          '<img src="' + item.url + '" alt="" loading="lazy" />' +
+          thumb +
           '<span class="media-picker-item-name">' + item.name + '</span>';
         cell.addEventListener('click', function () {
           finishPick(item);
