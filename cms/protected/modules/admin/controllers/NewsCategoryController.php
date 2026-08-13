@@ -58,10 +58,11 @@ class NewsCategoryController extends AdminCrudController
 
         $model = $this->loadModel($this->modelClass, $id);
 
-        if ($model->postCount > 0) {
+        $postCount = $model->getRealPostCount();
+        if ($postCount > 0) {
             $this->redirectWith(array('index'), 'error',
                 'Không thể xoá “' . $model->name . '” vì đang có '
-                . $model->postCount . ' bài viết. Hãy chuyển các bài sang danh mục khác trước.');
+                . $postCount . ' bài viết. Hãy chuyển các bài sang danh mục khác trước.');
         }
 
         $model->softDelete();
