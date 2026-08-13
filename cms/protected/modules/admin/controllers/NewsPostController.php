@@ -37,9 +37,21 @@ class NewsPostController extends AdminCrudController
         return TextHelper::truncate($item->excerpt, 90);
     }
 
-    public function categoryName($item)
+    /**
+     * Hiển thị tất cả danh mục mà bài viết thuộc về (đa danh mục) dưới dạng chip.
+     */
+    public function renderCategories($item)
     {
-        return $item->category !== null ? $item->category->name : null;
+        $categories = $item->categories;
+        if (empty($categories)) {
+            return '<span class="text-muted">—</span>';
+        }
+        $badges = array();
+        foreach ($categories as $category) {
+            $badges[] = '<span class="badge bg-secondary-subtle text-secondary-emphasis">'
+                . CHtml::encode($category->name) . '</span>';
+        }
+        return implode(' ', $badges);
     }
 
     /**
