@@ -14,13 +14,16 @@ class NewsCategoryController extends AdminCrudController
     protected function gridColumns()
     {
         return array(
-            array('name' => 'name', 'label' => 'Tên danh mục', 'type' => 'primary'),
-            array('name' => 'slug', 'label' => 'Slug (data-filter)', 'type' => 'badge'),
+            array('name' => 'name', 'label' => 'Tên danh mục', 'type' => 'primary',
+                'sortable' => true),
+            array('name' => 'slug', 'label' => 'Slug (data-filter)', 'type' => 'badge',
+                'sortable' => true),
             array('name' => 'postCount', 'label' => 'Số bài', 'type' => 'callback',
                 'value' => array($this, 'renderPostCount'), 'width' => '90px'),
             array('name' => 'show_in_filter', 'label' => 'Trên thanh lọc', 'type' => 'bool',
-                'width' => '130px'),
-            array('name' => 'is_active', 'label' => 'Trạng thái', 'type' => 'bool', 'width' => '110px'),
+                'width' => '130px', 'sortable' => true),
+            array('name' => 'is_active', 'label' => 'Trạng thái', 'type' => 'bool',
+                'width' => '110px', 'sortable' => true),
         );
     }
 
