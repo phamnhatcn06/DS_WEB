@@ -51,6 +51,8 @@
   background-color: rgba(13, 37, 69, .08);
   border-radius: var(--radius);
   overflow: hidden;
+  /* Đường kẻ dọc mảnh ngăn cách các cột (hiện qua khe 1px giữa thẻ) */
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .28);
 }
 
 .linhvuc-item {
@@ -60,7 +62,7 @@
   padding: var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: clamp(1.5rem, 3vw, 3rem);
+  gap: clamp(1.75rem, 3vw, 3rem);
   /* Chuyển động mượt cho hiệu ứng spotlight khi hover */
   transition:
     transform var(--transition-base),
