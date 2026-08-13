@@ -11,6 +11,29 @@
   overflow: hidden;
 }
 
+/* Hoạ tiết Cityscape (nhà cao tầng hồng/xanh) thật từ Figma — phủ mờ ở đầu
+   section, hoà sắc overlay lên nền gradient hồng (Figma node 1134:1266). */
+.duan::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  aspect-ratio: 1920 / 459;
+  background: url("../images/duan-cityscape.png") no-repeat center top / contain;
+  mix-blend-mode: overlay;
+  opacity: .9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Nội dung (tiêu đề + slider) luôn nằm trên lớp hoạ tiết nền */
+.duan > .container {
+  position: relative;
+  z-index: 1;
+}
+
 /* -------- Đầu section: tiêu đề trái · intro + link phải -------- */
 .duan-head { margin-bottom: clamp(2rem, 4vw, 3.5rem); }
 

@@ -65,10 +65,10 @@ if (empty($items)) {
 
         <!-- Đầu section: tiêu đề trái · intro phải -->
         <div class="row g-4 align-items-center linhvuc-head">
-          <div class="col-12 col-lg-7">
+          <div class="col-12 col-lg-8">
             <h2 class="linhvuc-title" data-reveal="left">Lĩnh vực<br />kinh doanh</h2>
           </div>
-          <div class="col-12 col-lg-5">
+          <div class="col-12 col-lg-4">
             <p class="linhvuc-intro" data-reveal="right">Đông Sơn Holdings hoạt động trên ba trụ cột: đầu tư, bất động sản
               và xây lắp — đồng thời mở rộng chiến lược vào khu công nghiệp và năng lượng tái tạo.</p>
           </div>
