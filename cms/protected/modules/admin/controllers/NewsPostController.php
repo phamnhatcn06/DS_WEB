@@ -8,7 +8,9 @@ class NewsPostController extends AdminCrudController
     protected $permissionResource = 'news_posts';
     protected $titleSingular      = 'Bài viết';
     protected $titlePlural        = 'Tin tức';
-    protected $withRelations      = array('thumbnail', 'categories');
+    // categories là quan hệ MANY_MANY: nạp bằng truy vấn riêng (together=false) để
+    // JOIN không nhân đôi dòng, tránh phân trang đếm 1 kiểu nhưng hiển thị 1 kiểu khác.
+    protected $withRelations      = array('thumbnail', 'categories' => array('together' => false));
     protected $defaultOrder       = 't.published_at DESC';
     protected $sortable           = false;
     protected $formView           = 'admin.views.newsPost.form';
