@@ -46,7 +46,7 @@
 
 .timeline-quote {
   color: var(--dsh-red);
-  font-size: clamp(0.9rem, 1vw, 1.0625rem);
+  font-size: clamp(0.8125rem, 0.9vw, 0.9375rem);
   font-style: italic;
   line-height: 1.6;
   text-align: right;
