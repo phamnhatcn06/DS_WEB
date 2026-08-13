@@ -22,15 +22,15 @@ class NewsPostController extends AdminCrudController
         return array(
             array('name' => 'thumbnail', 'label' => 'Ảnh', 'type' => 'image', 'width' => '90px'),
             array('name' => 'title', 'label' => 'Tiêu đề', 'type' => 'primary',
-                'sub' => array($this, 'excerptSummary')),
+                'sub' => array($this, 'excerptSummary'), 'sortable' => true),
             array('name' => 'categories', 'label' => 'Danh mục', 'type' => 'callback',
                 'value' => array($this, 'renderCategories'), 'width' => '180px'),
             array('name' => 'published_at', 'label' => 'Ngày đăng', 'type' => 'callback',
-                'value' => array($this, 'renderDate'), 'width' => '120px'),
+                'value' => array($this, 'renderDate'), 'width' => '120px', 'sortable' => true),
             array('name' => 'card_size', 'label' => 'Card', 'type' => 'badge',
-                'value' => array($this, 'cardSizeLabel'), 'width' => '150px'),
+                'value' => array($this, 'cardSizeLabel'), 'width' => '150px', 'sortable' => true),
             array('name' => 'status', 'label' => 'Trạng thái', 'type' => 'callback',
-                'value' => array($this, 'renderStatus'), 'width' => '120px'),
+                'value' => array($this, 'renderStatus'), 'width' => '120px', 'sortable' => true),
         );
     }
 
