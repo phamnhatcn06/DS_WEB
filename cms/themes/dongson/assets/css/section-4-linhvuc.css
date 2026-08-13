@@ -166,18 +166,18 @@
 /* Thẻ tag viền mảnh (Figma: hộp chữ nhật, không bo tròn) */
 .linhvuc-tags {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 6px;
   margin-top: auto;
 }
 
-/* Cỡ chữ co theo bề rộng cột để 4 tag luôn nằm gọn trên một hàng */
+/* Tag giữ cỡ chữ 14px như Figma; tự xuống hàng khi cột hẹp thay vì ép nhỏ */
 .lv-tag {
   border: 1px solid rgba(13, 37, 69, .1);
   color: var(--dsh-slate);
-  font-size: clamp(.625rem, .72vw, .875rem);
+  font-size: clamp(.8125rem, .8vw, .875rem);
   line-height: 1;
-  padding: .45em .6em;
+  padding: .5em .7em;
   white-space: nowrap;
 }
 
