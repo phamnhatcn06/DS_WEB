@@ -93,6 +93,30 @@ class NewsCategory extends BaseActiveRecord
         return true;
     }
 
+    /**
+     * Số bài viết thực tế thuộc danh mục — tính cả cột category_id chính lẫn
+     * bảng liên kết nhiều-nhiều pvn_news_post_categories (một bài có thể nằm ở
+     * nhiều danh mục). Đếm DISTINCT để không tính trùng khi bài vừa có
+     * category_id vừa có liên kết trỏ tới cùng danh mục.
+     */
+    public function getRealPostCount()
+    {
+        $db = Yii::app()->db;
+        $categoryId = (int) $this->id;
+
+        if ($db->getSchema()->getTable('pvn_news_post_categories') === null) {
+            return (int) $this->postCount;
+        }
+
+        return (int) $db->createCommand()
+            ->select('COUNT(DISTINCT p.id)')
+            ->from('pvn_news_posts p')
+            ->leftJoin('pvn_news_post_categories npc', 'npc.post_id = p.id')
+            ->where('p.deleted_at IS NULL AND (p.category_id = :id OR npc.category_id = :id)',
+                array(':id' => $categoryId))
+            ->queryScalar();
+    }
+
     public static function optionsForSelect($excludeId = null)
     {
         $criteria = new CDbCriteria();
