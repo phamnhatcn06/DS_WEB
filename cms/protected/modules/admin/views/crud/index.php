@@ -85,9 +85,14 @@ $items = $dataProvider->getData();
       <table class="table table-hover mb-0 align-middle">
         <thead>
           <tr>
+            <?php $sort = $dataProvider->getSort(); ?>
             <?php foreach ($columns as $column): ?>
               <th<?php echo isset($column['width']) ? ' style="width:' . $column['width'] . '"' : ''; ?>>
-                <?php echo CHtml::encode($column['label']); ?>
+                <?php if (!empty($column['sortable']) && $sort !== false): ?>
+                  <?php echo $sort->link($column['name'], CHtml::encode($column['label'])); ?>
+                <?php else: ?>
+                  <?php echo CHtml::encode($column['label']); ?>
+                <?php endif; ?>
               </th>
             <?php endforeach; ?>
             <th style="width:150px" class="text-end">Thao tác</th>
