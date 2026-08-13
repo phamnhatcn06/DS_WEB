@@ -74,7 +74,10 @@ a:not(.btn):focus-visible {
 .text-muted-soft { color: var(--dsh-muted) !important; }
 
 .container {
+  width: 100%;
   max-width: var(--container-max);
+  padding-inline: var(--container-pad);
+  margin-inline: auto;
 }
 
 /* -------- Divider vàng mảnh -------- */
