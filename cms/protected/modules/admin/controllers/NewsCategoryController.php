@@ -26,7 +26,7 @@ class NewsCategoryController extends AdminCrudController
 
     public function renderPostCount($item)
     {
-        return '<span class="badge bg-secondary">' . (int) $item->postCount . '</span>';
+        return '<span class="badge bg-secondary">' . (int) $item->getRealPostCount() . '</span>';
     }
 
     protected function formFields()
