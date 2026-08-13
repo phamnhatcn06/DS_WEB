@@ -18,6 +18,9 @@
   height: 100%;
   object-fit: cover;
   pointer-events: none;
+  /* Figma lật ngang ảnh gốc (scaleY(-1)·rotate(180) = scaleX(-1)):
+     thành phố dạt sang phải, làn đường đổ xuống trái, đúng thiết kế */
+  transform: scaleX(-1);
 }
 
 /* Overlay tối để tương phản chữ trắng + hoà tông navy brand */
