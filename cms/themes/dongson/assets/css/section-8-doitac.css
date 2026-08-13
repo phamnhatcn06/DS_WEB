@@ -17,6 +17,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Bám khung như Figma: cắt bớt trời phía trên, để tháp cầu nổi bật hơn */
+  object-position: center bottom;
   pointer-events: none;
   /* Figma lật ngang ảnh gốc (scaleY(-1)·rotate(180) = scaleX(-1)):
      thành phố dạt sang phải, làn đường đổ xuống trái, đúng thiết kế */
