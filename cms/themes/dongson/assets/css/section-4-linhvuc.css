@@ -139,12 +139,20 @@
   flex-direction: column;
 }
 
+/* Đường kẻ dọc mảnh giữa các cột thẻ (md+); mobile xếp dọc dùng kẻ ngang */
+@media (min-width: 768px) {
+  .linhvuc-col + .linhvuc-col .linhvuc-item {
+    box-shadow: inset 1px 0 0 rgba(13, 37, 69, .08);
+  }
+}
+
 .linhvuc-num {
   display: block;
   font-family: var(--font-heading);
-  font-size: clamp(2.25rem, 3.2vw, 3.25rem);
+  font-size: clamp(2.75rem, 3.2vw, 3.25rem);
   font-weight: 700;
   line-height: 1;
+  letter-spacing: -.01em;
   color: var(--dsh-red-bright);
 }
 
