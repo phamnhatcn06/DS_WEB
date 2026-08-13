@@ -48,6 +48,12 @@
   margin: 0 0 clamp(2rem, 4vw, 3.5rem);
 }
 
+/* -------- Grid logo: gutter ngang 23px · dọc 43px (Figma) -------- */
+.partner-grid {
+  --bs-gutter-x: clamp(12px, 1.5vw, 23px);
+  --bs-gutter-y: clamp(20px, 3vw, 43px);
+}
+
 /* -------- Ô logo -------- */
 .partner-card {
   display: flex;
