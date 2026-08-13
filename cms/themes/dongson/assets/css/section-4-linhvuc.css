@@ -166,7 +166,7 @@
 
 .linhvuc-item p {
   color: var(--dsh-slate);
-  font-size: clamp(.875rem, 1vw, .9375rem); /* 14 → 15px */
+  font-size: clamp(.9375rem, 1.05vw, 1rem); /* 15 → 16px */
   line-height: 1.5;
   margin-bottom: var(--space-4);
   text-align: justify;
