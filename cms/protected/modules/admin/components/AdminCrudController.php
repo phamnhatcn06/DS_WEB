@@ -74,9 +74,25 @@ abstract class AdminCrudController extends AdminController
             }
         }
 
+        // Cột nào khai báo 'sortable' => true thì cho phép bấm tiêu đề để sắp xếp.
+        $sortAttributes = array();
+        foreach ($this->gridColumns() as $column) {
+            if (!empty($column['sortable'])) {
+                $sortAttributes[$column['name']] = array(
+                    'asc'   => 't.' . $column['name'] . ' ASC',
+                    'desc'  => 't.' . $column['name'] . ' DESC',
+                    'label' => $column['label'],
+                );
+            }
+        }
+
         $dataProvider = new CActiveDataProvider($this->modelClass, array(
             'criteria'   => $criteria,
             'pagination' => array('pageSize' => Yii::app()->params['pageSize']),
+            'sort'       => array(
+                'attributes'   => $sortAttributes,
+                'defaultOrder' => $this->defaultOrder,
+            ),
         ));
 
         $this->pageTitle = $this->titlePlural;
