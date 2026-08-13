@@ -53,6 +53,8 @@
   /* -------- Layout -------- */
   /* Figma: frame nội dung rộng 1680px, lề 120px mỗi bên trên canvas 1920px */
   --container-max: 1680px;
+  /* Lề hai bên co giãn: 16px (mobile) → 120px (desktop lớn) */
+  --container-pad: clamp(16px, 5vw, 120px);
 
   /* -------- Hiệu ứng -------- */
   --transition-base: .3s ease;
