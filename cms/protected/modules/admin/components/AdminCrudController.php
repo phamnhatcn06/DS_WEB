@@ -51,7 +51,8 @@ abstract class AdminCrudController extends AdminController
 
         $criteria = new CDbCriteria();
         $criteria->condition = 't.deleted_at IS NULL';
-        $criteria->order = $this->defaultOrder;
+        // Thứ tự do CSort đảm nhiệm (mặc định = $this->defaultOrder, hoặc theo cột
+        // người dùng bấm ở tiêu đề) — không đặt criteria->order để tránh trùng lặp.
         if ($this->withRelations !== array()) {
             $criteria->with = $this->withRelations;
             $criteria->together = true;
