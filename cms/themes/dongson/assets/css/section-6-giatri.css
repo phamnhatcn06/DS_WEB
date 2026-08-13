@@ -96,7 +96,7 @@
 
 .giatri-card h3 {
   color: var(--dsh-white);
-  font-size: clamp(1.375rem, 1.9vw, 2rem);
+  font-size: clamp(1.125rem, 1.3vw, 1.5rem);
   font-weight: 500;
   line-height: 1.25;
   margin: 0 0 6px;
@@ -104,7 +104,7 @@
 
 .giatri-card p {
   color: var(--dsh-white);
-  font-size: 1rem;
+  font-size: clamp(.875rem, .95vw, .9375rem);
   line-height: 1.5;
   margin: 0;
 }
