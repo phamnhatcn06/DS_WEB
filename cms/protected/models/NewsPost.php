@@ -10,8 +10,8 @@ class NewsPost extends BaseActiveRecord
     /** @var int[]|null id các danh mục được chọn trong form (trường ảo, không phải cột). */
     private $_categoryIds;
 
-    /** @var int[]|null id các file đính kèm được chọn trong form (trường ảo). */
-    private $_attachmentIds;
+    /** @var array id file đính kèm theo ngôn ngữ ['vi'=>int[], 'en'=>int[]] (trường ảo). */
+    private $_attachmentIds = array();
 
     /**
      * Tình trạng dự án — dùng cho danh mục dự án. Đồng bộ nhãn với model Project.
