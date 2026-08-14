@@ -97,17 +97,22 @@ class NewsPost extends BaseActiveRecord
         return array(
             'category'  => array(self::BELONGS_TO, 'NewsCategory', 'category_id'),
             // Đa danh mục: một bài thuộc nhiều danh mục qua bảng liên kết.
+            // together=false: eager-load bằng truy vấn riêng, KHÔNG INNER JOIN vào
+            // truy vấn chính — nếu không, bài chưa gắn danh mục/thẻ sẽ bị loại khỏi
+            // kết quả (bug làm trang chủ rỗng khi bảng thẻ trống).
             'categories' => array(self::MANY_MANY, 'NewsCategory',
                 'pvn_news_post_categories(post_id, category_id)',
                 'condition' => 'categories.deleted_at IS NULL',
-                'order'     => 'categories.sort_order ASC, categories.name ASC'),
+                'order'     => 'categories.sort_order ASC, categories.name ASC',
+                'together'  => false),
             'thumbnail' => array(self::BELONGS_TO, 'MediaFile', 'thumbnail_media_id'),
             'author'    => array(self::BELONGS_TO, 'User', 'author_id'),
             // Chỉ nạp thẻ đang bật, theo thứ tự cấu hình — dùng để hiển thị chip.
             'tags'      => array(self::MANY_MANY, 'Tag',
                 'pvn_news_post_tags(post_id, tag_id)',
                 'condition' => 'tags.deleted_at IS NULL AND tags.is_active = 1',
-                'order'     => 'tags.sort_order ASC, tags.name ASC'),
+                'order'     => 'tags.sort_order ASC, tags.name ASC',
+                'together'  => false),
         );
     }
 
