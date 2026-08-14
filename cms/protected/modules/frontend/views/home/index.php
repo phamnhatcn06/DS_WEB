@@ -13,6 +13,7 @@
  * @var HeroSlide[]         $heroSlides
  * @var BusinessSector[]    $sectors
  * @var Project[]           $projects
+ * @var NewsPost[]          $featuredProjects
  * @var CoreValue[]         $coreValues
  * @var TimelineMilestone[] $milestones
  * @var Partner[]           $partners
