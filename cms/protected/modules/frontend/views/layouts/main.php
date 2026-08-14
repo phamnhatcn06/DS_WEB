@@ -209,6 +209,7 @@ $telHref = function ($phone) {
           <!-- Brand + liên hệ + social -->
           <div class="col">
             <img src="<?php echo CHtml::encode($logoFooter); ?>" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
+            <?php if ($hotlines !== array() || $contactEmail !== '' || $officeAddress !== ''): ?>
             <ul class="list-unstyled footer-contact mb-4">
               <?php if ($hotlines !== array()): ?>
                 <li>
