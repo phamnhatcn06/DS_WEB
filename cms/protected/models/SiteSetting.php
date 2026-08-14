@@ -116,6 +116,13 @@ class SiteSetting extends CActiveRecord
             case 'json':
                 $decoded = json_decode((string) $this->setting_value, true);
                 return json_last_error() === JSON_ERROR_NONE ? $decoded : array();
+            case 'category_multi':
+                // Danh sách id danh mục, lưu dạng JSON mảng số nguyên.
+                $decoded = json_decode((string) $this->setting_value, true);
+                if (!is_array($decoded)) {
+                    return array();
+                }
+                return array_values(array_map('intval', $decoded));
             case 'media':
                 return $this->setting_value === null ? null : (int) $this->setting_value;
             default:
