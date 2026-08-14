@@ -50,6 +50,39 @@ $ogImageUrl = $settingImageUrl('og_image');
 $headerScript     = (string) SiteSetting::get('header_script');
 $bodyStartScript  = (string) SiteSetting::get('body_start_script');
 $footerScript     = (string) SiteSetting::get('footer_script');
+
+// --- Thông tin liên hệ & mạng xã hội (footer) ---
+// Hotline có thể gồm nhiều số: nhập tách nhau bằng dấu phẩy hoặc xuống dòng.
+$hotlines = array_values(array_filter(array_map(
+  'trim',
+  preg_split('/[\r\n,]+/', (string) SiteSetting::get('hotline', ''))
+), 'strlen'));
+
+$contactEmail   = trim((string) SiteSetting::get('contact_email', ''));
+$officeAddress  = trim((string) SiteSetting::get('head_office_address', ''));
+$copyrightText  = (string) SiteSetting::get(
+  'copyright_text',
+  '© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.'
+);
+
+// Chỉ giữ social có link thật (bỏ rỗng và placeholder '#').
+$socialLinks = array();
+foreach (array(
+  'social_facebook' => array('Facebook', 'social-facebook.svg'),
+  'social_linkedin' => array('LinkedIn', 'social-linkedin.svg'),
+  'social_youtube'  => array('YouTube', 'social-youtube.svg'),
+) as $key => $meta) {
+  $url = trim((string) SiteSetting::get($key, ''));
+  if ($url !== '' && $url !== '#') {
+    $socialLinks[] = array('label' => $meta[0], 'icon' => $meta[1], 'url' => $url);
+  }
+}
+
+/** Chuyển số điện thoại thành href tel: (giữ dấu + đầu, bỏ ký tự thừa). */
+$telHref = function ($phone) {
+  $digits = preg_replace('/[^0-9+]/', '', $phone);
+  return 'tel:' . $digits;
+};
 ?>
 <!doctype html>
 <html lang="vi">
@@ -186,11 +219,11 @@ $footerScript     = (string) SiteSetting::get('footer_script');
                 <span><small>Email</small><strong>hatangdongson@htds.vn</strong></span>
               </li>
             </ul>
-            <div class="social-links d-flex gap-2">
+            <!-- <div class="social-links d-flex gap-2">
               <a href="#" aria-label="Facebook"><img src="<?php echo $root; ?>/assets/images/social-facebook.svg" alt="" aria-hidden="true" /></a>
               <a href="#" aria-label="LinkedIn"><img src="<?php echo $root; ?>/assets/images/social-linkedin.svg" alt="" aria-hidden="true" /></a>
               <a href="#" aria-label="YouTube"><img src="<?php echo $root; ?>/assets/images/social-youtube.svg" alt="" aria-hidden="true" /></a>
-            </div>
+            </div> -->
           </div>
 
           <!-- Về Đông Sơn -->
