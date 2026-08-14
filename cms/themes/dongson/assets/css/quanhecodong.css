@@ -36,11 +36,14 @@
   color: #fff;
   overflow: hidden;
 }
+.qhcd-hero__img {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
 .qhcd-hero__bg {
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 1;
   background:
-    linear-gradient(180deg, rgba(115, 0, 17, .82) 0%, rgba(154, 18, 32, .92) 100%),
-    var(--qhcd-red);
+    linear-gradient(180deg, rgba(115, 0, 17, .72) 0%, rgba(154, 18, 32, .88) 65%, var(--qhcd-red) 100%);
 }
 .qhcd-hero__inner { position: relative; z-index: 2; padding: 120px 16px 64px; }
 .qhcd-hero__eyebrow { font-size: 13px; letter-spacing: 4px; text-transform: uppercase; color: #ffd5d5; margin-bottom: 18px; }
