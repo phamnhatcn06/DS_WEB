@@ -7,11 +7,14 @@ $isNew     = $model->getIsNewRecord();
 $modelName = 'NewsPost';
 $root      = Yii::app()->baseUrl;
 
-// Danh sách danh mục & thẻ để render checkbox nhiều lựa chọn.
-$categoryOptions = NewsCategory::optionsForSelect();
+// Danh sách danh mục (kèm cờ phân loại) & thẻ để render checkbox nhiều lựa chọn.
+$categoriesWithFlags = NewsCategory::optionsWithFlags();
 $tagOptions      = Tag::optionsForSelect();
 $selectedCats    = array_map('strval', $model->getCategoryIds());
 $selectedTags    = array_map('strval', (array) $model->tagIds);
+
+// File đính kèm hiện có (quan hệ cổ đông) — dựng lại danh sách trong form.
+$attachmentFiles = $isNew ? array() : $model->getAttachmentFiles();
 
 // Ảnh đại diện hiện tại.
 $thumb    = $model->thumbnail_media_id ? MediaFile::model()->findByPk($model->thumbnail_media_id) : null;
