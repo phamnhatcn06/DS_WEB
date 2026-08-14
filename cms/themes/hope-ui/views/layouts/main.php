@@ -205,6 +205,24 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
                 }
             });
         }
+
+        // Xác nhận xoá toàn bộ cache website từ nút trên top bar.
+        function confirmClearCache() {
+            Swal.fire({
+                title: 'Xoá toàn bộ cache?',
+                text: 'Trang sẽ được dựng lại từ dữ liệu mới nhất ở lần truy cập kế tiếp.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#9a1220',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Xoá cache',
+                cancelButtonText: 'Hủy'
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    document.getElementById('form-clear-cache').submit();
+                }
+            });
+        }
     </script>
     <script>
         // Navbar dính khi cuộn (đồng bộ vị trí với sidebar mini/đầy đủ).
