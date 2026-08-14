@@ -39,6 +39,15 @@ $postUrl = function (NewsPost $post) {
 
 $currentPage = $pages->currentPage; // 0-based
 $pageCount   = $pages->pageCount;
+
+/** URL trang này với một năm cụ thể (hoặc "tất cả"); luôn reset về trang 1. */
+$yearUrl = function ($yearValue) use ($category) {
+    $params = array('category' => $category->slug);
+    if ($yearValue !== null) {
+        $params['year'] = (int) $yearValue;
+    }
+    return Yii::app()->createUrl('frontend/investor/index', $params);
+};
 ?>
 
 <div class="qhcd-page">
