@@ -277,7 +277,9 @@ $telHref = function ($phone) {
     <!-- Thanh dưới cùng -->
     <div class="footer-bottom">
       <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-        <p class="mb-0"><?php echo CHtml::encode($copyrightText); ?></p>
+        <?php if (trim($copyrightText) !== ''): ?>
+          <p class="mb-0"><?php echo CHtml::encode($copyrightText); ?></p>
+        <?php endif; ?>
         <div class="d-flex gap-4">
           <a class="footer-link" href="#">Chính sách bảo mật</a>
           <a class="footer-link" href="#">Điều khoản sử dụng</a>
