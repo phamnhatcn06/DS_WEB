@@ -110,14 +110,8 @@ class NewsPostController extends AdminCrudController
         $style = isset($styles[$item->status]) ? $styles[$item->status] : 'bg-light text-dark';
         $label = isset($labels[$item->status]) ? $labels[$item->status] : $item->status;
 
-        $html = '<span class="badge ' . $style . '">' . CHtml::encode($label) . '</span>';
-        if ($item->is_featured) {
-            $html .= ' <i class="fa fa-star text-warning" title="Bài nổi bật"></i>';
-        }
-        if ($item->is_featured_project) {
-            $html .= ' <i class="fa fa-building text-danger" title="Dự án trọng điểm"></i>';
-        }
-        return $html;
+        // Cờ "Bài nổi bật" / "Dự án trọng điểm" đã có cột riêng — không lặp lại ở đây.
+        return '<span class="badge ' . $style . '">' . CHtml::encode($label) . '</span>';
     }
 
     /**
