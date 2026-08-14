@@ -69,6 +69,7 @@
 .qhcd-year-filter { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 10px 0 28px; }
 .qhcd-year-filter__label { font-size: 14px; color: var(--qhcd-muted); }
 .qhcd-year-chip {
+  display: inline-block; text-decoration: none;
   border: 1px solid transparent; background: none; color: var(--qhcd-ink);
   font-size: 14px; font-weight: 500; padding: 6px 16px;
   border-radius: var(--qhcd-radius-pill); cursor: pointer;
