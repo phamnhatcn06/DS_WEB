@@ -87,7 +87,7 @@ $items = $dataProvider->getData();
           <tr>
             <?php $sort = $dataProvider->getSort(); ?>
             <?php foreach ($columns as $column): ?>
-              <th<?php echo isset($column['width']) ? ' style="width:' . $column['width'] . '"' : ''; ?>>
+              <th<?php echo isset($column['width']) ? ' style="width:' . $column['width'] . '"' : ''; ?><?php echo isset($column['class']) ? ' class="' . $column['class'] . '"' : ''; ?>>
                 <?php if (!empty($column['sortable']) && $sort !== false): ?>
                   <?php echo $sort->link($column['name'], CHtml::encode($column['label'])); ?>
                 <?php else: ?>
