@@ -134,25 +134,28 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
             </div>
           <?php endif; ?>
 
-          <?php $attachments = $post->getAttachmentFiles(); ?>
-          <?php if (!empty($attachments)): ?>
-            <!-- Tài liệu đính kèm (quan hệ cổ đông) -->
-            <div class="nd-attachments">
-              <h4 class="nd-attachments-title">Tài liệu đính kèm</h4>
-              <ul class="nd-attachments-list list-unstyled mb-0">
-                <?php foreach ($attachments as $file): ?>
-                  <li>
-                    <a class="nd-attachment" href="<?php echo CHtml::encode($file->getPublicUrl()); ?>"
-                       target="_blank" rel="noopener" download>
-                      <img src="<?php echo $root; ?>/assets/images/icon-download.svg" alt="" aria-hidden="true" />
-                      <span class="nd-attachment-name"><?php echo CHtml::encode($file->getDisplayName()); ?></span>
-                      <span class="nd-attachment-size"><?php echo CHtml::encode($file->getFormattedSize()); ?></span>
-                    </a>
-                  </li>
-                <?php endforeach; ?>
-              </ul>
-            </div>
-          <?php endif; ?>
+          <?php
+          // Tài liệu đính kèm — tách bản tiếng Việt / tiếng Anh.
+          $renderAttachments = function ($files, $title) use ($root) {
+            if (empty($files)) {
+              return;
+            }
+            echo '<div class="nd-attachments">';
+            echo '<h4 class="nd-attachments-title">' . CHtml::encode($title) . '</h4>';
+            echo '<ul class="nd-attachments-list list-unstyled mb-0">';
+            foreach ($files as $file) {
+              echo '<li><a class="nd-attachment" href="' . CHtml::encode($file->getPublicUrl()) . '"'
+                . ' target="_blank" rel="noopener" download>'
+                . '<img src="' . $root . '/assets/images/icon-download.svg" alt="" aria-hidden="true" />'
+                . '<span class="nd-attachment-name">' . CHtml::encode($file->getDisplayName()) . '</span>'
+                . '<span class="nd-attachment-size">' . CHtml::encode($file->getFormattedSize()) . '</span>'
+                . '</a></li>';
+            }
+            echo '</ul></div>';
+          };
+          $renderAttachments($post->getAttachmentFiles('vi'), 'Tài liệu đính kèm');
+          $renderAttachments($post->getAttachmentFiles('en'), 'Tài liệu đính kèm (English)');
+          ?>
 
           <?php if ($post->source_url !== null && $post->source_url !== ''): ?>
             <!-- Nguồn / tài liệu gốc -->
