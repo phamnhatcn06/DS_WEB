@@ -356,7 +356,11 @@ section[id] {
   }
 
   [data-reveal],
-  .fade-section {
+  .fade-section,
+  .hero-item .hero-logo,
+  .hero-item .hero-title,
+  .hero-item .hero-subtitle,
+  .hero-item .hero-actions {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
