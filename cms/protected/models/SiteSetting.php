@@ -43,7 +43,7 @@ class SiteSetting extends CActiveRecord
             array('setting_key', 'match', 'pattern' => '/^[a-z0-9_]+$/',
                 'message' => 'Khoá chỉ gồm chữ thường, số và dấu gạch dưới.'),
             array('value_type', 'in',
-                'range' => array('string', 'number', 'boolean', 'json', 'media'),
+                'range' => array('string', 'number', 'boolean', 'json', 'media', 'category_multi'),
                 'message' => 'Kiểu giá trị không hợp lệ.'),
             array('group_name', 'length', 'max' => 60),
             array('label', 'length', 'max' => 200),
