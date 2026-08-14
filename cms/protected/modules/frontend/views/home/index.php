@@ -30,7 +30,7 @@ $this->renderPartial('sections/_pillars', array(
     'sectors' => isset($sectors) ? $sectors : array(),
 ));
 $this->renderPartial('sections/_projects', array(
-    'projects' => isset($projects) ? $projects : array(),
+    'featuredProjects' => isset($featuredProjects) ? $featuredProjects : array(),
 ));
 $this->renderPartial('sections/_values', array(
     'coreValues' => isset($coreValues) ? $coreValues : array(),
