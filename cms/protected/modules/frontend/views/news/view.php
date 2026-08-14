@@ -108,10 +108,49 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
             <p class="nd-lead"><?php echo CHtml::encode($post->excerpt); ?></p>
           <?php endif; ?>
 
-          <?php if ($post->content !== null && trim($post->content) !== ''): ?>
-            <!-- Thân bài (HTML biên tập viên nhập) -->
-            <div class="nd-body">
+          <?php
+          $hasVi = $post->content !== null && trim($post->content) !== '';
+          $hasEn = trim((string) $post->content_en) !== '';
+          ?>
+          <?php if ($hasVi && $hasEn): ?>
+            <!-- Chuyển ngôn ngữ VI / EN (chỉ khi có cả hai bản) -->
+            <div class="nd-lang-toggle" data-nd-lang>
+              <button type="button" class="nd-lang-btn is-active" data-lang="vi">Tiếng Việt</button>
+              <button type="button" class="nd-lang-btn" data-lang="en">English</button>
+            </div>
+          <?php endif; ?>
+
+          <?php if ($hasVi): ?>
+            <!-- Thân bài tiếng Việt (HTML biên tập viên nhập) -->
+            <div class="nd-body" data-lang-body="vi">
               <?php echo $post->content; ?>
+            </div>
+          <?php endif; ?>
+
+          <?php if ($hasEn): ?>
+            <!-- Thân bài tiếng Anh -->
+            <div class="nd-body" data-lang-body="en"<?php echo $hasVi ? ' hidden' : ''; ?>>
+              <?php echo $post->content_en; ?>
+            </div>
+          <?php endif; ?>
+
+          <?php $attachments = $post->getAttachmentFiles(); ?>
+          <?php if (!empty($attachments)): ?>
+            <!-- Tài liệu đính kèm (quan hệ cổ đông) -->
+            <div class="nd-attachments">
+              <h4 class="nd-attachments-title">Tài liệu đính kèm</h4>
+              <ul class="nd-attachments-list list-unstyled mb-0">
+                <?php foreach ($attachments as $file): ?>
+                  <li>
+                    <a class="nd-attachment" href="<?php echo CHtml::encode($file->getPublicUrl()); ?>"
+                       target="_blank" rel="noopener" download>
+                      <img src="<?php echo $root; ?>/assets/images/icon-download.svg" alt="" aria-hidden="true" />
+                      <span class="nd-attachment-name"><?php echo CHtml::encode($file->getDisplayName()); ?></span>
+                      <span class="nd-attachment-size"><?php echo CHtml::encode($file->getFormattedSize()); ?></span>
+                    </a>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
             </div>
           <?php endif; ?>
 
