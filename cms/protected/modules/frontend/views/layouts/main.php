@@ -60,10 +60,7 @@ $hotlines = array_values(array_filter(array_map(
 
 $contactEmail   = trim((string) SiteSetting::get('contact_email', ''));
 $officeAddress  = trim((string) SiteSetting::get('head_office_address', ''));
-$copyrightText  = (string) SiteSetting::get(
-  'copyright_text',
-  '© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.'
-);
+$copyrightText  = (string) SiteSetting::get('copyright_text', '');
 
 // Chỉ giữ social có link thật (bỏ rỗng và placeholder '#').
 $socialLinks = array();
