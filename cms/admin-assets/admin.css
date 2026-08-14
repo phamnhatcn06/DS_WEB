@@ -286,6 +286,20 @@ body.admin-body {
   word-break: break-word;
 }
 
+/* Khối trường điều kiện (Dự án / Quan hệ cổ đông) ẩn theo danh mục đã chọn.
+   .card mặc định display:flex sẽ đè thuộc tính [hidden] — buộc ẩn lại. */
+.dsh-conditional[hidden] {
+  display: none !important;
+}
+
+/* Danh sách file đính kèm trong form bài viết. */
+.attachment-item {
+  padding: 6px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  background: #fafbfc;
+}
+
 /* ------------------------------------------------------------------ badge
    Theme Hope UI dùng bản Bootstrap cũ: .badge ép color:#fff và KHÔNG có các
    lớp bg-*-subtle / text-*-emphasis của Bootstrap 5.3 mà toàn bộ view admin
