@@ -36,9 +36,6 @@ $postUrl = function (NewsPost $post) {
     return Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug));
 };
 
-$currentPage = $pages->currentPage; // 0-based
-$pageCount   = $pages->pageCount;
-
 /** URL trang này với một năm cụ thể (hoặc "tất cả"); luôn reset về trang 1. */
 $yearUrl = function ($yearValue) use ($category) {
     $params = array('category' => $category->slug);
