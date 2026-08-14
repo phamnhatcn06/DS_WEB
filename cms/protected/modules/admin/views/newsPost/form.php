@@ -114,6 +114,81 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
         <?php echo $form->error($model, 'excerpt', array('class' => 'text-danger small mt-1')); ?>
       </div>
     </div>
+
+    <!-- ===== Khối Dự án — hiện khi chọn danh mục là "danh mục dự án" ===== -->
+    <div class="card mb-3 dsh-conditional" data-project-box hidden>
+      <div class="card-header py-2"><i class="fa fa-building me-1"></i> Thông tin dự án</div>
+      <div class="card-body">
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <?php echo $form->label($model, 'project_name', array('class' => 'form-label')); ?>
+            <?php echo $form->textField($model, 'project_name', array('class' => 'form-control', 'maxlength' => 255)); ?>
+          </div>
+          <div class="col-12 col-md-6">
+            <?php echo $form->label($model, 'project_location', array('class' => 'form-label')); ?>
+            <?php echo $form->textField($model, 'project_location', array('class' => 'form-control', 'maxlength' => 255)); ?>
+          </div>
+          <div class="col-12 col-md-6">
+            <?php echo $form->label($model, 'project_investment_display', array('class' => 'form-label')); ?>
+            <?php echo $form->textField($model, 'project_investment_display', array('class' => 'form-control', 'maxlength' => 100, 'placeholder' => 'VD: 4.213 tỷ đồng')); ?>
+          </div>
+          <div class="col-12 col-md-6">
+            <?php echo $form->label($model, 'project_scale_display', array('class' => 'form-label')); ?>
+            <?php echo $form->textField($model, 'project_scale_display', array('class' => 'form-control', 'maxlength' => 150, 'placeholder' => 'VD: 1.100 căn hộ')); ?>
+          </div>
+          <div class="col-12 col-md-6">
+            <?php echo $form->label($model, 'project_status', array('class' => 'form-label')); ?>
+            <?php echo $form->dropDownList($model, 'project_status', NewsPost::projectStatusOptions(),
+                array('class' => 'form-select', 'empty' => '— Chọn tình trạng —')); ?>
+            <?php echo $form->error($model, 'project_status', array('class' => 'text-danger small mt-1')); ?>
+          </div>
+        </div>
+        <p class="form-hint mt-2 mb-0">Các ô này chỉ dùng cho bài thuộc danh mục dự án.</p>
+      </div>
+    </div>
+
+    <!-- ===== Khối Quan hệ cổ đông — hiện khi chọn danh mục quan hệ cổ đông ===== -->
+    <div class="card mb-3 dsh-conditional" data-investor-box hidden>
+      <div class="card-header py-2"><i class="fa fa-language me-1"></i> Nội dung song ngữ &amp; tài liệu đính kèm</div>
+      <div class="card-body">
+
+        <!-- Nội dung tiếng Anh -->
+        <div class="mb-3">
+          <?php echo $form->label($model, 'content_en', array('class' => 'form-label')); ?>
+          <?php echo $form->textArea($model, 'content_en', array(
+              'class' => 'form-control wp-content-editor',
+              'rows'  => 14,
+          )); ?>
+          <p class="form-hint mt-1 mb-0">Bản dịch tiếng Anh của nội dung. Ô “Nội dung” phía trên là bản tiếng Việt.</p>
+        </div>
+
+        <!-- File đính kèm -->
+        <div>
+          <label class="form-label mb-1">File đính kèm (PDF)</label>
+          <div class="attachment-list" data-attachment-list>
+<?php foreach ($attachmentFiles as $file): ?>
+            <div class="attachment-item d-flex align-items-center gap-2 mb-1" data-attachment-item>
+              <input type="hidden" name="NewsPost[attachmentIds][]" value="<?php echo (int) $file->id; ?>" />
+              <i class="fa fa-file-pdf-o text-danger"></i>
+              <a href="<?php echo CHtml::encode($file->getPublicUrl()); ?>" target="_blank" rel="noopener" class="flex-grow-1 text-truncate">
+                <?php echo CHtml::encode($file->getDisplayName()); ?>
+              </a>
+              <button type="button" class="btn btn-sm btn-outline-danger" data-attachment-remove title="Bỏ file">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+<?php endforeach; ?>
+          </div>
+          <!-- Luôn gửi giá trị rỗng để lưu được khi xoá hết file -->
+          <input type="hidden" name="NewsPost[attachmentIds][]" value="" />
+          <button type="button" class="btn btn-sm btn-dsh mt-2" data-attachment-add>
+            <i class="fa fa-paperclip me-1"></i> Thêm / tải file đính kèm
+          </button>
+          <p class="form-hint mt-1 mb-0">Chọn từ thư viện hoặc tải file PDF mới lên.</p>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <!-- ===== Cột phải: hộp đăng bài, danh mục, thẻ, ảnh, tuỳ chọn ===== -->
