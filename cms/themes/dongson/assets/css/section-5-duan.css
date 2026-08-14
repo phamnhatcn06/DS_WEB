@@ -111,6 +111,12 @@
   transition: box-shadow var(--transition-base);
 }
 
+/* Thẻ dạng liên kết (bài dự án tiêu biểu) — bỏ gạch chân, giữ màu caption. */
+a.duan-item {
+  text-decoration: none;
+  color: inherit;
+}
+
 .duan-thumb {
   width: 100%;
   height: 100%;
