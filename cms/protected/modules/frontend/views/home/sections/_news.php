@@ -80,20 +80,23 @@ if (!empty($newsPosts)) {
         );
     }
 } else {
+    // Dữ liệu demo tĩnh (khi CSDL chưa có bài xuất bản). Chưa có slug thật nên
+    // trỏ tạm về trang danh sách tin tức thay vì anchor chết.
+    $newsIndexUrl = Yii::app()->createUrl('frontend/news/index');
     $posts = array(
         array('img' => $root . '/assets/images/news-01.webp', 'cat' => 'du-an', 'chip' => 'Dự án', 'date' => '09/03/2026',
             'title' => 'Đông Sơn Holdings đầu tư dự án nhà ở xã hội Bãi Viên – Nam Định',
             'excerpt' => 'CTCP Đông Sơn Holdings chính thức công bố đầu tư Khu nhà ở xã hội Bãi Viên tại TP. Nam Định, tổng mức đầu tư hơn 909 tỷ đồng với 1.100 căn hộ, khởi công tháng 5/2025.',
-            'url' => '#tin-tuc'),
+            'url' => $newsIndexUrl),
         array('img' => $root . '/assets/images/news-02.webp', 'cat' => 'dau-tu', 'chip' => 'Đầu tư', 'date' => '11/2025',
             'title' => 'Tăng vốn điều lệ lên 350 tỷ đồng, mở rộng danh mục đầu tư',
-            'excerpt' => '', 'url' => '#tin-tuc'),
+            'excerpt' => '', 'url' => $newsIndexUrl),
         array('img' => $root . '/assets/images/duan-04-thicong.webp', 'cat' => 'thi-cong', 'chip' => 'Thi công', 'date' => '05/2025',
             'title' => 'Khởi công gói thầu xây lắp trọng điểm, bảo đảm tiến độ toàn tuyến',
-            'excerpt' => '', 'url' => '#tin-tuc'),
+            'excerpt' => '', 'url' => $newsIndexUrl),
         array('img' => $root . '/assets/images/duan-01-bot.webp', 'cat' => 'co-dong', 'chip' => 'Cổ đông', 'date' => '22/04/2025',
             'title' => 'Cổ phiếu DSH chính thức giao dịch trên UPCOM',
-            'excerpt' => '', 'url' => '#tin-tuc'),
+            'excerpt' => '', 'url' => $newsIndexUrl),
     );
 }
 
