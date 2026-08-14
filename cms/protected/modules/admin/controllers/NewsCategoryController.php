@@ -45,6 +45,12 @@ class NewsCategoryController extends AdminCrudController
             array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
             array('name' => 'show_in_filter', 'type' => 'checkbox', 'width' => 6),
             array('name' => 'is_active', 'type' => 'checkbox', 'width' => 6),
+            array('name' => 'is_project_category', 'type' => 'checkbox', 'width' => 6,
+                'hint' => 'Bài thuộc danh mục này sẽ có thêm các ô: tên dự án, địa điểm, '
+                    . 'vốn đầu tư, quy mô, tình trạng dự án.'),
+            array('name' => 'is_investor_category', 'type' => 'checkbox', 'width' => 6,
+                'hint' => 'Bài thuộc danh mục này sẽ có thêm ô nội dung tiếng Anh và '
+                    . 'khu vực tải file đính kèm.'),
         );
     }
 
