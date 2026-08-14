@@ -135,4 +135,41 @@ class NewsCategory extends BaseActiveRecord
         }
         return $options;
     }
+
+    /**
+     * Danh sách danh mục kèm cờ phân loại — dùng để render checkbox trong form
+     * bài viết với data-attribute, JS bật/tắt khối trường tương ứng.
+     *
+     * @return array id => array('name', 'is_project', 'is_investor')
+     */
+    public static function optionsWithFlags()
+    {
+        $criteria = new CDbCriteria();
+        $criteria->condition = 'deleted_at IS NULL';
+        $criteria->order = 'sort_order ASC';
+
+        $result = array();
+        foreach (self::model()->findAll($criteria) as $category) {
+            $result[$category->id] = array(
+                'name'        => $category->name,
+                'is_project'  => (int) $category->is_project_category,
+                'is_investor' => (int) $category->is_investor_category,
+            );
+        }
+        return $result;
+    }
+
+    /**
+     * Id các danh mục có bật một cờ phân loại (dự án hoặc quan hệ cổ đông).
+     * @param string $flagColumn 'is_project_category' | 'is_investor_category'
+     * @return int[]
+     */
+    public static function idsByFlag($flagColumn)
+    {
+        $ids = Yii::app()->db->createCommand()
+            ->select('id')->from('pvn_news_categories')
+            ->where('deleted_at IS NULL AND ' . $flagColumn . ' = 1')
+            ->queryColumn();
+        return array_map('intval', $ids);
+    }
 }
