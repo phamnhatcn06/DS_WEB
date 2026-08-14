@@ -21,7 +21,11 @@ class NewsCategoryController extends AdminCrudController
             array('name' => 'postCount', 'label' => 'Số bài', 'type' => 'callback',
                 'value' => array($this, 'renderPostCount'), 'width' => '90px'),
             array('name' => 'show_in_filter', 'label' => 'Trên thanh lọc', 'type' => 'bool',
-                'width' => '130px', 'sortable' => true),
+                'width' => '120px', 'sortable' => true),
+            array('name' => 'is_project_category', 'label' => 'DM dự án', 'type' => 'bool',
+                'width' => '100px', 'sortable' => true),
+            array('name' => 'is_investor_category', 'label' => 'DM cổ đông', 'type' => 'bool',
+                'width' => '110px', 'sortable' => true),
             array('name' => 'is_active', 'label' => 'Trạng thái', 'type' => 'bool',
                 'width' => '110px', 'sortable' => true),
         );
