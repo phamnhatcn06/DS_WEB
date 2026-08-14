@@ -8,8 +8,7 @@
  *
  * @var InvestorController $this
  * @var NewsCategory       $category  danh mục đang hiển thị
- * @var NewsPost[]         $posts     tài liệu trang hiện tại
- * @var CPagination        $pages
+ * @var NewsPost[]         $posts     tài liệu của (năm) danh mục
  * @var int                $total
  * @var int[]              $years     các năm có tài liệu (DESC) — cho bộ lọc
  * @var int|null           $year      năm đang lọc (null = tất cả)
