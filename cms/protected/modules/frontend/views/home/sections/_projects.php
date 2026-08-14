@@ -2,33 +2,39 @@
 /**
  * Section 5 — Dự án tiêu biểu.
  *
- * Nguồn: projects (featured, đã xuất bản). Rỗng → dữ liệu demo tĩnh.
- * Caption (tên + địa điểm) luôn hiển thị dưới ảnh (đúng spec mobile cảm ứng).
+ * Nguồn: TIN TỨC — bài is_featured_project = 1 thuộc các danh mục được chọn ở
+ * Cấu hình website (khoá featured_projects_category_ids). Xem
+ * HomepageDataService::loadFeaturedProjects. Rỗng → dữ liệu demo tĩnh.
+ * Mỗi thẻ là một liên kết tới trang chi tiết bài viết; caption (tên + danh mục)
+ * luôn khả dụng dưới ảnh.
  *
  * @var Controller $this
- * @var Project[] $projects
+ * @var NewsPost[] $featuredProjects
  */
 $root = $this->assetsBase();
 
 $items = array();
-if (!empty($projects)) {
-    foreach ($projects as $p) {
-        $place = $p->location != '' ? $p->location : $p->province;
+if (!empty($featuredProjects)) {
+    foreach ($featuredProjects as $post) {
         $items[] = array(
-            'thumb' => $p->thumbnail,
-            'title' => $p->name,
-            'place' => $place,
+            'thumb' => $post->thumbnail,
+            'title' => $post->title,
+            'place' => $post->category ? $post->category->name : $post->getFormattedDate(),
+            'url'   => Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug)),
         );
     }
 } else {
     $items = array(
-        array('thumb' => $root . '/assets/images/duan-01-bot.webp', 'title' => 'BOT Hà Nội – Bắc Giang', 'place' => 'Quốc lộ 1, Hà Nội – Bắc Giang'),
-        array('thumb' => $root . '/assets/images/duan-02-dothi.webp', 'title' => 'Khu đô thị Đông Sơn', 'place' => 'Thành phố Thanh Hóa'),
-        array('thumb' => $root . '/assets/images/duan-01-bot.webp', 'title' => 'Nhà ở xã hội Bãi Viên', 'place' => 'Thành phố Nam Định'),
-        array('thumb' => $root . '/assets/images/duan-03-nhao.webp', 'title' => 'Tổ hợp căn hộ Sông Đào', 'place' => 'Thành phố Nam Định'),
-        array('thumb' => $root . '/assets/images/duan-04-thicong.webp', 'title' => 'Dự án đang thi công', 'place' => 'Hà Nội'),
+        array('thumb' => $root . '/assets/images/duan-01-bot.webp', 'title' => 'BOT Hà Nội – Bắc Giang', 'place' => 'Quốc lộ 1, Hà Nội – Bắc Giang', 'url' => null),
+        array('thumb' => $root . '/assets/images/duan-02-dothi.webp', 'title' => 'Khu đô thị Đông Sơn', 'place' => 'Thành phố Thanh Hóa', 'url' => null),
+        array('thumb' => $root . '/assets/images/duan-01-bot.webp', 'title' => 'Nhà ở xã hội Bãi Viên', 'place' => 'Thành phố Nam Định', 'url' => null),
+        array('thumb' => $root . '/assets/images/duan-03-nhao.webp', 'title' => 'Tổ hợp căn hộ Sông Đào', 'place' => 'Thành phố Nam Định', 'url' => null),
+        array('thumb' => $root . '/assets/images/duan-04-thicong.webp', 'title' => 'Dự án đang thi công', 'place' => 'Hà Nội', 'url' => null),
     );
 }
+
+// "Xem tất cả dự án" → trang tin tức.
+$viewAllUrl = Yii::app()->createUrl('frontend/news/index');
 ?>
     <!-- ===== Section 5: Dự án tiêu biểu ===== -->
     <section id="du-an" class="duan fade-section">
@@ -42,7 +48,7 @@ if (!empty($projects)) {
           <div class="col-12 col-lg-5">
             <p class="duan-intro">Các công trình trọng điểm quốc gia và dự án đầu tư tiêu biểu
               của Đông Sơn Holdings.</p>
-            <a class="duan-link" href="#du-an">
+            <a class="duan-link" href="<?php echo CHtml::encode($viewAllUrl); ?>">
               Xem tất cả dự án
               <img src="<?php echo $root; ?>/assets/images/arrow-right-red.svg" alt="" class="duan-link-icon" aria-hidden="true" />
             </a>
@@ -56,18 +62,19 @@ if (!empty($projects)) {
           </button>
           <div class="duan-gallery" role="list">
 <?php foreach ($items as $item): ?>
-            <figure class="duan-item m-0" role="listitem">
+<?php $tag = $item['url'] ? 'a' : 'figure'; ?>
+            <<?php echo $tag; ?> class="duan-item m-0" role="listitem"<?php echo $item['url'] ? ' href="' . CHtml::encode($item['url']) . '"' : ''; ?>>
               <div class="duan-thumb">
                 <?php echo MediaHelper::imgOr($item['thumb'], $root . '/assets/images/duan-01-bot.webp',
                   $item['title'], array('class' => 'img-fluid')); ?>
               </div>
-              <figcaption class="duan-caption">
+              <div class="duan-caption">
                 <h3><?php echo CHtml::encode($item['title']); ?></h3>
 <?php if ($item['place'] !== null && $item['place'] !== ''): ?>
                 <p><img src="<?php echo $root; ?>/assets/images/icon-pin.svg" alt="" aria-hidden="true" /><?php echo CHtml::encode($item['place']); ?></p>
 <?php endif; ?>
-              </figcaption>
-            </figure>
+              </div>
+            </<?php echo $tag; ?>>
 <?php endforeach; ?>
           </div>
 
