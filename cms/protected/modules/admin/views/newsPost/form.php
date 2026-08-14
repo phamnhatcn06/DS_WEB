@@ -162,30 +162,41 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
           <p class="form-hint mt-1 mb-0">Bản dịch tiếng Anh của nội dung. Ô “Nội dung” phía trên là bản tiếng Việt.</p>
         </div>
 
-        <!-- File đính kèm -->
-        <div>
-          <label class="form-label mb-1">File đính kèm (PDF)</label>
-          <div class="attachment-list" data-attachment-list>
-<?php foreach ($attachmentFiles as $file): ?>
-            <div class="attachment-item d-flex align-items-center gap-2 mb-1" data-attachment-item>
-              <input type="hidden" name="NewsPost[attachmentIds][]" value="<?php echo (int) $file->id; ?>" />
-              <i class="fa fa-file-pdf-o text-danger"></i>
-              <a href="<?php echo CHtml::encode($file->getPublicUrl()); ?>" target="_blank" rel="noopener" class="flex-grow-1 text-truncate">
-                <?php echo CHtml::encode($file->getDisplayName()); ?>
-              </a>
-              <button type="button" class="btn btn-sm btn-outline-danger" data-attachment-remove title="Bỏ file">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-<?php endforeach; ?>
-          </div>
-          <!-- Luôn gửi giá trị rỗng để lưu được khi xoá hết file -->
-          <input type="hidden" name="NewsPost[attachmentIds][]" value="" />
-          <button type="button" class="btn btn-sm btn-dsh mt-2" data-attachment-add>
-            <i class="fa fa-paperclip me-1"></i> Thêm / tải file đính kèm
-          </button>
-          <p class="form-hint mt-1 mb-0">Chọn từ thư viện hoặc tải file PDF mới lên.</p>
+        <!-- File đính kèm — tách riêng bản tiếng Việt và bản tiếng Anh -->
+        <div class="row g-3">
+<?php
+/** Render một khu vực đính kèm (một ngôn ngữ). */
+$renderAttachmentGroup = function ($field, $label, $addLabel, $files) {
+    echo '<div class="col-12 col-md-6">';
+    echo '<div class="attachment-group" data-attachment-group data-field="' . $field . '">';
+    echo '<label class="form-label mb-1">' . CHtml::encode($label) . '</label>';
+    echo '<div class="attachment-list" data-attachment-list>';
+    foreach ($files as $file) {
+        echo '<div class="attachment-item d-flex align-items-center gap-2 mb-1" data-attachment-item>'
+            . '<input type="hidden" name="NewsPost[' . $field . '][]" value="' . (int) $file->id . '" />'
+            . '<i class="fa fa-file-pdf-o text-danger"></i>'
+            . '<a href="' . CHtml::encode($file->getPublicUrl()) . '" target="_blank" rel="noopener" class="flex-grow-1 text-truncate">'
+            . CHtml::encode($file->getDisplayName()) . '</a>'
+            . '<button type="button" class="btn btn-sm btn-outline-danger" data-attachment-remove title="Bỏ file">'
+            . '<i class="fa fa-times"></i></button>'
+            . '</div>';
+    }
+    echo '</div>';
+    // Luôn gửi giá trị rỗng để lưu được khi xoá hết file.
+    echo '<input type="hidden" name="NewsPost[' . $field . '][]" value="" />';
+    echo '<button type="button" class="btn btn-sm btn-dsh mt-2" data-attachment-add>'
+        . '<i class="fa fa-paperclip me-1"></i> ' . CHtml::encode($addLabel) . '</button>';
+    echo '</div>';
+    echo '</div>';
+};
+
+$renderAttachmentGroup('attachmentIdsVi', 'File đính kèm (tiếng Việt)',
+    'Thêm file tiếng Việt', $isNew ? array() : $model->getAttachmentFiles('vi'));
+$renderAttachmentGroup('attachmentIdsEn', 'File đính kèm (tiếng Anh)',
+    'Thêm file tiếng Anh', $isNew ? array() : $model->getAttachmentFiles('en'));
+?>
         </div>
+        <p class="form-hint mt-2 mb-0">Chọn từ thư viện hoặc tải file PDF mới lên (mỗi ngôn ngữ một khu vực).</p>
 
       </div>
     </div>
