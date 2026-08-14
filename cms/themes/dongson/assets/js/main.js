@@ -276,6 +276,21 @@
       var counter = carousel.querySelector('.js-counter');
       var dashes = carousel.querySelectorAll('.dash');
 
+      /* Chạy hiệu ứng nội dung ngay khi slide bắt đầu vào bằng cách gắn .hero-in
+         vào phần tử đích. Bootstrap chỉ gắn .active sau khi crossfade xong, nên
+         nếu dựa vào .active thì nội dung hiện đủ trước rồi mới chạy hiệu ứng. */
+      function playContentIn(target) {
+        if (!target || !target.classList.contains('hero-item')) {
+          return;
+        }
+        target.classList.remove('hero-in');
+        void target.offsetWidth; // ép reflow để khởi động lại animation
+        target.classList.add('hero-in');
+      }
+
+      // Slide đầu tiên: chạy hiệu ứng ngay khi tải trang.
+      playContentIn(carousel.querySelector('.hero-item.active'));
+
       carousel.addEventListener('slide.bs.carousel', function (event) {
         var index = event.to;
         if (counter) {
@@ -284,6 +299,7 @@
         dashes.forEach(function (dash, i) {
           dash.classList.toggle('active', i === index);
         });
+        playContentIn(event.relatedTarget);
       });
     });
   }
