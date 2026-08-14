@@ -59,6 +59,8 @@ class NewsCategory extends BaseActiveRecord
             'description'    => 'Mô tả',
             'parent_id'      => 'Danh mục cha',
             'show_in_filter' => 'Hiện trên thanh lọc',
+            'is_project_category'  => 'Là danh mục dự án',
+            'is_investor_category' => 'Là danh mục quan hệ cổ đông',
             'sort_order'     => 'Thứ tự',
             'is_active'      => 'Hiển thị',
         );
