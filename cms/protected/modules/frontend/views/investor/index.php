@@ -89,7 +89,7 @@ $yearUrl = function ($yearValue) use ($category) {
 <?php endif; ?>
 
   <!-- ===== Main content (danh sách + sidebar) ===== -->
-  <section class="qhcd-content fade-section">
+  <section class="qhcd-content">
     <div class="container">
       <div class="row g-5">
 
