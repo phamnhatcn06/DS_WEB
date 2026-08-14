@@ -148,9 +148,11 @@
 .site-header .navbar-toggler {
   border-color: rgba(255, 255, 255, 0.35);
 }
+
 .site-header .navbar-toggler:focus {
   box-shadow: none;
 }
+
 .site-header .navbar-toggler-icon {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.85)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
@@ -165,6 +167,7 @@
     border-radius: var(--radius-lg);
     border: 1px solid var(--dsh-line);
   }
+
   .site-header .navbar-nav {
     gap: 8px;
   }
@@ -205,7 +208,7 @@
 .cta-banner {
   position: relative;
   background-color: #101c36;
-  min-height: clamp(360px, 30vw, 640px);
+  min-height: clamp(360px, 25vw, 516px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,12 +218,12 @@
 
 .cta-banner .cta-bg {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  /* inset: 0; */
+  width: 93%;
   height: 100%;
   object-fit: cover;
-  /* Neo lên trên (~35%) để giữ trời + trụ + mặt cầu, cắt tiền cảnh dưới như thiết kế */
-  object-position: center 54%;
+  object-position: center 55%;
+
 }
 
 /* Lớp phủ tối trên ảnh cầu: nhẹ ở trên → đậm dần thành navy ở đáy để hoà vào 4 cột */
@@ -230,12 +233,10 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(8, 15, 29, 0.32) 0%,
-    rgba(8, 15, 29, 0.2) 45%,
-    rgba(16, 28, 54, 0.85) 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(8, 15, 29, 0.32) 0%,
+      rgba(8, 15, 29, 0.2) 45%,
+      rgba(16, 28, 54, 0.85) 100%);
 }
 
 .cta-inner {
@@ -250,7 +251,7 @@
   font-weight: 800;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-size: clamp(2rem, 5vw, 2.75rem);
   line-height: 1.3;
   margin-bottom: clamp(1.5rem, 4vw, 2.75rem);
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.4);
@@ -258,7 +259,7 @@
 
 .cta-btn {
   --bs-btn-padding-x: 36px;
-  --bs-btn-padding-y: 16px;
+  --bs-btn-padding-y: 10px;
   --bs-btn-border-radius: 8px;
   font-size: 1rem;
   display: inline-flex;
