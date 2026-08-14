@@ -24,10 +24,11 @@ class InvestorDataService
     }
 
     /**
-     * @param string $categorySlug slug danh mục Quan hệ cổ đông cần hiển thị.
+     * @param string   $categorySlug slug danh mục Quan hệ cổ đông cần hiển thị.
+     * @param int|null $year         lọc theo năm xuất bản; null = tất cả các năm.
      * @return array|null null nếu slug không tồn tại (controller trả 404).
      */
-    public static function load($categorySlug)
+    public static function load($categorySlug, $year = null)
     {
         $category = NewsCategory::model()->find(array(
             'condition' => 't.deleted_at IS NULL AND t.is_active = 1 AND (t.slug = :s OR t.name = :s)',
@@ -37,8 +38,16 @@ class InvestorDataService
             return null;
         }
 
+        // Chỉ nhận năm hợp lệ có tài liệu trong danh mục; ngược lại về "tất cả".
+        $years = self::publishedYears($category->id);
+        $year  = ($year !== null && in_array((int) $year, $years, true)) ? (int) $year : null;
+
         $publishedCond = 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st';
         $publishedParams = array(':st' => NewsPost::STATUS_PUBLISHED);
+        if ($year !== null) {
+            $publishedCond .= ' AND YEAR(t.published_at) = :yr';
+            $publishedParams[':yr'] = $year;
+        }
 
         // Model đã gắn scope danh mục — tạo lại mỗi lần vì Yii1 reset scope sau truy vấn.
         $scoped = function () use ($category) {
@@ -66,7 +75,8 @@ class InvestorDataService
             'posts'    => $posts,
             'pages'    => $pages,
             'total'    => $total,
-            'years'    => self::publishedYears($category->id),
+            'years'    => $years,
+            'year'     => $year,
             'latest'   => self::latestInvestorPosts(4),
         );
     }

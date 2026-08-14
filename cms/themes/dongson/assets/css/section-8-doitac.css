@@ -6,7 +6,8 @@
 
 .doitac {
   position: relative;
-  padding-block: clamp(64px, 8vw, 128px);
+  padding-top: clamp(64px, 20vw, 253px);
+  padding-bottom: 50px;
   overflow: hidden;
   color: var(--dsh-white);
 }
@@ -22,7 +23,7 @@
   pointer-events: none;
   /* Figma lật ngang ảnh gốc (scaleY(-1)·rotate(180) = scaleX(-1)):
      thành phố dạt sang phải, làn đường đổ xuống trái, đúng thiết kế */
-  transform: scaleX(-1);
+  transform: scaleX(-1) !important;
 }
 
 /* Overlay tối để tương phản chữ trắng + hoà tông navy brand */
@@ -30,10 +31,12 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: linear-gradient(90deg,
-    rgba(8, 15, 29, .55) 0%,
-    rgba(8, 15, 29, .15) 45%,
-    rgba(8, 15, 29, 0) 70%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(8, 15, 29, 0.55) 0%,
+    rgba(8, 15, 29, 0.15) 45%,
+    rgba(8, 15, 29, 0) 70%
+  );
 }
 
 .doitac-inner {
@@ -62,12 +65,14 @@
   align-items: center;
   justify-content: center;
   /* Ô Figma 402×200 → tỉ lệ ~2:1, bo góc 15px */
-  aspect-ratio: 402 / 200;
+  aspect-ratio: 480 / 200;
   /* Padding rộng hơn → logo nhỏ lại, có nhiều khoảng trắng bao quanh */
-  padding: clamp(20px, 2.8vw, 40px) clamp(32px, 4.4vw, 68px);
+  padding: clamp(20px, 2.8vw, 30px) clamp(32px, 4.4vw, 30px);
   background-color: var(--dsh-white);
   border-radius: 15px;
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .partner-card img {
@@ -78,9 +83,11 @@
 
 .partner-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .partner-card { transition: none; }
+  .partner-card {
+    transition: none;
+  }
 }
