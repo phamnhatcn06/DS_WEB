@@ -13,9 +13,6 @@ $tagOptions      = Tag::optionsForSelect();
 $selectedCats    = array_map('strval', $model->getCategoryIds());
 $selectedTags    = array_map('strval', (array) $model->tagIds);
 
-// File đính kèm hiện có (quan hệ cổ đông) — dựng lại danh sách trong form.
-$attachmentFiles = $isNew ? array() : $model->getAttachmentFiles();
-
 // Ảnh đại diện hiện tại.
 $thumb    = $model->thumbnail_media_id ? MediaFile::model()->findByPk($model->thumbnail_media_id) : null;
 $thumbUrl = $thumb ? $thumb->getPublicUrl() : '';
