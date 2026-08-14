@@ -278,6 +278,14 @@ body.admin-body {
   padding: 4px;
 }
 
+/* Ô bảng cho phép xuống dòng (wrap): dùng cho cột tiêu đề dài để giữ cột hẹp
+   mà vẫn hiển thị đủ nội dung, thay vì kéo dài trên một dòng. */
+.admin-cell-wrap {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 /* ------------------------------------------------------------------ badge
    Theme Hope UI dùng bản Bootstrap cũ: .badge ép color:#fff và KHÔNG có các
    lớp bg-*-subtle / text-*-emphasis của Bootstrap 5.3 mà toàn bộ view admin
