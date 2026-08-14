@@ -561,3 +561,67 @@
 .nd-body a[href*=".pdf?"] {
   cursor: zoom-in;
 }
+
+/* ===== Chuyển ngôn ngữ VI / EN (bài quan hệ cổ đông song ngữ) ===== */
+.nd-lang-toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  margin: 0 0 22px;
+  background: #f1f3f6;
+  border-radius: 10px;
+}
+
+.nd-lang-btn {
+  border: 0;
+  background: transparent;
+  padding: 7px 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: .9rem;
+  color: #55606f;
+  cursor: pointer;
+  transition: background .2s, color .2s;
+}
+
+.nd-lang-btn.is-active {
+  background: var(--dsh-red, #9a1220);
+  color: #fff;
+}
+
+/* ===== Tài liệu đính kèm ===== */
+.nd-attachments {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(0, 0, 0, .1);
+}
+
+.nd-attachments-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+  color: var(--dsh-navy, #080f1d);
+}
+
+.nd-attachments-list li { margin-bottom: 10px; }
+
+.nd-attachment {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid rgba(0, 0, 0, .12);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--dsh-navy, #080f1d);
+  transition: border-color .2s, background .2s;
+}
+
+.nd-attachment:hover {
+  border-color: var(--dsh-red, #9a1220);
+  background: rgba(154, 18, 32, .04);
+}
+
+.nd-attachment img { width: 20px; height: 20px; flex: 0 0 20px; }
+.nd-attachment-name { flex: 1 1 auto; font-weight: 600; overflow-wrap: anywhere; }
+.nd-attachment-size { color: #8a94a3; font-size: .85rem; flex: 0 0 auto; }
