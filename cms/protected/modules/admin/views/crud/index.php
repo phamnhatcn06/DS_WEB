@@ -102,7 +102,7 @@ $items = $dataProvider->getData();
         <?php foreach ($items as $item): ?>
           <tr>
             <?php foreach ($columns as $column): ?>
-              <td><?php echo $this->renderPartial('admin.views.crud._cell', array(
+              <td<?php echo isset($column['class']) ? ' class="' . $column['class'] . '"' : ''; ?>><?php echo $this->renderPartial('admin.views.crud._cell', array(
                   'item'   => $item,
                   'column' => $column,
               ), true); ?></td>
