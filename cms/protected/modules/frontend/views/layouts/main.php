@@ -210,20 +210,39 @@ $telHref = function ($phone) {
           <div class="col">
             <img src="<?php echo CHtml::encode($logoFooter); ?>" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
             <ul class="list-unstyled footer-contact mb-4">
-              <li>
-                <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
-                <span><small>Điện thoại</small><strong>024 3933 5708</strong></span>
-              </li>
-              <li>
-                <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-email.svg" alt="" aria-hidden="true" /></span>
-                <span><small>Email</small><strong>hatangdongson@htds.vn</strong></span>
-              </li>
+              <?php if ($hotlines !== array()): ?>
+                <li>
+                  <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
+                  <span>
+                    <small>Điện thoại</small>
+                    <?php foreach ($hotlines as $phone): ?>
+                      <strong><a href="<?php echo CHtml::encode($telHref($phone)); ?>"><?php echo CHtml::encode($phone); ?></a></strong>
+                    <?php endforeach; ?>
+                  </span>
+                </li>
+              <?php endif; ?>
+              <?php if ($contactEmail !== ''): ?>
+                <li>
+                  <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-email.svg" alt="" aria-hidden="true" /></span>
+                  <span><small>Email</small><strong><a href="mailto:<?php echo CHtml::encode($contactEmail); ?>"><?php echo CHtml::encode($contactEmail); ?></a></strong></span>
+                </li>
+              <?php endif; ?>
+              <?php if ($officeAddress !== ''): ?>
+                <li>
+                  <span class="contact-ic"><img src="<?php echo $root; ?>/assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
+                  <span><small>Địa chỉ</small><strong><?php echo CHtml::encode($officeAddress); ?></strong></span>
+                </li>
+              <?php endif; ?>
             </ul>
-            <!-- <div class="social-links d-flex gap-2">
-              <a href="#" aria-label="Facebook"><img src="<?php echo $root; ?>/assets/images/social-facebook.svg" alt="" aria-hidden="true" /></a>
-              <a href="#" aria-label="LinkedIn"><img src="<?php echo $root; ?>/assets/images/social-linkedin.svg" alt="" aria-hidden="true" /></a>
-              <a href="#" aria-label="YouTube"><img src="<?php echo $root; ?>/assets/images/social-youtube.svg" alt="" aria-hidden="true" /></a>
-            </div> -->
+            <?php if ($socialLinks !== array()): ?>
+              <div class="social-links d-flex gap-2">
+                <?php foreach ($socialLinks as $social): ?>
+                  <a href="<?php echo CHtml::encode($social['url']); ?>" aria-label="<?php echo CHtml::encode($social['label']); ?>" target="_blank" rel="noopener">
+                    <img src="<?php echo $root; ?>/assets/images/<?php echo $social['icon']; ?>" alt="" aria-hidden="true" />
+                  </a>
+                <?php endforeach; ?>
+              </div>
+            <?php endif; ?>
           </div>
 
           <!-- Về Đông Sơn -->
