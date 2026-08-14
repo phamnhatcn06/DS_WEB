@@ -275,7 +275,7 @@ $telHref = function ($phone) {
     <!-- Thanh dưới cùng -->
     <div class="footer-bottom">
       <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-        <p class="mb-0">© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.</p>
+        <p class="mb-0"><?php echo CHtml::encode($copyrightText); ?></p>
         <div class="d-flex gap-4">
           <a class="footer-link" href="#">Chính sách bảo mật</a>
           <a class="footer-link" href="#">Điều khoản sử dụng</a>
