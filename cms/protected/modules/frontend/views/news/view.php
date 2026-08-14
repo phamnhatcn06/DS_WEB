@@ -261,6 +261,26 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
 </div>
 
 <?php
-// Chuyển đổi VI/EN cho thân bài — chỉ chạy khi có nút chuyển ngôn ngữ.
-$this->registerLangToggleScript();
+// Chuyển đổi VI/EN cho thân bài — chỉ đăng ký khi bài có cả hai bản.
+if (!empty($hasVi) && !empty($hasEn)) {
+    Yii::app()->clientScript->registerScript('nd-lang-toggle', <<<'JS'
+(function () {
+  var toggle = document.querySelector('[data-nd-lang]');
+  if (!toggle) { return; }
+  var bodies = document.querySelectorAll('[data-lang-body]');
+  toggle.addEventListener('click', function (e) {
+    var btn = e.target.closest('.nd-lang-btn');
+    if (!btn) { return; }
+    var lang = btn.getAttribute('data-lang');
+    toggle.querySelectorAll('.nd-lang-btn').forEach(function (b) {
+      b.classList.toggle('is-active', b === btn);
+    });
+    bodies.forEach(function (body) {
+      body.hidden = body.getAttribute('data-lang-body') !== lang;
+    });
+  });
+})();
+JS
+    , CClientScript::POS_END);
+}
 ?>
