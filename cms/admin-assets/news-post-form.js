@@ -161,10 +161,10 @@
     update();
   }
 
-  // -------------------------------------------- file đính kèm
-  function attachmentItemHtml(item) {
+  // -------------------------------------------- file đính kèm (nhiều khu vực VI/EN)
+  function attachmentItemHtml(field, item) {
     return '<div class="attachment-item d-flex align-items-center gap-2 mb-1" data-attachment-item>' +
-      '<input type="hidden" name="NewsPost[attachmentIds][]" value="' + parseInt(item.id, 10) + '" />' +
+      '<input type="hidden" name="NewsPost[' + field + '][]" value="' + parseInt(item.id, 10) + '" />' +
       '<i class="fa fa-file-pdf-o text-danger"></i>' +
       '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener" class="flex-grow-1 text-truncate">' +
       escapeHtml(item.name || 'Tệp đính kèm') + '</a>' +
@@ -173,10 +173,11 @@
       '</div>';
   }
 
-  function initAttachments() {
-    var list = document.querySelector('[data-attachment-list]');
-    var addBtn = document.querySelector('[data-attachment-add]');
-    if (!list || !addBtn) {
+  function initAttachmentGroup(group) {
+    var field = group.getAttribute('data-field');
+    var list = group.querySelector('[data-attachment-list]');
+    var addBtn = group.querySelector('[data-attachment-add]');
+    if (!field || !list || !addBtn) {
       return;
     }
 
@@ -185,11 +186,11 @@
         return;
       }
       window.DSHMediaPicker.open(function (item) {
-        // Không thêm trùng cùng một file.
+        // Không thêm trùng cùng một file trong CÙNG khu vực.
         if (list.querySelector('input[value="' + parseInt(item.id, 10) + '"]')) {
           return;
         }
-        list.insertAdjacentHTML('beforeend', attachmentItemHtml(item));
+        list.insertAdjacentHTML('beforeend', attachmentItemHtml(field, item));
       }, { scope: 'doc', accept: 'application/pdf' });
     });
 
@@ -203,6 +204,10 @@
         item.remove();
       }
     });
+  }
+
+  function initAttachments() {
+    document.querySelectorAll('[data-attachment-group]').forEach(initAttachmentGroup);
   }
 
   function init() {
