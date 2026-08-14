@@ -154,26 +154,3 @@ $yearUrl = function ($yearValue) use ($category) {
   </section>
 
 </div>
-
-<?php
-// Lọc thẻ tài liệu theo năm (ẩn/hiện, không reload) — nội bộ trang này.
-$cs->registerScript('qhcd-year-filter', <<<'JS'
-(function () {
-  var chips = document.querySelectorAll('.qhcd-year-chip');
-  var cards = document.querySelectorAll('.qhcd-card');
-  if (!chips.length) return;
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      chips.forEach(function (c) { c.classList.remove('is-active'); });
-      chip.classList.add('is-active');
-      var year = chip.getAttribute('data-year');
-      cards.forEach(function (card) {
-        var match = year === 'all' || card.getAttribute('data-year') === year;
-        card.style.display = match ? '' : 'none';
-      });
-    });
-  });
-})();
-JS
-, CClientScript::POS_END);
-?>
