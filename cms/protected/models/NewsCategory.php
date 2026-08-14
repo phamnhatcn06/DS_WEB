@@ -35,7 +35,7 @@ class NewsCategory extends BaseActiveRecord
             array('slug', 'length', 'max' => 120),
             array('slug', 'unique', 'message' => 'Slug này đã tồn tại.'),
             array('parent_id, sort_order', 'numerical', 'integerOnly' => true),
-            array('show_in_filter, is_active', 'boolean'),
+            array('show_in_filter, is_active, is_project_category, is_investor_category', 'boolean'),
             array('description', 'safe'),
         );
     }
