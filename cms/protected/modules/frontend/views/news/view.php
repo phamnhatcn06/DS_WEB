@@ -259,3 +259,8 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
     </div>
   </div>
 </div>
+
+<?php
+// Chuyển đổi VI/EN cho thân bài — chỉ chạy khi có nút chuyển ngôn ngữ.
+$this->registerLangToggleScript();
+?>
