@@ -16,10 +16,14 @@ $root = $this->assetsBase();
 $items = array();
 if (!empty($featuredProjects)) {
     foreach ($featuredProjects as $post) {
+        // Ưu tiên trường dự án; fallback về tiêu đề/danh mục khi chưa nhập.
+        $name  = trim((string) $post->project_name) !== '' ? $post->project_name : $post->title;
+        $place = trim((string) $post->project_location) !== '' ? $post->project_location
+            : ($post->category ? $post->category->name : $post->getFormattedDate());
         $items[] = array(
             'thumb' => $post->thumbnail,
-            'title' => $post->title,
-            'place' => $post->category ? $post->category->name : $post->getFormattedDate(),
+            'title' => $name,
+            'place' => $place,
             'url'   => Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug)),
         );
     }
