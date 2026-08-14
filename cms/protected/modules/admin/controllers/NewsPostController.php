@@ -64,6 +64,28 @@ class NewsPostController extends AdminCrudController
     }
 
     /**
+     * Cột "Tin nổi bật" — badge Có/— theo cột is_featured.
+     */
+    public function renderFeatured($item)
+    {
+        return $item->is_featured
+            ? '<span class="badge bg-warning-subtle text-warning-emphasis">'
+                . '<i class="fa fa-star me-1"></i>Nổi bật</span>'
+            : '<span class="text-muted small">—</span>';
+    }
+
+    /**
+     * Cột "Dự án nổi bật" — badge Có/— theo cột is_featured_project.
+     */
+    public function renderFeaturedProject($item)
+    {
+        return $item->is_featured_project
+            ? '<span class="badge bg-danger-subtle text-danger-emphasis">'
+                . '<i class="fa fa-building me-1"></i>Dự án</span>'
+            : '<span class="text-muted small">—</span>';
+    }
+
+    /**
      * Hiển thị ngày đúng như bài sẽ hiện ra ngoài website.
      */
     public function renderDate($item)
