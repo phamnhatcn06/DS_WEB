@@ -113,6 +113,20 @@ $currentRoute = '/' . Yii::app()->controller->module->id . '/'
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="mb-2 navbar-nav ms-auto align-items-center navbar-list mb-lg-0">
+                            <!-- Xoá cache (mọi trang admin, cần quyền settings.update) -->
+                            <?php if ($user->checkAccess('settings.update')): ?>
+                            <li class="nav-item">
+                                <?php echo CHtml::beginForm($this->createUrl('/admin/default/clearCache'), 'post', array(
+                                    'id'    => 'form-clear-cache',
+                                    'class' => 'd-inline',
+                                )); ?>
+                                    <button type="button" class="nav-link btn btn-sm btn-outline-danger me-2"
+                                            title="Xoá toàn bộ cache website" onclick="confirmClearCache()">
+                                        <i class="fa fa-refresh me-1"></i> Xoá cache
+                                    </button>
+                                <?php echo CHtml::endForm(); ?>
+                            </li>
+                            <?php endif; ?>
                             <!-- Xem website -->
                             <li class="nav-item">
                                 <a class="nav-link btn btn-sm btn-outline-secondary me-2" target="_blank" rel="noopener"

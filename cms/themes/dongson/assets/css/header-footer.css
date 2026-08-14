@@ -346,20 +346,6 @@
   font-weight: 700;
 }
 
-/* Nhiều hotline xếp chồng — khoảng cách nhỏ giữa các số */
-.footer-contact span strong + strong {
-  margin-top: 2px;
-}
-
-.footer-contact span strong a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.footer-contact span strong a:hover {
-  color: var(--dsh-gold);
-}
-
 /* Social — ô viền vuông */
 .social-links a {
   display: inline-flex;
