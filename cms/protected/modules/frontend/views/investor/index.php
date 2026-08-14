@@ -80,7 +80,6 @@ $yearUrl = function ($yearValue) use ($category) {
   <div class="container">
     <div class="qhcd-year-filter" role="group" aria-label="Lọc theo năm">
       <span class="qhcd-year-filter__label">Năm:</span>
-      <a class="qhcd-year-chip<?php echo $year === null ? ' is-active' : ''; ?>" href="<?php echo CHtml::encode($yearUrl(null)); ?>">Tất cả</a>
 <?php foreach ($years as $y): ?>
       <a class="qhcd-year-chip<?php echo $year === (int) $y ? ' is-active' : ''; ?>" href="<?php echo CHtml::encode($yearUrl($y)); ?>"><?php echo (int) $y; ?></a>
 <?php endforeach; ?>
