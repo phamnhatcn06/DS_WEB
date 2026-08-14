@@ -64,6 +64,23 @@ $firstGroup = $groupKeys === array() ? null : $groupKeys[0];
                       )
                   ); ?>
 
+                <?php elseif ($setting->value_type === 'category_multi'): ?>
+                  <?php // Chọn nhiều danh mục. Hidden field đứng trước để khi bỏ
+                        // chọn tất cả vẫn gửi giá trị rỗng (xoá cấu hình). ?>
+                  <input type="hidden" name="Setting[<?php echo $setting->setting_key; ?>]" value="" />
+                  <?php echo CHtml::listBox(
+                      'Setting[' . $setting->setting_key . ']',
+                      $setting->getTypedValue(),
+                      NewsCategory::optionsForSelect(),
+                      array(
+                          'multiple' => 'multiple',
+                          'class'    => 'form-select',
+                          'id'       => $inputId,
+                          'size'     => 6,
+                          'disabled' => !$canUpdate,
+                      )
+                  ); ?>
+
                 <?php elseif ($isLong): ?>
                   <textarea class="form-control" id="<?php echo $inputId; ?>" rows="3"
                             name="Setting[<?php echo $setting->setting_key; ?>]"
