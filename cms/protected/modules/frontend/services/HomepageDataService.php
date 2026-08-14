@@ -55,6 +55,10 @@ class HomepageDataService
                 'order'     => 't.sort_order ASC',
             )),
 
+            // Section 5 "Dự án tiêu biểu" lấy từ TIN TỨC: bài is_featured_project = 1
+            // thuộc các danh mục được chọn ở Cấu hình website.
+            'featuredProjects' => self::loadFeaturedProjects($newsWith, $hasCats),
+
             'coreValues' => CoreValue::model()->with('icon')->active()->findAll(),
 
             'milestones' => TimelineMilestone::model()->findAll(array(
