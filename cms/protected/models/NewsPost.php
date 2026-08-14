@@ -187,6 +187,104 @@ class NewsPost extends BaseActiveRecord
         $this->_categoryIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
     }
 
+    /**
+     * Id các file đính kèm đang gắn — đọc thẳng bảng liên kết (theo thứ tự đã sắp)
+     * để dựng lại danh sách trong form.
+     * @return int[]
+     */
+    public function getAttachmentIds()
+    {
+        if ($this->_attachmentIds === null) {
+            if ($this->getIsNewRecord()) {
+                $this->_attachmentIds = array();
+            } else {
+                $ids = Yii::app()->db->createCommand()
+                    ->select('media_id')->from('pvn_news_post_attachments')
+                    ->where('post_id = :id', array(':id' => (int) $this->id))
+                    ->order('sort_order ASC, id ASC')
+                    ->queryColumn();
+                $this->_attachmentIds = array_map('intval', $ids);
+            }
+        }
+        return $this->_attachmentIds;
+    }
+
+    public function setAttachmentIds($value)
+    {
+        // Giữ NGUYÊN thứ tự người dùng sắp (không unique-sort), chỉ loại rỗng/trùng.
+        $ids = array();
+        foreach ((array) $value as $id) {
+            $id = (int) $id;
+            if ($id > 0 && !in_array($id, $ids, true)) {
+                $ids[] = $id;
+            }
+        }
+        $this->_attachmentIds = $ids;
+    }
+
+    /**
+     * Ghi phẳng liên kết file đính kèm: xoá cũ, thêm lại theo đúng thứ tự đã chọn,
+     * chỉ giữ media còn tồn tại (chưa xoá mềm).
+     */
+    public function syncAttachments()
+    {
+        $db = Yii::app()->db;
+        $postId = (int) $this->id;
+
+        $ids = $this->getAttachmentIds();
+        if ($ids !== array()) {
+            $criteria = new CDbCriteria();
+            $criteria->select = 'id';
+            $criteria->addInCondition('id', $ids);
+            $criteria->addCondition('deleted_at IS NULL');
+            $valid = array();
+            foreach (MediaFile::model()->findAll($criteria) as $file) {
+                $valid[(int) $file->id] = true;
+            }
+            // Giữ thứ tự người dùng, loại id không hợp lệ.
+            $ids = array_values(array_filter($ids, function ($id) use ($valid) {
+                return isset($valid[$id]);
+            }));
+        }
+
+        $now = date('Y-m-d H:i:s');
+        $transaction = $db->beginTransaction();
+        try {
+            $db->createCommand()->delete('pvn_news_post_attachments',
+                'post_id = :id', array(':id' => $postId));
+            $order = 0;
+            foreach ($ids as $mediaId) {
+                $db->createCommand()->insert('pvn_news_post_attachments', array(
+                    'post_id'    => $postId,
+                    'media_id'   => $mediaId,
+                    'sort_order' => $order++,
+                    'created_at' => $now,
+                ));
+            }
+            $transaction->commit();
+        } catch (Exception $e) {
+            $transaction->rollback();
+            Yii::log('Đồng bộ file đính kèm bài viết thất bại: ' . $e->getMessage(),
+                CLogger::LEVEL_ERROR, 'app');
+            throw $e;
+        }
+    }
+
+    /**
+     * File đính kèm dưới dạng MediaFile[] theo đúng thứ tự — cho frontend render.
+     * @return MediaFile[]
+     */
+    public function getAttachmentFiles()
+    {
+        $files = array();
+        foreach ($this->attachments as $attachment) {
+            if ($attachment->media instanceof MediaFile) {
+                $files[] = $attachment->media;
+            }
+        }
+        return $files;
+    }
+
     public function attributeLabels()
     {
         return array(
