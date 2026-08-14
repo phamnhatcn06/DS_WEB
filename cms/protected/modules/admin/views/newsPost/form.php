@@ -156,11 +156,30 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
       </div>
     </div>
 
-    <!-- Danh mục (chọn nhiều) -->
+    <!-- Danh mục (chọn nhiều) — data-attribute cờ phân loại để JS bật/tắt khối trường -->
     <div class="card mb-3">
       <div class="card-header py-2"><i class="fa fa-folder-open me-1"></i> Danh mục</div>
       <div class="card-body">
-        <?php $renderCheckList('categoryIds', $categoryOptions, $selectedCats); ?>
+<?php if ($categoriesWithFlags === array()): ?>
+        <p class="text-muted small mb-0"><em>Chưa có danh mục nào.</em></p>
+        <input type="hidden" name="NewsPost[categoryIds][]" value="" />
+<?php else: ?>
+        <div class="wp-checklist" data-category-checklist>
+<?php foreach ($categoriesWithFlags as $catId => $info): ?>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="categoryIds_<?php echo $catId; ?>"
+                   name="NewsPost[categoryIds][]" value="<?php echo $catId; ?>"
+                   data-project-cat="<?php echo $info['is_project']; ?>"
+                   data-investor-cat="<?php echo $info['is_investor']; ?>"
+                   <?php echo in_array((string) $catId, $selectedCats, true) ? 'checked' : ''; ?> />
+            <label class="form-check-label" for="categoryIds_<?php echo $catId; ?>">
+              <?php echo CHtml::encode($info['name']); ?>
+            </label>
+          </div>
+<?php endforeach; ?>
+        </div>
+        <input type="hidden" name="NewsPost[categoryIds][]" value="" />
+<?php endif; ?>
         <?php echo $form->error($model, 'categoryIds', array('class' => 'text-danger small mt-1')); ?>
         <p class="form-hint mt-2 mb-0">Bài sẽ hiển thị ở tất cả danh mục được chọn.</p>
       </div>
