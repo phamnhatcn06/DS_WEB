@@ -12,6 +12,7 @@
  * @var CPagination        $pages
  * @var int                $total
  * @var int[]              $years     các năm có tài liệu (DESC) — cho bộ lọc
+ * @var int|null           $year      năm đang lọc (null = tất cả)
  * @var NewsPost[]         $latest    tin mới nhất nhóm Quan hệ cổ đông (sidebar)
  */
 $root = $this->assetsBase();
