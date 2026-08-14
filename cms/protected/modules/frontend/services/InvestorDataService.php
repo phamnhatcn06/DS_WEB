@@ -9,9 +9,6 @@
  */
 class InvestorDataService
 {
-    /** Số tài liệu hiển thị trên mỗi trang. */
-    const PER_PAGE = 10;
-
     /** Slug các danh mục thuộc nhóm Quan hệ cổ đông (dùng cho sidebar tin mới nhất). */
     public static function categorySlugs()
     {
