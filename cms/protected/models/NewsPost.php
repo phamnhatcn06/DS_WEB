@@ -187,31 +187,44 @@ class NewsPost extends BaseActiveRecord
         $this->_categoryIds = array_values(array_unique(array_filter(array_map('intval', (array) $value))));
     }
 
+    /** Các ngôn ngữ file đính kèm hỗ trợ. */
+    public static function attachmentLangs()
+    {
+        return array('vi', 'en');
+    }
+
+    // Getter/setter riêng cho từng ngôn ngữ (form dùng attachmentIdsVi / attachmentIdsEn).
+    public function getAttachmentIdsVi() { return $this->attachmentIdsByLang('vi'); }
+    public function getAttachmentIdsEn() { return $this->attachmentIdsByLang('en'); }
+    public function setAttachmentIdsVi($value) { $this->_attachmentIds['vi'] = $this->normalizeMediaIds($value); }
+    public function setAttachmentIdsEn($value) { $this->_attachmentIds['en'] = $this->normalizeMediaIds($value); }
+
     /**
-     * Id các file đính kèm đang gắn — đọc thẳng bảng liên kết (theo thứ tự đã sắp)
-     * để dựng lại danh sách trong form.
+     * Id file đính kèm của một ngôn ngữ — đọc thẳng bảng liên kết theo thứ tự
+     * đã sắp để dựng lại danh sách trong form.
      * @return int[]
      */
-    public function getAttachmentIds()
+    private function attachmentIdsByLang($lang)
     {
-        if ($this->_attachmentIds === null) {
+        if (!isset($this->_attachmentIds[$lang])) {
             if ($this->getIsNewRecord()) {
-                $this->_attachmentIds = array();
+                $this->_attachmentIds[$lang] = array();
             } else {
                 $ids = Yii::app()->db->createCommand()
                     ->select('media_id')->from('pvn_news_post_attachments')
-                    ->where('post_id = :id', array(':id' => (int) $this->id))
+                    ->where('post_id = :id AND lang = :lang',
+                        array(':id' => (int) $this->id, ':lang' => $lang))
                     ->order('sort_order ASC, id ASC')
                     ->queryColumn();
-                $this->_attachmentIds = array_map('intval', $ids);
+                $this->_attachmentIds[$lang] = array_map('intval', $ids);
             }
         }
-        return $this->_attachmentIds;
+        return $this->_attachmentIds[$lang];
     }
 
-    public function setAttachmentIds($value)
+    /** Chuẩn hoá danh sách id: giữ nguyên thứ tự, loại rỗng/trùng. */
+    private function normalizeMediaIds($value)
     {
-        // Giữ NGUYÊN thứ tự người dùng sắp (không unique-sort), chỉ loại rỗng/trùng.
         $ids = array();
         foreach ((array) $value as $id) {
             $id = (int) $id;
@@ -219,47 +232,36 @@ class NewsPost extends BaseActiveRecord
                 $ids[] = $id;
             }
         }
-        $this->_attachmentIds = $ids;
+        return $ids;
     }
 
     /**
-     * Ghi phẳng liên kết file đính kèm: xoá cũ, thêm lại theo đúng thứ tự đã chọn,
-     * chỉ giữ media còn tồn tại (chưa xoá mềm).
+     * Ghi phẳng liên kết file đính kèm cả 2 ngôn ngữ: xoá cũ, thêm lại theo đúng
+     * thứ tự đã chọn, chỉ giữ media còn tồn tại (chưa xoá mềm).
      */
     public function syncAttachments()
     {
         $db = Yii::app()->db;
         $postId = (int) $this->id;
-
-        $ids = $this->getAttachmentIds();
-        if ($ids !== array()) {
-            $criteria = new CDbCriteria();
-            $criteria->select = 'id';
-            $criteria->addInCondition('id', $ids);
-            $criteria->addCondition('deleted_at IS NULL');
-            $valid = array();
-            foreach (MediaFile::model()->findAll($criteria) as $file) {
-                $valid[(int) $file->id] = true;
-            }
-            // Giữ thứ tự người dùng, loại id không hợp lệ.
-            $ids = array_values(array_filter($ids, function ($id) use ($valid) {
-                return isset($valid[$id]);
-            }));
-        }
-
         $now = date('Y-m-d H:i:s');
+
         $transaction = $db->beginTransaction();
         try {
             $db->createCommand()->delete('pvn_news_post_attachments',
                 'post_id = :id', array(':id' => $postId));
-            $order = 0;
-            foreach ($ids as $mediaId) {
-                $db->createCommand()->insert('pvn_news_post_attachments', array(
-                    'post_id'    => $postId,
-                    'media_id'   => $mediaId,
-                    'sort_order' => $order++,
-                    'created_at' => $now,
-                ));
+
+            foreach (self::attachmentLangs() as $lang) {
+                $ids = $this->filterExistingMedia($this->attachmentIdsByLang($lang));
+                $order = 0;
+                foreach ($ids as $mediaId) {
+                    $db->createCommand()->insert('pvn_news_post_attachments', array(
+                        'post_id'    => $postId,
+                        'media_id'   => $mediaId,
+                        'lang'       => $lang,
+                        'sort_order' => $order++,
+                        'created_at' => $now,
+                    ));
+                }
             }
             $transaction->commit();
         } catch (Exception $e) {
@@ -270,15 +272,35 @@ class NewsPost extends BaseActiveRecord
         }
     }
 
+    /** Lọc bỏ id media không còn tồn tại, giữ nguyên thứ tự. */
+    private function filterExistingMedia($ids)
+    {
+        if ($ids === array()) {
+            return array();
+        }
+        $criteria = new CDbCriteria();
+        $criteria->select = 'id';
+        $criteria->addInCondition('id', $ids);
+        $criteria->addCondition('deleted_at IS NULL');
+        $valid = array();
+        foreach (MediaFile::model()->findAll($criteria) as $file) {
+            $valid[(int) $file->id] = true;
+        }
+        return array_values(array_filter($ids, function ($id) use ($valid) {
+            return isset($valid[$id]);
+        }));
+    }
+
     /**
-     * File đính kèm dưới dạng MediaFile[] theo đúng thứ tự — cho frontend render.
+     * File đính kèm của một ngôn ngữ dưới dạng MediaFile[] theo đúng thứ tự.
+     * @param string $lang 'vi' | 'en'
      * @return MediaFile[]
      */
-    public function getAttachmentFiles()
+    public function getAttachmentFiles($lang = 'vi')
     {
         $files = array();
         foreach ($this->attachments as $attachment) {
-            if ($attachment->media instanceof MediaFile) {
+            if ($attachment->lang === $lang && $attachment->media instanceof MediaFile) {
                 $files[] = $attachment->media;
             }
         }
