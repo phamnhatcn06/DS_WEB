@@ -93,6 +93,50 @@ class HomepageDataService
     }
 
     /**
+     * Nạp bài cho Section 5 "Dự án tiêu biểu": bài đã xuất bản, is_featured_project = 1,
+     * thuộc các danh mục được chọn tại Cấu hình website (khoá
+     * featured_projects_category_ids). Khớp danh mục qua cột category_id chính
+     * HOẶC bảng liên kết nhiều-nhiều. Bỏ trống cấu hình → lấy mọi bài
+     * is_featured_project = 1 (không giới hạn danh mục).
+     *
+     * @param string[] $newsWith quan hệ eager-load
+     * @param bool     $hasCats  bảng pvn_news_post_categories tồn tại
+     * @return NewsPost[]
+     */
+    private static function loadFeaturedProjects($newsWith, $hasCats)
+    {
+        $limit = 10;
+
+        $categoryIds = SiteSetting::get('featured_projects_category_ids', array());
+        if (!is_array($categoryIds)) {
+            $categoryIds = array();
+        }
+        $categoryIds = array_values(array_filter(array_map('intval', $categoryIds)));
+
+        $condition = 't.deleted_at IS NULL AND t.is_active = 1'
+            . ' AND t.is_featured_project = 1 AND t.status = :st';
+        $params = array(':st' => NewsPost::STATUS_PUBLISHED);
+
+        if (!empty($categoryIds)) {
+            $idList = implode(',', $categoryIds);
+            if ($hasCats) {
+                $condition .= ' AND (t.category_id IN (' . $idList . ')'
+                    . ' OR EXISTS (SELECT 1 FROM pvn_news_post_categories npc'
+                    . ' WHERE npc.post_id = t.id AND npc.category_id IN (' . $idList . ')))';
+            } else {
+                $condition .= ' AND t.category_id IN (' . $idList . ')';
+            }
+        }
+
+        return NewsPost::model()->with($newsWith)->findAll(array(
+            'condition' => $condition,
+            'params'    => $params,
+            'order'     => 't.published_at DESC, t.id DESC',
+            'limit'     => $limit,
+        ));
+    }
+
+    /**
      * Nạp bài viết cho Section 9: gom tối đa 4 bài mới nhất của MỖI danh mục tab
      * (dedup theo id, giữ thứ tự mới nhất trước). Khi chưa có bảng đa danh mục
      * hoặc chưa chọn tab nào → fallback về 4 bài mới nhất toàn cục.
