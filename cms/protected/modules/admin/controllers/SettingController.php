@@ -42,6 +42,14 @@ class SettingController extends AdminController
         try {
             $changed = 0;
             foreach ($values as $key => $value) {
+                // Khoá chọn nhiều (category_multi) gửi lên dạng mảng → chuẩn hoá
+                // về JSON mảng số nguyên trước khi so sánh & lưu.
+                if (is_array($value)) {
+                    $value = json_encode(
+                        array_values(array_map('intval', array_filter($value, 'strlen'))),
+                        JSON_UNESCAPED_UNICODE
+                    );
+                }
                 $setting = SiteSetting::model()->findByAttributes(array('setting_key' => $key));
                 if ($setting === null) {
                     continue; // bỏ qua khoá lạ gửi kèm từ client
