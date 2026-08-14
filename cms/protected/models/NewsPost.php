@@ -89,7 +89,13 @@ class NewsPost extends BaseActiveRecord
             array('category_id, thumbnail_media_id, author_id, sort_order', 'numerical',
                 'integerOnly' => true),
             array('is_featured, is_featured_project, is_active', 'boolean'),
-            array('excerpt, content, tagIds, categoryIds', 'safe'),
+            // Trường dự án (chỉ dùng khi bài thuộc danh mục dự án).
+            array('project_name, project_location', 'length', 'max' => 255),
+            array('project_investment_display', 'length', 'max' => 100),
+            array('project_scale_display', 'length', 'max' => 150),
+            array('project_status', 'in', 'range' => array_keys(self::projectStatusOptions()),
+                'allowEmpty' => true, 'message' => 'Tình trạng dự án không hợp lệ.'),
+            array('excerpt, content, content_en, tagIds, categoryIds, attachmentIds', 'safe'),
         );
     }
 
