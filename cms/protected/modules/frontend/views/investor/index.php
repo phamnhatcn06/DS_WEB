@@ -50,6 +50,7 @@ $yearUrl = function ($yearValue) use ($category) {
 
   <!-- ===== Hero Banner ===== -->
   <section class="qhcd-hero">
+    <img class="qhcd-hero__img" src="<?php echo $root; ?>/assets/images/quanhecodong-hero.webp" alt="" aria-hidden="true" />
     <div class="qhcd-hero__bg" aria-hidden="true"></div>
     <p class="qhcd-hero__crumb">
       <a href="<?php echo CHtml::encode($home); ?>">Trang chủ</a> / <span>Quan hệ cổ đông</span>
