@@ -35,9 +35,16 @@ class InvestorDataService
             return null;
         }
 
-        // Chỉ nhận năm hợp lệ có tài liệu trong danh mục; ngược lại về "tất cả".
+        // Danh sách năm có tài liệu (DESC). Không còn "tất cả": mặc định năm hiện
+        // tại nếu có tài liệu, ngược lại lấy năm mới nhất.
         $years = self::publishedYears($category->id);
-        $year  = ($year !== null && in_array((int) $year, $years, true)) ? (int) $year : null;
+        if ($year !== null && in_array((int) $year, $years, true)) {
+            $year = (int) $year;
+        } elseif (in_array((int) date('Y'), $years, true)) {
+            $year = (int) date('Y');
+        } else {
+            $year = !empty($years) ? $years[0] : null;
+        }
 
         $publishedCond = 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st';
         $publishedParams = array(':st' => NewsPost::STATUS_PUBLISHED);
