@@ -104,8 +104,8 @@ $yearUrl = function ($yearValue) use ($category) {
             <p class="qhcd-empty">Chưa có tài liệu nào trong chuyên mục này.</p>
 <?php else: ?>
 <?php foreach ($posts as $post): ?>
-<?php $url = $postUrl($post); $year = (int) date('Y', strtotime((string) $post->published_at)); ?>
-            <article class="qhcd-card" data-year="<?php echo $year; ?>">
+<?php $url = $postUrl($post); ?>
+            <article class="qhcd-card">
               <div class="qhcd-card__top">
                 <span class="qhcd-date-chip"><?php echo CHtml::encode($dateChip($post->published_at)); ?></span>
                 <i class="bi bi-calendar3" aria-hidden="true"></i>
