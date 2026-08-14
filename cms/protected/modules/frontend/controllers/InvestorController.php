@@ -19,7 +19,10 @@ class InvestorController extends FrontendController
             $category = self::DEFAULT_CATEGORY;
         }
 
-        $data = InvestorDataService::load($category);
+        $year = Yii::app()->request->getQuery('year');
+        $year = ($year !== null && ctype_digit((string) $year)) ? (int) $year : null;
+
+        $data = InvestorDataService::load($category, $year);
         if ($data === null) {
             throw new CHttpException(404, 'Không tìm thấy chuyên mục.');
         }
