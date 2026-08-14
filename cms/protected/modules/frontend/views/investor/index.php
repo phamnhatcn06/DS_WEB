@@ -118,17 +118,6 @@ $yearUrl = function ($yearValue) use ($category) {
 <?php endforeach; ?>
 <?php endif; ?>
           </div>
-
-<?php if ($pageCount > 1): ?>
-          <!-- Pagination -->
-          <nav class="qhcd-pager" aria-label="Phân trang">
-<?php for ($i = 0; $i < $pageCount; $i++): ?>
-            <a href="<?php echo CHtml::encode($pages->createPageUrl($this, $i)); ?>"<?php echo $i === $currentPage ? ' class="is-active" aria-current="page"' : ''; ?>><?php echo $i + 1; ?></a>
-<?php endfor; ?>
-            <a href="<?php echo CHtml::encode($pages->createPageUrl($this, min($currentPage + 1, $pageCount - 1))); ?>"
-               class="<?php echo $currentPage >= $pageCount - 1 ? 'is-disabled' : ''; ?>" aria-label="Trang sau"><i class="bi bi-chevron-right"></i></a>
-          </nav>
-<?php endif; ?>
         </div>
 
         <!-- Cột phải: Tin tức mới nhất -->
