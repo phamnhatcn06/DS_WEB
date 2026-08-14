@@ -265,17 +265,28 @@ section[id] {
    6. Hero — chữ vào từng lớp khi slide đổi
    ========================================================================== */
 
-.hero-item.active .hero-logo,
-.hero-item.active .hero-title,
-.hero-item.active .hero-subtitle,
-.hero-item.active .hero-actions {
+/* Ẩn nội dung mặc định; chỉ hiện (animate) khi slide bắt đầu vào (.hero-in).
+   Dùng .hero-in thay cho .active vì Bootstrap chỉ gắn .active SAU khi crossfade
+   xong — khiến nội dung hiện đủ rồi mới chạy lại hiệu ứng (nháy). .hero-in được
+   JS gắn ngay khi slide bắt đầu vào (sự kiện slide.bs.carousel) nên chạy từ đầu. */
+.hero-item .hero-logo,
+.hero-item .hero-title,
+.hero-item .hero-subtitle,
+.hero-item .hero-actions {
+  opacity: 0;
+}
+
+.hero-item.hero-in .hero-logo,
+.hero-item.hero-in .hero-title,
+.hero-item.hero-in .hero-subtitle,
+.hero-item.hero-in .hero-actions {
   animation: heroIn 1s var(--ease-out-back) both;
 }
 
-.hero-item.active .hero-logo     { animation-delay: .15s; }
-.hero-item.active .hero-title    { animation-delay: .3s; }
-.hero-item.active .hero-subtitle { animation-delay: .45s; }
-.hero-item.active .hero-actions  { animation-delay: .6s; }
+.hero-item.hero-in .hero-logo     { animation-delay: .15s; }
+.hero-item.hero-in .hero-title    { animation-delay: .3s; }
+.hero-item.hero-in .hero-subtitle { animation-delay: .45s; }
+.hero-item.hero-in .hero-actions  { animation-delay: .6s; }
 
 /* Ảnh nền hero phóng chậm (Ken Burns) suốt thời gian slide hiển thị */
 .hero-item.active .hero-bg {
