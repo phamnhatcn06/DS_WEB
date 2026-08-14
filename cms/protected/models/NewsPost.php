@@ -95,7 +95,7 @@ class NewsPost extends BaseActiveRecord
             array('project_scale_display', 'length', 'max' => 150),
             array('project_status', 'in', 'range' => array_keys(self::projectStatusOptions()),
                 'allowEmpty' => true, 'message' => 'Tình trạng dự án không hợp lệ.'),
-            array('excerpt, content, content_en, tagIds, categoryIds, attachmentIds', 'safe'),
+            array('excerpt, content, content_en, tagIds, categoryIds, attachmentIdsVi, attachmentIdsEn', 'safe'),
         );
     }
 
