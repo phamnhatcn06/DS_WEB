@@ -130,6 +130,11 @@ class NewsPost extends BaseActiveRecord
                 'condition' => 'tags.deleted_at IS NULL AND tags.is_active = 1',
                 'order'     => 'tags.sort_order ASC, tags.name ASC',
                 'together'  => false),
+            // File đính kèm (quan hệ cổ đông) — nạp media theo thứ tự đã sắp.
+            'attachments' => array(self::HAS_MANY, 'NewsPostAttachment', 'post_id',
+                'with'  => 'media',
+                'order' => 'attachments.sort_order ASC, attachments.id ASC',
+                'together' => false),
         );
     }
 
