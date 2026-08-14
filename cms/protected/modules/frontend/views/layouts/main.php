@@ -235,6 +235,7 @@ $telHref = function ($phone) {
                 </li>
               <?php endif; ?>
             </ul>
+            <?php endif; ?>
             <?php if ($socialLinks !== array()): ?>
               <div class="social-links d-flex gap-2">
                 <?php foreach ($socialLinks as $social): ?>
