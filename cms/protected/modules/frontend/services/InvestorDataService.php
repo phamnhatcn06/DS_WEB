@@ -54,27 +54,17 @@ class InvestorDataService
             return NewsPost::model()->belongingToCategory($category->id);
         };
 
-        $total = (int) $scoped()->count(array(
-            'condition' => $publishedCond,
-            'params'    => $publishedParams,
-        ));
-
-        $pages = new CPagination($total);
-        $pages->pageSize = self::PER_PAGE;
-
+        // Không phân trang — hiển thị toàn bộ tài liệu của (năm) danh mục.
         $posts = $scoped()->findAll(array(
             'condition' => $publishedCond,
             'params'    => $publishedParams,
             'order'     => 't.published_at DESC, t.id DESC',
-            'limit'     => $pages->pageSize,
-            'offset'    => $pages->currentPage * $pages->pageSize,
         ));
 
         return array(
             'category' => $category,
             'posts'    => $posts,
-            'pages'    => $pages,
-            'total'    => $total,
+            'total'    => count($posts),
             'years'    => $years,
             'year'     => $year,
             'latest'   => self::latestInvestorPosts(4),
