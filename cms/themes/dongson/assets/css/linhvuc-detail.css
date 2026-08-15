@@ -155,16 +155,19 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Cột phải: quote (bg #f8f9fa, padding 120px, canh giữa) */
+/* Cột phải: quote (bg #f8f9fa, padding 120px, canh giữa cả ngang + dọc).
+   Figma "Background" (1486:6425): flex items-center justify-center p-[120px];
+   khối nội dung width cố định 361px (không dàn rộng). */
 .lv-quote-panel {
   background: #f8f9fa;
   padding: clamp(40px, 6.25vw, 120px);
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
-.lv-quote-inner { max-width: 576px; width: 100%; }
+.lv-quote-inner { width: 361px; max-width: 100%; }
 
 .lv-quote-mark {
   font-family: var(--font-heading);
