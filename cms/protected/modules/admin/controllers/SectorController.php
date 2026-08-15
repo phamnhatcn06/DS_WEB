@@ -105,6 +105,12 @@ class SectorController extends AdminCrudController
             array('name' => 'capability_lead', 'type' => 'textarea', 'width' => 12, 'rows' => 2,
                 'hint' => 'Quản lý từng thẻ năng lực ở mục "Năng lực lĩnh vực".'),
 
+            // ===== Dự án tiêu biểu (dưới "Năng lực cốt lõi") =====
+            array('name' => 'news_category_id', 'type' => 'select', 'width' => 6,
+                'options' => NewsCategory::optionsForSelect(), 'empty' => '— Không hiển thị —',
+                'hint' => 'Danh mục Tin tức dùng để lấy "Dự án tiêu biểu" hiển thị ở cuối '
+                    . 'trang chi tiết lĩnh vực (lưới 3 cột). Bỏ trống → không hiện.'),
+
             array('name' => 'sort_order', 'type' => 'number', 'width' => 6),
             array('name' => 'show_in_slider', 'type' => 'checkbox', 'width' => 6),
             array('name' => 'show_in_grid', 'type' => 'checkbox', 'width' => 6),
