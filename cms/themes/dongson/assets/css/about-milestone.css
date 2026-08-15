@@ -126,12 +126,12 @@
   background-color: rgba(255, 255, 255, .2);
 }
 
-/* Emblem lớn (vector) neo góc phải */
+/* Emblem lớn (vector) — canh giữa nửa phải của panel đỏ */
 .milestone-emblem {
   position: absolute;
-  right: clamp(-40px, -2vw, 0px);
+  left: 75%;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   width: clamp(240px, 26vw, 419px);
   height: auto;
   pointer-events: none;
