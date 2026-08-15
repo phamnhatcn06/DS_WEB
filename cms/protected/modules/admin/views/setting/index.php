@@ -121,3 +121,32 @@ $firstGroup = $groupKeys === array() ? null : $groupKeys[0];
 </div>
 
 <?php echo CHtml::endForm(); ?>
+
+<script>
+  // Giữ nguyên tab đang xem sau khi lưu (form submit → trang tải lại). Nếu không,
+  // trang reload luôn về tab đầu tiên, khiến người dùng tưởng cấu hình vừa nhập
+  // (vd danh mục tiêu biểu ở tab "Thông tin chung") bị mất.
+  (function () {
+    var STORAGE_KEY = 'dsh:setting:activeTab';
+    var tabButtons = document.querySelectorAll('[data-bs-toggle="tab"][data-bs-target]');
+    if (!tabButtons.length || typeof bootstrap === 'undefined') {
+      return;
+    }
+
+    // Khôi phục tab đã lưu trước đó.
+    var savedTarget = sessionStorage.getItem(STORAGE_KEY);
+    if (savedTarget) {
+      var savedButton = document.querySelector('[data-bs-toggle="tab"][data-bs-target="' + savedTarget + '"]');
+      if (savedButton) {
+        bootstrap.Tab.getOrCreateInstance(savedButton).show();
+      }
+    }
+
+    // Ghi nhớ tab mỗi khi người dùng chuyển tab.
+    tabButtons.forEach(function (button) {
+      button.addEventListener('shown.bs.tab', function (event) {
+        sessionStorage.setItem(STORAGE_KEY, event.target.getAttribute('data-bs-target'));
+      });
+    });
+  })();
+</script>
