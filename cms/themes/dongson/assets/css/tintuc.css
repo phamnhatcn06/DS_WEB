@@ -70,6 +70,7 @@
   width: 100%;
   background: var(--tt-skeleton);
   overflow: hidden;
+  border-radius: 8px; /* Bo góc ảnh tin — bám theo Figma (rounded 8px) */
 }
 
 .tt-thumb img { width: 100%; height: 100%; object-fit: cover; }
