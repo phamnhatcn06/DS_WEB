@@ -80,17 +80,24 @@
   font-weight: 600;
 }
 
-/* Nửa đỏ: thống kê + emblem */
+/* Nửa đỏ: thống kê (trái) + emblem (phải) */
 .milestone-stats {
-  position: relative;
   flex: 1 1 54%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: clamp(32px, 4vw, 64px);
+  background-color: var(--dsh-red);
+  overflow: hidden;
+}
+
+/* Cột số liệu bên trái */
+.milestone-stats-nums {
+  flex: 1 1 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-6);
-  padding: clamp(32px, 4vw, 64px);
-  background-color: var(--dsh-red);
-  overflow: hidden;
 }
 
 .milestone-stat .stat-num {
