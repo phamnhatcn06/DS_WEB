@@ -46,7 +46,11 @@ class TimelineController extends AdminCrudController
             array('name' => 'event_date', 'type' => 'date', 'width' => 6),
             array('name' => 'eyebrow', 'width' => 6),
             array('name' => 'title', 'width' => 12),
-            array('name' => 'description', 'type' => 'textarea', 'width' => 12, 'rows' => 4),
+            array('name' => 'description', 'type' => 'textarea', 'width' => 12, 'rows' => 3,
+                'hint' => 'Mô tả ngắn gọn — hiển thị ở timeline <strong>trang chủ</strong>.'),
+            array('name' => 'content', 'type' => 'richtext', 'width' => 12, 'rows' => 12,
+                'hint' => 'Mô tả đầy đủ (có định dạng) — hiển thị ở khối cột mốc '
+                    . '<strong>trang Giới thiệu</strong>. Bỏ trống sẽ dùng mô tả ngắn.'),
             array('name' => 'image_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'side', 'type' => 'select', 'width' => 6,
                 'options' => TimelineMilestone::sideOptions()),
