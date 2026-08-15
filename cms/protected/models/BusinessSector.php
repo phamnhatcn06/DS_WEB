@@ -63,6 +63,8 @@ class BusinessSector extends BaseActiveRecord
             'image'    => array(self::BELONGS_TO, 'MediaFile', 'image_media_id'),
             'icon'     => array(self::BELONGS_TO, 'MediaFile', 'icon_media_id'),
             'heroBg'   => array(self::BELONGS_TO, 'MediaFile', 'hero_bg_media_id'),
+            // Danh mục tin dùng để lấy "Dự án tiêu biểu" ở trang chi tiết lĩnh vực.
+            'newsCategory' => array(self::BELONGS_TO, 'NewsCategory', 'news_category_id'),
             'legacyImage'   => array(self::BELONGS_TO, 'MediaFile', 'legacy_media_id'),
             'heritageImage' => array(self::BELONGS_TO, 'MediaFile', 'heritage_media_id'),
             'pvn_projects' => array(self::HAS_MANY, 'Project', 'sector_id'),
