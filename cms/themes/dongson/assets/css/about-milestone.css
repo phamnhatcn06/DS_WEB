@@ -133,12 +133,18 @@
   background-color: rgba(255, 255, 255, .2);
 }
 
-/* Emblem lớn (vector) — canh giữa cột phải */
-.milestone-emblem {
+/* Cột phải chứa emblem — canh giữa */
+.milestone-emblem-wrap {
   flex: 1 1 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Emblem lớn (vector) */
+.milestone-emblem {
   width: clamp(200px, 22vw, 340px);
   height: auto;
-  margin: 0 auto;
   pointer-events: none;
   user-select: none;
 }
