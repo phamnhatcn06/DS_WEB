@@ -22,6 +22,13 @@ class AboutDataService
 
             // Lưới giá trị (tái sử dụng Section 6) — icon eager-load tránh N+1.
             'coreValues'     => CoreValue::model()->with('icon')->active()->findAll(),
+
+            // Cột mốc phát triển (Section 2) — cùng nguồn với timeline trang chủ.
+            // Eager-load ảnh tránh N+1; sắp theo năm rồi thứ tự thủ công.
+            'milestones'     => TimelineMilestone::model()->with('image')->findAll(array(
+                'condition' => 't.deleted_at IS NULL AND t.is_active = 1',
+                'order'     => 't.year_value ASC, t.sort_order ASC',
+            )),
         );
     }
 
