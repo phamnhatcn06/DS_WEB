@@ -182,7 +182,8 @@ $returnUrl = trim((string) Yii::app()->request->getParam('return', ''));
       <button type="submit" name="save_and_continue" value="1" class="btn btn-outline-secondary">
         Lưu và tiếp tục sửa
       </button>
-      <a class="btn btn-link text-muted ms-auto" href="<?php echo $this->createUrl('index'); ?>">
+      <a class="btn btn-link text-muted ms-auto"
+         href="<?php echo $returnUrl !== '' ? CHtml::encode($returnUrl) : $this->createUrl('index'); ?>">
         Huỷ
       </a>
     </div>
