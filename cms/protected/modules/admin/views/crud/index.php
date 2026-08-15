@@ -18,6 +18,10 @@ $resource = $this->getPermissionResource();
 $canUpdate = $user->checkAccess($resource . '.update');
 $canDelete = $user->checkAccess($resource . '.delete');
 $items = $dataProvider->getData();
+
+// URL danh sách hiện tại (kèm q, bộ lọc, trang, sắp xếp) để sau khi sửa xong
+// quay lại đúng danh sách vừa lọc.
+$returnUrl = Yii::app()->request->getRequestUri();
 ?>
 
 <div class="card">
