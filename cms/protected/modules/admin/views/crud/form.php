@@ -56,6 +56,14 @@ $returnUrl = trim((string) Yii::app()->request->getParam('return', ''));
               )); ?>
               <?php break; ?>
 
+            <?php case 'richtext': ?>
+              <?php // Trình soạn thảo TinyMCE self-host — khởi tạo bởi richtext-init.js. ?>
+              <?php echo $form->textArea($model, $name, array(
+                  'class' => 'form-control wp-content-editor',
+                  'rows'  => isset($field['rows']) ? $field['rows'] : 10,
+              )); ?>
+              <?php break; ?>
+
             <?php case 'number': ?>
               <?php echo $form->numberField($model, $name, array(
                   'class' => 'form-control',
