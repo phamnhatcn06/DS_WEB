@@ -202,12 +202,13 @@ $returnUrl = trim((string) Yii::app()->request->getParam('return', ''));
 
 <?php
 // Bộ chọn ảnh dùng chung: chỉ nhúng khi form có ít nhất một trường media.
+// Trình soạn thảo TinyMCE: chỉ nạp khi có ít nhất một trường richtext.
 $hasMediaField = false;
+$hasRichtext   = false;
 foreach ($fields as $field) {
-    if (isset($field['type']) && $field['type'] === 'media') {
-        $hasMediaField = true;
-        break;
-    }
+    $ftype = isset($field['type']) ? $field['type'] : 'text';
+    if ($ftype === 'media')    { $hasMediaField = true; }
+    if ($ftype === 'richtext') { $hasRichtext = true; }
 }
 ?>
 <?php if ($hasMediaField): ?>
