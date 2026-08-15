@@ -219,13 +219,15 @@ foreach ($founders as $founder):
 
           <!-- Nửa đỏ: thống kê + logo emblem -->
           <div class="milestone-stats">
-            <div class="milestone-stat">
-              <span class="stat-num"><span class="count-up" data-count-to="<?php echo (int) $s('about_milestone_stat_1_value', 100); ?>">1</span><span class="plus"><?php echo CHtml::encode($s('about_milestone_stat_1_suffix', '+')); ?></span></span>
-              <span class="stat-label"><?php echo CHtml::encode($s('about_milestone_stat_1_label', 'Dự án quy mô quốc gia')); ?></span>
-            </div>
-            <div class="milestone-stat">
-              <span class="stat-num"><span class="count-up" data-count-to="<?php echo (int) $s('about_milestone_stat_2_value', 63); ?>">1</span><span class="plus"><?php echo CHtml::encode($s('about_milestone_stat_2_suffix', '')); ?></span></span>
-              <span class="stat-label"><?php echo CHtml::encode($s('about_milestone_stat_2_label', 'Tỉnh thành hiện diện')); ?></span>
+            <div class="milestone-stats-nums">
+              <div class="milestone-stat">
+                <span class="stat-num"><span class="count-up" data-count-to="<?php echo (int) $s('about_milestone_stat_1_value', 100); ?>">1</span><span class="plus"><?php echo CHtml::encode($s('about_milestone_stat_1_suffix', '+')); ?></span></span>
+                <span class="stat-label"><?php echo CHtml::encode($s('about_milestone_stat_1_label', 'Dự án quy mô quốc gia')); ?></span>
+              </div>
+              <div class="milestone-stat">
+                <span class="stat-num"><span class="count-up" data-count-to="<?php echo (int) $s('about_milestone_stat_2_value', 63); ?>">1</span><span class="plus"><?php echo CHtml::encode($s('about_milestone_stat_2_suffix', '')); ?></span></span>
+                <span class="stat-label"><?php echo CHtml::encode($s('about_milestone_stat_2_label', 'Tỉnh thành hiện diện')); ?></span>
+              </div>
             </div>
             <img src="<?php echo $root; ?>/assets/images/ds-emblem.webp" alt="Biểu tượng Đông Sơn Holdings"
                  class="milestone-emblem" loading="lazy" aria-hidden="true" />
