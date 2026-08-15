@@ -123,6 +123,7 @@ class BusinessSector extends BaseActiveRecord
             'heritage_media_id'          => 'Ảnh khối kế thừa',
             'capability_title'           => 'Tiêu đề "Năng lực cốt lõi"',
             'capability_lead'            => 'Đoạn dẫn "Năng lực cốt lõi"',
+            'news_category_id'           => 'Danh mục "Dự án tiêu biểu"',
         );
     }
 
