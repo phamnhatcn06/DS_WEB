@@ -223,6 +223,12 @@
 .lv-stat--bar .lv-stat-label { font-weight: 500; letter-spacing: 0.6px; }
 
 /* ===== Section 3: Kế Thừa Di Sản — text 24px #59413f + ảnh ===== */
+/* Khoảng cách text ↔ ảnh: Figma "Introduction Section" (1484:2605) là 64px
+   (2 cột 808px, gap 872−808). Bootstrap g-lg-5 chỉ 48px nên phải override. */
+@media (min-width: 992px) {
+  .lv-heritage .row { --bs-gutter-x: 64px; }
+}
+
 .lv-heritage h2 {
   font-weight: 700;
   font-size: clamp(1.75rem, 2.4vw, 32px);
