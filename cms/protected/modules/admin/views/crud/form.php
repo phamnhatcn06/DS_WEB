@@ -242,3 +242,15 @@ foreach ($fields as $field) {
   </div>
   <script src="<?php echo Yii::app()->baseUrl; ?>/admin-assets/admin.js" defer></script>
 <?php endif; ?>
+
+<?php if ($hasRichtext): ?>
+  <?php
+  // Cache-busting theo mtime — buộc trình duyệt tải bản mới nhất.
+  $rtBase = Yii::app()->baseUrl . '/admin-assets';
+  $rtInitV = @filemtime(Yii::getPathOfAlias('webroot') . '/admin-assets/richtext-init.js');
+  ?>
+  <!-- TinyMCE (self-host, không CDN) — khởi tạo mọi textarea .wp-content-editor -->
+  <script src="<?php echo $rtBase; ?>/vendor/tinymce/tinymce.min.js"></script>
+  <script src="<?php echo $rtBase; ?>/richtext-init.js?v=<?php echo $rtInitV; ?>" defer></script>
+  <script>window.DSH_TINYMCE_BASE = '<?php echo $rtBase; ?>/vendor/tinymce';</script>
+<?php endif; ?>
