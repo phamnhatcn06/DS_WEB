@@ -49,8 +49,10 @@ $postUrl = function (NewsPost $post) {
 };
 
 /** Render một thẻ tin cột trên (ảnh + tiêu đề + trích + ngày). */
-$renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) {
+$renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl, $excerptWords) {
     $url = $postUrl($post);
+    // Có trích dẫn thì hiển thị; không có thì cắt một đoạn đầu từ nội dung bài.
+    $excerpt = $post->getDisplayExcerpt($excerptWords);
     ob_start(); ?>
     <a href="<?php echo CHtml::encode($url); ?>" class="text-decoration-none">
       <article class="tt-news-card" data-reveal="up">
@@ -58,8 +60,8 @@ $renderNewsCard = function (NewsPost $post) use ($root, $fallbackImg, $postUrl) 
           <?php echo MediaHelper::imgOr($post->thumbnail, $fallbackImg, $post->title); ?>
         </div>
         <h3><?php echo CHtml::encode($post->title); ?></h3>
-<?php if ($post->excerpt !== null && $post->excerpt !== ''): ?>
-        <p><?php echo CHtml::encode(TextHelper::truncate($post->excerpt, 120)); ?></p>
+<?php if ($excerpt !== ''): ?>
+        <p><?php echo CHtml::encode($excerpt); ?></p>
 <?php endif; ?>
         <time class="tt-date"><?php echo CHtml::encode($post->getFormattedDate()); ?></time>
       </article>
