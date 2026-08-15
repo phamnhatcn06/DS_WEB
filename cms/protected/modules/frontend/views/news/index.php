@@ -21,7 +21,8 @@ $home = Yii::app()->homeUrl;
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile($root . '/assets/fonts/montserrat.css');
 $cs->registerCssFile($root . '/assets/css/about-hero.css');
-$cs->registerCssFile($root . '/assets/css/tintuc.css');
+// Kèm ?v=<mtime> để trình duyệt luôn nạp bản mới nhất sau khi sửa CSS.
+$cs->registerCssFile($this->assetUrl('assets/css/tintuc.css'));
 
 // Text hero có thể chỉnh trong Cấu hình website; fallback = bản thiết kế gốc.
 $s = function ($key, $default = '') {
