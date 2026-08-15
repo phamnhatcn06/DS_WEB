@@ -19,4 +19,20 @@ class FrontendController extends Controller
     {
         return Yii::app()->theme->baseUrl;
     }
+
+    /**
+     * URL asset của theme kèm tham số ?v=<mtime> để tự phá cache trình duyệt
+     * mỗi khi file thay đổi. Dùng cho CSS/JS hay được chỉnh sửa.
+     *
+     * @param string $relPath đường dẫn tương đối tính từ gốc theme, ví dụ
+     *                        'assets/css/tintuc.css'
+     */
+    public function assetUrl($relPath)
+    {
+        $theme   = Yii::app()->theme;
+        $relPath = ltrim($relPath, '/');
+        $url     = $theme->baseUrl . '/' . $relPath;
+        $mtime   = @filemtime($theme->basePath . '/' . $relPath);
+        return $mtime ? $url . '?v=' . $mtime : $url;
+    }
 }
