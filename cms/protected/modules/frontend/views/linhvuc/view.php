@@ -9,16 +9,23 @@
  *
  * @var LinhvucController $this
  * @var BusinessSector    $sector
- * @var string $heroBgUrl
- * @var string $legacyUrl
- * @var string $heritageUrl
- * @var string $themeBase
+ * @var string     $heroBgUrl
+ * @var string     $legacyUrl
+ * @var string     $heritageUrl
+ * @var NewsPost[] $featuredPosts   Dự án tiêu biểu (tin thuộc danh mục cấu hình)
+ * @var string     $themeBase
  */
 $root = $this->assetsBase();
 $home = Yii::app()->homeUrl;
 
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile($root . '/assets/css/linhvuc-detail.css');
+// "Dự án tiêu biểu" tái sử dụng thẻ tin của trang Tin tức (lưới 3 cột).
+$featuredPosts = isset($featuredPosts) ? $featuredPosts : array();
+if (!empty($featuredPosts)) {
+    $cs->registerCssFile($root . '/assets/fonts/montserrat.css');
+    $cs->registerCssFile($this->assetUrl('assets/css/tintuc.css'));
+}
 
 // Trả giá trị đầu tiên khác rỗng trong danh sách (fallback thiết kế gốc).
 $val = function ($value, $default = '') {
