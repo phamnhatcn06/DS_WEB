@@ -81,6 +81,11 @@
   line-height: 28px;
   color: var(--tt-ink);
   margin: 12px 0 0;
+  /* Tiêu đề chỉ hiện tối đa 2 dòng, dài hơn thì cắt bằng dấu … */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .tt-news-card p {
@@ -88,6 +93,11 @@
   line-height: 24px;
   color: var(--tt-body);
   margin: 8px 0 0;
+  /* Trích dẫn giữ gọn tối đa 3 dòng cho lưới thẳng hàng */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .tt-date {
