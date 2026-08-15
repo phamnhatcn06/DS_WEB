@@ -154,8 +154,16 @@
   .milestone-card {
     flex-direction: column;
   }
+  .milestone-stats {
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .milestone-stats-nums,
+  .milestone-emblem-wrap {
+    flex: 0 0 auto;
+    width: 100%;
+  }
   .milestone-emblem {
-    left: 50%;
     width: clamp(180px, 40vw, 280px);
   }
 }
