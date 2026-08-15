@@ -57,6 +57,24 @@ class TextHelper
     }
 
     /**
+     * Cắt chuỗi theo số TỪ (không cắt giữa từ), bỏ HTML và gộp khoảng trắng.
+     * Dùng cho trích dẫn card: "hiển thị N từ đầu tiên rồi thêm …".
+     */
+    public static function truncateWords($text, $words = 30, $suffix = '…')
+    {
+        $text = trim(preg_replace('/\s+/u', ' ', strip_tags((string) $text)));
+        if ($text === '') {
+            return '';
+        }
+        $words = max(1, (int) $words);
+        $parts = preg_split('/\s+/u', $text);
+        if (count($parts) <= $words) {
+            return $text;
+        }
+        return implode(' ', array_slice($parts, 0, $words)) . $suffix;
+    }
+
+    /**
      * Định dạng số tiền VNĐ dạng rút gọn: 4213000000000 → "4.213 tỷ đồng"
      */
     public static function formatCurrencyShort($amount)
