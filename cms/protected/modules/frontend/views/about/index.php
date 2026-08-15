@@ -56,12 +56,90 @@ $visionIconClass = array('inner' => ' vision-card-icon--inner', 'award' => ' vis
       </div>
     </section>
 
-    <!-- ===== Section 2: History Section / Lịch sử hình thành ===== -->
-    <section class="about-history section fade-section" id="lich-su">
+    <!-- ===== Section 2: Cột mốc phát triển (timeline) — nguồn từ DB ===== -->
+    <section class="about-timeline section fade-section" id="lich-su">
       <div class="container">
-        <div class="row g-4 g-lg-5 align-items-center">
+<?php if (!empty($milestones)): ?>
+<?php
+// Nhãn eyebrow chung + label badge mặc định (giữ đúng "giao diện như ảnh").
+$sectionEyebrow  = $s('about_history_eyebrow', 'Giới thiệu · Lịch sử hình thành');
+$fallbackImg     = $root . '/assets/images/about-construction.webp';
 
-          <!-- Cột trái: nội dung -->
+/**
+ * Render một khối cột mốc: cột lẻ (index chẵn) text trái · ảnh phải;
+ * cột chẵn (index lẻ) ảnh trái · text phải (đảo cột ở >= lg).
+ */
+$renderMilestone = function (TimelineMilestone $m, $index)
+    use ($sectionEyebrow, $fallbackImg) {
+
+    $reverse = ($index % 2 === 1); // vị trí chẵn → ảnh bên trái
+    $imgUrl  = ($m->image !== null) ? $m->image->getPublicUrl() : $fallbackImg;
+    $eyebrow = ($m->eyebrow !== null && $m->eyebrow !== '') ? $m->eyebrow : $sectionEyebrow;
+    // Mô tả đầy đủ (HTML) — bỏ trống thì dùng mô tả ngắn.
+    $body = ($m->content !== null && trim($m->content) !== '')
+        ? $m->content
+        : '<p>' . nl2br(CHtml::encode($m->description)) . '</p>';
+?>
+        <article class="about-tl-item<?php echo $reverse ? ' about-tl-item--reverse' : ''; ?>">
+          <div class="row g-4 g-lg-5 align-items-center<?php echo $reverse ? ' flex-lg-row-reverse' : ''; ?>">
+
+            <!-- Cột nội dung -->
+            <div class="col-12 col-lg-6 about-tl-text">
+              <span class="history-eyebrow" data-reveal="up"><?php echo CHtml::encode($eyebrow); ?></span>
+              <h2 class="history-title" data-reveal="up"><?php echo CHtml::encode($m->title); ?></h2>
+              <div class="about-tl-body rich-text" data-reveal="up"><?php echo $body; ?></div>
+            </div>
+
+            <!-- Cột ảnh + badge năm -->
+            <div class="col-12 col-lg-6">
+              <div class="history-visual" data-reveal="<?php echo $reverse ? 'left' : 'right'; ?>">
+                <img src="<?php echo CHtml::encode($imgUrl); ?>"
+                     alt="<?php echo CHtml::encode($m->title); ?>"
+                     class="history-image" loading="lazy" />
+                <div class="history-image-caption">
+                  <strong><?php echo CHtml::encode($m->title); ?></strong>
+<?php if ($m->year_label !== null && $m->year_label !== ''): ?>
+                  <small><?php echo CHtml::encode($m->year_label); ?></small>
+<?php endif; ?>
+                </div>
+                <div class="history-badge">
+                  <span class="badge-num"><?php echo CHtml::encode($m->year_label); ?></span>
+<?php if ($m->eyebrow !== null && $m->eyebrow !== ''): ?>
+                  <span class="badge-label"><?php echo CHtml::encode($m->eyebrow); ?></span>
+<?php endif; ?>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </article>
+<?php
+};
+
+// Cột mốc đầu tiên luôn hiển thị.
+$renderMilestone($milestones[0], 0);
+$rest = array_slice($milestones, 1);
+?>
+<?php if (!empty($rest)): ?>
+        <!-- Các cột mốc còn lại: ẩn cho tới khi bấm "Xem thêm" -->
+        <div class="about-tl-more" data-tl-more hidden>
+<?php foreach ($rest as $i => $m): ?>
+<?php $renderMilestone($m, $i + 1); ?>
+<?php endforeach; ?>
+        </div>
+
+        <div class="about-tl-actions text-center" data-reveal="up">
+          <button type="button" class="btn btn-dsh about-tl-toggle" data-tl-toggle
+                  aria-expanded="false">
+            <span class="tl-toggle-label">Xem thêm cột mốc</span>
+            <i class="bi bi-chevron-down ms-2" aria-hidden="true"></i>
+          </button>
+        </div>
+<?php endif; ?>
+
+<?php else: ?>
+        <!-- Fallback: chưa có cột mốc nào trong DB → khối lịch sử tĩnh gốc -->
+        <div class="row g-4 g-lg-5 align-items-center">
           <div class="col-12 col-lg-6">
             <span class="history-eyebrow" data-reveal="up"><?php echo CHtml::encode($s('about_history_eyebrow', 'Giới thiệu · Lịch sử')); ?></span>
             <h2 class="history-title" data-reveal="up"><?php echo CHtml::encode($s('about_history_title', 'Hành trình kiến tạo giá trị cốt lõi')); ?></h2>
@@ -92,8 +170,6 @@ foreach ($founders as $founder):
 <?php endforeach; ?>
             </ul>
           </div>
-
-          <!-- Cột phải: ảnh + badge năm -->
           <div class="col-12 col-lg-6">
             <div class="history-visual" data-reveal="right">
               <img src="<?php echo CHtml::encode($historyImgUrl); ?>"
@@ -109,8 +185,8 @@ foreach ($founders as $founder):
               </div>
             </div>
           </div>
-
         </div>
+<?php endif; ?>
       </div>
     </section>
 
