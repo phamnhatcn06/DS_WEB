@@ -229,8 +229,10 @@ foreach ($founders as $founder):
                 <span class="stat-label"><?php echo CHtml::encode($s('about_milestone_stat_2_label', 'Tỉnh thành hiện diện')); ?></span>
               </div>
             </div>
-            <img src="<?php echo $root; ?>/assets/images/ds-emblem.webp" alt="Biểu tượng Đông Sơn Holdings"
-                 class="milestone-emblem" loading="lazy" aria-hidden="true" />
+            <div class="milestone-emblem-wrap">
+              <img src="<?php echo $root; ?>/assets/images/ds-emblem.webp" alt="Biểu tượng Đông Sơn Holdings"
+                   class="milestone-emblem" loading="lazy" aria-hidden="true" />
+            </div>
           </div>
 
         </div>
