@@ -144,7 +144,7 @@
     flex-direction: column;
   }
   .milestone-emblem {
-    right: -30px;
+    left: 50%;
     width: clamp(180px, 40vw, 280px);
   }
 }
