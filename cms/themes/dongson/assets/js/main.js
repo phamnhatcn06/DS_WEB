@@ -576,6 +576,45 @@
     }
   }
 
+  /**
+   * Cột mốc phát triển (trang Giới thiệu): mặc định chỉ hiện cột mốc đầu tiên,
+   * bấm "Xem thêm" mở/đóng phần còn lại. Các mục ẩn có [data-reveal] nên khi
+   * hiện ra cần gắn is-visible thủ công để chạy hiệu ứng (observer bỏ qua phần
+   * tử display:none).
+   */
+  function initAboutTimeline() {
+    var toggle = document.querySelector('[data-tl-toggle]');
+    var more = document.querySelector('[data-tl-more]');
+    if (!toggle || !more) {
+      return;
+    }
+
+    var label = toggle.querySelector('.tl-toggle-label');
+
+    toggle.addEventListener('click', function () {
+      var expanded = toggle.getAttribute('aria-expanded') === 'true';
+
+      if (expanded) {
+        more.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+        if (label) {
+          label.textContent = 'Xem thêm cột mốc';
+        }
+        return;
+      }
+
+      more.hidden = false;
+      toggle.setAttribute('aria-expanded', 'true');
+      if (label) {
+        label.textContent = 'Thu gọn';
+      }
+      // Kích hoạt reveal cho các mục vừa hiện.
+      more.querySelectorAll('[data-reveal]').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     markRevealTargets();
     initScrollReveal();
@@ -588,6 +627,7 @@
     initCustomSliders();
     initScrollSliders();
     initNewsFilter();
+    initAboutTimeline();
     initContactForm();
   });
 })();
