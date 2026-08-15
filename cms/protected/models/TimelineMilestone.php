@@ -40,6 +40,8 @@ class TimelineMilestone extends BaseActiveRecord
                 'message' => 'Vị trí không hợp lệ.'),
             array('image_media_id, sort_order', 'numerical', 'integerOnly' => true),
             array('is_active', 'boolean'),
+            // content = mô tả đầy đủ dạng HTML (TinyMCE) cho trang Giới thiệu.
+            array('content', 'safe'),
         );
     }
 
