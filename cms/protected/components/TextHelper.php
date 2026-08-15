@@ -44,7 +44,9 @@ class TextHelper
      */
     public static function truncate($text, $length = 120, $suffix = '…')
     {
-        $text = trim(strip_tags((string) $text));
+        $text = strip_tags((string) $text);
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = trim(preg_replace('/[\s\x{00A0}]+/u', ' ', $text));
         if (mb_strlen($text, 'UTF-8') <= $length) {
             return $text;
         }
