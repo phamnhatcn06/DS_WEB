@@ -26,10 +26,25 @@ class SettingController extends AdminController
             $grouped[$setting->group_name][] = $setting;
         }
 
+        // Sắp nhóm theo thứ tự khai báo trong groupLabels() (Thông tin chung
+        // trước), thay vì theo alphabet group_name — để tab đầu tiên đúng ý đồ.
+        $labels  = SiteSetting::groupLabels();
+        $ordered = array();
+        foreach (array_keys($labels) as $group) {
+            if (isset($grouped[$group])) {
+                $ordered[$group] = $grouped[$group];
+            }
+        }
+        foreach ($grouped as $group => $items) {
+            if (!isset($ordered[$group])) {
+                $ordered[$group] = $items; // nhóm chưa khai báo nhãn — giữ cuối.
+            }
+        }
+
         $this->pageTitle = 'Cấu hình website';
         $this->render('index', array(
-            'grouped' => $grouped,
-            'labels'  => SiteSetting::groupLabels(),
+            'grouped' => $ordered,
+            'labels'  => $labels,
         ));
     }
 
