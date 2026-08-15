@@ -117,7 +117,7 @@
   display: flex;
   flex-wrap: wrap;
   background: var(--tt-card-soft);
-  border-radius: 2px;
+  border-radius: 8px; /* Bo góc — bám theo Figma (rounded 8px) */
   overflow: hidden;
 }
 
