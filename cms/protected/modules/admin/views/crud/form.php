@@ -211,7 +211,7 @@ foreach ($fields as $field) {
     if ($ftype === 'richtext') { $hasRichtext = true; }
 }
 ?>
-<?php if ($hasMediaField): ?>
+<?php if ($hasMediaField || $hasRichtext): ?>
   <div class="modal fade" id="mediaPickerModal" tabindex="-1" aria-hidden="true"
        data-list-url="<?php echo $this->createUrl('/admin/media/listJson'); ?>"
        data-upload-url="<?php echo $this->createUrl('/admin/media/ajaxUpload'); ?>"
