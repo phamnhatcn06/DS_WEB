@@ -13,6 +13,7 @@
  * @var string      $historyImgUrl
  * @var string      $visionBgUrl
  * @var CoreValue[] $coreValues
+ * @var TimelineMilestone[] $milestones
  */
 $root = $this->assetsBase();
 $home = Yii::app()->homeUrl;
@@ -20,6 +21,7 @@ $home = Yii::app()->homeUrl;
 $cs = Yii::app()->clientScript;
 $cs->registerCssFile($root . '/assets/css/about-hero.css');
 $cs->registerCssFile($root . '/assets/css/about-history.css');
+$cs->registerCssFile($root . '/assets/css/about-timeline.css');
 $cs->registerCssFile($root . '/assets/css/about-milestone.css');
 $cs->registerCssFile($root . '/assets/css/about-vision.css');
 
