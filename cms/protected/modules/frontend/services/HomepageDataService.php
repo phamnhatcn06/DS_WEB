@@ -105,7 +105,11 @@ class HomepageDataService
      */
     private static function loadFeaturedProjects($newsWith, $hasCats)
     {
-        $limit = 10;
+        // Số bài tối đa lấy từ Cấu hình website; <= 0 hoặc rỗng → mặc định 10.
+        $limit = (int) SiteSetting::get('featured_projects_limit', 10);
+        if ($limit <= 0) {
+            $limit = 10;
+        }
 
         $categoryIds = SiteSetting::get('featured_projects_category_ids', array());
         if (!is_array($categoryIds)) {
