@@ -600,6 +600,19 @@
       if (label) {
         label.textContent = expanded ? 'Xem thêm cột mốc' : 'Thu gọn';
       }
+
+      // Vừa mở: mốc nào đã nằm trong viewport thì hiện ngay; mốc dưới màn hình
+      // để observer lộ dần khi cuộn xuống (an toàn cả khi observer không tự
+      // kích hoạt lại sau khi bỏ display:none).
+      if (!expanded) {
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        more.querySelectorAll('[data-reveal]').forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < vh * 0.92 && rect.bottom > 0) {
+            el.classList.add('is-visible');
+          }
+        });
+      }
     });
   }
 
