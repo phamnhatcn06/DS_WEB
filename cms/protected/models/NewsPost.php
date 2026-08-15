@@ -367,6 +367,23 @@ class NewsPost extends BaseActiveRecord
     }
 
     /**
+     * Trích dẫn hiển thị trên thẻ tin: ưu tiên trường trích dẫn; nếu bài không
+     * nhập trích dẫn thì cắt một đoạn đầu từ nội dung. Giới hạn theo số TỪ để
+     * biên tập viên chỉnh được qua cấu hình website (news_excerpt_words).
+     *
+     * @param int $words số từ tối đa hiển thị
+     * @return string đã bỏ HTML, an toàn để encode và in ra
+     */
+    public function getDisplayExcerpt($words = 30)
+    {
+        $text = trim(strip_tags((string) $this->excerpt));
+        if ($text === '') {
+            $text = (string) $this->content;
+        }
+        return TextHelper::truncateWords($text, $words);
+    }
+
+    /**
      * Ngày hiển thị theo đúng định dạng đã chọn cho bài này.
      */
     public function getFormattedDate()
