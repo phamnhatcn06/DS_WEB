@@ -65,7 +65,7 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
 </section>
 
 <!-- ===== Main → Article (2 cột: nội dung + sidebar) ===== -->
-<section class="nd-article fade-section">
+<section class="nd-article">
   <div class="container">
     <div class="row g-4 g-xl-5">
 
