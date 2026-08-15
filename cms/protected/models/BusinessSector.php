@@ -51,7 +51,7 @@ class BusinessSector extends BaseActiveRecord
             array('lead_text, description, card_description, tagIds', 'safe'),
             array('hero_subtitle, legacy_text, quote_text, heritage_body, capability_title, capability_lead', 'safe'),
             array('image_media_id, icon_media_id, sort_order, hero_bg_media_id, '
-                . 'legacy_media_id, heritage_media_id', 'numerical',
+                . 'legacy_media_id, heritage_media_id, news_category_id', 'numerical',
                 'integerOnly' => true),
             array('show_in_slider, show_in_grid, is_active', 'boolean'),
         );
