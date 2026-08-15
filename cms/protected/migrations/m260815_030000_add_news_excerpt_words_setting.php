@@ -7,7 +7,7 @@
  * thì cắt một đoạn đầu từ nội dung. Số từ tối đa lấy theo khoá này (kiểu
  * number). Bỏ trống / <= 0 → dùng mặc định 30.
  */
-class m260815_020000_add_news_excerpt_words_setting extends CDbMigration
+class m260815_030000_add_news_excerpt_words_setting extends CDbMigration
 {
     const SETTING_KEY = 'news_excerpt_words';
 
