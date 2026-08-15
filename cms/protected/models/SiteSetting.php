@@ -145,6 +145,7 @@ class SiteSetting extends CActiveRecord
             'about'    => 'Trang giới thiệu',
             'sodo'     => 'Trang sơ đồ tổ chức',
             'sumenh'   => 'Trang sứ mệnh - tầm nhìn',
+            'news'     => 'Trang tin tức',
         );
     }
 }
