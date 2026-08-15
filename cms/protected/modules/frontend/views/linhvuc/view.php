@@ -225,3 +225,50 @@ $ctaSecondary    = $val($sector->detail_cta_secondary_label, 'Xem năng lực c�
     </div>
   </section>
 <?php endif; ?>
+
+  <!-- ===== Section 5: Dự án tiêu biểu (lưới 3 cột — tái sử dụng thẻ tin) ===== -->
+<?php if (!empty($featuredPosts)): ?>
+<?php
+  $excerptWords = max(1, (int) SiteSetting::get('news_excerpt_words', 30));
+  $fallbackImg  = $root . '/assets/images/news-01.webp';
+
+  // Link "Xem tất cả" trỏ về trang Tin tức lọc theo danh mục của lĩnh vực.
+  $seeAllUrl = ($sector->newsCategory instanceof NewsCategory)
+      ? Yii::app()->createUrl('frontend/news/index', array('category' => $sector->newsCategory->slug))
+      : Yii::app()->createUrl('frontend/news/index');
+?>
+  <section class="lv-projects tt-featured fade-section" id="du-an-tieu-bieu">
+    <div class="container tt-page">
+
+      <div class="tt-section-head">
+        <h2 class="tt-section-title">Dự án tiêu biểu</h2>
+        <a class="tt-more" href="<?php echo CHtml::encode($seeAllUrl); ?>">Xem tất cả
+          <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" /></a>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+<?php foreach ($featuredPosts as $post): ?>
+<?php
+        $postUrl = Yii::app()->createUrl('frontend/news/view', array('slug' => $post->slug));
+        $excerpt = $post->getDisplayExcerpt($excerptWords);
+?>
+        <div class="col">
+          <a href="<?php echo CHtml::encode($postUrl); ?>" class="text-decoration-none">
+            <article class="tt-news-card" data-reveal="up">
+              <div class="tt-thumb">
+                <?php echo MediaHelper::imgOr($post->thumbnail, $fallbackImg, $post->title); ?>
+              </div>
+              <h3><?php echo CHtml::encode($post->title); ?></h3>
+<?php if ($excerpt !== ''): ?>
+              <p><?php echo CHtml::encode($excerpt); ?></p>
+<?php endif; ?>
+              <time class="tt-date"><?php echo CHtml::encode($post->getFormattedDate()); ?></time>
+            </article>
+          </a>
+        </div>
+<?php endforeach; ?>
+      </div>
+
+    </div>
+  </section>
+<?php endif; ?>
