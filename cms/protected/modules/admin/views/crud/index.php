@@ -127,7 +127,7 @@ $returnUrl = Yii::app()->request->getRequestUri();
 
                 <?php if ($canUpdate): ?>
                   <a class="btn btn-sm btn-action btn-action--edit" title="Sửa"
-                     href="<?php echo $this->createUrl('update', array('id' => $item->id)); ?>">
+                     href="<?php echo $this->createUrl('update', array('id' => $item->id, 'return' => $returnUrl)); ?>">
                     <i class="fa fa-pencil"></i>
                   </a>
                 <?php endif; ?>
