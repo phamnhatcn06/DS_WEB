@@ -226,11 +226,33 @@ abstract class AdminCrudController extends AdminController
 
         if ($model->save()) {
             $this->afterSaveModel($model);
-            $target = Yii::app()->request->getPost('save_and_continue')
-                ? array('update', 'id' => $model->id)
-                : array('index');
+            if (Yii::app()->request->getPost('save_and_continue')) {
+                $target = array('update', 'id' => $model->id);
+            } else {
+                // Quay về đúng danh sách đã lọc (giữ q, bộ lọc, trang, sắp xếp)
+                // nếu form gửi kèm URL trở về hợp lệ; nếu không thì về index gốc.
+                $return = $this->safeReturnUrl(Yii::app()->request->getPost('return'));
+                $target = $return !== null ? $return : array('index');
+            }
             $this->redirectWith($target, 'success', $successMessage);
         }
+    }
+
+    /**
+     * Chỉ chấp nhận URL nội bộ (đường dẫn tương đối bắt đầu bằng một dấu '/')
+     * để tránh lỗ hổng open redirect. Trả về null nếu không hợp lệ.
+     */
+    protected function safeReturnUrl($url)
+    {
+        $url = trim((string) $url);
+        if ($url === '' || $url[0] !== '/') {
+            return null;
+        }
+        // Chặn '//host' và '/\host' (chuyển hướng ra miền ngoài).
+        if (isset($url[1]) && ($url[1] === '/' || $url[1] === '\\')) {
+            return null;
+        }
+        return $url;
     }
 
     /**
