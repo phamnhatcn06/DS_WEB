@@ -28,6 +28,8 @@ $s = function ($key, $default = '') {
     return SiteSetting::get($key, $default);
 };
 $publisher = $s('news_publisher', 'HTDS Media');
+// Số từ trích dẫn hiển thị trên thẻ tin nhỏ (biên tập viên chỉnh trong Cấu hình website).
+$excerptWords = max(1, (int) $s('news_excerpt_words', 30));
 
 // --- Phân bổ bài vào các ô hiển thị (giữ layout gốc) ---
 $topPosts    = array_slice($posts, 0, 2);              // 2 thẻ tin cột trên
