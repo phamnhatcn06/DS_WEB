@@ -600,14 +600,6 @@
       if (label) {
         label.textContent = expanded ? 'Xem thêm cột mốc' : 'Thu gọn';
       }
-
-      // Vừa mở: cuộn mềm tới mốc đầu tiên vừa hiện để người dùng thấy hiệu ứng.
-      if (!expanded && !PREFERS_REDUCED_MOTION) {
-        var firstNew = more.querySelector('.about-tl-item');
-        if (firstNew) {
-          firstNew.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }
     });
   }
 
