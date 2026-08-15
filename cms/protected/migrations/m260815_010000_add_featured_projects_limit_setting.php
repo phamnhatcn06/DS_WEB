@@ -1,11 +1,10 @@
 <?php
 /**
- * Thêm khoá cấu hình "Số bài tối đa hiển thị ở mục Dự án tiêu biểu" (Section 5)
+ * Thêm khoá cấu hình số bài hiển thị cho mục "Dự án tiêu biểu" (Section 5)
  * ở trang chủ.
  *
- * Section này hiển thị tối đa N bài is_featured_project = 1. Trước đây N cố định
- * bằng 10 trong code; nay đưa ra Cấu hình website để chỉnh không cần sửa code.
- * Bỏ trống / <= 0 → dùng mặc định 10.
+ * Trước đây giới hạn cứng 10 bài trong HomepageDataService::loadFeaturedProjects.
+ * Giờ lấy theo khoá này (kiểu number). Bỏ trống / <= 0 → dùng mặc định 10.
  */
 class m260815_010000_add_featured_projects_limit_setting extends CDbMigration
 {
@@ -27,9 +26,9 @@ class m260815_010000_add_featured_projects_limit_setting extends CDbMigration
             'setting_value' => '10',
             'value_type'    => 'number',
             'group_name'    => 'general',
-            'label'         => 'Số bài tối đa ở mục Dự án tiêu biểu',
-            'hint'          => 'Số lượng bài "Dự án trọng điểm" hiển thị tối đa ở mục '
-                . 'Dự án tiêu biểu trang chủ. Bỏ trống hoặc <= 0 sẽ dùng mặc định 10.',
+            'label'         => 'Số bài hiển thị ở mục Dự án tiêu biểu',
+            'hint'          => 'Số lượng bài tối đa hiển thị ở mục "Dự án tiêu biểu" '
+                . 'trang chủ. Bỏ trống hoặc <= 0 = dùng mặc định 10.',
             'sort_order'    => 51,
             'is_public'     => 1,
             'created_at'    => $now,
