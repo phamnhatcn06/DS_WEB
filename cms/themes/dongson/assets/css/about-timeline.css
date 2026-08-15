@@ -1,0 +1,87 @@
+/* ==========================================================================
+   about-timeline.css — Trang Giới thiệu · Section 2: Cột mốc phát triển
+   Mỗi cột mốc là một khối 2 cột (tái dùng .history-* của about-history.css):
+   vị trí lẻ → text trái · ảnh phải; vị trí chẵn → ảnh trái · text phải.
+   Mặc định chỉ hiện cột mốc đầu; nút "Xem thêm" mở phần còn lại.
+   ========================================================================== */
+
+.about-timeline {
+  background-color: #ffffff;
+  color: var(--dsh-ink);
+  overflow: hidden;
+}
+
+/* -------- Khoảng cách giữa các cột mốc -------- */
+.about-tl-more {
+  margin-top: clamp(3rem, 6vw, 6rem);
+}
+
+.about-tl-more > .about-tl-item + .about-tl-item {
+  margin-top: clamp(3rem, 6vw, 6rem);
+}
+
+/* -------- Nội dung (mô tả đầy đủ dạng HTML) -------- */
+.about-tl-body {
+  color: var(--dsh-slate);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.about-tl-body > :last-child {
+  margin-bottom: 0;
+}
+
+.about-tl-body p {
+  margin-bottom: var(--space-4);
+}
+
+.about-tl-body ul,
+.about-tl-body ol {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.25rem;
+}
+
+.about-tl-body li {
+  margin-bottom: var(--space-2);
+}
+
+.about-tl-body a {
+  color: var(--dsh-red);
+  font-weight: 600;
+}
+
+.about-tl-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+.about-tl-body strong {
+  color: var(--dsh-ink);
+}
+
+/* -------- Cột mốc chẵn: badge đổi sang mép phải của ảnh -------- */
+.about-tl-item--reverse .history-badge {
+  left: auto;
+  right: calc(-1 * var(--space-4));
+}
+
+/* -------- Nút "Xem thêm" -------- */
+.about-tl-actions {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about-tl-toggle .bi-chevron-down {
+  transition: transform var(--transition-base);
+}
+
+.about-tl-toggle[aria-expanded="true"] .bi-chevron-down {
+  transform: rotate(180deg);
+}
+
+/* -------- Responsive: badge chẵn theo mép phải khi xếp dọc -------- */
+@media (max-width: 991.98px) {
+  .about-tl-item--reverse .history-badge {
+    right: var(--space-4);
+  }
+}
