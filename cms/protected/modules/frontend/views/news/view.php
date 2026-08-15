@@ -157,24 +157,6 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
           $renderAttachments($post->getAttachmentFiles('en'), 'Tài liệu đính kèm (English)');
           ?>
 
-          <?php if ($post->source_url !== null && $post->source_url !== ''): ?>
-            <!-- Nguồn / tài liệu gốc -->
-            <div class="nd-disclosure">
-              <span class="nd-disclosure-ic">
-                <img src="<?php echo $root; ?>/assets/images/icon-info-red.svg" alt="" aria-hidden="true" />
-              </span>
-              <div class="nd-disclosure-text">
-                <h4>Toàn văn công bố thông tin</h4>
-                <p>Xem chi tiết tại nguồn công bố chính thức.</p>
-              </div>
-              <a href="<?php echo CHtml::encode($post->source_url); ?>" class="btn nd-download-btn"
-                target="_blank" rel="noopener">
-                <img src="<?php echo $root; ?>/assets/images/icon-download.svg" alt="" aria-hidden="true" />
-                Xem tài liệu
-              </a>
-            </div>
-          <?php endif; ?>
-
         </article>
       </div>
 
