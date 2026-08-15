@@ -11,7 +11,7 @@ class LinhvucDataService
     public static function load($slug)
     {
         $sector = BusinessSector::model()
-            ->with('heroBg', 'legacyImage', 'heritageImage',
+            ->with('heroBg', 'legacyImage', 'heritageImage', 'newsCategory',
                 'capabilities', 'capabilities.image', 'capabilities.icon')
             ->find(array(
                 'condition' => 't.slug = :slug AND t.deleted_at IS NULL AND t.is_active = 1',
