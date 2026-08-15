@@ -62,7 +62,12 @@ class TextHelper
      */
     public static function truncateWords($text, $words = 30, $suffix = '…')
     {
-        $text = trim(preg_replace('/\s+/u', ' ', strip_tags((string) $text)));
+        $text = strip_tags((string) $text);
+        // Giải mã thực thể HTML (&ecirc; &aacute; &nbsp; &ndash; …) về ký tự thật,
+        // nếu không sẽ hiện nguyên "T&ecirc;n d&aacute;n" trên thẻ tin.
+        $text = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // Gộp mọi khoảng trắng — kể cả non-breaking space (&nbsp; = U+00A0).
+        $text = trim(preg_replace('/[\s\x{00A0}]+/u', ' ', $text));
         if ($text === '') {
             return '';
         }
