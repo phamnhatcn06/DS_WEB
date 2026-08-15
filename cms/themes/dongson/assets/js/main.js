@@ -578,9 +578,10 @@
 
   /**
    * Cột mốc phát triển (trang Giới thiệu): mặc định chỉ hiện cột mốc đầu tiên,
-   * bấm "Xem thêm" mở/đóng phần còn lại. Các mục ẩn có [data-reveal] nên khi
-   * hiện ra cần gắn is-visible thủ công để chạy hiệu ứng (observer bỏ qua phần
-   * tử display:none).
+   * bấm "Xem thêm" mở/đóng phần còn lại. Khi mở, KHÔNG gắn is-visible ngay —
+   * để observer scroll-reveal lộ dần từng mốc lúc cuộn xuống. Các mục ẩn đã
+   * được observer theo dõi từ đầu (display:none → không intersect), nên khi
+   * bỏ hidden, mốc nào vào viewport sẽ tự chạy hiệu ứng.
    */
   function initAboutTimeline() {
     var toggle = document.querySelector('[data-tl-toggle]');
@@ -594,24 +595,19 @@
     toggle.addEventListener('click', function () {
       var expanded = toggle.getAttribute('aria-expanded') === 'true';
 
-      if (expanded) {
-        more.hidden = true;
-        toggle.setAttribute('aria-expanded', 'false');
-        if (label) {
-          label.textContent = 'Xem thêm cột mốc';
-        }
-        return;
+      more.hidden = expanded;
+      toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      if (label) {
+        label.textContent = expanded ? 'Xem thêm cột mốc' : 'Thu gọn';
       }
 
-      more.hidden = false;
-      toggle.setAttribute('aria-expanded', 'true');
-      if (label) {
-        label.textContent = 'Thu gọn';
+      // Vừa mở: cuộn mềm tới mốc đầu tiên vừa hiện để người dùng thấy hiệu ứng.
+      if (!expanded && !PREFERS_REDUCED_MOTION) {
+        var firstNew = more.querySelector('.about-tl-item');
+        if (firstNew) {
+          firstNew.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
-      // Kích hoạt reveal cho các mục vừa hiện.
-      more.querySelectorAll('[data-reveal]').forEach(function (el) {
-        el.classList.add('is-visible');
-      });
     });
   }
 
