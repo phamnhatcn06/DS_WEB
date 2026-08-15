@@ -4,6 +4,10 @@
 /* @var $fields array */
 
 $isNew = $model->getIsNewRecord();
+
+// URL trở về danh sách đã lọc — nhận từ query (lúc mở form) hoặc POST (khi
+// submit lỗi validate và render lại). Rỗng nếu vào form không qua danh sách.
+$returnUrl = trim((string) Yii::app()->request->getParam('return', ''));
 ?>
 
 <?php $form = $this->beginWidget('CActiveForm', array(
@@ -11,6 +15,10 @@ $isNew = $model->getIsNewRecord();
     'enableClientValidation' => false,
     'htmlOptions' => array('data-lock-submit' => '1'),
 )); ?>
+
+<?php if ($returnUrl !== ''): ?>
+  <input type="hidden" name="return" value="<?php echo CHtml::encode($returnUrl); ?>" />
+<?php endif; ?>
 
 <div class="card">
   <div class="card-header">
