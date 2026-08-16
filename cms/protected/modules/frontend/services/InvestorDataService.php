@@ -81,10 +81,20 @@ class InvestorDataService
     }
 
     /**
+     * Chênh lệch giữa năm hiển thị (năm báo cáo) và năm xuất bản.
+     * Báo cáo thường niên: −1 (báo cáo năm N đăng năm N+1). Khác: 0.
+     */
+    private static function reportYearOffset($category)
+    {
+        return $category->slug === 'bao-cao-thuong-nien' ? -1 : 0;
+    }
+
+    /**
      * Danh sách năm (DESC) có tài liệu đã xuất bản trong danh mục — cho bộ lọc năm.
+     * $yearOffset cộng vào năm đăng để ra năm hiển thị (vd −1 cho báo cáo thường niên).
      * @return int[]
      */
-    private static function publishedYears($categoryId)
+    private static function publishedYears($categoryId, $yearOffset = 0)
     {
         $hasCatsTable = Yii::app()->db->getSchema()->getTable('pvn_news_post_categories') !== null;
         $catCond = $hasCatsTable
