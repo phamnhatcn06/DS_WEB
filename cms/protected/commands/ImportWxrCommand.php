@@ -36,13 +36,13 @@ class ImportWxrCommand extends CConsoleCommand
      * Các host WordPress nguồn xuất hiện trong nội dung (link ảnh/tệp).
      * Nội dung bài cũ còn trỏ htds.vn (đã 404), thư viện ảnh nay ở pvnsoft.cloud.
      */
-    private $sourceHosts = array('pvnsoft.cloud', 'htds.vn');
+    private $sourceHosts = array('118.70.120.203:8881', 'htds.vn');
 
     /** Host thực sự đang phục vụ tệp — mọi ảnh/tệp đều tải từ đây. */
-    private $downloadHost = 'pvnsoft.cloud';
+    private $downloadHost = '118.70.120.203:8881';
 
     /** Scheme để tải tệp (http|https) — đổi được qua --downloadHost=http://... */
-    private $downloadScheme = 'https';
+    private $downloadScheme = 'http';
 
     /** slug danh mục CMS -> id (nạp 1 lần). */
     private $categoryIdBySlug = array();
@@ -699,17 +699,38 @@ class ImportWxrCommand extends CConsoleCommand
         );
     }
 
-    private function postExists($sourceUrl)
+    /**
+     * Slug ổn định của bài: post_name (hoặc slugify tiêu đề) + hậu tố -{post_id}.
+     * Không phụ thuộc host nên đổi domain web cũ vẫn khớp đúng bài đã nhập.
+     */
+    private function computeSlug($wp, $item)
     {
-        return $this->findExistingPost($sourceUrl) !== null;
+        $baseSlug = trim((string) $wp->post_name);
+        if ($baseSlug === '') {
+            $baseSlug = TextHelper::slugify(trim((string) $item->title));
+        }
+        return TextHelper::truncate($baseSlug, 210, '') . '-' . (string) $wp->post_id;
     }
 
-    /** Bài đã nhập trước đó (khớp source_url, chưa xoá mềm) hoặc null. */
-    private function findExistingPost($sourceUrl)
+    /**
+     * Bài đã nhập trước đó (chưa xoá mềm) hoặc null.
+     *
+     * Khớp theo slug ổn định (post_name-{post_id}) TRƯỚC — bền vững khi domain web
+     * cũ đổi (source_url trong DB có thể còn trỏ host cũ). source_url chỉ là phương
+     * án phụ cho dữ liệu nhập từ bản không có hậu tố post_id.
+     */
+    private function findExistingPost($slug, $sourceUrl = null)
     {
-        return NewsPost::model()->notDeleted()->find(
-            'source_url = :u', array(':u' => $sourceUrl)
-        );
+        $post = NewsPost::model()->notDeleted()->find('slug = :s', array(':s' => $slug));
+        if ($post !== null) {
+            return $post;
+        }
+        if ($sourceUrl !== null && $sourceUrl !== '') {
+            return NewsPost::model()->notDeleted()->find(
+                'source_url = :u', array(':u' => $sourceUrl)
+            );
+        }
+        return null;
     }
 
     private function resolvePath($file)
