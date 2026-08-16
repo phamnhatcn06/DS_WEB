@@ -18,6 +18,11 @@ $thumb    = $model->thumbnail_media_id ? MediaFile::model()->findByPk($model->th
 $thumbUrl = $thumb ? $thumb->getPublicUrl() : '';
 $thumbName = $thumb ? $thumb->file_name : '';
 
+// File PDF báo cáo hiện tại (Quan hệ cổ đông — Báo cáo thường niên).
+$reportPdf     = $model->report_pdf_media_id ? MediaFile::model()->findByPk($model->report_pdf_media_id) : null;
+$reportPdfUrl  = $reportPdf ? $reportPdf->getPublicUrl() : '';
+$reportPdfName = $reportPdf ? $reportPdf->getDisplayName() : '';
+
 /** Render một danh sách checkbox (danh mục / thẻ) trong hộp cuộn kiểu WordPress. */
 $renderCheckList = function ($attribute, $options, $selected) use ($modelName) {
     if ($options === array()) {
