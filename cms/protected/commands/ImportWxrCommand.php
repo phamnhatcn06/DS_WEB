@@ -72,16 +72,20 @@ class ImportWxrCommand extends CConsoleCommand
         $dryRun = (int) $dryRun;
         $limit = (int) $limit;
 
-        // Domain web cũ có thể đã đổi — cho phép ghi đè host tải tệp qua tham số.
+        // Domain web cũ có thể đã đổi (kể cả sang IP:cổng, http) — cho phép ghi đè
+        // host + scheme tải tệp qua tham số. Chấp nhận cả dạng có http(s):// và cổng.
         $downloadHost = trim((string) $downloadHost);
         if ($downloadHost !== '') {
+            if (preg_match('~^(https?)://~i', $downloadHost, $mScheme)) {
+                $this->downloadScheme = strtolower($mScheme[1]);
+            }
             $downloadHost = preg_replace('~^https?://~i', '', $downloadHost);
             $downloadHost = rtrim($downloadHost, '/');
             $this->downloadHost = $downloadHost;
             if (!in_array($downloadHost, $this->sourceHosts, true)) {
                 $this->sourceHosts[] = $downloadHost;
             }
-            echo "Host tải tệp: {$this->downloadHost}\n";
+            echo "Host tải tệp: {$this->downloadScheme}://{$this->downloadHost}\n";
         }
         $skipForeign = (int) $skipForeign;
         $update = (int) $update;
