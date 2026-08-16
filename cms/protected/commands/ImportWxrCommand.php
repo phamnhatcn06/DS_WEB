@@ -459,6 +459,85 @@ class ImportWxrCommand extends CConsoleCommand
         return $media;
     }
 
+    /**
+     * URL file PDF báo cáo cho một bài (nếu có), ưu tiên ACF file_dinh_kem.
+     * @return string|null
+     */
+    private function findReportAttachmentUrl($wp, $attachmentUrl, $pdfByParent)
+    {
+        // 1) ACF field file_dinh_kem = post_id của attachment PDF.
+        foreach ($wp->postmeta as $meta) {
+            if ((string) $meta->meta_key === 'file_dinh_kem') {
+                $attId = trim((string) $meta->meta_value);
+                if ($attId !== '' && isset($attachmentUrl[$attId])) {
+                    return $attachmentUrl[$attId];
+                }
+            }
+        }
+        // 2) Dự phòng: attachment PDF có post_parent trỏ về bài này.
+        $postId = (string) $wp->post_id;
+        return isset($pdfByParent[$postId]) ? $pdfByParent[$postId] : null;
+    }
+
+    /**
+     * Tìm + tải file PDF báo cáo của bài về local, trả id MediaFile hoặc null.
+     */
+    private function resolveReportPdfMediaId($item, $wp, $attachmentUrl, $pdfByParent)
+    {
+        $url = $this->findReportAttachmentUrl($wp, $attachmentUrl, $pdfByParent);
+        if ($url === null) {
+            return null;
+        }
+        $media = $this->downloadFileToMedia($url, trim((string) $item->title));
+        return $media !== null ? (int) $media->id : null;
+    }
+
+    /**
+     * Tải một file tài liệu (PDF…) về uploads/news và tạo MediaFile.
+     * Khác downloadToMedia (ảnh): dò lại mime bằng finfo/phần mở rộng, không đọc
+     * kích thước ảnh. Trùng checksum thì tái sử dụng bản ghi cũ.
+     * @return MediaFile|null
+     */
+    private function downloadFileToMedia($url, $title)
+    {
+        $file = $this->downloadImageFile($url); // dùng chung logic tải-về-đĩa
+        if ($file === null) {
+            return null;
+        }
+
+        // downloadImageFile suy mime bằng getimagesize (sai với PDF) → dò lại.
+        $mime = MediaHelper::detectMimeType($file['absPath']);
+        if ($mime === null || $mime === '') {
+            $mime = strtolower(pathinfo($file['absPath'], PATHINFO_EXTENSION)) === 'pdf'
+                ? 'application/pdf' : $file['mime'];
+        }
+
+        $checksum = @hash_file('sha256', $file['absPath']);
+        if ($checksum) {
+            $existing = MediaFile::model()->find('checksum = :c', array(':c' => $checksum));
+            if ($existing !== null) {
+                return $existing;
+            }
+        }
+
+        $media = new MediaFile();
+        $media->folder_id = $this->newsFolderId;
+        $media->file_name = basename($file['relPath']);
+        $media->file_path = $file['relPath'];
+        $media->mime_type = $mime;
+        $media->file_size = $file['size'];
+        $media->width  = null;
+        $media->height = null;
+        $media->alt_text = TextHelper::truncate($title, 300, '');
+        $media->checksum = $checksum ?: null;
+
+        if (!$media->save()) {
+            throw new Exception('Lưu media (PDF) thất bại: '
+                . implode('; ', $this->flattenErrors($media->getErrors())));
+        }
+        return $media;
+    }
+
     /** Lấy phần đường dẫn sau /wp-content/uploads/ của URL. */
     private function uploadsRelative($url)
     {
