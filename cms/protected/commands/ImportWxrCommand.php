@@ -344,7 +344,7 @@ class ImportWxrCommand extends CConsoleCommand
         $post->excerpt = $excerptText !== '' ? $excerptText : null;
         $post->content = $contentHtml;
         $post->thumbnail_media_id = $thumbMediaId;
-        $post->report_pdf_media_id = $reportPdfMediaId;
+        $post->report_pdf_media_id = $pdf['id'];
         $post->published_at = date('Y-m-d H:i:s', strtotime((string) $wp->post_date));
         $post->date_display_format = 'd/m/Y';
         $post->card_size = 'sm';
