@@ -4,13 +4,9 @@
    Header / Hero / Footer tái dùng CSS chung; file này chỉ style phần thân.
    ========================================================================== */
 
-/* Token cục bộ cho trang (màu khối sơ đồ — xác nhận Figma node 1263:17878) */
-.sodo-page {
-  --org-red-dark:   #730011;   /* nền box cấp 1, viền/chữ box cấp 2, đường nối */
-  --org-surface:    #f8f9fa;   /* nền section sơ đồ + box phòng ban */
-  --org-line-pink:  #e1bebc;   /* viền box phòng ban cấp 3 */
-  --org-branch:     #8d706e;   /* nhánh cây phân cấp */
-  --org-ink:        #191c1d;   /* tiêu đề + chữ box phòng ban */
+/* Nền xám nhạt cho khung ảnh chân dung khi chưa có ảnh thật */
+:root {
+  --sodo-photo-bg: #f8f9fa;
 }
 
 /* ==========================================================================
