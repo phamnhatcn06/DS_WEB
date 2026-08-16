@@ -91,10 +91,15 @@ class ImportWxrCommand extends CConsoleCommand
         $attachmentUrl = $this->buildAttachmentMap($xml, $ns);
         echo 'Số attachment: ' . count($attachmentUrl) . "\n";
 
+        // Map bài viết -> URL file PDF đính kèm (attachment PDF có post_parent là
+        // bài đó) — dùng làm phương án dự phòng khi bài không có ACF file_dinh_kem.
+        $pdfByParent = $this->buildPdfParentMap($xml, $ns);
+        echo 'Số PDF gắn theo bài: ' . count($pdfByParent) . "\n";
+
         // Bước 2: duyệt bài viết.
         $stat = array('imported' => 0, 'updatedCats' => 0, 'skippedExisting' => 0,
             'fallbackCat' => 0, 'skippedNotPublish' => 0, 'skippedForeign' => 0,
-            'images' => 0, 'errors' => 0);
+            'images' => 0, 'reportPdfs' => 0, 'errors' => 0);
         $processed = 0;
 
         foreach ($xml->channel->item as $item) {
