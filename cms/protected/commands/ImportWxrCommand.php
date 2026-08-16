@@ -187,6 +187,7 @@ class ImportWxrCommand extends CConsoleCommand
         echo "Bỏ (spam nước ngoài):{$stat['skippedForeign']}\n";
         echo "Bỏ (không publish): {$stat['skippedNotPublish']}\n";
         echo "Ảnh đã tải:         {$stat['images']}\n";
+        echo "File PDF báo cáo:    {$stat['reportPdfs']}\n";
         echo "Lỗi:                {$stat['errors']}\n";
 
         if ($this->dryRun && $this->categoryNameBySlug !== array()) {
