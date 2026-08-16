@@ -177,12 +177,16 @@
    (pseudo-elements) nên hoạt động với mọi số nhánh / độ sâu.
    ========================================================================== */
 .orgchart {
-  --org-gap:    28px;          /* chiều cao đường nối dọc giữa hai cấp */
-  --org-hpad:   14px;          /* nửa khoảng cách ngang giữa các anh em */
-  --org-line-w: 2px;           /* độ dày đường nối */
-  --org-line:   var(--dsh-red);/* màu đường nối — đỏ thương hiệu */
+  /* Ô rộng cố định & co theo viewport → cả cây gói gọn trong màn, không tràn ngang.
+     Mọi ô cùng bề rộng nên trục giữa (gốc → HĐQT → Ban TGĐ) luôn thẳng hàng. */
+  --org-box-w:  min(160px, 10.8vw);
+  --org-gap:    clamp(16px, 2vw, 28px);  /* chiều cao đường nối dọc giữa hai cấp */
+  --org-hpad:   clamp(3px, .5vw, 12px);  /* nửa khoảng cách ngang giữa các anh em */
+  --org-line-w: 2px;                     /* độ dày đường nối */
+  --org-line:   var(--dsh-red);          /* màu đường nối — đỏ thương hiệu */
   padding-block: var(--section-py);
   background: var(--dsh-white);
+  overflow-x: hidden;                    /* chốt: không cho tràn / scroll ngang */
 }
 
 .orgchart-title {
