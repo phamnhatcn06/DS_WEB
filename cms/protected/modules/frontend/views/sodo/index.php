@@ -24,20 +24,21 @@ $s = function ($key, $default = '') {
     return SiteSetting::get($key, $default);
 };
 
-// Gom các đơn vị sơ đồ theo cấp để dựng bố cục xương sống dọc (board → exec → depts).
-$boards = array();
-$execs  = array();
-$depts  = array();
-foreach ($orgTree as $boardNode) {
-    $boards[] = $boardNode['unit'];
-    foreach ($boardNode['children'] as $execNode) {
-        $execs[] = $execNode['unit'];
-        foreach ($execNode['children'] as $deptNode) {
-            $depts[] = $deptNode['unit'];
-        }
-    }
-}
 $portraitFallback = $root . '/assets/images/placeholder.svg';
+
+// Bộ dựng cây đệ quy: xuất ul/li lồng nhau, đường nối do CSS thuần vẽ.
+$renderOrgTree = function (array $nodes) use (&$renderOrgTree) {
+    echo '<ul>';
+    foreach ($nodes as $node) {
+        echo '<li>';
+        echo '<div class="org-box">' . CHtml::encode($node['unit']->name) . '</div>';
+        if (!empty($node['children'])) {
+            $renderOrgTree($node['children']);
+        }
+        echo '</li>';
+    }
+    echo '</ul>';
+};
 ?>
 
     <!-- ===== HeroBanner ===== -->
