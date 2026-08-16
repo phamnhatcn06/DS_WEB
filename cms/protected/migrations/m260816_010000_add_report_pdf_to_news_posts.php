@@ -1,4 +1,4 @@
-<?php
+                                    <?php
 /**
  * Thêm trường "File PDF báo cáo" cho bài viết (pvn_news_posts).
  *
