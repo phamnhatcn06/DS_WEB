@@ -199,18 +199,8 @@
   margin: 0 0 var(--space-7);
 }
 
-/* Khung cho cuộn ngang khi màn hình hẹp — không phá vỡ cấu trúc cây */
 .org-tree {
-  overflow-x: auto;
   padding-bottom: var(--space-2);
-}
-
-/* Cây rộng bằng nội dung: canh giữa khi vừa khung, cuộn từ trái khi tràn
-   (tránh lỗi flex canh giữa làm mất phần bên trái khi overflow). */
-.org-tree > ul {
-  width: max-content;
-  min-width: 100%;
-  margin-inline: auto;
 }
 
 /* ---- Các cấp: hàng ngang, căn giữa ---- */
@@ -222,7 +212,6 @@
   padding: var(--org-gap) 0 0;
   margin: 0;
   list-style: none;
-  white-space: nowrap;
 }
 
 /* Cấp gốc không có cha → bỏ khoảng đệm trên cùng */
