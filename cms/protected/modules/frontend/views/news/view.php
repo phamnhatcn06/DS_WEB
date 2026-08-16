@@ -153,7 +153,23 @@ $detailTitle   = TextHelper::truncate($post->title, 60);
             }
             echo '</ul></div>';
           };
-          $renderAttachments($post->getAttachmentFiles('vi'), 'Tài liệu đính kèm');
+          // "File PDF báo cáo" gắn trực tiếp hiển thị cùng nhóm tài liệu tiếng Việt
+          // (đưa lên đầu), tránh trùng nếu file đó cũng nằm trong đính kèm.
+          $viFiles = $post->getAttachmentFiles('vi');
+          $reportPdf = $post->getReportPdfFile();
+          if ($reportPdf !== null) {
+            $already = false;
+            foreach ($viFiles as $viFile) {
+              if ((int) $viFile->id === (int) $reportPdf->id) {
+                $already = true;
+                break;
+              }
+            }
+            if (!$already) {
+              array_unshift($viFiles, $reportPdf);
+            }
+          }
+          $renderAttachments($viFiles, 'Tài liệu đính kèm');
           $renderAttachments($post->getAttachmentFiles('en'), 'Tài liệu đính kèm (English)');
           ?>
 
