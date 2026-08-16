@@ -86,8 +86,8 @@ class NewsPost extends BaseActiveRecord
                 'message' => 'Định dạng ngày không hợp lệ.'),
             array('status', 'in', 'range' => array_keys(self::statusOptions()),
                 'message' => 'Trạng thái không hợp lệ.'),
-            array('category_id, thumbnail_media_id, author_id, sort_order', 'numerical',
-                'integerOnly' => true),
+            array('category_id, thumbnail_media_id, report_pdf_media_id, author_id, sort_order',
+                'numerical', 'integerOnly' => true),
             array('is_featured, is_featured_project, is_active', 'boolean'),
             // Trường dự án (chỉ dùng khi bài thuộc danh mục dự án).
             array('project_name, project_location', 'length', 'max' => 255),
