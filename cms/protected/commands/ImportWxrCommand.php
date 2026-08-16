@@ -223,6 +223,34 @@ class ImportWxrCommand extends CConsoleCommand
     }
 
     /**
+     * post_parent (bài viết) => URL file PDF đính kèm đầu tiên.
+     * Dự phòng cho trường hợp bài không có ACF file_dinh_kem nhưng có attachment
+     * PDF trỏ post_parent về bài.
+     */
+    private function buildPdfParentMap($xml, $ns)
+    {
+        $map = array();
+        foreach ($xml->channel->item as $item) {
+            $wp = $item->children($ns['wp']);
+            if ((string) $wp->post_type !== 'attachment') {
+                continue;
+            }
+            $url = trim((string) $wp->attachment_url);
+            $parent = (string) $wp->post_parent;
+            if ($url === '' || $parent === '' || $parent === '0') {
+                continue;
+            }
+            if (stripos($url, '.pdf') === false) {
+                continue;
+            }
+            if (!isset($map[$parent])) {
+                $map[$parent] = $url; // giữ PDF đầu tiên cho mỗi bài
+            }
+        }
+        return $map;
+    }
+
+    /**
      * Trả về mảng id danh mục CMS cho một item bài viết.
      * Giữ nguyên toàn bộ danh mục WP: mỗi nicename -> một danh mục CMS
      * (tạo theo nhu cầu), bỏ các danh mục spam trong skipCategories.
