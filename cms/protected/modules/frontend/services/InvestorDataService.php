@@ -35,9 +35,13 @@ class InvestorDataService
             return null;
         }
 
+        // Báo cáo thường niên năm N được đăng vào năm N+1 → tab/năm lọc hiển thị
+        // theo NĂM BÁO CÁO (năm đăng − 1). Các danh mục khác giữ đúng năm đăng.
+        $yearOffset = self::reportYearOffset($category);
+
         // Danh sách năm có tài liệu (DESC). Không còn "tất cả": mặc định năm hiện
         // tại nếu có tài liệu, ngược lại lấy năm mới nhất.
-        $years = self::publishedYears($category->id);
+        $years = self::publishedYears($category->id, $yearOffset);
         if ($year !== null && in_array((int) $year, $years, true)) {
             $year = (int) $year;
         } elseif (in_array((int) date('Y'), $years, true)) {
@@ -49,8 +53,9 @@ class InvestorDataService
         $publishedCond = 't.deleted_at IS NULL AND t.is_active = 1 AND t.status = :st';
         $publishedParams = array(':st' => NewsPost::STATUS_PUBLISHED);
         if ($year !== null) {
+            // $year là NĂM BÁO CÁO; quy về năm đăng thực để lọc (năm báo cáo − offset).
             $publishedCond .= ' AND YEAR(t.published_at) = :yr';
-            $publishedParams[':yr'] = $year;
+            $publishedParams[':yr'] = $year - $yearOffset;
         }
 
         // Model đã gắn scope danh mục — tạo lại mỗi lần vì Yii1 reset scope sau truy vấn.
