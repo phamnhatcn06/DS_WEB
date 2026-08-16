@@ -179,9 +179,9 @@
 .orgchart {
   /* Ô rộng cố định & co theo viewport → cả cây gói gọn trong màn, không tràn ngang.
      Mọi ô cùng bề rộng nên trục giữa (gốc → HĐQT → Ban TGĐ) luôn thẳng hàng. */
-  --org-box-w:  min(150px, 9vw);
-  --org-gap:    clamp(16px, 2vw, 28px);  /* chiều cao đường nối dọc giữa hai cấp */
-  --org-hpad:   clamp(3px, .5vw, 12px);  /* nửa khoảng cách ngang giữa các anh em */
+  --org-box-w:  min(164px, 9.7vw);
+  --org-gap:    clamp(14px, 1.8vw, 26px); /* chiều cao đường nối dọc giữa hai cấp */
+  --org-hpad:   clamp(2px, .3vw, 8px);    /* nửa khoảng cách ngang giữa các anh em */
   --org-line-w: 2px;                     /* độ dày đường nối */
   --org-line:   var(--dsh-red);          /* màu đường nối — đỏ thương hiệu */
   padding-block: var(--section-py);
