@@ -201,6 +201,14 @@
   padding-bottom: var(--space-2);
 }
 
+/* Cây rộng bằng nội dung: canh giữa khi vừa khung, cuộn từ trái khi tràn
+   (tránh lỗi flex canh giữa làm mất phần bên trái khi overflow). */
+.org-tree > ul {
+  width: max-content;
+  min-width: 100%;
+  margin-inline: auto;
+}
+
 /* ---- Các cấp: hàng ngang, căn giữa ---- */
 .org-tree ul {
   position: relative;
