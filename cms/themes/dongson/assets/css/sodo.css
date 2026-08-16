@@ -53,7 +53,7 @@
   max-width: 100%;
   aspect-ratio: 272 / 362;
   overflow: hidden;
-  background: var(--org-surface);
+  background: var(--sodo-photo-bg);
   margin-right: var(--space-6);
 }
 
@@ -134,7 +134,7 @@
 
 .bod-member-photo {
   aspect-ratio: 400 / 335;
-  background: var(--org-surface);
+  background: var(--sodo-photo-bg);
 }
 
 .bod-member-photo img {
