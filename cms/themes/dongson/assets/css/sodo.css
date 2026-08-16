@@ -303,12 +303,22 @@
   box-shadow: 0 12px 26px rgba(154, 18, 32, .34);
 }
 
-/* Node gốc: ô dạng viên thuốc (pill) nổi bật hơn — chỉ mình một mình nên
-   bề rộng khác không ảnh hưởng canh trục giữa. */
+/* Node có con (không phải lá) đứng trên một nhánh rộng hơn chính nó → cho ô nở
+   theo nội dung để chữ gọn trên 1 dòng. Vì ô luôn hẹp hơn bề rộng nhánh con và
+   được canh giữa nên KHÔNG làm tăng tổng bề rộng cây, cũng không lệch trục giữa.
+   (Ô lá vẫn giữ bề rộng đồng nhất → quyết định bề rộng cột, giữ canh hàng.) */
+.org-tree li:has(> ul) > .org-box {
+  width: max-content;
+  min-width: var(--org-box-w);
+  max-width: 100%;
+  padding-inline: clamp(12px, 1.2vw, 22px);
+  white-space: nowrap;
+}
+
+/* Node gốc: ô dạng viên thuốc (pill) nổi bật hơn */
 .org-tree > ul > li > .org-box {
   border-radius: 999px;
-  width: calc(var(--org-box-w) + clamp(8px, 1.4vw, 28px));
-  padding-inline: clamp(12px, 1.4vw, 24px);
+  padding-inline: clamp(14px, 1.5vw, 26px);
 }
 
 /* ==========================================================================
