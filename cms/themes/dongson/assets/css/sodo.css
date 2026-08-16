@@ -240,13 +240,15 @@
 .org-tree li::before { right: 50%; }
 .org-tree li::after  { left: 50%; border-left: var(--org-line-w) solid var(--org-line); }
 
-/* Node là con duy nhất: chỉ cần đường dọc thẳng, bỏ thanh ngang */
+/* Node là con duy nhất: bỏ thanh ngang; đường dọc do ul cha (::before) vẽ.
+   padding-top phải = 0 để đường nối liền mạch, không hở khoảng. */
 .org-tree li:only-child::before,
 .org-tree li:only-child::after { display: none; }
-.org-tree li:only-child { padding-top: var(--org-gap); }
+.org-tree li:only-child { padding-top: 0; }
 
-/* Gốc: không có đường nối phía trên */
-.org-tree > ul > li { padding-top: 0; }
+/* Gốc: không có đường nối phía trên (kể cả khi là con duy nhất) */
+.org-tree > ul > li,
+.org-tree > ul > li:only-child { padding-top: 0; }
 .org-tree > ul > li::before,
 .org-tree > ul > li::after { display: none; }
 
