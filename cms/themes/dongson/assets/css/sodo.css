@@ -373,39 +373,8 @@
 .bod-stat { transition: transform .4s var(--ease-out-soft); }
 .bod-chair:hover .bod-stat:nth-child(2) { transform: translateY(-2px); }
 
-/* Tôn trọng giảm chuyển động */
-@media (prefers-reduced-motion: reduce) {
-  .orgchart .org-node,
-  .orgchart .org-dept,
-  .orgchart .org-connector-v,
-  .orgchart .org-branch-stem,
-  .orgchart .org-branch-bar,
-  .orgchart .org-dept::before {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* -------- Responsive -------- */
+/* -------- Responsive: card Chủ tịch -------- */
 @media (max-width: 767.98px) {
-  /* 2 khối/hàng (2×2), gap flex tạo luôn khoảng cách hàng */
-  .org-depts { flex-wrap: wrap; }
-  .org-dept { flex: 1 1 calc(50% - var(--space-4) / 2); }
-
-  /* Thanh ngang thu về đúng tâm 2 cột (mỗi cột rộng 50% - gap/2) */
-  .org-branch-bar {
-    left: calc(25% - var(--space-4) / 4);
-    right: calc(25% - var(--space-4) / 4);
-  }
-
-  /* Hàng trên (Đầu tư / Tài chính): stub nối lên thanh ngang (36px) — giữ mặc định.
-     Hàng dưới (Kỹ thuật / Hành chính): stub nối lên box phía trên, dài bằng gap hàng. */
-  .org-dept:nth-child(3)::before,
-  .org-dept:nth-child(4)::before {
-    height: var(--space-4);
-  }
-
   /* Card chủ tịch: ảnh trên, chữ dưới */
   .bod-chair-photo {
     width: 100%;
