@@ -287,6 +287,9 @@ class ImportWxrCommand extends CConsoleCommand
         }
         $slug = TextHelper::truncate($baseSlug, 210, '') . '-' . (string) $wp->post_id;
 
+        // File PDF báo cáo (nếu bài có) — tải về local trước khi lưu bài.
+        $reportPdfMediaId = $this->resolveReportPdfMediaId($item, $wp, $attachmentUrl, $pdfByParent);
+
         $post = new NewsPost();
         $post->title = TextHelper::truncate(trim((string) $item->title), 300, '');
         $post->slug = $slug;
