@@ -61,6 +61,12 @@ $yearUrl = function ($yearValue) use ($category) {
 
 /** File PDF chính của một tài liệu (ưu tiên .pdf); null nếu bài chưa đính kèm. */
 $primaryDoc = function (NewsPost $post) {
+    // Ưu tiên "File PDF báo cáo" gắn trực tiếp vào bài; sau đó mới tới tài liệu
+    // đính kèm (tương thích ngược với các bài chỉ có đính kèm).
+    $report = $post->getReportPdfFile();
+    if ($report !== null) {
+        return $report;
+    }
     $files = $post->getAttachmentFiles('vi');
     if (empty($files)) {
         return null;
