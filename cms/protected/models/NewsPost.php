@@ -318,6 +318,7 @@ class NewsPost extends BaseActiveRecord
             'excerpt'             => 'Trích dẫn (chỉ card lớn hiển thị)',
             'content'             => 'Nội dung',
             'thumbnail_media_id'  => 'Ảnh đại diện',
+            'report_pdf_media_id' => 'File PDF báo cáo',
             'published_at'        => 'Thời điểm đăng',
             'date_display_format' => 'Cách hiển thị ngày',
             'author_id'           => 'Tác giả',
