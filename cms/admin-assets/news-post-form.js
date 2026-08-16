@@ -210,11 +210,55 @@
     document.querySelectorAll('[data-attachment-group]').forEach(initAttachmentGroup);
   }
 
+  // -------------------------------------------- file PDF báo cáo (1 file)
+  function reportPdfItemHtml(item) {
+    return '<div class="attachment-item d-flex align-items-center gap-2 mb-1" data-report-pdf-item>' +
+      '<i class="fa fa-file-pdf-o text-danger"></i>' +
+      '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener" class="flex-grow-1 text-truncate">' +
+      escapeHtml(item.name || 'File PDF báo cáo') + '</a>' +
+      '<button type="button" class="btn btn-sm btn-outline-danger" data-report-pdf-remove title="Bỏ file">' +
+      '<i class="fa fa-times"></i></button>' +
+      '</div>';
+  }
+
+  function initReportPdf() {
+    var field = document.querySelector('[data-report-pdf]');
+    if (!field) {
+      return;
+    }
+    var input = field.querySelector('[data-report-pdf-input]');
+    var current = field.querySelector('[data-report-pdf-current]');
+    var addBtn = field.querySelector('[data-report-pdf-add]');
+    if (!input || !current || !addBtn) {
+      return;
+    }
+
+    addBtn.addEventListener('click', function () {
+      if (!window.DSHMediaPicker) {
+        return;
+      }
+      window.DSHMediaPicker.open(function (item) {
+        // 1 file duy nhất — chọn file mới thay thế file cũ.
+        input.value = parseInt(item.id, 10);
+        current.innerHTML = reportPdfItemHtml(item);
+      }, { scope: 'doc', accept: 'application/pdf' });
+    });
+
+    current.addEventListener('click', function (e) {
+      if (!e.target.closest('[data-report-pdf-remove]')) {
+        return;
+      }
+      input.value = '';
+      current.innerHTML = '';
+    });
+  }
+
   function init() {
     initSlug();
     initEditor();
     initConditionalBoxes();
     initAttachments();
+    initReportPdf();
   }
 
   if (document.readyState === 'loading') {
