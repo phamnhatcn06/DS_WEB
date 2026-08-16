@@ -145,10 +145,20 @@ class ImportWxrCommand extends CConsoleCommand
                 if ($existing !== null) {
                     if ($update) {
                         // Cập nhật lại danh mục cho đúng bản giữ-nguyên (không đụng
-                        // nội dung, không tải lại ảnh).
+                        // nội dung, không tải lại ảnh nội dung).
                         $existing->categoryIds = $catIds;
                         $existing->syncCategories();
                         $stat['updatedCats']++;
+
+                        // Cập nhật file PDF báo cáo từ <wp:attachment_url> (tải về
+                        // local nếu chưa có) — đây là trường dữ liệu cần bổ sung.
+                        $pdfMediaId = $this->resolveReportPdfMediaId($item, $wp, $attachmentUrl, $pdfByParent);
+                        if ($pdfMediaId !== null
+                            && (int) $existing->report_pdf_media_id !== $pdfMediaId) {
+                            $existing->saveAttributes(array('report_pdf_media_id' => $pdfMediaId));
+                            $stat['reportPdfs']++;
+                            echo "  [+PDF] {$title}\n";
+                        }
                         echo "  [CẬP NHẬT DM] {$title}  ->  " . implode(',', $catIds) . "\n";
                     } else {
                         $stat['skippedExisting']++;
