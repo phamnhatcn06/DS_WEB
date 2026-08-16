@@ -282,15 +282,15 @@
   align-items: center;
   justify-content: center;
   width: var(--org-box-w);
-  min-height: clamp(48px, 5.4vw, 66px);
-  padding: clamp(6px, .9vw, 12px) clamp(6px, .8vw, 14px);
+  min-height: clamp(46px, 5vw, 62px);
+  padding: clamp(5px, .55vw, 9px) clamp(6px, .55vw, 10px);
   border-radius: clamp(8px, .8vw, 12px);
   background: var(--dsh-red);
   color: var(--dsh-white);
   font-weight: 700;
-  font-size: clamp(.62rem, .48rem + .55vw, 1rem);
-  line-height: 1.2;
-  letter-spacing: .01em;
+  font-size: clamp(.56rem, .42rem + .5vw, .82rem);
+  line-height: 1.15;
+  letter-spacing: 0;
   text-align: center;
   text-transform: uppercase;
   white-space: normal;                 /* chữ xuống dòng trong ô */
