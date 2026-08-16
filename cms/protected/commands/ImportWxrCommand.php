@@ -561,7 +561,9 @@ class ImportWxrCommand extends CConsoleCommand
             curl_setopt_array($ch, array(
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_TIMEOUT        => 30,
+                // File PDF báo cáo có thể 13–20MB — nới thời gian chờ tải.
+                CURLOPT_CONNECTTIMEOUT => 15,
+                CURLOPT_TIMEOUT        => 180,
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_USERAGENT      => 'DSH-CMS-Importer/1.0',
             ));
