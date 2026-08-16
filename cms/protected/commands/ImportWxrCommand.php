@@ -41,6 +41,9 @@ class ImportWxrCommand extends CConsoleCommand
     /** Host thực sự đang phục vụ tệp — mọi ảnh/tệp đều tải từ đây. */
     private $downloadHost = 'pvnsoft.cloud';
 
+    /** Scheme để tải tệp (http|https) — đổi được qua --downloadHost=http://... */
+    private $downloadScheme = 'https';
+
     /** slug danh mục CMS -> id (nạp 1 lần). */
     private $categoryIdBySlug = array();
 
