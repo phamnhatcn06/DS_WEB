@@ -309,6 +309,20 @@ class NewsPost extends BaseActiveRecord
         return $files;
     }
 
+    /**
+     * File PDF báo cáo của bài (nếu có) — MediaFile còn tồn tại, hoặc null.
+     * Dùng cho trang Quan hệ cổ đông (Báo cáo thường niên) và trang chi tiết.
+     * @return MediaFile|null
+     */
+    public function getReportPdfFile()
+    {
+        $file = $this->reportPdf;
+        if ($file instanceof MediaFile && $file->deleted_at === null) {
+            return $file;
+        }
+        return null;
+    }
+
     public function attributeLabels()
     {
         return array(
