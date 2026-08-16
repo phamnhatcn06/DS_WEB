@@ -154,6 +154,27 @@ $publishedValue = $publishedRaw ? date('Y-m-d\TH:i', strtotime($publishedRaw)) :
       <div class="card-header py-2"><i class="fa fa-language me-1"></i> Nội dung song ngữ &amp; tài liệu đính kèm</div>
       <div class="card-body">
 
+        <!-- File PDF báo cáo (1 file) — dùng cho Báo cáo thường niên -->
+        <div class="mb-3">
+          <?php echo $form->label($model, 'report_pdf_media_id', array('class' => 'form-label')); ?>
+          <div class="report-pdf-field" data-report-pdf>
+            <?php echo $form->hiddenField($model, 'report_pdf_media_id', array('data-report-pdf-input' => '1')); ?>
+            <div class="attachment-list" data-report-pdf-current>
+<?php if ($reportPdf !== null): ?>
+              <div class="attachment-item d-flex align-items-center gap-2 mb-1" data-report-pdf-item>
+                <i class="fa fa-file-pdf-o text-danger"></i>
+                <a href="<?php echo CHtml::encode($reportPdfUrl); ?>" target="_blank" rel="noopener" class="flex-grow-1 text-truncate"><?php echo CHtml::encode($reportPdfName); ?></a>
+                <button type="button" class="btn btn-sm btn-outline-danger" data-report-pdf-remove title="Bỏ file"><i class="fa fa-times"></i></button>
+              </div>
+<?php endif; ?>
+            </div>
+            <button type="button" class="btn btn-sm btn-dsh mt-1" data-report-pdf-add>
+              <i class="fa fa-file-pdf-o me-1"></i> Chọn / Tải file PDF báo cáo
+            </button>
+          </div>
+          <p class="form-hint mt-1 mb-0">Một file PDF báo cáo cho bài. Chọn từ thư viện hoặc tải PDF mới lên. Import sẽ tự điền từ <code>&lt;wp:attachment_url&gt;</code>.</p>
+        </div>
+
         <!-- Nội dung tiếng Anh -->
         <div class="mb-3">
           <?php echo $form->label($model, 'content_en', array('class' => 'form-label')); ?>
