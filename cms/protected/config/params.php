@@ -11,7 +11,9 @@ return array(
 
     // Thư mục upload — đường dẫn tương đối từ webroot của cms/
     'uploadPath'      => 'uploads',
-    'uploadMaxSize'   => 10 * 1024 * 1024, // 10 MB
+    // 30MB: file PDF báo cáo thường niên có thể 13–20MB. Lưu ý phải nới cả
+    // upload_max_filesize / post_max_size trong php.ini cho khớp.
+    'uploadMaxSize'   => 30 * 1024 * 1024, // 30 MB
 
     // Chỉ nhận đúng các định dạng dùng trong thiết kế: raster → webp, vector → svg.
     'allowedMimeTypes' => array(
