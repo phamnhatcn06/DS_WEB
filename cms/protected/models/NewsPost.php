@@ -123,6 +123,8 @@ class NewsPost extends BaseActiveRecord
                 'order'     => 'categories.sort_order ASC, categories.name ASC',
                 'together'  => false),
             'thumbnail' => array(self::BELONGS_TO, 'MediaFile', 'thumbnail_media_id'),
+            // File PDF báo cáo (danh mục Quan hệ cổ đông) — 1 file trong thư viện.
+            'reportPdf' => array(self::BELONGS_TO, 'MediaFile', 'report_pdf_media_id'),
             'author'    => array(self::BELONGS_TO, 'User', 'author_id'),
             // Chỉ nạp thẻ đang bật, theo thứ tự cấu hình — dùng để hiển thị chip.
             'tags'      => array(self::MANY_MANY, 'Tag',
