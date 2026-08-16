@@ -168,10 +168,11 @@ class ImportWxrCommand extends CConsoleCommand
             }
 
             try {
-                $imgCount = $this->importPost($item, $wp, $ns, $catIds, $attachmentUrl);
+                $result = $this->importPost($item, $wp, $ns, $catIds, $attachmentUrl, $pdfByParent);
                 $stat['imported']++;
-                $stat['images'] += $imgCount;
-                echo "  [OK] {$title}\n";
+                $stat['images'] += $result['images'];
+                $stat['reportPdfs'] += $result['reportPdf'] ? 1 : 0;
+                echo "  [OK] {$title}" . ($result['reportPdf'] ? ' [+PDF]' : '') . "\n";
             } catch (Exception $e) {
                 $stat['errors']++;
                 echo "  [LỖI] {$title} — " . $e->getMessage() . "\n";
