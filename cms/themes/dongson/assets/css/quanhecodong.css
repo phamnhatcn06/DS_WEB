@@ -159,6 +159,67 @@
 .qhcd-news-item__title { font-size: 14px; font-weight: 500; line-height: 1.45; color: var(--qhcd-ink); margin: 0; }
 .qhcd-news-item:hover .qhcd-news-item__title { color: var(--qhcd-red); }
 
+/* ===== Báo cáo thường niên — danh sách dạng bảng ===== */
+.qhcd-reports { padding: 26px 0 84px; }
+.qhcd-reports__title {
+  font-size: clamp(18px, 2vw, 22px); font-weight: 800;
+  text-transform: uppercase; letter-spacing: .4px;
+  color: var(--qhcd-ink); margin: 6px 0 18px;
+}
+
+/* Tab năm (khác year-chip: nút bo góc, đậm hơn, không có nhãn "Năm:") */
+.qhcd-reports__years { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+.qhcd-year-tab {
+  display: inline-flex; align-items: center; text-decoration: none;
+  padding: 9px 22px; border-radius: 8px;
+  font-size: 15px; font-weight: 700; color: var(--qhcd-ink);
+  transition: background .25s ease, color .25s ease;
+}
+.qhcd-year-tab:hover { color: var(--qhcd-red); }
+.qhcd-year-tab.is-active,
+.qhcd-year-tab.is-active:hover { background: var(--qhcd-red); color: #fff; }
+
+/* Bảng tài liệu */
+.qhcd-table-wrap { overflow-x: auto; }
+.qhcd-table { width: 100%; min-width: 640px; border-collapse: collapse; }
+.qhcd-table thead th {
+  padding: 0 18px 16px; border-bottom: 2px solid var(--qhcd-orange);
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--qhcd-muted-2); white-space: nowrap;
+}
+.qhcd-table__col-name { text-align: left; }
+.qhcd-table__col-date { text-align: center; width: 22%; }
+.qhcd-table__col-act { text-align: center; width: 13%; }
+.qhcd-table tbody td {
+  padding: 20px 18px; border-bottom: 1px solid var(--qhcd-card-line);
+  font-size: 15px; vertical-align: middle;
+}
+.qhcd-table tbody tr:hover { background: #fbf7f7; }
+.qhcd-table__name a {
+  color: var(--qhcd-red); font-weight: 700; text-decoration: none;
+  text-transform: uppercase; letter-spacing: .3px;
+}
+.qhcd-table__name a:hover { color: var(--qhcd-red-hover); text-decoration: underline; }
+.qhcd-table__date { text-align: center; color: var(--qhcd-muted); }
+.qhcd-table__act { text-align: center; }
+
+/* Nút icon Xem / Tải (màu cam theo thiết kế) */
+.qhcd-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 8px;
+  color: var(--qhcd-orange); font-size: 20px; text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+.qhcd-icon-btn:hover { background: rgba(232, 100, 28, .1); color: var(--qhcd-orange); transform: translateY(-1px); }
+.qhcd-icon-btn.is-disabled { color: var(--qhcd-muted-2); pointer-events: none; }
+
+/* Popup xem PDF online */
+.qhcd-pdf-modal .modal-dialog { max-width: 980px; }
+.qhcd-pdf-modal .modal-body { padding: 0; }
+.qhcd-pdf-frame { width: 100%; height: 78vh; border: 0; display: block; }
+.qhcd-pdf-modal .qhcd-btn-dl { background: var(--qhcd-red); border-color: var(--qhcd-red); color: #fff; }
+.qhcd-pdf-modal .qhcd-btn-dl:hover { background: var(--qhcd-red-hover); border-color: var(--qhcd-red-hover); color: #fff; }
+
 /* ===== Responsive ===== */
 @media (max-width: 991.98px) {
   .qhcd-hero__crumb { left: 16px; }
