@@ -191,6 +191,7 @@ class ImportWxrCommand extends CConsoleCommand
                 $stat['imported']++;
                 $stat['images'] += $result['images'];
                 $stat['reportPdfs'] += $result['reportPdf'] ? 1 : 0;
+                $stat['pdfFailed'] += $result['pdfFailed'] ? 1 : 0;
                 echo "  [OK] {$title}" . ($result['reportPdf'] ? ' [+PDF]' : '') . "\n";
             } catch (Exception $e) {
                 $stat['errors']++;
