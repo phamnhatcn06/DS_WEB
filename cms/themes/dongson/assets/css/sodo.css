@@ -275,21 +275,21 @@
   border-left: var(--org-line-w) solid var(--org-line);
 }
 
-/* ---- Ô đơn vị: nền đỏ thương hiệu, bo tròn (bám Figma) ---- */
+/* ---- Ô đơn vị: nền đỏ thương hiệu, bo tròn (bám Figma) ----
+   Bề rộng cố định (bằng nhau ở mọi ô) → các cấp thẳng trục giữa. */
 .org-box {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 148px;
-  max-width: 208px;
-  min-height: 66px;
-  padding: var(--space-2) var(--space-3);
-  border-radius: 12px;
+  width: var(--org-box-w);
+  min-height: clamp(48px, 5.4vw, 66px);
+  padding: clamp(6px, .9vw, 12px) clamp(6px, .8vw, 14px);
+  border-radius: clamp(8px, .8vw, 12px);
   background: var(--dsh-red);
   color: var(--dsh-white);
   font-weight: 700;
-  font-size: clamp(.8rem, .55rem + .5vw, 1rem);
-  line-height: 1.25;
+  font-size: clamp(.62rem, .48rem + .55vw, 1rem);
+  line-height: 1.2;
   letter-spacing: .01em;
   text-align: center;
   text-transform: uppercase;
@@ -303,11 +303,12 @@
   box-shadow: 0 12px 26px rgba(154, 18, 32, .34);
 }
 
-/* Node gốc: ô dạng viên thuốc (pill) nổi bật hơn */
+/* Node gốc: ô dạng viên thuốc (pill) nổi bật hơn — chỉ mình một mình nên
+   bề rộng khác không ảnh hưởng canh trục giữa. */
 .org-tree > ul > li > .org-box {
   border-radius: 999px;
-  min-width: 176px;
-  padding-inline: var(--space-4);
+  width: calc(var(--org-box-w) + clamp(8px, 1.4vw, 28px));
+  padding-inline: clamp(12px, 1.4vw, 24px);
 }
 
 /* ==========================================================================
