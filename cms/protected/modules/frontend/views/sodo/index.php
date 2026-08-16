@@ -133,50 +133,14 @@ $renderOrgTree = function (array $nodes) use (&$renderOrgTree) {
       </div>
     </section>
 
-<?php if (!empty($boards)): ?>
+<?php if (!empty($orgTree)): ?>
     <!-- ===== Section 2: Hệ thống phân cấp (Sơ đồ tổ chức) ===== -->
     <section class="orgchart fade-section" id="he-thong-phan-cap">
       <div class="container">
         <h2 class="orgchart-title" data-reveal="up"><?php echo CHtml::encode($s('sodo_org_title', 'Hệ thống phân cấp')); ?></h2>
 
-        <!-- Cây phân cấp (bung dần theo .is-visible của section) -->
-        <div class="org-tree">
-
-          <!-- Cấp 1 -->
-          <div class="org-level org-level--top">
-<?php foreach ($boards as $board): ?>
-            <div class="org-node org-node--board"><?php echo CHtml::encode($board->name); ?></div>
-<?php endforeach; ?>
-          </div>
-
-<?php if (!empty($execs)): ?>
-          <!-- Đường nối dọc -->
-          <span class="org-connector-v" aria-hidden="true"></span>
-
-          <!-- Cấp 2 -->
-          <div class="org-level">
-<?php foreach ($execs as $exec): ?>
-            <div class="org-node org-node--exec"><?php echo CHtml::encode($exec->name); ?></div>
-<?php endforeach; ?>
-          </div>
-<?php endif; ?>
-
-<?php if (!empty($depts)): ?>
-          <!-- Nhánh tỏa xuống cấp 3 -->
-          <div class="org-branches" aria-hidden="true">
-            <span class="org-branch-stem"></span>
-            <span class="org-branch-bar"></span>
-          </div>
-
-          <!-- Cấp 3: các khối chức năng -->
-          <div class="org-depts">
-<?php foreach ($depts as $dept): ?>
-            <div class="org-dept"><?php echo CHtml::encode($dept->name); ?></div>
-<?php endforeach; ?>
-          </div>
-<?php endif; ?>
-
-        </div>
+        <!-- Cây phân cấp: ul/li lồng nhau, đường nối vẽ bằng CSS thuần -->
+        <div class="org-tree"><?php $renderOrgTree($orgTree); ?></div>
       </div>
     </section>
 <?php endif; ?>
