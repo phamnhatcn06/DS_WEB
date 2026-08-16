@@ -249,8 +249,11 @@ class ImportWxrCommand extends CConsoleCommand
     // Ghi dữ liệu
     // ---------------------------------------------------------------------
 
-    /** Nhập một bài; trả về số ảnh đã tải (thumbnail + inline). */
-    private function importPost($item, $wp, $ns, $catIds, $attachmentUrl)
+    /**
+     * Nhập một bài.
+     * @return array{images:int, reportPdf:bool} số ảnh đã tải và có gắn PDF báo cáo không.
+     */
+    private function importPost($item, $wp, $ns, $catIds, $attachmentUrl, $pdfByParent)
     {
         $content = $item->children($ns['content']);
         $excerpt = $item->children($ns['excerpt']);
