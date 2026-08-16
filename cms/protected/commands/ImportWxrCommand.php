@@ -360,7 +360,8 @@ class ImportWxrCommand extends CConsoleCommand
         }
         $post->syncCategories();
 
-        return array('images' => $imgCount, 'reportPdf' => $reportPdfMediaId !== null);
+        return array('images' => $imgCount, 'reportPdf' => $pdf['id'] !== null,
+            'pdfFailed' => $pdf['failed']);
     }
 
     /** postmeta _thumbnail_id -> id attachment (chuỗi) hoặc null. */
