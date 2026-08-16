@@ -168,29 +168,28 @@ class ImportWxrCommand extends CConsoleCommand
             $existing = $this->findExistingPost($slug, $link);
             if ($existing !== null) {
                 if ($update) {
-                        // Cập nhật lại danh mục cho đúng bản giữ-nguyên (không đụng
-                        // nội dung, không tải lại ảnh nội dung).
-                        $existing->categoryIds = $catIds;
-                        $existing->syncCategories();
-                        $stat['updatedCats']++;
+                    // Cập nhật lại danh mục cho đúng bản giữ-nguyên (không đụng
+                    // nội dung, không tải lại ảnh nội dung).
+                    $existing->categoryIds = $catIds;
+                    $existing->syncCategories();
+                    $stat['updatedCats']++;
 
-                        // Cập nhật file PDF báo cáo từ <wp:attachment_url> (tải về
-                        // local nếu chưa có) — đây là trường dữ liệu cần bổ sung.
-                        $pdf = $this->resolveReportPdf($item, $wp, $attachmentUrl, $pdfByParent);
-                        if ($pdf['id'] !== null
-                            && (int) $existing->report_pdf_media_id !== $pdf['id']) {
-                            $existing->saveAttributes(array('report_pdf_media_id' => $pdf['id']));
-                            $stat['reportPdfs']++;
-                            echo "  [+PDF] {$title}\n";
-                        } elseif ($pdf['failed']) {
-                            $stat['pdfFailed']++;
-                        }
-                        echo "  [CẬP NHẬT DM] {$title}  ->  " . implode(',', $catIds) . "\n";
-                    } else {
-                        $stat['skippedExisting']++;
+                    // Cập nhật file PDF báo cáo từ <wp:attachment_url> (tải về
+                    // local nếu chưa có) — đây là trường dữ liệu cần bổ sung.
+                    $pdf = $this->resolveReportPdf($item, $wp, $attachmentUrl, $pdfByParent);
+                    if ($pdf['id'] !== null
+                        && (int) $existing->report_pdf_media_id !== $pdf['id']) {
+                        $existing->saveAttributes(array('report_pdf_media_id' => $pdf['id']));
+                        $stat['reportPdfs']++;
+                        echo "  [+PDF] {$title}\n";
+                    } elseif ($pdf['failed']) {
+                        $stat['pdfFailed']++;
                     }
-                    continue;
+                    echo "  [CẬP NHẬT DM] {$title}  ->  " . implode(',', $catIds) . "\n";
+                } else {
+                    $stat['skippedExisting']++;
                 }
+                continue;
             }
 
             try {
