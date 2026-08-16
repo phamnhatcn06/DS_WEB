@@ -336,21 +336,6 @@
 .orgchart.is-visible ul ul ul .org-box     { transition-delay: .48s; }
 .orgchart.is-visible ul ul ul ul .org-box  { transition-delay: .66s; }
 
-/* Responsive: ô nhỏ hơn + khoảng nối gọn hơn ở màn hẹp */
-@media (max-width: 767.98px) {
-  .orgchart {
-    --org-gap: 20px;
-    --org-hpad: 8px;
-  }
-  .org-box {
-    min-width: 118px;
-    max-width: 158px;
-    min-height: 56px;
-    font-size: .72rem;
-  }
-  .org-tree > ul > li > .org-box { min-width: 132px; }
-}
-
 /* Tôn trọng giảm chuyển động */
 @media (prefers-reduced-motion: reduce) {
   .orgchart .org-tree,
