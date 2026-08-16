@@ -334,13 +334,8 @@ class ImportWxrCommand extends CConsoleCommand
         $contentHtml = $rewrite['html'];
         $imgCount += $rewrite['count'];
 
-        // Slug = post_name (hoặc slugify tiêu đề nếu trống) + hậu tố -{post_id}
-        // để mỗi bài WP là một slug duy nhất, không đụng slug bài khác.
-        $baseSlug = trim((string) $wp->post_name);
-        if ($baseSlug === '') {
-            $baseSlug = TextHelper::slugify(trim((string) $item->title));
-        }
-        $slug = TextHelper::truncate($baseSlug, 210, '') . '-' . (string) $wp->post_id;
+        // Slug ổn định = post_name-{post_id} (dùng chung với bước dò trùng).
+        $slug = $this->computeSlug($wp, $item);
 
         // File PDF báo cáo (nếu bài có) — tải về local trước khi lưu bài.
         $pdf = $this->resolveReportPdf($item, $wp, $attachmentUrl, $pdfByParent);
