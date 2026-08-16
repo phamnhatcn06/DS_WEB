@@ -501,16 +501,23 @@ class ImportWxrCommand extends CConsoleCommand
     }
 
     /**
-     * Tìm + tải file PDF báo cáo của bài về local, trả id MediaFile hoặc null.
+     * Tìm + tải file PDF báo cáo của bài về local.
+     * @return array{id:int|null, failed:bool} id MediaFile (hoặc null nếu bài không
+     *         có PDF), failed=true khi có URL nhưng tải về thất bại (host đổi/lỗi
+     *         mạng) — để không bỏ sót âm thầm, người dùng biết bài nào cần chạy lại.
      */
-    private function resolveReportPdfMediaId($item, $wp, $attachmentUrl, $pdfByParent)
+    private function resolveReportPdf($item, $wp, $attachmentUrl, $pdfByParent)
     {
         $url = $this->findReportAttachmentUrl($wp, $attachmentUrl, $pdfByParent);
         if ($url === null) {
-            return null;
+            return array('id' => null, 'failed' => false);
         }
         $media = $this->downloadFileToMedia($url, trim((string) $item->title));
-        return $media !== null ? (int) $media->id : null;
+        if ($media === null) {
+            echo '  [PDF LỖI TẢI] ' . trim((string) $item->title) . '  <- ' . $url . "\n";
+            return array('id' => null, 'failed' => true);
+        }
+        return array('id' => (int) $media->id, 'failed' => false);
     }
 
     /**
