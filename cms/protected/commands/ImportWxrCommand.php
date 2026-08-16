@@ -169,12 +169,14 @@ class ImportWxrCommand extends CConsoleCommand
 
                         // Cập nhật file PDF báo cáo từ <wp:attachment_url> (tải về
                         // local nếu chưa có) — đây là trường dữ liệu cần bổ sung.
-                        $pdfMediaId = $this->resolveReportPdfMediaId($item, $wp, $attachmentUrl, $pdfByParent);
-                        if ($pdfMediaId !== null
-                            && (int) $existing->report_pdf_media_id !== $pdfMediaId) {
-                            $existing->saveAttributes(array('report_pdf_media_id' => $pdfMediaId));
+                        $pdf = $this->resolveReportPdf($item, $wp, $attachmentUrl, $pdfByParent);
+                        if ($pdf['id'] !== null
+                            && (int) $existing->report_pdf_media_id !== $pdf['id']) {
+                            $existing->saveAttributes(array('report_pdf_media_id' => $pdf['id']));
                             $stat['reportPdfs']++;
                             echo "  [+PDF] {$title}\n";
+                        } elseif ($pdf['failed']) {
+                            $stat['pdfFailed']++;
                         }
                         echo "  [CẬP NHẬT DM] {$title}  ->  " . implode(',', $catIds) . "\n";
                     } else {
