@@ -50,19 +50,36 @@ class ImportWxrCommand extends CConsoleCommand
     public function getHelp()
     {
         return "Nhập tin tức từ WordPress WXR.\n"
-            . "  yiic importWxr --file=post.xml [--dryRun=1] [--limit=N] [--imgBase=/]\n";
+            . "  yiic importWxr --file=post.xml [--dryRun=1] [--limit=N] [--imgBase=/]\n"
+            . "                 [--update=1] [--downloadHost=domain-moi.vn]\n"
+            . "  --downloadHost: host thực sự đang phục vụ ảnh/PDF (khi domain cũ đã đổi).\n";
     }
 
     /**
-     * @param string $file    đường dẫn file WXR (tương đối basePath hoặc tuyệt đối).
-     * @param int    $dryRun  1 = chỉ phân tích, không ghi DB / không tải ảnh.
-     * @param int    $limit   giới hạn số bài xử lý (0 = tất cả).
-     * @param string $imgBase tiền tố URL cho ảnh viết lại trong nội dung.
+     * @param string $file         đường dẫn file WXR (tương đối basePath hoặc tuyệt đối).
+     * @param int    $dryRun       1 = chỉ phân tích, không ghi DB / không tải ảnh.
+     * @param int    $limit        giới hạn số bài xử lý (0 = tất cả).
+     * @param string $imgBase      tiền tố URL cho ảnh viết lại trong nội dung.
+     * @param string $downloadHost host thực đang phục vụ tệp (mặc định giữ nguyên host
+     *                             cấu hình). Dùng khi domain web cũ đã đổi.
      */
-    public function actionIndex($file, $dryRun = 0, $limit = 0, $imgBase = '/', $skipForeign = 1, $update = 0)
+    public function actionIndex($file, $dryRun = 0, $limit = 0, $imgBase = '/',
+        $skipForeign = 1, $update = 0, $downloadHost = '')
     {
         $dryRun = (int) $dryRun;
         $limit = (int) $limit;
+
+        // Domain web cũ có thể đã đổi — cho phép ghi đè host tải tệp qua tham số.
+        $downloadHost = trim((string) $downloadHost);
+        if ($downloadHost !== '') {
+            $downloadHost = preg_replace('~^https?://~i', '', $downloadHost);
+            $downloadHost = rtrim($downloadHost, '/');
+            $this->downloadHost = $downloadHost;
+            if (!in_array($downloadHost, $this->sourceHosts, true)) {
+                $this->sourceHosts[] = $downloadHost;
+            }
+            echo "Host tải tệp: {$this->downloadHost}\n";
+        }
         $skipForeign = (int) $skipForeign;
         $update = (int) $update;
         $this->dryRun = (bool) $dryRun;
