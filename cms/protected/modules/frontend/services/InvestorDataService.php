@@ -114,7 +114,7 @@ class InvestorDataService
         $years = array();
         foreach ($rows as $y) {
             if ((int) $y > 0) {
-                $years[] = (int) $y;
+                $years[] = (int) $y + $yearOffset;
             }
         }
         return $years;
