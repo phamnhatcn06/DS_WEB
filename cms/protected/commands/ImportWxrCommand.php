@@ -163,11 +163,11 @@ class ImportWxrCommand extends CConsoleCommand
                 continue;
             }
 
-            // Idempotent theo source_url.
-            if ($link !== '') {
-                $existing = $this->findExistingPost($link);
-                if ($existing !== null) {
-                    if ($update) {
+            // Idempotent theo slug ổn định (không phụ thuộc host); source_url là phụ.
+            $slug = $this->computeSlug($wp, $item);
+            $existing = $this->findExistingPost($slug, $link);
+            if ($existing !== null) {
+                if ($update) {
                         // Cập nhật lại danh mục cho đúng bản giữ-nguyên (không đụng
                         // nội dung, không tải lại ảnh nội dung).
                         $existing->categoryIds = $catIds;
