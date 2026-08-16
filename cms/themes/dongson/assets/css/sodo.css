@@ -177,196 +177,189 @@
 
 /* ==========================================================================
    Section 2: Hệ thống phân cấp — Org chart (.orgchart)
+   Cây đệ quy dựng bằng ul/li lồng nhau; đường nối vẽ 100% bằng CSS thuần
+   (pseudo-elements) nên hoạt động với mọi số nhánh / độ sâu.
    ========================================================================== */
 .orgchart {
+  --org-gap:    28px;          /* chiều cao đường nối dọc giữa hai cấp */
+  --org-hpad:   14px;          /* nửa khoảng cách ngang giữa các anh em */
+  --org-line-w: 2px;           /* độ dày đường nối */
+  --org-line:   var(--dsh-red);/* màu đường nối — đỏ thương hiệu */
   padding-block: var(--section-py);
-  background: var(--org-surface);
+  background: var(--dsh-white);
 }
 
 .orgchart-title {
-  font-family: "Montserrat", var(--font-heading);
-  font-weight: 600;
-  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--fs-h2);
   text-transform: uppercase;
   text-align: center;
-  color: var(--org-ink);
-  margin: 0 0 var(--space-8);
+  color: var(--dsh-ink);
+  margin: 0 0 var(--space-7);
 }
 
-/* Cây phân cấp — full width, chỉ 2 box trên căn giữa hẹp */
+/* Khung cho cuộn ngang khi màn hình hẹp — không phá vỡ cấu trúc cây */
 .org-tree {
-  max-width: 1530px;
-  margin-inline: auto;
+  overflow-x: auto;
+  padding-bottom: var(--space-2);
 }
 
-.org-level {
+/* ---- Các cấp: hàng ngang, căn giữa ---- */
+.org-tree ul {
+  position: relative;
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  padding: var(--org-gap) 0 0;
+  margin: 0;
+  list-style: none;
+  white-space: nowrap;
 }
 
-/* Box cấp 1 + cấp 2 dùng chung khung */
-.org-node {
-  width: min(100%, 382px);
-  text-align: center;
-  padding: var(--space-4) var(--space-3);
-  border-radius: var(--radius);
-  font-weight: 700;
-  font-size: clamp(1rem, 1.8vw, 1.5rem);
-  text-transform: uppercase;
+/* Cấp gốc không có cha → bỏ khoảng đệm trên cùng */
+.org-tree > ul {
+  padding-top: 0;
 }
 
-/* Cấp 1 — Hội đồng quản trị (nền đỏ đậm) */
-.org-node--board {
-  background: var(--org-red-dark);
-  border: 3px solid var(--dsh-red);
-  color: var(--dsh-white);
-  box-shadow: 0 6px 9px -1px rgba(0, 0, 0, .1), 0 3px 6px -3px rgba(0, 0, 0, .1);
-}
-
-/* Cấp 2 — Ban Tổng giám đốc (nền trắng, viền đỏ) */
-.org-node--exec {
-  background: var(--dsh-white);
-  border: 3px solid var(--org-red-dark);
-  color: var(--org-red-dark);
-  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, .05);
-}
-
-/* Đường nối dọc giữa cấp 1 và cấp 2 */
-.org-connector-v {
-  display: block;
-  width: 2px;
-  height: 48px;
-  margin-inline: auto;
-  background: var(--org-red-dark);
-}
-
-/* Nhánh tỏa xuống cấp 3 */
-.org-branches {
+.org-tree li {
   position: relative;
-  height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--org-gap) var(--org-hpad) 0;
 }
 
-.org-branch-stem {
+/* Nửa thanh ngang trái/phải từ mỗi node lên bus của anh em */
+.org-tree li::before,
+.org-tree li::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: var(--org-gap);
+  border-top: var(--org-line-w) solid var(--org-line);
+}
+
+.org-tree li::before { right: 50%; }
+.org-tree li::after  { left: 50%; border-left: var(--org-line-w) solid var(--org-line); }
+
+/* Node là con duy nhất: chỉ cần đường dọc thẳng, bỏ thanh ngang */
+.org-tree li:only-child::before,
+.org-tree li:only-child::after { display: none; }
+.org-tree li:only-child { padding-top: var(--org-gap); }
+
+/* Gốc: không có đường nối phía trên */
+.org-tree > ul > li { padding-top: 0; }
+.org-tree > ul > li::before,
+.org-tree > ul > li::after { display: none; }
+
+/* Bỏ nửa thanh thừa ở hai đầu; bo góc mềm ở node đầu/cuối */
+.org-tree li:first-child::before,
+.org-tree li:last-child::after { border: 0 none; }
+
+.org-tree li:last-child::before {
+  border-right: var(--org-line-w) solid var(--org-line);
+  border-radius: 0 6px 0 0;
+}
+
+.org-tree li:first-child::after { border-radius: 6px 0 0 0; }
+
+/* Đường dọc từ node cha xuống bus của nhóm con */
+.org-tree ul ul::before {
+  content: "";
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: var(--org-branch);
+  width: 0;
+  height: var(--org-gap);
+  border-left: var(--org-line-w) solid var(--org-line);
 }
 
-.org-branch-bar {
-  position: absolute;
-  bottom: 0;
-  /* Khớp đúng tâm box đầu/cuối: 4 box flex đều nhau, cách nhau gap = space-4.
-     boxW = (100% - 3*gap)/4  →  tâm box đầu = (100% - 3*gap)/8 tính từ mép. */
-  left: calc((100% - 3 * var(--space-4)) / 8);
-  right: calc((100% - 3 * var(--space-4)) / 8);
-  height: 2px;
-  background: var(--org-branch);
-}
-
-/* Cấp 3 — 4 khối chức năng trải đều (flex để tâm cột đúng 12.5%/…/87.5%) */
-.org-depts {
-  display: flex;
-  gap: var(--space-4);
-  margin-top: 36px;
-}
-
-/* Nhánh dọc nhỏ nối từ thanh ngang xuống mỗi box */
-.org-dept {
-  position: relative;
-  flex: 1 1 0;
-  min-width: 0;
+/* ---- Ô đơn vị: nền đỏ thương hiệu, bo tròn (bám Figma) ---- */
+.org-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 148px;
+  max-width: 208px;
+  min-height: 66px;
+  padding: var(--space-2) var(--space-3);
+  border-radius: 12px;
+  background: var(--dsh-red);
+  color: var(--dsh-white);
+  font-weight: 700;
+  font-size: clamp(.8rem, .55rem + .5vw, 1rem);
+  line-height: 1.25;
+  letter-spacing: .01em;
   text-align: center;
-  padding: var(--space-4) var(--space-4);
-  background: var(--org-surface);
-  border: 1.5px solid var(--org-line-pink);
-  border-radius: var(--radius);
-  font-weight: 500;
-  font-size: clamp(.9rem, 1.2vw, 1.125rem);
   text-transform: uppercase;
-  color: var(--org-ink);
-  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  white-space: normal;                 /* chữ xuống dòng trong ô */
+  box-shadow: 0 6px 16px rgba(154, 18, 32, .22);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
-.org-dept::before {
-  content: "";
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 36px;
-  background: var(--org-branch);
+.org-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(154, 18, 32, .34);
 }
 
-.org-dept:hover {
-  border-color: var(--dsh-red);
-  box-shadow: 0 8px 20px rgba(115, 0, 17, .1);
+/* Node gốc: ô dạng viên thuốc (pill) nổi bật hơn */
+.org-tree > ul > li > .org-box {
+  border-radius: 999px;
+  min-width: 176px;
+  padding-inline: var(--space-4);
 }
 
 /* ==========================================================================
-   Hiệu ứng riêng trang: sơ đồ "vẽ dần" khi khối lọt viewport
-   Trạng thái ẩn ban đầu → khi .orgchart.is-visible thì bung theo trình tự.
+   Hiệu ứng: cây hiện dần khi khối lọt viewport (.orgchart.is-visible)
    ========================================================================== */
+.orgchart .org-tree {
+  opacity: 0;
+  transition: opacity .6s var(--ease-out-soft);
+}
 
-/* Box (cấp 1/2/3): bung nhẹ + mờ → rõ */
-.orgchart .org-node,
-.orgchart .org-dept {
+.orgchart .org-box {
   opacity: 0;
   transform: translate3d(0, 14px, 0) scale(.96);
   transition:
-    opacity .7s var(--ease-out-back),
-    transform .7s var(--ease-out-back);
+    opacity .6s var(--ease-out-back),
+    transform .6s var(--ease-out-back);
 }
 
-/* Đường nối dọc/nhánh: kéo dài từ trên xuống */
-.orgchart .org-connector-v,
-.orgchart .org-branch-stem,
-.orgchart .org-dept::before {
-  transform: scaleY(0);
-  transform-origin: top center;
-  transition: transform .45s var(--ease-out-soft);
+.orgchart.is-visible .org-tree { opacity: 1; }
+.orgchart.is-visible .org-box  { opacity: 1; transform: none; }
+
+/* Trễ dần theo thứ tự xuất hiện để cây "mọc" từ trên xuống */
+.orgchart.is-visible .org-box              { transition-delay: .12s; }
+.orgchart.is-visible ul ul .org-box        { transition-delay: .30s; }
+.orgchart.is-visible ul ul ul .org-box     { transition-delay: .48s; }
+.orgchart.is-visible ul ul ul ul .org-box  { transition-delay: .66s; }
+
+/* Responsive: ô nhỏ hơn + khoảng nối gọn hơn ở màn hẹp */
+@media (max-width: 767.98px) {
+  .orgchart {
+    --org-gap: 20px;
+    --org-hpad: 8px;
+  }
+  .org-box {
+    min-width: 118px;
+    max-width: 158px;
+    min-height: 56px;
+    font-size: .72rem;
+  }
+  .org-tree > ul > li > .org-box { min-width: 132px; }
 }
 
-/* Thanh ngang: kéo từ giữa ra hai bên */
-.orgchart .org-branch-bar {
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .6s var(--ease-out-soft);
+/* Tôn trọng giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .orgchart .org-tree,
+  .orgchart .org-box {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
-
-/* --- Kích hoạt theo trình tự khi khối hiện --- */
-.orgchart.is-visible .org-node,
-.orgchart.is-visible .org-dept {
-  opacity: 1;
-  transform: none;
-}
-
-.orgchart.is-visible .org-connector-v,
-.orgchart.is-visible .org-branch-stem,
-.orgchart.is-visible .org-branch-bar,
-.orgchart.is-visible .org-dept::before {
-  transform: none;
-}
-
-/* Trình tự trễ: board → nối → exec → nhánh → 4 khối */
-.orgchart.is-visible .org-node--board   { transition-delay: .10s; }
-.orgchart.is-visible .org-connector-v   { transition-delay: .30s; }
-.orgchart.is-visible .org-node--exec    { transition-delay: .42s; }
-.orgchart.is-visible .org-branch-stem   { transition-delay: .62s; }
-.orgchart.is-visible .org-branch-bar    { transition-delay: .74s; }
-
-.orgchart.is-visible .org-dept:nth-child(1)          { transition-delay: .92s; }
-.orgchart.is-visible .org-dept:nth-child(1)::before  { transition-delay: .88s; }
-.orgchart.is-visible .org-dept:nth-child(2)          { transition-delay: 1.00s; }
-.orgchart.is-visible .org-dept:nth-child(2)::before  { transition-delay: .96s; }
-.orgchart.is-visible .org-dept:nth-child(3)          { transition-delay: 1.08s; }
-.orgchart.is-visible .org-dept:nth-child(3)::before  { transition-delay: 1.04s; }
-.orgchart.is-visible .org-dept:nth-child(4)          { transition-delay: 1.16s; }
-.orgchart.is-visible .org-dept:nth-child(4)::before  { transition-delay: 1.12s; }
 
 /* Ảnh Chủ tịch: zoom rất nhẹ khi hover card */
 .bod-chair-photo img { transition: transform .8s var(--ease-out-soft); }
