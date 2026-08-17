@@ -115,8 +115,6 @@ $heroTitle = $currentCategory !== null
 
     <div class="tt-section-head">
       <h2 class="tt-section-title"><?php echo CHtml::encode($categoryName); ?></h2>
-      <a class="tt-more" href="<?php echo CHtml::encode(Yii::app()->createUrl('frontend/news/index')); ?>">Xem tất cả
-        <img src="<?php echo $root; ?>/assets/images/arrow-right.svg" alt="" aria-hidden="true" /></a>
     </div>
 
     <div class="row g-4 g-lg-5">
