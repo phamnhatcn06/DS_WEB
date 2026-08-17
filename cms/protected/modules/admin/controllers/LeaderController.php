@@ -29,6 +29,9 @@ class LeaderController extends AdminCrudController
         return array(
             array('name' => 'name', 'width' => 6),
             array('name' => 'role', 'width' => 6),
+            array('name' => 'gender', 'type' => 'select', 'width' => 6,
+                'options' => Leader::genderOptions(),
+                'hint' => 'Dùng để chọn ảnh đại diện mặc định khi chưa tải ảnh chân dung riêng.'),
             array('name' => 'photo_media_id', 'type' => 'media', 'width' => 6),
             array('name' => 'is_chairman', 'type' => 'checkbox', 'width' => 6,
                 'hint' => 'Bật để hiển thị dạng thẻ Chủ tịch lớn kèm 2 số liệu.'),
