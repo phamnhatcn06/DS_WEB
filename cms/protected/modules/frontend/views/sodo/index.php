@@ -118,7 +118,7 @@ $renderOrgTree = function (array $nodes) use (&$renderOrgTree) {
           <div class="col">
             <article class="bod-member" data-reveal="up" style="--reveal-delay:<?php echo $i * 100; ?>ms">
               <div class="bod-member-photo">
-                <?php echo MediaHelper::imgOr($member->photo, $portraitFallback,
+                <?php echo MediaHelper::imgOr($member->photo, $portraitFallback($member),
                   'Chân dung ' . $member->name, array('loading' => 'lazy')); ?>
               </div>
               <div class="bod-member-body">
