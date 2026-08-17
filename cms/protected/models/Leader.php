@@ -88,4 +88,17 @@ class Leader extends BaseActiveRecord
     {
         return $this->name;
     }
+
+    /**
+     * Ảnh đại diện mặc định (tên file trong theme /assets/images) theo giới tính,
+     * dùng khi lãnh đạo chưa có ảnh chân dung riêng.
+     *
+     * @return string vd 'avatar-female.svg' | 'avatar-male.svg'
+     */
+    public function getDefaultAvatarFile()
+    {
+        return $this->gender === self::GENDER_FEMALE
+            ? 'avatar-female.svg'
+            : 'avatar-male.svg';
+    }
 }
