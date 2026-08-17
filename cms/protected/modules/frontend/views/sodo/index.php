@@ -78,7 +78,7 @@ $renderOrgTree = function (array $nodes) use (&$renderOrgTree) {
           <div class="row g-0">
             <div class="col-12 col-lg-auto">
               <div class="bod-chair-photo">
-                <?php echo MediaHelper::imgOr($chairman->photo, $portraitFallback,
+                <?php echo MediaHelper::imgOr($chairman->photo, $portraitFallback($chairman),
                   'Chân dung ' . $chairman->name, array('loading' => 'lazy')); ?>
               </div>
             </div>
