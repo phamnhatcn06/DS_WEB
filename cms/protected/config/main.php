@@ -123,6 +123,9 @@ return array(
                 'tin-tuc/danh-muc/<category:[a-z0-9\-]+>'=> 'frontend/news/index',
                 // Chi tiết bài viết tin tức theo slug.
                 'tin-tuc/<slug:[a-z0-9\-]+>'             => 'frontend/news/view',
+                // Trang dự án: nội dung động từ pvn_news_posts (danh mục dự án).
+                'du-an'                                  => 'frontend/duan/index',
+                'du-an/danh-muc/<category:[a-z0-9\-]+>'  => 'frontend/duan/index',
                 // Trang lưu trữ theo thẻ: liệt kê tin tức + lĩnh vực gắn thẻ.
                 'the/<slug:[a-z0-9\-]+>'                 => 'frontend/tag/view',
                 '<action:(error|contact)>'               => 'site/<action>',
