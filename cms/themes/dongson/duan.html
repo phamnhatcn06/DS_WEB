@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- SEO -->
+  <title>Dự án — Đông Sơn Holdings</title>
+  <meta name="description"
+        content="Danh mục các dự án tiêu biểu của Đông Sơn Holdings (DSH): hạ tầng BOT, đô thị & nhà ở, thi công xây lắp và năng lượng — lọc theo từng danh mục." />
+
+  <!-- Fonts (local) -->
+  <link href="assets/fonts/fonts.css" rel="stylesheet" />
+  <!-- Montserrat: dùng cho heading — tải local -->
+  <link href="assets/fonts/montserrat.css" rel="stylesheet" />
+
+  <!-- Bootstrap 5.3 CSS (local) -->
+  <link href="assets/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons (local) -->
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.min.css" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="assets/css/variables.css" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+  <link href="assets/css/components.css" rel="stylesheet" />
+  <link href="assets/css/header-footer.css" rel="stylesheet" />
+  <link href="assets/css/about-hero.css" rel="stylesheet" />
+  <link href="assets/css/tintuc.css" rel="stylesheet" />
+  <link href="assets/css/duan.css" rel="stylesheet" />
+  <!-- Lớp chuyển động (nạp cuối để override transition mặc định của section) -->
+  <link href="assets/css/animations.css" rel="stylesheet" />
+</head>
+<body class="tt-page">
+
+  <!-- Sentinel: kích hoạt glassmorphism header khi rời khỏi đỉnh trang -->
+  <span class="header-sentinel" aria-hidden="true"></span>
+
+  <!-- ===== Header (dùng chung với trang chủ) ===== -->
+  <header class="site-header" id="siteHeader">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-4 px-xl-5">
+        <a class="navbar-brand" href="index.html" aria-label="Đông Sơn Holdings">
+          <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="brand-logo" />
+        </a>
+
+        <!-- CTA + hamburger nằm ngoài collapse để luôn hiện trên thanh bar mobile -->
+        <a href="index.html#lien-he" class="btn btn-dsh btn-contact ms-auto ms-lg-0 order-lg-3">
+          <span class="d-lg-none">Liên hệ</span>
+          <span class="d-none d-lg-inline">Liên hệ ngay</span>
+        </a>
+
+        <button class="navbar-toggler ms-2 order-lg-last" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainNav" aria-controls="mainNav"
+                aria-expanded="false" aria-label="Mở menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-2" id="mainNav">
+          <ul class="navbar-nav mx-lg-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link nav-caret" href="about.html" role="button"
+                 data-bs-toggle="dropdown" aria-expanded="false">Về chúng tôi</a>
+              <ul class="dropdown-menu dsh-dropdown">
+                <li><a class="dropdown-item" href="about.html">Giới thiệu</a></li>
+                <li><a class="dropdown-item" href="sumenh.html">Sứ mệnh - Tầm nhìn</a></li>
+                <li><a class="dropdown-item" href="sodo-to-chuc.html">Sơ đồ tổ chức</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link nav-caret" href="index.html#linh-vuc">Lĩnh vực</a></li>
+            <li class="nav-item"><a class="nav-link active" href="duan.html">Dự án</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html#co-dong">Quan hệ cổ đông</a></li>
+            <li class="nav-item"><a class="nav-link" href="tintuc.html">Tin tức</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HeroBanner ===== -->
+    <section class="about-hero" id="hero-banner">
+      <img src="assets/images/news-hero.webp" alt="" class="about-hero-bg" aria-hidden="true" />
+
+      <!-- Breadcrumb -->
+      <nav class="about-hero-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Trang chủ</a>
+        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+        <span class="bc-current">Dự án</span>
+      </nav>
+
+      <!-- Nội dung giữa -->
+      <div class="container about-hero-content">
+        <span class="about-hero-eyebrow" data-reveal="up"><span>Đông Sơn Holdings</span></span>
+        <h1 class="about-hero-title" data-reveal="up" style="--reveal-delay:120ms">DỰ ÁN TIÊU BIỂU</h1>
+        <p class="about-hero-subtitle" data-reveal="up" style="--reveal-delay:220ms">
+          Các công trình trọng điểm quốc gia và dự án đầu tư tiêu biểu do Đông Sơn Holdings
+          triển khai trên hành trình kiến tạo giá trị bền vững.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== Section: Danh sách dự án (lưới 3 cột + lọc danh mục) ===== -->
+    <section class="duan-list fade-section" id="danh-sach-du-an">
+      <div class="container">
+
+        <div class="tt-section-head">
+          <h2 class="tt-section-title" id="duan-heading">Tất cả dự án</h2>
+          <span class="duan-count" data-duan-count>0 dự án</span>
+        </div>
+
+        <!-- Bộ lọc danh mục (đồng bộ với URL param ?category=slug) -->
+        <nav class="duan-filter" aria-label="Lọc theo danh mục dự án" data-duan-filter>
+          <a class="duan-chip is-active" href="duan.html" data-category="all">Tất cả</a>
+          <a class="duan-chip" href="duan.html?category=ha-tang-bot" data-category="ha-tang-bot">Hạ tầng &amp; BOT</a>
+          <a class="duan-chip" href="duan.html?category=do-thi-nha-o" data-category="do-thi-nha-o">Đô thị &amp; Nhà ở</a>
+          <a class="duan-chip" href="duan.html?category=thi-cong-xay-lap" data-category="thi-cong-xay-lap">Thi công &amp; Xây lắp</a>
+          <a class="duan-chip" href="duan.html?category=nang-luong-kcn" data-category="nang-luong-kcn">Năng lượng &amp; KCN</a>
+        </nav>
+
+        <!-- Lưới 3 cột: 1 (mobile) → 2 (tablet) → 3 (desktop) -->
+        <div class="row g-4 g-lg-5" data-duan-grid>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="ha-tang-bot">
+            <article class="duan-card" data-reveal="up">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/duan-01-bot.webp" alt="BOT Hà Nội – Bắc Giang, Quốc lộ 1" loading="lazy" />
+                  <span class="duan-card-badge">Hạ tầng &amp; BOT</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>BOT Hà Nội – Bắc Giang</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Quốc lộ 1, Hà Nội – Bắc Giang
+                  </p>
+                  <p class="duan-card-desc">Tuyến cao tốc huyết mạch kết nối hành lang kinh tế phía Bắc,
+                    rút ngắn thời gian di chuyển và thúc đẩy giao thương liên vùng.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="ha-tang-bot">
+            <article class="duan-card" data-reveal="up" style="--reveal-delay:80ms">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/news-cauhongha.webp" alt="Thi công cầu Hồng Hà thuộc Vành đai 4" loading="lazy" />
+                  <span class="duan-card-badge">Hạ tầng &amp; BOT</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>Cầu Hồng Hà – Vành đai 4 Hà Nội</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Vùng Thủ đô Hà Nội
+                  </p>
+                  <p class="duan-card-desc">Một trong những công trình quan trọng nhất của dự án đường
+                    Vành đai 4, kết nối huyết mạch giao thông vùng Thủ đô.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="do-thi-nha-o">
+            <article class="duan-card" data-reveal="up" style="--reveal-delay:160ms">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/news-baivien.webp" alt="Khu nhà ở xã hội Bãi Viên – Nam Định" loading="lazy" />
+                  <span class="duan-card-badge">Đô thị &amp; Nhà ở</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>Nhà ở xã hội Bãi Viên</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Nam Định
+                  </p>
+                  <p class="duan-card-desc">Khu nhà ở xã hội quy mô hơn 1.100 căn hộ dành cho người
+                    thu nhập thấp — bước đi chiến lược an sinh của tập đoàn.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="do-thi-nha-o">
+            <article class="duan-card" data-reveal="up">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/duan-02-dothi.webp" alt="Khu đô thị hiện đại Đông Sơn" loading="lazy" />
+                  <span class="duan-card-badge">Đô thị &amp; Nhà ở</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>Khu đô thị Đông Sơn</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Thanh Hóa
+                  </p>
+                  <p class="duan-card-desc">Khu đô thị hiện đại đồng bộ hạ tầng, kiến tạo không gian
+                    sống chất lượng cao và điểm nhấn phát triển của địa phương.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="thi-cong-xay-lap">
+            <article class="duan-card" data-reveal="up" style="--reveal-delay:80ms">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/duan-04-thicong.webp" alt="Công trình đang thi công phần thân" loading="lazy" />
+                  <span class="duan-card-badge">Thi công &amp; Xây lắp</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>Tổ hợp căn hộ Sông Đào</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Thành phố Nam Định
+                  </p>
+                  <p class="duan-card-desc">Dự án thi công xây lắp phần thân với tiến độ vượt trội,
+                    đảm bảo chất lượng và an toàn lao động trên công trường.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+          <div class="col-12 col-md-6 col-lg-4" data-category="nang-luong-kcn">
+            <article class="duan-card" data-reveal="up" style="--reveal-delay:160ms">
+              <a class="duan-card-link" href="chitiet-tin-tuc.html">
+                <div class="duan-card-media">
+                  <img src="assets/images/duan-03-nhao.webp" alt="Dự án năng lượng và khu công nghiệp" loading="lazy" />
+                  <span class="duan-card-badge">Năng lượng &amp; KCN</span>
+                </div>
+                <div class="duan-card-body">
+                  <h3>Khu công nghiệp &amp; Năng lượng DSH</h3>
+                  <p class="duan-card-loc">
+                    <img src="assets/images/icon-pin.svg" alt="" aria-hidden="true" />Miền Bắc Việt Nam
+                  </p>
+                  <p class="duan-card-desc">Phát triển hạ tầng khu công nghiệp gắn với nguồn năng lượng
+                    bền vững, tạo động lực thu hút đầu tư và việc làm.</p>
+                </div>
+              </a>
+            </article>
+          </div>
+
+        </div>
+
+        <!-- Trạng thái rỗng khi danh mục không có dự án -->
+        <p class="duan-empty" data-duan-empty hidden>
+          Chưa có dự án nào trong danh mục này.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== Footer (dùng chung với trang chủ) ===== -->
+  <footer class="site-footer" id="lien-he">
+
+    <!-- CTA banner nền ảnh cầu -->
+    <div class="cta-banner fade-section">
+      <img src="assets/images/cta-bridge.webp" alt="" class="cta-bg" aria-hidden="true" data-parallax="0.16" />
+      <div class="cta-inner text-center">
+        <h2 class="cta-title" data-reveal="up">Khám phá tiềm năng<br />Bắt đầu kết nối.</h2>
+        <a href="mailto:hatangdongson@htds.vn" class="btn btn-dsh cta-btn">
+          Liên lạc ngay
+          <img src="assets/images/arrow-right.svg" alt="" class="btn-arrow" aria-hidden="true" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Khối cột -->
+    <div class="footer-main">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4 g-lg-5">
+
+          <!-- Brand + liên hệ + social -->
+          <div class="col">
+            <img src="assets/images/logo.webp" alt="Đông Sơn Holdings" class="footer-logo mb-4" />
+            <ul class="list-unstyled footer-contact mb-4">
+              <li>
+                <span class="contact-ic"><img src="assets/images/icon-phone.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Điện thoại</small><strong>024 3933 5708</strong></span>
+              </li>
+              <li>
+                <span class="contact-ic"><img src="assets/images/icon-email.svg" alt="" aria-hidden="true" /></span>
+                <span><small>Email</small><strong>hatangdongson@htds.vn</strong></span>
+              </li>
+            </ul>
+            <div class="social-links d-flex gap-2">
+              <a href="#" aria-label="Facebook"><img src="assets/images/social-facebook.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="LinkedIn"><img src="assets/images/social-linkedin.svg" alt="" aria-hidden="true" /></a>
+              <a href="#" aria-label="YouTube"><img src="assets/images/social-youtube.svg" alt="" aria-hidden="true" /></a>
+            </div>
+          </div>
+
+          <!-- Về Đông Sơn -->
+          <div class="col">
+            <h6>Về Đông Sơn</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="about.html">Giới thiệu</a></li>
+              <li><a class="footer-link" href="sumenh.html">Tầm nhìn &amp; Sứ mệnh</a></li>
+              <li><a class="footer-link" href="about.html">Ban lãnh đạo</a></li>
+              <li><a class="footer-link" href="sumenh.html#gia-tri">Giá trị cốt lõi</a></li>
+              <li><a class="footer-link" href="about.html">Trách nhiệm XH</a></li>
+            </ul>
+          </div>
+
+          <!-- Lĩnh vực -->
+          <div class="col">
+            <h6>Lĩnh vực</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="index.html#linh-vuc">Thi công &amp; Xây lắp</a></li>
+              <li><a class="footer-link" href="index.html#linh-vuc">Đầu tư BOT</a></li>
+              <li><a class="footer-link" href="index.html#linh-vuc">Nhà ở &amp; Đô thị</a></li>
+              <li><a class="footer-link" href="index.html#linh-vuc">Năng lượng &amp; KCN</a></li>
+            </ul>
+          </div>
+
+          <!-- Dự án -->
+          <div class="col">
+            <h6>Dự án</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="duan.html?category=ha-tang-bot">BOT Hà Nội – Bắc Giang</a></li>
+              <li><a class="footer-link" href="duan.html?category=do-thi-nha-o">Nhà ở XH Bãi Viên</a></li>
+              <li><a class="footer-link" href="duan.html?category=ha-tang-bot">Cao tốc TQ–HG</a></li>
+              <li><a class="footer-link" href="duan.html?category=do-thi-nha-o">Mỹ Đình – Bái Đính</a></li>
+            </ul>
+          </div>
+
+          <!-- Nhà đầu tư -->
+          <div class="col">
+            <h6>Nhà đầu tư</h6>
+            <ul class="list-unstyled mb-0">
+              <li><a class="footer-link" href="index.html#co-dong">Báo cáo tài chính</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">Công bố thông tin</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">Báo cáo thường niên</a></li>
+              <li><a class="footer-link" href="index.html#co-dong">ĐHĐCĐ 2026</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Thanh dưới cùng -->
+    <div class="footer-bottom">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+        <p class="mb-0">© 2026 Công ty Cổ phần Đông Sơn Holdings (DSH). Bảo lưu mọi quyền.</p>
+        <div class="d-flex gap-4">
+          <a class="footer-link" href="#">Chính sách bảo mật</a>
+          <a class="footer-link" href="#">Điều khoản sử dụng</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS bundle (kèm Popper) — local -->
+  <script src="assets/vendor/bootstrap/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="assets/js/main.js"></script>
+  <!-- Lọc dự án theo URL param ?category=slug -->
+  <script src="assets/js/duan.js"></script>
+</body>
+</html>
