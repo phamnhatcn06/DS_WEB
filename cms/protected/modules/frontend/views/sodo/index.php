@@ -24,7 +24,10 @@ $s = function ($key, $default = '') {
     return SiteSetting::get($key, $default);
 };
 
-$portraitFallback = $root . '/assets/images/placeholder.svg';
+// Ảnh chân dung mặc định theo giới tính (dùng khi lãnh đạo chưa có ảnh riêng).
+$portraitFallback = function (Leader $leader) use ($root) {
+    return $root . '/assets/images/' . $leader->getDefaultAvatarFile();
+};
 
 // Bộ dựng cây đệ quy: xuất ul/li lồng nhau, đường nối do CSS thuần vẽ.
 $renderOrgTree = function (array $nodes) use (&$renderOrgTree) {
