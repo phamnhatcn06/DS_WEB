@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="600" viewBox="0 0 480 600" role="img" aria-label="Ảnh đại diện mặc định (nam)">
+  <rect width="480" height="600" fill="#0f1a2e"/>
+  <rect x="1" y="1" width="478" height="598" fill="none" stroke="rgba(201,168,76,.25)" stroke-width="2"/>
+  <!-- Đầu -->
+  <circle cx="240" cy="228" r="96" fill="#c9a84c"/>
+  <!-- Vai / thân -->
+  <path d="M96 600c0-95 64-168 144-168s144 73 144 168z" fill="#c9a84c"/>
+</svg>
