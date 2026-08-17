@@ -56,6 +56,7 @@ class Leader extends BaseActiveRecord
         return array(
             'name'           => 'Họ tên',
             'role'           => 'Chức vụ',
+            'gender'         => 'Giới tính',
             'description'    => 'Mô tả',
             'photo_media_id' => 'Ảnh chân dung',
             'is_chairman'    => 'Là Chủ tịch (thẻ lớn)',
