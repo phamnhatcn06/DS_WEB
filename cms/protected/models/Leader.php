@@ -7,6 +7,18 @@
  */
 class Leader extends BaseActiveRecord
 {
+    const GENDER_MALE   = 'male';
+    const GENDER_FEMALE = 'female';
+
+    /** Danh sách giới tính cho dropdown admin. */
+    public static function genderOptions()
+    {
+        return array(
+            self::GENDER_MALE   => 'Nam',
+            self::GENDER_FEMALE => 'Nữ',
+        );
+    }
+
     public static function model($className = __CLASS__)
     {
         return parent::model($className);
