@@ -35,6 +35,7 @@ class Leader extends BaseActiveRecord
             array('name, role', 'required', 'message' => '{attribute} không được để trống.'),
             array('name', 'length', 'max' => 150),
             array('role', 'length', 'max' => 150),
+            array('gender', 'in', 'range' => array(self::GENDER_MALE, self::GENDER_FEMALE)),
             array('stat1_value, stat2_value', 'length', 'max' => 30),
             array('stat1_label, stat2_label', 'length', 'max' => 100),
             array('photo_media_id, sort_order', 'numerical', 'integerOnly' => true),
