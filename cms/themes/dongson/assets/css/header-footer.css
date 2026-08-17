@@ -346,6 +346,18 @@
   font-weight: 700;
 }
 
+/* Số điện thoại / email là link — kế thừa màu trắng, đổi vàng khi hover */
+.footer-contact span strong a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.footer-contact span strong a:hover,
+.footer-contact span strong a:focus {
+  color: var(--dsh-gold);
+}
+
 /* Social — ô viền vuông */
 .social-links a {
   display: inline-flex;
